@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://ckf6c34awldoe"]
+
+[ext_resource type="Script" uid="uid://dkdr2d4t2x6rv" path="res://scenes/settings.gd" id="1_5p8wc"]
+
+[node name="Setting" type="Control" unique_id=21935495]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5p8wc")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=503215908]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.011764706, 0.011764706, 0.011764706, 0.5882353)
+
+[node name="Label" type="Label" parent="ColorRect" unique_id=1400626257]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Cài đặt — đang phát triển"
+
+[node name="Button" type="Button" parent="ColorRect" unique_id=527317474]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -91.0
+offset_right = 80.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "Đóng"
