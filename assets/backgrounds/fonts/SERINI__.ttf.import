@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dufrwosflfo7y"
-path="res://.godot/imported/Roboto-BoldItalic.ttf-c29a4527833d36a5c59d67c4f4873057.fontdata"
+uid="uid://dek2bbt2iu2am"
+path="res://.godot/imported/SERINI__.ttf-8f88c8a6443c9fa7bcba60a3e1267a2e.fontdata"
 
 [deps]
 
-source_file="res://font/Roboto-BoldItalic.ttf"
-dest_files=["res://.godot/imported/Roboto-BoldItalic.ttf-c29a4527833d36a5c59d67c4f4873057.fontdata"]
+source_file="res://assets/backgrounds/fonts/SERINI__.ttf"
+dest_files=["res://.godot/imported/SERINI__.ttf-8f88c8a6443c9fa7bcba60a3e1267a2e.fontdata"]
 
 [params]
 

@@ -1,9 +1,9 @@
 extends Control
 
-@onready var start_button: Button = $"MarginContainer/main button/start"
-@onready var continue_button: Button = $"MarginContainer/main button/continue"
-@onready var setting_button: Button = $"MarginContainer/main button/setting"
-@onready var exit_button: Button = $"MarginContainer/main button/exit"
+@export var start_button: Button
+@export var continue_button: Button
+@export var setting_button: Button
+@export var exit_button: Button
 
 
 func _ready() -> void:
@@ -14,15 +14,15 @@ func _ready() -> void:
 
 
 func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/chapter1.tscn")
+	get_tree().change_scene_to_file("res://scenes/chapters/chapter_01/chapter1.tscn")
 
 
 func _on_continue_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/chapter1.tscn")
+	get_tree().change_scene_to_file("res://scenes/chapters/chapter_01/chapter1.tscn")
 
 
 func _on_setting_pressed() -> void:
-	var settings_scene := preload("res://scenes/settings.tscn")
+	var settings_scene := preload("res://scenes/settings/settings.tscn")
 	var settings_instance := settings_scene.instantiate()
 	get_tree().root.add_child(settings_instance)
 

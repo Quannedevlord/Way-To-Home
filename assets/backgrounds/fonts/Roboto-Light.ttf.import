@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://btbnqup66xgp"
-path="res://.godot/imported/Rounded Sans.ttf-6a744e55632285424119690289961a6c.fontdata"
+uid="uid://x8p4edifovu1"
+path="res://.godot/imported/Roboto-Light.ttf-807d486e0ed2bcc9d37e2c2f2b3b6ef8.fontdata"
 
 [deps]
 
-source_file="res://font/Rounded Sans.ttf"
-dest_files=["res://.godot/imported/Rounded Sans.ttf-6a744e55632285424119690289961a6c.fontdata"]
+source_file="res://assets/backgrounds/fonts/Roboto-Light.ttf"
+dest_files=["res://.godot/imported/Roboto-Light.ttf-807d486e0ed2bcc9d37e2c2f2b3b6ef8.fontdata"]
 
 [params]
 

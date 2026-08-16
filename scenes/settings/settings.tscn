@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://ckf6c34awldoe"]
+
+[ext_resource type="Script" uid="uid://dkdr2d4t2x6rv" path="res://scenes/settings/settings.gd" id="1_5p8wc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5p8wc"]
+bg_color = Color(0.22745098, 0.2901961, 0.3529412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6d6q"]
+bg_color = Color(0.96862745, 0.8509804, 0.65882355, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa1go"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbmy8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5dd4i"]
+
+[node name="Setting" type="Control" unique_id=21935495 node_paths=PackedStringArray("close_button", "master_slider", "music_slider", "sfx_slider", "fullscreen_toggle")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5p8wc")
+close_button = NodePath("close")
+master_slider = NodePath("OptionsBox/HBoxContainer/HSlider")
+music_slider = NodePath("OptionsBox/HBoxContainer2/HSlider")
+sfx_slider = NodePath("OptionsBox/HBoxContainer3/HSlider")
+fullscreen_toggle = NodePath("OptionsBox/HBoxContainer4/CheckButton")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=503215908]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.011764706, 0.011764706, 0.011764706, 0.5882353)
+
+[node name="Label" type="Label" parent="ColorRect" unique_id=1400626257]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Cài đặt — đang phát triển"
+
+[node name="OptionsBox" type="VBoxContainer" parent="." unique_id=22288951]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -568.0
+offset_top = -258.25
+offset_right = 568.0
+offset_bottom = 258.25
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsBox" unique_id=1054499406]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsBox/HBoxContainer" unique_id=1077952952]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Âm lượng chung"
+
+[node name="HSlider" type="HSlider" parent="OptionsBox/HBoxContainer" unique_id=862845978]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/slider = SubResource("StyleBoxFlat_5p8wc")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r6d6q")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="OptionsBox" unique_id=75003055]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsBox/HBoxContainer2" unique_id=1610445095]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Nhạc nền"
+
+[node name="HSlider" type="HSlider" parent="OptionsBox/HBoxContainer2" unique_id=1976948138]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/slider = SubResource("StyleBoxFlat_5p8wc")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r6d6q")
+step = 0.05
+value = 1.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="OptionsBox" unique_id=1428609877]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsBox/HBoxContainer3" unique_id=719560118]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Hiệu ứng"
+
+[node name="HSlider" type="HSlider" parent="OptionsBox/HBoxContainer3" unique_id=2064140750]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/slider = SubResource("StyleBoxFlat_5p8wc")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r6d6q")
+step = 0.05
+value = 1.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="OptionsBox" unique_id=607965698]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsBox/HBoxContainer4" unique_id=2083108784]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Toàn màn hình"
+
+[node name="CheckButton" type="CheckButton" parent="OptionsBox/HBoxContainer4" unique_id=442894790]
+layout_mode = 2
+
+[node name="close" type="Button" parent="." unique_id=527317474]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = -50.0
+offset_right = 42.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.6627451, 0, 0.05882353, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.16862746, 0.22745098, 0.2901961, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oa1go")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_tbmy8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5dd4i")
+text = "Đóng"

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://br32clludmf7q"
-path="res://.godot/imported/Creamy Chicken.otf-927aa45f59dd8891ea15f078fc48d745.fontdata"
+uid="uid://dufrwosflfo7y"
+path="res://.godot/imported/Roboto-BoldItalic.ttf-cebc22dafc1b78358d73fdc1de85451e.fontdata"
 
 [deps]
 
-source_file="res://font/Creamy Chicken.otf"
-dest_files=["res://.godot/imported/Creamy Chicken.otf-927aa45f59dd8891ea15f078fc48d745.fontdata"]
+source_file="res://assets/backgrounds/fonts/Roboto-BoldItalic.ttf"
+dest_files=["res://.godot/imported/Roboto-BoldItalic.ttf-cebc22dafc1b78358d73fdc1de85451e.fontdata"]
 
 [params]
 

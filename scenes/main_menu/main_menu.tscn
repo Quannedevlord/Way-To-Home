@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://vdokwuvkkuvq"]
 
 [ext_resource type="Theme" uid="uid://dw0edg512es" path="res://themes/main_theme.tres" id="1_rtw2f"]
-[ext_resource type="Script" uid="uid://ccaiigwio7fyb" path="res://scenes/main_menu.gd" id="2_oa1go"]
-[ext_resource type="Texture2D" uid="uid://vj8ly36y5hg4" path="res://main menu/cat-pixel-art-city-scenery-4k-wallpaper-uhdpaper.com-284@5@p.jpg" id="3_tbmy8"]
+[ext_resource type="Script" uid="uid://ccaiigwio7fyb" path="res://scenes/main_menu/main_menu.gd" id="2_oa1go"]
+[ext_resource type="Texture2D" uid="uid://vj8ly36y5hg4" path="res://assets/backgrounds/cat-pixel-art-city-scenery-4k-wallpaper-uhdpaper.com-284@5@p.jpg" id="3_tbmy8"]
 [ext_resource type="Texture2D" uid="uid://cg8fxk5dxgfof" path="res://icon.svg" id="4_jk1qb"]
-[ext_resource type="FontFile" uid="uid://dufrwosflfo7y" path="res://font/Roboto-BoldItalic.ttf" id="5_5dd4i"]
-[ext_resource type="FontFile" uid="uid://br32clludmf7q" path="res://font/Creamy Chicken.otf" id="6_lgwnu"]
+[ext_resource type="FontFile" uid="uid://dufrwosflfo7y" path="res://assets/backgrounds/fonts/Roboto-BoldItalic.ttf" id="5_5dd4i"]
+[ext_resource type="FontFile" uid="uid://br32clludmf7q" path="res://assets/backgrounds/fonts/Creamy Chicken.otf" id="6_lgwnu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uef0c"]
 
@@ -13,7 +13,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bswgn"]
 
-[node name="MainMenu" type="Control" unique_id=133904996]
+[node name="MainMenu" type="Control" unique_id=133904996 node_paths=PackedStringArray("start_button", "continue_button", "setting_button", "exit_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,6 +22,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_rtw2f")
 script = ExtResource("2_oa1go")
+start_button = NodePath("MarginContainer/main button/start")
+continue_button = NodePath("MarginContainer/main button/continue")
+setting_button = NodePath("MarginContainer/main button/setting")
+exit_button = NodePath("MarginContainer/main button/exit")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1354990067]
 modulate = Color(0.47007585, 0.47007585, 0.47007585, 1)
@@ -123,14 +127,15 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -467.5
-offset_right = 467.5
-offset_bottom = 165.0
+offset_left = -358.0
+offset_top = 23.0
+offset_right = 433.0
+offset_bottom = 188.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 0.9098039, 0.7607843, 1)
 theme_override_colors/font_shadow_color = Color(0.22745098, 0.14117648, 0.09803922, 1)
 theme_override_colors/font_outline_color = Color(0.16862746, 0.22745098, 0.2901961, 1)
 theme_override_constants/shadow_offset_y = 12
 theme_override_fonts/font = ExtResource("6_lgwnu")
-theme_override_font_sizes/font_size = 120
+theme_override_font_sizes/font_size = 100
 text = "WAY TO HOME"

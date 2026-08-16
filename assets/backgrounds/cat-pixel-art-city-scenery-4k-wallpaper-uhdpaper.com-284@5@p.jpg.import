@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://vj8ly36y5hg4"
-path="res://.godot/imported/cat-pixel-art-city-scenery-4k-wallpaper-uhdpaper.com-284@5@p.jpg-aec42a51ed18e3979a426c18993a98c7.ctex"
+path="res://.godot/imported/cat-pixel-art-city-scenery-4k-wallpaper-uhdpaper.com-284@5@p.jpg-50f2da6a7455f92bb1a6849b69c033df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://main menu/cat-pixel-art-city-scenery-4k-wallpaper-uhdpaper.com-284@5@p.jpg"
-dest_files=["res://.godot/imported/cat-pixel-art-city-scenery-4k-wallpaper-uhdpaper.com-284@5@p.jpg-aec42a51ed18e3979a426c18993a98c7.ctex"]
+source_file="res://assets/backgrounds/cat-pixel-art-city-scenery-4k-wallpaper-uhdpaper.com-284@5@p.jpg"
+dest_files=["res://.godot/imported/cat-pixel-art-city-scenery-4k-wallpaper-uhdpaper.com-284@5@p.jpg-50f2da6a7455f92bb1a6849b69c033df.ctex"]
 
 [params]
 

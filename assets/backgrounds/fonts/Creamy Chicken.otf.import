@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dek2bbt2iu2am"
-path="res://.godot/imported/SERINI__.ttf-5e96b24fd16036fa3c42137fba6f476f.fontdata"
+uid="uid://br32clludmf7q"
+path="res://.godot/imported/Creamy Chicken.otf-9c6d467ea2baa8a518f8f5d93b4a1129.fontdata"
 
 [deps]
 
-source_file="res://font/SERINI__.ttf"
-dest_files=["res://.godot/imported/SERINI__.ttf-5e96b24fd16036fa3c42137fba6f476f.fontdata"]
+source_file="res://assets/backgrounds/fonts/Creamy Chicken.otf"
+dest_files=["res://.godot/imported/Creamy Chicken.otf-9c6d467ea2baa8a518f8f5d93b4a1129.fontdata"]
 
 [params]
 
