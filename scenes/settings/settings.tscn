@@ -14,7 +14,7 @@ bg_color = Color(0.96862745, 0.8509804, 0.65882355, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5dd4i"]
 
-[node name="Setting" type="Control" unique_id=21935495 node_paths=PackedStringArray("close_button", "master_slider", "music_slider", "sfx_slider", "fullscreen_toggle")]
+[node name="Setting" type="Control" unique_id=21935495 node_paths=PackedStringArray("close_button", "music_slider", "sfx_slider", "fullscreen_toggle")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5p8wc")
 close_button = NodePath("close")
-master_slider = NodePath("OptionsBox/HBoxContainer/HSlider")
 music_slider = NodePath("OptionsBox/HBoxContainer2/HSlider")
 sfx_slider = NodePath("OptionsBox/HBoxContainer3/HSlider")
 fullscreen_toggle = NodePath("OptionsBox/HBoxContainer4/CheckButton")
@@ -61,21 +60,6 @@ offset_bottom = 258.25
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OptionsBox" unique_id=1054499406]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="OptionsBox/HBoxContainer" unique_id=1077952952]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Âm lượng chung"
-
-[node name="HSlider" type="HSlider" parent="OptionsBox/HBoxContainer" unique_id=862845978]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/slider = SubResource("StyleBoxFlat_5p8wc")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r6d6q")
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="OptionsBox" unique_id=75003055]
 layout_mode = 2
 
@@ -90,6 +74,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/slider = SubResource("StyleBoxFlat_5p8wc")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r6d6q")
+max_value = 2.0
 step = 0.05
 value = 1.0
 
@@ -107,6 +92,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/slider = SubResource("StyleBoxFlat_5p8wc")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r6d6q")
+max_value = 2.0
 step = 0.05
 value = 1.0
 

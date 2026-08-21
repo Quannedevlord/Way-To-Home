@@ -1,5 +1,7 @@
 extends Control
 
+const SettingsScript = preload("res://scenes/settings/settings.gd")
+
 @export var start_button: Button
 @export var continue_button: Button
 @export var setting_button: Button
@@ -7,6 +9,7 @@ extends Control
 
 
 func _ready() -> void:
+	SettingsScript.apply_saved_audio_settings()
 	start_button.pressed.connect(_on_start_pressed)
 	continue_button.pressed.connect(_on_continue_pressed)
 	setting_button.pressed.connect(_on_setting_pressed)
