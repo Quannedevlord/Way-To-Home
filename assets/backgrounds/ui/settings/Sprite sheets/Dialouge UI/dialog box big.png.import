@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3opo0lwx3vik"
-path="res://.godot/imported/cat-night-scenery.jpg-c1eb7319d5538d9d23a46926f4fa4520.ctex"
+uid="uid://dk01swhfjpv6m"
+path="res://.godot/imported/dialog box big.png-d04716266bd6a3eb107b0e8edd5a0bcd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/cat-night-scenery.jpg"
-dest_files=["res://.godot/imported/cat-night-scenery.jpg-c1eb7319d5538d9d23a46926f4fa4520.ctex"]
+source_file="res://assets/backgrounds/ui/settings/Sprite sheets/Dialouge UI/dialog box big.png"
+dest_files=["res://.godot/imported/dialog box big.png-d04716266bd6a3eb107b0e8edd5a0bcd.ctex"]
 
 [params]
 

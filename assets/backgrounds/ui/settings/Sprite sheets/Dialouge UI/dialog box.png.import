@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vj8ly36y5hg4"
-path="res://.godot/imported/cat-pixel-art-city-scenery-4k-wallpaper-uhdpaper.com-284@5@p.jpg-50f2da6a7455f92bb1a6849b69c033df.ctex"
+uid="uid://c2moi7evlqlye"
+path="res://.godot/imported/dialog box.png-5a681d9694755c13f91082ebbb52a7ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/cat-pixel-art-city-scenery-4k-wallpaper-uhdpaper.com-284@5@p.jpg"
-dest_files=["res://.godot/imported/cat-pixel-art-city-scenery-4k-wallpaper-uhdpaper.com-284@5@p.jpg-50f2da6a7455f92bb1a6849b69c033df.ctex"]
+source_file="res://assets/backgrounds/ui/settings/Sprite sheets/Dialouge UI/dialog box.png"
+dest_files=["res://.godot/imported/dialog box.png-5a681d9694755c13f91082ebbb52a7ca.ctex"]
 
 [params]
 

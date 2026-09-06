@@ -2,10 +2,9 @@
 
 [ext_resource type="Theme" uid="uid://dw0edg512es" path="res://themes/main_theme.tres" id="1_rtw2f"]
 [ext_resource type="Script" uid="uid://ccaiigwio7fyb" path="res://scenes/main_menu/main_menu.gd" id="2_oa1go"]
-[ext_resource type="Texture2D" uid="uid://3opo0lwx3vik" path="res://assets/backgrounds/cat-night-scenery.jpg" id="3_5seab"]
-[ext_resource type="Texture2D" uid="uid://cg8fxk5dxgfof" path="res://icon.svg" id="4_jk1qb"]
+[ext_resource type="Texture2D" uid="uid://chgbvvop65ytf" path="res://assets/backgrounds/ChatGPT Image Sep 6, 2026, 07_44_07 PM.png" id="3_3ovsr"]
+[ext_resource type="Texture2D" uid="uid://mbmqpbumbw1v" path="res://assets/backgrounds/ten_game-Photoroom.png" id="5_3ovsr"]
 [ext_resource type="FontFile" uid="uid://dufrwosflfo7y" path="res://assets/backgrounds/fonts/Roboto-BoldItalic.ttf" id="5_5dd4i"]
-[ext_resource type="FontFile" uid="uid://br32clludmf7q" path="res://assets/backgrounds/fonts/Creamy Chicken.otf" id="6_lgwnu"]
 [ext_resource type="AudioStream" uid="uid://dyvrysgyoaciy" path="res://assets/backgrounds/audio/bgm/menu3.mp3" id="7_5seab"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uef0c"]
@@ -36,7 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_5seab")
+texture = ExtResource("3_3ovsr")
 expand_mode = 1
 stretch_mode = 6
 
@@ -58,13 +57,8 @@ theme_override_constants/margin_bottom = 60
 [node name="main button" type="VBoxContainer" parent="MarginContainer" unique_id=658152569]
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_constants/separation = 25
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/main button" unique_id=812374454]
-layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_jk1qb")
+theme_override_constants/separation = 25
 
 [node name="start" type="Button" parent="MarginContainer/main button" unique_id=1520971154]
 layout_mode = 2
@@ -124,23 +118,14 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_uef0c")
 text = "Thoát"
 
-[node name="Label" type="Label" parent="." unique_id=1595493750]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -348.0
-offset_top = 70.0
-offset_right = 443.0
-offset_bottom = 235.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(1, 0.9098039, 0.7607843, 1)
-theme_override_colors/font_shadow_color = Color(0.22745098, 0.14117648, 0.09803922, 1)
-theme_override_colors/font_outline_color = Color(0.16862746, 0.22745098, 0.2901961, 1)
-theme_override_constants/shadow_offset_y = 12
-theme_override_fonts/font = ExtResource("6_lgwnu")
-theme_override_font_sizes/font_size = 100
-text = "WAY TO HOME"
+[node name="TenGamePhotoroom" type="TextureRect" parent="." unique_id=106253098]
+layout_mode = 0
+offset_left = 357.0
+offset_top = -101.0
+offset_right = 896.0
+offset_bottom = 455.0
+texture = ExtResource("5_3ovsr")
+expand_mode = 1
 
 [node name="BGMPlayer" type="AudioStreamPlayer" parent="." unique_id=2101348592]
 stream = ExtResource("7_5seab")

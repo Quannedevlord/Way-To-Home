@@ -4,7 +4,7 @@ const SETTINGS_PATH := "user://settings.cfg"
 const DEFAULT_MUSIC_VOLUME := 1.0
 const DEFAULT_SFX_VOLUME := 1.0
 
-@export var close_button: Button
+@export var close_button: TextureButton
 @export var music_slider: HSlider
 @export var sfx_slider: HSlider
 @export var fullscreen_toggle: CheckButton
@@ -33,11 +33,12 @@ func _on_sfx_volume_changed(value: float) -> void:
 	_save_settings()
 
 
-func _on_fullscreen_toggled(is_on: bool) -> void:
-	if is_on:
+func _on_fullscreen_toggled(toggled_on: bool) -> void:
+	if toggled_on:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
 	_save_settings()
 
 

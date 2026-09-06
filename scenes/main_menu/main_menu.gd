@@ -10,6 +10,7 @@ const SettingsScript = preload("res://scenes/settings/settings.gd")
 
 func _ready() -> void:
 	SettingsScript.apply_saved_audio_settings()
+	continue_button.visible = GameManager.has_save()
 	start_button.pressed.connect(_on_start_pressed)
 	continue_button.pressed.connect(_on_continue_pressed)
 	setting_button.pressed.connect(_on_setting_pressed)
@@ -17,11 +18,12 @@ func _ready() -> void:
 
 
 func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/chapters/chapter_01/chapter1.tscn")
+	GameManager.change_scene("res://scenes/chapters/chapter_01/chapter1.tscn")
 
 
 func _on_continue_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/chapters/chapter_01/chapter1.tscn")
+	var save_data := GameManager.load_game()
+	GameManager.change_scene(save_data.get("current_scene", "res://scenes/chapters/chapter_01/chapter1.tscn"))
 
 
 func _on_setting_pressed() -> void:

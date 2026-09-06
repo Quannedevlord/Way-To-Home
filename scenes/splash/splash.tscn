@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://c6mp5vwswbpf0"]
+
+[ext_resource type="Script" uid="uid://by2qdra3ha6g1" path="res://scenes/splash/splash.gd" id="1_splash"]
+[ext_resource type="Texture2D" uid="uid://mbmqpbumbw1v" path="res://assets/backgrounds/ten_game-Photoroom.png" id="2_cwtag"]
+[ext_resource type="Texture2D" uid="uid://chgbvvop65ytf" path="res://assets/backgrounds/ChatGPT Image Sep 6, 2026, 07_44_07 PM.png" id="2_y4437"]
+
+[node name="Splash" type="Control" unique_id=545633942]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_splash")
+
+[node name="Panel" type="Panel" parent="." unique_id=916182066]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChatGptImageSep6,2026,074407Pm" type="TextureRect" parent="Panel" unique_id=1131255518]
+modulate = Color(0.12955838, 0.1295585, 0.12955841, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -194.0
+offset_top = -96.0
+offset_right = 198.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_y4437")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Panel" unique_id=1550317245]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 228.0
+offset_top = -21.0
+offset_right = -216.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cwtag")

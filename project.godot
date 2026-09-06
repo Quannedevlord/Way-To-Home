@@ -11,13 +11,17 @@ config_version=5
 [application]
 
 config/name="Way To Home"
-run/main_scene="uid://vdokwuvkkuvq"
+run/main_scene="uid://c6mp5vwswbpf0"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [audio]
 
 buses/default_bus_layout="uid://b4bgpc8lt02km"
+
+[autoload]
+
+GameManager="*uid://blqlnygpdk32n"
 
 [display]
 
