@@ -1,0 +1,196 @@
+{
+  "arc": "Khởi đầu",
+  "episodes": [
+	{
+	  "title": "Chiếc vòng tay",
+	  "scenes": [
+		{
+		  "id": "1.1",
+		  "location": "Sân trường - Chiều muộn",
+		  "dialogues": [
+			{
+			  "type": "narration",
+			  "message": "Một ngày bình thường như bao ngày khác..."
+			},
+			{
+			  "speaker": "Kiên",
+			  "message": "... Hả?"
+			},
+			{
+			  "speaker": "Kiên",
+			  "message": "Có ai ở đây không?"
+			},
+			{
+			  "speaker": "Kiên",
+			  "message": "Vòng tay của ai thế này? Trông hơi cũ..."
+			}
+		  ]
+		},
+		{
+		  "id": "1.2",
+		  "location": "Phòng ngủ Kiên - Đêm",
+		  "dialogues": [
+			{
+			  "type": "narration",
+			  "message": "Về đến nhà, cơn mệt mỏi của cả một ngày dài ập đến..."
+			}
+		  ]
+		},
+		{
+		  "id": "1.3",
+		  "location": "Không gian Giấc mơ",
+		  "dialogues": [
+			{
+			  "speaker": "Kiên",
+			  "message": "Này... Có ai ở đó không?"
+			},
+			{
+			  "speaker": "Vy",
+			  "message": "... Cứu..."
+			},
+			{
+			  "speaker": "Vy",
+			  "message": "Xin cậu... hãy đưa tôi trở về 'nhà'..."
+			}
+		  ]
+		},
+		{
+		  "id": "1.4",
+		  "location": "Phòng ngủ Kiên - Sáng sớm",
+		  "dialogues": [
+			{
+			  "speaker": "Kiên",
+			  "message": "Giấc mơ gì lạ vậy?"
+			},
+			{
+			  "type": "narration",
+			  "message": "Chiếc vòng tay nhặt được ở trường chiều qua... đã nằm gọn trong lòng bàn tay Kiên."
+			}
+		  ]
+		}
+	  ]
+	},
+	{
+	  "title": "Không chỉ là một giấc mơ",
+	  "scenes": [
+		{
+		  "id": "2.1",
+		  "location": "Sân trường / Lớp học - Ban ngày",
+		  "dialogues": [
+			{
+			  "speaker": "Kiên",
+			  "message": "Nhặt được một chiếc vòng tay nữ ở hành lang chiều qua..."
+			},
+			{
+			  "speaker": "Thư",
+			  "message": "Này Kiên! Làm gì mà đứng thẫn thờ thế?"
+			}
+		  ]
+		},
+		{
+		  "id": "2.3",
+		  "location": "Không gian Giấc mơ",
+		  "dialogues": [
+			{
+			  "speaker": "Vy",
+			  "message": "Cậu... đã quay lại..."
+			},
+			{
+			  "speaker": "Kiên",
+			  "message": "Tên cậu là gì?"
+			},
+			{
+			  "speaker": "Vy",
+			  "message": "Tên tôi... Vy."
+			}
+		  ]
+		},
+		{
+		  "id": "2.4",
+		  "location": "Phòng ngủ Kiên - Sáng",
+		  "dialogues": [
+			{
+			  "type": "narration",
+			  "message": "Giấc mơ này không phải ngẫu nhiên... Cô ấy tên là Vy."
+			},
+			{
+			  "speaker": "Kiên",
+			  "message": "Phải tìm hiểu xem Vy là ai."
+			}
+		  ]
+		}
+	  ]
+	},
+	{
+	  "title": "Bắt đầu",
+	  "scenes": [
+		{
+		  "id": "3.1",
+		  "location": "Phòng Giáo viên - Chiều",
+		  "dialogues": [
+			{
+			  "speaker": "Kiên",
+			  "message": "Thưa thầy, cho em hỏi một chút được không ạ?"
+			},
+			{
+			  "speaker": "Thầy giáo",
+			  "message": "Vy sao? Họ gì em? Học lớp nào?"
+			},
+			{
+			  "speaker": "Kiên",
+			  "message": "Em cũng không rõ họ... chỉ nghe nói năm ngoái."
+			}
+		  ]
+		},
+		{
+		  "id": "3.2",
+		  "location": "Góc sân trường - Hoàng hôn",
+		  "choices": [
+			{
+			  "option": "A",
+			  "description": "Kể một phần sự thật",
+			  "dialogues": [
+				{
+				  "speaker": "Kiên",
+				  "message": "Thật ra... mấy đêm nay tớ liên tục mơ thấy một cô gái tên Vy."
+				},
+				{
+				  "speaker": "Thư",
+				  "message": "Giấc mơ lặp đi lặp lại? Nghe cũng kỳ lạ thật."
+				}
+			  ]
+			},
+			{
+			  "option": "B",
+			  "description": "Giữ kín hoàn toàn",
+			  "dialogues": [
+				{
+				  "speaker": "Kiên",
+				  "message": "Không có gì đâu Thư. Chỉ là đống bài tập nhóm căng thẳng quá thôi."
+				},
+				{
+				  "speaker": "Thư",
+				  "message": "Cậu lúc nào cũng ôm hết mọi việc vào người..."
+				}
+			  ]
+			}
+		  ]
+		},
+		{
+		  "id": "3.3",
+		  "location": "Phòng ngủ Kiên - Tối",
+		  "dialogues": [
+			{
+			  "type": "narration",
+			  "message": "Thái độ né tránh của thầy chủ nhiệm càng làm tôi tin rằng có một sự thật nào đó về Vy."
+			},
+			{
+			  "speaker": "Kiên",
+			  "message": "Vy, tôi nhất định sẽ tìm ra sự thật về cậu."
+			}
+		  ]
+		}
+	  ]
+	}
+  ]
+}
