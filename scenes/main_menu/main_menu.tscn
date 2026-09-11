@@ -2,10 +2,14 @@
 
 [ext_resource type="Theme" uid="uid://dw0edg512es" path="res://themes/main_theme.tres" id="1_rtw2f"]
 [ext_resource type="Script" uid="uid://ccaiigwio7fyb" path="res://scenes/main_menu/main_menu.gd" id="2_oa1go"]
-[ext_resource type="VideoStream" uid="uid://bv6dhmofkd1a0" path="res://assets/backgrounds/bg_godot.ogv" id="3_5seab"]
+[ext_resource type="VideoStream" uid="uid://dj0bmn6v8cl3r" path="res://assets/backgrounds/menu_bg_da_xoa_logo.ogv" id="3_3ovsr"]
 [ext_resource type="FontFile" uid="uid://c48xj77famwca" path="res://assets/backgrounds/fonts/dearpix-1-94.otf" id="4_3ovsr"]
 [ext_resource type="Texture2D" uid="uid://mbmqpbumbw1v" path="res://assets/backgrounds/ten_game-Photoroom.png" id="5_3ovsr"]
-[ext_resource type="AudioStream" uid="uid://dyvrysgyoaciy" path="res://assets/backgrounds/audio/bgm/menu3.mp3" id="7_5seab"]
+[ext_resource type="AudioStream" uid="uid://bw0f6m6ilypju" path="res://assets/backgrounds/audio/bgm/menu4.mp3" id="6_3ovsr"]
+[ext_resource type="AudioStream" uid="uid://qxop7q0cwyxs" path="res://assets/backgrounds/audio/sfx/JDSherbert - Wooden UI SFX Pack - Cancel - 2.wav" id="7_sfx"]
+[ext_resource type="Script" uid="uid://w1ptg1vdsoy6" path="res://scenes/main_menu/click_sfx.gd" id="8_click_sfx"]
+[ext_resource type="Script" uid="uid://d0767i1lv27p" path="res://scenes/main_menu/hover_sfx.gd" id="9_hover_sfx"]
+[ext_resource type="AudioStream" uid="uid://dwsop0yuaq5d7" path="res://assets/backgrounds/audio/sfx/JDSherbert - Wooden UI SFX Pack - Cancel - 1.wav" id="10_x2yjq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uef0c"]
 
@@ -45,7 +49,7 @@ offset_right = 657.0
 offset_bottom = 369.0
 grow_horizontal = 2
 grow_vertical = 2
-stream = ExtResource("3_5seab")
+stream = ExtResource("3_3ovsr")
 autoplay = true
 expand = true
 loop = true
@@ -77,13 +81,14 @@ theme_override_constants/separation = 25
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"FlatButton"
-theme_override_colors/font_color = Color(0.99215686, 0.9529412, 0.90588236, 1)
+theme_override_colors/font_color = Color(1, 0.9098039, 0.6392157, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0.6643574, 0, 0.0576792, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.16862746, 0.22745098, 0.2901961, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.7882353, 0.36078432, 1)
+theme_override_colors/font_outline_color = Color(0.22745098, 0.19215687, 0.33333334, 1)
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_3ovsr")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_uef0c")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_1m6bl")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bswgn")
@@ -93,13 +98,14 @@ text = "Chơi mới"
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"FlatButton"
-theme_override_colors/font_color = Color(0.99215686, 0.9529412, 0.90588236, 1)
+theme_override_colors/font_color = Color(1, 0.9098039, 0.6392157, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0.6643574, 0, 0.0576792, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.16862746, 0.22745098, 0.2901961, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.7882353, 0.36078432, 1)
+theme_override_colors/font_outline_color = Color(0.22745098, 0.19215687, 0.33333334, 1)
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_3ovsr")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_uef0c")
 text = "Tiếp tục"
 
@@ -107,13 +113,14 @@ text = "Tiếp tục"
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"FlatButton"
-theme_override_colors/font_color = Color(0.99215686, 0.9529412, 0.90588236, 1)
+theme_override_colors/font_color = Color(1, 0.9098039, 0.6392157, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0.6643574, 0, 0.0576792, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.16862746, 0.22745098, 0.2901961, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.7882353, 0.36078432, 1)
+theme_override_colors/font_outline_color = Color(0.22745098, 0.19215687, 0.33333334, 1)
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_3ovsr")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_uef0c")
 text = "Cài đặt"
 
@@ -121,13 +128,14 @@ text = "Cài đặt"
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"FlatButton"
-theme_override_colors/font_color = Color(0.99215686, 0.9529412, 0.90588236, 1)
+theme_override_colors/font_color = Color(1, 0.9098039, 0.6392157, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0.6643574, 0, 0.0576792, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.16862746, 0.22745098, 0.2901961, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.7882353, 0.36078432, 1)
+theme_override_colors/font_outline_color = Color(0.22745098, 0.19215687, 0.33333334, 1)
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_3ovsr")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_uef0c")
 text = "Thoát"
 
@@ -136,14 +144,24 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -180.5
-offset_right = 180.5
-offset_bottom = 281.0
+offset_left = -180.0
+offset_top = 36.0
+offset_right = 181.0
+offset_bottom = 317.0
 grow_horizontal = 2
 texture = SubResource("AtlasTexture_vlew8")
 expand_mode = 1
 
 [node name="BGMPlayer" type="AudioStreamPlayer" parent="." unique_id=2101348592]
-stream = ExtResource("7_5seab")
+stream = ExtResource("6_3ovsr")
 autoplay = true
 bus = &"Music"
+
+[node name="HoverSFX" type="Node" parent="." unique_id=94065810]
+script = ExtResource("9_hover_sfx")
+hover_sound = ExtResource("7_sfx")
+
+[node name="ClickSFX" type="AudioStreamPlayer" parent="." unique_id=1549191567]
+bus = &"SFX"
+script = ExtResource("8_click_sfx")
+click_sound = ExtResource("10_x2yjq")

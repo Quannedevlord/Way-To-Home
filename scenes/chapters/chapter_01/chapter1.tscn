@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cqn28ke6tf87y"]
 
-[ext_resource type="Texture2D" uid="uid://chgbvvop65ytf" path="res://assets/backgrounds/ChatGPT Image Sep 6, 2026, 07_44_07 PM.png" id="1_bg"]
+[ext_resource type="Texture2D" uid="uid://0tidrtmgmaxe" path="res://assets/backgrounds/ngonqua.png" id="2_reab2"]
 [ext_resource type="Script" uid="uid://b0ghs0vegibxa" path="res://scenes/chapters/chapter_01/chapter1.gd" id="2_script"]
+[ext_resource type="AudioStream" uid="uid://dvrugvm21uunj" path="res://assets/backgrounds/audio/bgm/in game3.mp3" id="3_l34mg"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_avatar"]
 
@@ -57,7 +58,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_bg")
+texture = ExtResource("2_reab2")
 expand_mode = 1
 stretch_mode = 6
 
@@ -171,3 +172,8 @@ anchor_right = 0.72
 anchor_bottom = 0.85
 theme_override_constants/separation = 10
 alignment = 1
+
+[node name="BGM story" type="AudioStreamPlayer" parent="." unique_id=863119067]
+stream = ExtResource("3_l34mg")
+autoplay = true
+bus = &"Music"

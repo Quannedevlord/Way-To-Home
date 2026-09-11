@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ckf6c34awldoe"]
 
 [ext_resource type="Script" uid="uid://dkdr2d4t2x6rv" path="res://scenes/settings/settings.gd" id="1_5p8wc"]
-[ext_resource type="Texture2D" uid="uid://h48herv1hm0s" path="res://assets/backgrounds/ui/settings/Sprite sheets/Setting menu.png" id="2_vu5fi"]
+[ext_resource type="Texture2D" uid="uid://h48herv1hm0s" path="res://assets/backgrounds/ui/settings/Setting menu.png" id="2_vu5fi"]
 [ext_resource type="FontFile" uid="uid://c48xj77famwca" path="res://assets/backgrounds/fonts/dearpix-1-94.otf" id="3_v1hle"]
 [ext_resource type="Texture2D" uid="uid://bqb0budaioc32" path="res://assets/backgrounds/ui/settings/button2.png" id="4_1slea"]
 [ext_resource type="Texture2D" uid="uid://b3o8fc3oaw4u2" path="res://assets/backgrounds/ui/settings/button1.png" id="4_vghtj"]
