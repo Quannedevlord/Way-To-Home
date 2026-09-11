@@ -1,0 +1,167 @@
+[gd_scene format=3 uid="uid://vdokwuvkkuvq"]
+
+[ext_resource type="Theme" uid="uid://dw0edg512es" path="res://themes/main_theme.tres" id="1_rtw2f"]
+[ext_resource type="Script" uid="uid://ccaiigwio7fyb" path="res://scenes/main_menu/main_menu.gd" id="2_oa1go"]
+[ext_resource type="VideoStream" uid="uid://dj0bmn6v8cl3r" path="res://assets/backgrounds/menu_bg_da_xoa_logo.ogv" id="3_3ovsr"]
+[ext_resource type="FontFile" uid="uid://c48xj77famwca" path="res://assets/backgrounds/fonts/dearpix-1-94.otf" id="4_3ovsr"]
+[ext_resource type="Texture2D" uid="uid://mbmqpbumbw1v" path="res://assets/backgrounds/ten_game-Photoroom.png" id="5_3ovsr"]
+[ext_resource type="AudioStream" uid="uid://bw0f6m6ilypju" path="res://assets/backgrounds/audio/bgm/menu4.mp3" id="6_3ovsr"]
+[ext_resource type="AudioStream" uid="uid://qxop7q0cwyxs" path="res://assets/backgrounds/audio/sfx/JDSherbert - Wooden UI SFX Pack - Cancel - 2.wav" id="7_sfx"]
+[ext_resource type="Script" uid="uid://w1ptg1vdsoy6" path="res://scenes/main_menu/click_sfx.gd" id="8_click_sfx"]
+[ext_resource type="Script" uid="uid://d0767i1lv27p" path="res://scenes/main_menu/hover_sfx.gd" id="9_hover_sfx"]
+[ext_resource type="AudioStream" uid="uid://dwsop0yuaq5d7" path="res://assets/backgrounds/audio/sfx/JDSherbert - Wooden UI SFX Pack - Cancel - 1.wav" id="10_x2yjq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uef0c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m6bl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bswgn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlew8"]
+atlas = ExtResource("5_3ovsr")
+region = Rect2(238.90015, 330.6151, 535.4475, 356.96497)
+
+[node name="MainMenu" type="Control" unique_id=133904996 node_paths=PackedStringArray("start_button", "continue_button", "setting_button", "exit_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_rtw2f")
+script = ExtResource("2_oa1go")
+start_button = NodePath("MarginContainer/main button/start")
+continue_button = NodePath("MarginContainer/main button/continue")
+setting_button = NodePath("MarginContainer/main button/setting")
+exit_button = NodePath("MarginContainer/main button/exit")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1618298230]
+modulate = Color(0.8175213, 0.8175213, 0.81752133, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -652.0
+offset_top = -374.0
+offset_right = 657.0
+offset_bottom = 369.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("3_3ovsr")
+autoplay = true
+expand = true
+loop = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1623632154]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = 275.0
+offset_right = 114.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="main button" type="VBoxContainer" parent="MarginContainer" unique_id=658152569]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 25
+
+[node name="start" type="Button" parent="MarginContainer/main button" unique_id=1520971154]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_color = Color(1, 0.9098039, 0.6392157, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.7882353, 0.36078432, 1)
+theme_override_colors/font_outline_color = Color(0.22745098, 0.19215687, 0.33333334, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_3ovsr")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_uef0c")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_1m6bl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bswgn")
+text = "Chơi mới"
+
+[node name="continue" type="Button" parent="MarginContainer/main button" unique_id=811496956]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_color = Color(1, 0.9098039, 0.6392157, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.7882353, 0.36078432, 1)
+theme_override_colors/font_outline_color = Color(0.22745098, 0.19215687, 0.33333334, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_3ovsr")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_uef0c")
+text = "Tiếp tục"
+
+[node name="setting" type="Button" parent="MarginContainer/main button" unique_id=1280844810]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_color = Color(1, 0.9098039, 0.6392157, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.7882353, 0.36078432, 1)
+theme_override_colors/font_outline_color = Color(0.22745098, 0.19215687, 0.33333334, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_3ovsr")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_uef0c")
+text = "Cài đặt"
+
+[node name="exit" type="Button" parent="MarginContainer/main button" unique_id=126709313]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_color = Color(1, 0.9098039, 0.6392157, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.7882353, 0.36078432, 1)
+theme_override_colors/font_outline_color = Color(0.22745098, 0.19215687, 0.33333334, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_3ovsr")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_uef0c")
+text = "Thoát"
+
+[node name="TenGamePhotoroom" type="TextureRect" parent="." unique_id=106253098]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 36.0
+offset_right = 181.0
+offset_bottom = 317.0
+grow_horizontal = 2
+texture = SubResource("AtlasTexture_vlew8")
+expand_mode = 1
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="." unique_id=2101348592]
+stream = ExtResource("6_3ovsr")
+autoplay = true
+bus = &"Music"
+
+[node name="HoverSFX" type="Node" parent="." unique_id=94065810]
+script = ExtResource("9_hover_sfx")
+hover_sound = ExtResource("7_sfx")
+
+[node name="ClickSFX" type="AudioStreamPlayer" parent="." unique_id=1549191567]
+bus = &"SFX"
+script = ExtResource("8_click_sfx")
+click_sound = ExtResource("10_x2yjq")

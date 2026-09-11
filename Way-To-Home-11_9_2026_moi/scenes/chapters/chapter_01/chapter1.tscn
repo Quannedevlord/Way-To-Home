@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://cqn28ke6tf87y"]
+
+[ext_resource type="Script" uid="uid://b0ghs0vegibxa" path="res://scenes/chapters/chapter_01/chapter1.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://x8p4edifovu1" path="res://assets/backgrounds/fonts/Roboto-Light.ttf" id="2_font"]
+[ext_resource type="AudioStream" uid="uid://dvrugvm21uunj" path="res://assets/backgrounds/audio/bgm/in game3.mp3" id="3_bgm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.22, 0.22, 0.235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
+bg_color = Color(0.145, 0.145, 0.155, 0.98)
+border_width_bottom = 1
+border_color = Color(0.22, 0.22, 0.24, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hint"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.145, 0.145, 0.155, 0.92)
+
+[node name="Chapter1" type="Control" unique_id=1406911119 node_paths=PackedStringArray("chat_feed", "scroll_container", "location_label", "choice_container", "continue_hint")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+chat_feed = NodePath("ChatLayout/ScrollContainer/ChatFeed")
+scroll_container = NodePath("ChatLayout/ScrollContainer")
+location_label = NodePath("ChatLayout/Header/LocationLabel")
+choice_container = NodePath("ChoiceOverlay/ChoiceContainer")
+continue_hint = NodePath("ChatLayout/ContinueHint")
+
+[node name="Background" type="Panel" parent="." unique_id=1351719223]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="ChatLayout" type="VBoxContainer" parent="." unique_id=1819348085]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="ChatLayout" unique_id=1089425095]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_header")
+
+[node name="LocationLabel" type="Label" parent="ChatLayout/Header" unique_id=1168529968]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.87, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+text = "Chương 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ChatLayout" unique_id=426825709]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ChatFeed" type="VBoxContainer" parent="ChatLayout/ScrollContainer" unique_id=1475153686]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="ContinueHint" type="PanelContainer" parent="ChatLayout" unique_id=1582733713]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hint")
+
+[node name="HintLabel" type="Label" parent="ChatLayout/ContinueHint" unique_id=1240731170]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.45, 0.48, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 13
+text = "Nhấn để tiếp tục..."
+horizontal_alignment = 1
+
+[node name="ChoiceOverlay" type="Control" parent="." unique_id=88634947]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dimmer" type="ColorRect" parent="ChoiceOverlay" unique_id=501491178]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="ChoiceContainer" type="VBoxContainer" parent="ChoiceOverlay" unique_id=2141976339]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -80.0
+offset_right = 220.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="." unique_id=1966378470]
+stream = ExtResource("3_bgm")
+autoplay = true
+bus = &"Music"
