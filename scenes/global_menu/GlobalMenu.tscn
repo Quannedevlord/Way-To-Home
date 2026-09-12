@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://d1igt8yqm17se"]
+
+[ext_resource type="Script" uid="uid://cnhkouiwnxckn" path="res://scenes/global_menu/global_menu.gd" id="1_wj43r"]
+[ext_resource type="Texture2D" uid="uid://rryk8vakamfp" path="res://assets/backgrounds/ui/settings/All Icons.png" id="2_wj43r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlew8"]
+atlas = ExtResource("2_wj43r")
+region = Rect2(48.855877, 1.2395058, 14.363525, 13.928263)
+
+[node name="GlobalMenu" type="Control" unique_id=2108833488]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wj43r")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1679136798]
+layer = 100
+
+[node name="MenuButton" type="TextureButton" parent="CanvasLayer" unique_id=1240334255]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -37.0
+offset_top = 9.0
+offset_right = -7.0
+offset_bottom = 39.0
+grow_horizontal = 0
+texture_normal = SubResource("AtlasTexture_vlew8")
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true

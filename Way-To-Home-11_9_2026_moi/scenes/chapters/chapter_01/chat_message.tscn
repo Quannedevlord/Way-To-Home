@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://bqx8chatmsg001"]
-
-[ext_resource type="Script" path="res://scenes/chapters/chapter_01/chat_message.gd" id="1_script"]
-
-[node name="ChatMessage" type="MarginContainer"]
-size_flags_horizontal = 3
-script = ExtResource("1_script")
