@@ -1,0 +1,15 @@
+[
+	{
+		"type": "dialogue",
+		"speaker": "Kiên",
+		"text": "Này, tớ chẳng hiểu cậu nói gì cả",
+		"avatar": "res://assets/kien.png"
+	},
+	{
+		"type": "dialogue",
+		"speaker": "Kiên",
+		"text": "Mình không thể giúp được cậu rồi. Xin lỗi nhé",
+		"avatar": "res://assets/kien.png",
+		"next_file": "endbranch.json"
+	}
+]
