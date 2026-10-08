@@ -2,10 +2,17 @@
 
 [ext_resource type="Script" uid="uid://cnhkouiwnxckn" path="res://scenes/global_menu/global_menu.gd" id="1_wj43r"]
 [ext_resource type="Texture2D" uid="uid://rryk8vakamfp" path="res://assets/backgrounds/ui/settings/All Icons.png" id="2_wj43r"]
+[ext_resource type="Script" uid="uid://dpw7scpxd3yqt" path="res://scenes/settings/ui_sound_manager.gd" id="3_pj4yf"]
+[ext_resource type="AudioStream" uid="uid://qxop7q0cwyxs" path="res://assets/backgrounds/audio/sfx/JDSherbert - Wooden UI SFX Pack - Cancel - 2.wav" id="4_wjivj"]
+[ext_resource type="AudioStream" uid="uid://dwsop0yuaq5d7" path="res://assets/backgrounds/audio/sfx/JDSherbert - Wooden UI SFX Pack - Cancel - 1.wav" id="5_l0uk6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vlew8"]
 atlas = ExtResource("2_wj43r")
 region = Rect2(48.855877, 1.2395058, 14.363525, 13.928263)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3cpi"]
+atlas = ExtResource("2_wj43r")
+region = Rect2(144.89493, 1.3786871, 14.364, 13.928)
 
 [node name="GlobalMenu" type="Control" unique_id=2108833488]
 layout_mode = 3
@@ -23,11 +30,17 @@ layer = 100
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -37.0
-offset_top = 9.0
-offset_right = -7.0
-offset_bottom = 39.0
+offset_left = -44.0
+offset_top = 8.0
+offset_right = -14.0
+offset_bottom = 38.0
 grow_horizontal = 0
 texture_normal = SubResource("AtlasTexture_vlew8")
+texture_hover = SubResource("AtlasTexture_i3cpi")
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
+
+[node name="UISoundManager" type="Node" parent="." unique_id=1405993702]
+script = ExtResource("3_pj4yf")
+hover_sound = ExtResource("4_wjivj")
+click_sound = ExtResource("5_l0uk6")

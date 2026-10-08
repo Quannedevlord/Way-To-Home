@@ -49,16 +49,16 @@ loop = true
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1623632154]
 layout_mode = 1
-anchors_preset = 13
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -114.0
-offset_top = 275.0
-offset_right = 114.0
-offset_bottom = 2.0
+offset_left = -130.5
+offset_top = -399.0
+offset_right = 130.5
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme_override_constants/margin_left = 60
 theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 60
@@ -69,6 +69,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 25
+alignment = 1
 
 [node name="start" type="Button" parent="MarginContainer/main button" unique_id=1520971154]
 layout_mode = 2

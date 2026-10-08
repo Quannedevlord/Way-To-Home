@@ -7,8 +7,10 @@ const NAME_COLOR := Color(0.72, 0.72, 0.74, 1.0)
 const AVATAR_SIZE := 56
 const BUBBLE_RADIUS := 14
 const MAX_BUBBLE_WIDTH := 420
+const ENTRANCE_DURATION := 0.18
 
 var _font: Font
+var _entrance_prepared := false
 
 
 func _ready() -> void:
@@ -16,6 +18,23 @@ func _ready() -> void:
 	add_theme_constant_override("margin_right", 18)
 	add_theme_constant_override("margin_top", 4)
 	add_theme_constant_override("margin_bottom", 4)
+	if _entrance_prepared:
+		call_deferred("_play_entrance")
+
+
+func prepare_entrance() -> void:
+	_entrance_prepared = true
+	modulate.a = 0.0
+	scale = Vector2(0.96, 0.96)
+
+
+func _play_entrance() -> void:
+	pivot_offset = size * 0.5
+
+	var tween := create_tween().set_parallel(true)
+	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "modulate:a", 1.0, ENTRANCE_DURATION)
+	tween.tween_property(self, "scale", Vector2.ONE, ENTRANCE_DURATION)
 
 
 func set_font(font: Font) -> void:

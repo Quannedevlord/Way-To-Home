@@ -2,10 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b0ghs0vegibxa" path="res://scenes/chapters/chapter_01/chapter1.gd" id="1_script"]
 [ext_resource type="FontFile" uid="uid://x8p4edifovu1" path="res://assets/backgrounds/fonts/Roboto-Light.ttf" id="2_font"]
+[ext_resource type="Texture2D" uid="uid://3opo0lwx3vik" path="res://assets/backgrounds/cat-night-scenery.jpg" id="2_i3cpi"]
 [ext_resource type="AudioStream" uid="uid://dvrugvm21uunj" path="res://assets/backgrounds/audio/bgm/in game3.mp3" id="3_bgm"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
-bg_color = Color(0.22, 0.22, 0.235, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
 bg_color = Color(0.145, 0.145, 0.155, 0.98)
@@ -33,15 +31,21 @@ location_label = NodePath("ChatLayout/Header/LocationLabel")
 choice_container = NodePath("ChoiceOverlay/ChoiceContainer")
 continue_hint = NodePath("ChatLayout/ContinueHint")
 
-[node name="Background" type="Panel" parent="." unique_id=1351719223]
+[node name="Background" type="TextureRect" parent="." unique_id=1296590629]
+self_modulate = Color(0.1584723, 0.1584723, 0.15847233, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -591.0
+offset_top = -857.0
+offset_right = 1969.0
+offset_bottom = 583.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+texture = ExtResource("2_i3cpi")
+stretch_mode = 5
 
 [node name="ChatLayout" type="VBoxContainer" parent="." unique_id=1819348085]
 layout_mode = 1

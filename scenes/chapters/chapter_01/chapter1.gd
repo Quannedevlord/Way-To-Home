@@ -166,7 +166,7 @@ func _rebuild_chat_history() -> void:
 	_append_location_divider(scene.get("location", ""))
 
 	for i in range(mini(dialogue_index + 1, current_dialogues.size())):
-		_append_line(current_dialogues[i], false, false)
+		_append_line(current_dialogues[i], false, false, false)
 
 	_lines_shown = mini(dialogue_index + 1, current_dialogues.size())
 	_try_show_inline_choices()
@@ -174,7 +174,7 @@ func _rebuild_chat_history() -> void:
 	call_deferred("_scroll_to_bottom")
 
 
-func _append_line(line: Dictionary, scroll: bool = true, play_sound: bool = true) -> void:
+func _append_line(line: Dictionary, scroll: bool = true, play_sound: bool = true, animate: bool = true) -> void:
 	if str(line.get("time", "")) != "":
 		location_label.text = str(line["time"])
 		
@@ -196,25 +196,26 @@ func _append_line(line: Dictionary, scroll: bool = true, play_sound: bool = true
 		"narration":
 			_last_speaker = ""
 			if illustration != "" and ResourceLoader.exists(illustration):
-				_append_image(load(illustration), false)
+				_append_image(load(illustration), false, animate)
 			if message != "":
-				_append_narration(message)
+				_append_narration(message, animate)
 		"image":
 			_last_speaker = ""
 			var image_path: String = str(line.get("path", illustration))
 			if image_path != "" and ResourceLoader.exists(image_path):
-				_append_image(load(image_path), str(line.get("align", "left")) == "right")
+				var align_right := str(line.get("align", "left")) == "right"
+				_append_image(load(image_path), align_right, animate)
 		_:
 			var speaker: String = str(line.get("speaker", "???"))
 			var avatar_path: String = str(line.get("avatar", avatar_paths.get(speaker, "")))
-			_append_dialogue(speaker, message, avatar_path)
+			_append_dialogue(speaker, message, avatar_path, animate)
 			_last_speaker = speaker
 
 	if scroll:
 		call_deferred("_scroll_to_bottom")
 
 
-func _append_dialogue(speaker: String, message: String, avatar_path: String = "") -> void:
+func _append_dialogue(speaker: String, message: String, avatar_path: String = "", animate: bool = true) -> void:
 	var msg := CHAT_MESSAGE_SCENE.instantiate()
 	msg.set_font(CHAT_FONT)
 	if avatar_path.is_empty():
@@ -225,13 +226,17 @@ func _append_dialogue(speaker: String, message: String, avatar_path: String = ""
 	var align_right := speaker in protagonist_speakers
 	var compact := speaker == _last_speaker and speaker != ""
 	msg.setup_dialogue(speaker, message, avatar_tex, align_right, compact)
+	if animate:
+		msg.prepare_entrance()
 	chat_feed.add_child(msg)
 
 
-func _append_narration(message: String) -> void:
+func _append_narration(message: String, animate: bool = true) -> void:
 	var msg := CHAT_MESSAGE_SCENE.instantiate()
 	msg.set_font(CHAT_FONT)
 	msg.setup_narration(message)
+	if animate:
+		msg.prepare_entrance()
 	chat_feed.add_child(msg)
 
 
@@ -244,9 +249,11 @@ func _append_location_divider(location: String) -> void:
 	chat_feed.add_child(msg)
 
 
-func _append_image(texture: Texture2D, align_right: bool = false) -> void:
+func _append_image(texture: Texture2D, align_right: bool = false, animate: bool = true) -> void:
 	var msg := CHAT_MESSAGE_SCENE.instantiate()
 	msg.setup_image(texture, align_right)
+	if animate:
+		msg.prepare_entrance()
 	chat_feed.add_child(msg)
 	
 	
@@ -264,6 +271,8 @@ func play_sfx() -> void:
 
 
 func _scroll_to_bottom() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
 	var v_scroll := scroll_container.get_v_scroll_bar()
 	v_scroll.value = v_scroll.max_value
 
@@ -331,6 +340,8 @@ func _input(event: InputEvent) -> void:
 		return
 		
 	if event.is_action_pressed("ui_accept") or (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
+		if event is InputEventMouseButton and _is_pointer_over_button():
+			return
 		# Kiểm tra nếu click chuột ở câu thoại cuối cùng của file hiện tại để sẵn sàng chuyển file nhánh
 		if dialogue_index >= current_dialogues.size() - 1:
 			if current_dialogues.size() > 0:
@@ -357,6 +368,7 @@ func advance_scene() -> void:
 		if episode_index >= story_data["episodes"].size():
 			story_finished = true
 			_append_narration("— Hết chương —")
+			call_deferred("_scroll_to_bottom")
 			continue_hint.visible = false
 			GameManager.save_game({"completed": true})
 			return
@@ -407,6 +419,7 @@ func _on_choice_selected(choice: Dictionary) -> void:
 	var chosen_text := str(choice.get("text", choice.get("description", "")))
 	if chosen_text != "":
 		_append_dialogue("Kiên", chosen_text, avatar_paths["Kiên"])
+		call_deferred("_scroll_to_bottom")
 		_last_speaker = "Kiên"
 
 	# TÍNH NĂNG MỚI: Nếu lựa chọn yêu cầu đổi sang file JSON khác
@@ -450,9 +463,20 @@ func _unhandled_input(event: InputEvent) -> void:
 	if choice_container.get_parent().visible or story_finished:
 		return
 	if event.is_action_pressed("ui_accept") or (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
+		if event is InputEventMouseButton and _is_pointer_over_button():
+			return
 		dialogue_index += 1
 		show_current_line()
 		save_progress()
+
+
+func _is_pointer_over_button() -> bool:
+	var hovered_control := get_viewport().gui_get_hovered_control()
+	while hovered_control != null:
+		if hovered_control is BaseButton:
+			return true
+		hovered_control = hovered_control.get_parent() as Control
+	return false
 
 
 func restore_progress() -> void:

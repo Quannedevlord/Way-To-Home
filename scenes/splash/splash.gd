@@ -19,6 +19,4 @@ func _ready() -> void:
 	appear_tween.tween_property(nine_patch_rect, "scale", Vector2.ONE, APPEAR_DURATION)
 
 	await get_tree().create_timer(SPLASH_DURATION).timeout
-	var result := get_tree().change_scene_to_file(MAIN_MENU_SCENE)
-	if result != OK:
-		push_error("Khong the chuyen den main menu: %s" % error_string(result))
+	GameManager.change_scene(MAIN_MENU_SCENE)

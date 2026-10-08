@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://dw53eiplirwd2"]
+
+[ext_resource type="Script" uid="uid://35hc2id23r3c" path="res://scenes/credits/credits.gd" id="1_dr3ri"]
+[ext_resource type="AudioStream" uid="uid://boqanmp2422qs" path="res://assets/backgrounds/audio/bgm/The_Way_Back_Home.mp3" id="2_8n0nl"]
+[ext_resource type="FontFile" uid="uid://c48xj77famwca" path="res://assets/backgrounds/fonts/dearpix-1-94.otf" id="2_c8xcy"]
+
+[node name="Credits" type="Control" unique_id=1277510854]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dr3ri")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1560066497]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06666667, 0.07450981, 0.10980392, 1)
+
+[node name="CreditsText" type="Label" parent="." unique_id=336662439]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -162.0
+offset_top = 96.0
+offset_right = 173.0
+offset_bottom = 2145.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_c8xcy")
+theme_override_font_sizes/font_size = 30
+text = "WAY TO HOME
+
+
+Một hành trình nhỏ
+trên con đường tìm về nhà.
+
+
+CREATED BY
+
+
+TRẦN MINH QUÂN
+
+&
+
+NGUYỄN LÊ HOÀNG PHÚC
+
+
+────────────────────
+
+
+GAME DESIGN
+PROGRAMMING
+PIXEL ART
+MUSIC & SOUND
+
+
+────────────────────
+
+
+DEVELOPED WITH
+GODOT ENGINE
+
+
+────────────────────
+
+
+SPECIAL THANKS
+
+
+Cảm ơn giảng viên
+đã hướng dẫn và hỗ trợ dự án.
+
+
+Cảm ơn tất cả những người
+đã đồng hành cùng chúng tôi.
+
+
+────────────────────
+
+
+CẢM ƠN BẠN ĐÃ CHƠI
+
+
+WAY TO HOME
+
+
+THE JOURNEY ENDS HERE."
+horizontal_alignment = 1
+
+[node name="FadeOverlay" type="ColorRect" parent="." unique_id=309179443]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=499277761]
+stream = ExtResource("2_8n0nl")
+autoplay = true
