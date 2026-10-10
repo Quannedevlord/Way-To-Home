@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c11vpdse1cpwt"
+path="res://.godot/imported/end game2.mp3-e816b2cea935483b975931a57cfa74b5.mp3str"
+
+[deps]
+
+source_file="res://assets/backgrounds/audio/bgm/end game2.mp3"
+dest_files=["res://.godot/imported/end game2.mp3-e816b2cea935483b975931a57cfa74b5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
