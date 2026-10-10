@@ -1,0 +1,36 @@
+[
+	{
+		"type": "dialogue",
+		"speaker": "Kiên",
+		"text": "*ây da*",
+		"avatar": "res://assets/kien.png"
+	},
+	{
+		"type": "dialogue",
+		"speaker": "Mẹ Kiên",
+		"text": "Kiên! sao giờ này còn ngủ? Xuống ăn cơm mau",
+		"avatar": "res://assets/mother.png"
+	},
+	{
+		"type": "dialogue",
+		"speaker": "Kiên",
+		"text": "*thì thầm* Hóa ra nảy giờ đang nằm mơ à, Bao lâu rồi nhỉ?",
+		"avatar": "res://assets/kien.png"
+	},
+	{
+		"type": "narration",
+		"time": "19:30"
+	},
+	{
+		"type": "dialogue",
+		"speaker": "Kiên",
+		"text": "Hể, đã 1 tiếng trôi qua rồi sao?",
+		"avatar": "res://assets/kien.png"
+	},
+	{
+		"type": "dialogue",
+		"speaker": "Kiên",
+		"text": "Hôm nay mình cảm thấy sao sao ấy. Kỳ lạ thật *bối rối*",
+		"avatar": "res://assets/kien.png"
+	}
+]

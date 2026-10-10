@@ -1,0 +1,15 @@
+[
+	{
+		"type": "dialogue",
+		"speaker": "Kiên",
+		"text": "Nghe có vẻ rất phi lí. Tuy nhiên mình tin trực giác của mình",
+		"avatar": "res://assets/kien.png"
+	},
+	{
+		"type": "dialogue",
+		"speaker": "Kiên",
+		"text": "Mình sẽ giúp cậu",
+		"avatar": "res://assets/kien.png",
+		"next_file": "endbranch.json"
+	}
+]
