@@ -67,7 +67,7 @@ func _process(_delta: float) -> void:
 	if current_scene == null:
 		return
 
-	if current_scene.name == "MainMenu" or current_scene.name == "Splash":
+	if current_scene.name == "MainMenu" or current_scene.name == "Splash" or current_scene.name == "Credits":
 		canvas_layer.visible = false
 	else:
 		canvas_layer.visible = true

@@ -271,8 +271,14 @@ func play_sfx() -> void:
 
 
 func _scroll_to_bottom() -> void:
+	if not is_inside_tree() or not is_instance_valid(scroll_container):
+		return
 	await get_tree().process_frame
+	if not is_inside_tree():
+		return
 	await get_tree().process_frame
+	if not is_inside_tree() or not is_instance_valid(scroll_container):
+		return
 	var v_scroll := scroll_container.get_v_scroll_bar()
 	v_scroll.value = v_scroll.max_value
 
@@ -368,9 +374,8 @@ func advance_scene() -> void:
 		if episode_index >= story_data["episodes"].size():
 			story_finished = true
 			_append_narration("— Hết chương —")
-			call_deferred("_scroll_to_bottom")
 			continue_hint.visible = false
-			GameManager.save_game({"completed": true})
+			GameManager.change_to_next_chapter()
 			return
 
 	selected_choice_index = -1
