@@ -6,6 +6,8 @@ extends Control
 @export var choice_container: VBoxContainer
 @export var continue_hint: Control
 
+@onready var background: TextureRect = $Background
+
 const STORY_PATH := "res://data/chap1_story/main_story.json"
 const CHAT_MESSAGE_SCENE := preload("res://scenes/chapters/chapter_01/chat_message.tscn")
 const CHAT_FONT := preload("res://assets/backgrounds/fonts/Roboto-Light.ttf")
@@ -34,10 +36,15 @@ var _current_scene_id := ""
 var _lines_shown := 0
 var _last_speaker := ""
 var _inline_choice_resolved := false
+var _background_tween: Tween
+var _fade_tween: Tween
+var _fade_overlay: ColorRect
 
 
+## Khởi tạo âm thanh, lớp phủ fade và dữ liệu hội thoại đã lưu.
 func _ready() -> void:
 	SettingsScript.apply_saved_audio_settings()
+	_create_fade_overlay()
 	if not load_story(STORY_PATH):
 		return
 
@@ -57,6 +64,18 @@ func _ready() -> void:
 	save_progress()
 
 
+## Tạo lớp phủ đen toàn màn hình dùng cho fade in/out.
+func _create_fade_overlay() -> void:
+	_fade_overlay = ColorRect.new()
+	_fade_overlay.name = "FadeOverlay"
+	_fade_overlay.color = Color(0, 0, 0, 0)
+	_fade_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_fade_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_fade_overlay.z_index = 100
+	add_child(_fade_overlay)
+
+
+## Đọc và kiểm tra nội dung JSON của một chương truyện.
 func load_story(path: String) -> bool:
 	if not FileAccess.file_exists(path):
 		push_error("[Chapter1] Không tìm thấy file: %s" % path)
@@ -88,6 +107,7 @@ func load_story(path: String) -> bool:
 	return true
 
 
+## Chuẩn hóa các trường thoại và đường dẫn minh họa từ JSON cũ.
 func _normalize_script(lines: Array) -> Array:
 	var out: Array = []
 	for item in lines:
@@ -106,6 +126,7 @@ func _normalize_script(lines: Array) -> Array:
 	return out
 
 
+## Đưa tên asset cũ về đường dẫn hợp lệ trong dự án.
 func _remap_asset(path: String) -> String:
 	if path.is_empty():
 		return ""
@@ -125,10 +146,12 @@ func _remap_asset(path: String) -> String:
 	return ""
 
 
+## Lấy cảnh hiện tại từ dữ liệu tập và cảnh đang chọn.
 func get_current_scene() -> Dictionary:
 	return story_data["episodes"][episode_index]["scenes"][scene_index]
 
 
+## Nạp hội thoại, lựa chọn và tiêu đề địa điểm cho cảnh hiện tại.
 func load_scene_dialogues(show_location: bool = true) -> void:
 	var scene := get_current_scene()
 	_current_scene_id = scene.get("id", "")
@@ -156,6 +179,7 @@ func load_scene_dialogues(show_location: bool = true) -> void:
 		_append_location_divider(scene.get("location", ""))
 
 
+## Dựng lại các dòng đã đọc mà không phát lại hiệu ứng chuyển cảnh.
 func _rebuild_chat_history() -> void:
 	for child in chat_feed.get_children():
 		child.queue_free()
@@ -174,7 +198,10 @@ func _rebuild_chat_history() -> void:
 	call_deferred("_scroll_to_bottom")
 
 
+## Hiển thị một dòng JSON, bao gồm âm thanh, ảnh minh họa và sự kiện đính kèm.
 func _append_line(line: Dictionary, scroll: bool = true, play_sound: bool = true, animate: bool = true) -> void:
+	_process_json_events(line, animate)
+
 	if str(line.get("time", "")) != "":
 		location_label.text = str(line["time"])
 		
@@ -215,6 +242,100 @@ func _append_line(line: Dictionary, scroll: bool = true, play_sound: bool = true
 		call_deferred("_scroll_to_bottom")
 
 
+## Chạy các sự kiện `event` hoặc danh sách `events` được khai báo trên dòng JSON.
+## Ví dụ: {"event":{"type":"change_background","path":"res://assets/school.png"}}
+## Có thể dùng events:[{"type":"fade_out"},{"type":"change_background","path":"res://assets/dream.png"},{"type":"fade_in"}].
+func _process_json_events(line: Dictionary, animate: bool) -> void:
+	var events: Variant = line.get("events", line.get("event", []))
+	if events is Dictionary:
+		call_deferred("_run_json_events", [events], animate)
+	elif events is Array:
+		call_deferred("_run_json_events", events.duplicate(true), animate)
+	elif events != null and events != "":
+		push_error("[Chapter1] Trường event/events phải là object hoặc array.")
+
+
+## Chạy lần lượt các sự kiện để những hiệu ứng fade không ghi đè lẫn nhau.
+func _run_json_events(events: Array, animate: bool) -> void:
+	for event in events:
+		await _process_json_event(event, animate)
+
+
+## Xử lý sự kiện JSON đổi nền hoặc fade màn hình.
+func _process_json_event(event: Variant, animate: bool) -> void:
+	if not event is Dictionary:
+		push_error("[Chapter1] Mỗi sự kiện JSON phải là object.")
+		return
+
+	var event_type := str(event.get("type", ""))
+	var duration := maxf(float(event.get("duration", 0.35)), 0.0) if animate else 0.0
+	match event_type:
+		"change_background", "background":
+			var path := str(event.get("path", event.get("background", "")))
+			if path.is_empty():
+				push_error("[Chapter1] Sự kiện đổi nền cần có trường path.")
+				return
+			var use_fade := bool(event.get("fade", true))
+			var background_changed := change_background(path, duration, use_fade)
+			if background_changed and animate and use_fade and duration > 0.0:
+				await _background_tween.finished
+		"fade", "fade_in", "fade_out":
+			if not animate:
+				return
+			var direction := str(event.get("direction", event_type.trim_prefix("fade_")))
+			if event_type == "fade":
+				direction = str(event.get("direction", "out"))
+			fade_screen(direction, duration)
+			await _fade_tween.finished
+		_:
+			push_error("[Chapter1] Loại sự kiện JSON không được hỗ trợ: %s" % event_type)
+
+
+## Đổi texture nền; có thể fade nền cũ ra rồi fade nền mới vào.
+func change_background(path: String, duration: float = 0.35, use_fade: bool = true) -> bool:
+	if not ResourceLoader.exists(path):
+		push_error("[Chapter1] Không tìm thấy ảnh nền: %s" % path)
+		return false
+	var texture := ResourceLoader.load(path) as Texture2D
+	if texture == null:
+		push_error("[Chapter1] Asset không phải Texture2D: %s" % path)
+		return false
+
+	if is_instance_valid(_background_tween) and _background_tween.is_running():
+		_background_tween.kill()
+	if not use_fade or duration <= 0.0:
+		background.texture = texture
+		background.modulate.a = 1.0
+		return true
+
+	_background_tween = create_tween()
+	_background_tween.tween_property(background, "modulate:a", 0.0, duration * 0.5)
+	_background_tween.tween_callback(_set_background_texture.bind(texture))
+	_background_tween.tween_property(background, "modulate:a", 1.0, duration * 0.5)
+	return true
+
+
+## Gán texture mới vào node nền tại điểm giữa của hiệu ứng fade.
+func _set_background_texture(texture: Texture2D) -> void:
+	background.texture = texture
+
+
+## Fade màn hình theo hướng `out` (đen dần) hoặc `in` (hiện dần).
+func fade_screen(direction: String, duration: float = 0.35) -> void:
+	if direction != "in" and direction != "out":
+		push_error("[Chapter1] Hướng fade không hợp lệ: %s" % direction)
+		return
+	if is_instance_valid(_fade_tween) and _fade_tween.is_running():
+		_fade_tween.kill()
+
+	var start_alpha := 1.0 if direction == "in" else 0.0
+	var end_alpha := 0.0 if direction == "in" else 1.0
+	_fade_overlay.color.a = start_alpha
+	_fade_tween = create_tween()
+	_fade_tween.tween_property(_fade_overlay, "color:a", end_alpha, maxf(duration, 0.0))
+
+
+## Tạo bubble hội thoại và cuộn feed nếu cần.
 func _append_dialogue(speaker: String, message: String, avatar_path: String = "", animate: bool = true) -> void:
 	var msg := CHAT_MESSAGE_SCENE.instantiate()
 	msg.set_font(CHAT_FONT)
@@ -231,6 +352,7 @@ func _append_dialogue(speaker: String, message: String, avatar_path: String = ""
 	chat_feed.add_child(msg)
 
 
+## Tạo bubble lời dẫn trong feed hội thoại.
 func _append_narration(message: String, animate: bool = true) -> void:
 	var msg := CHAT_MESSAGE_SCENE.instantiate()
 	msg.set_font(CHAT_FONT)
@@ -240,6 +362,7 @@ func _append_narration(message: String, animate: bool = true) -> void:
 	chat_feed.add_child(msg)
 
 
+## Thêm đường phân cách địa điểm vào feed.
 func _append_location_divider(location: String) -> void:
 	if location.is_empty():
 		return
@@ -249,6 +372,7 @@ func _append_location_divider(location: String) -> void:
 	chat_feed.add_child(msg)
 
 
+## Tạo bubble ảnh minh họa trong feed hội thoại.
 func _append_image(texture: Texture2D, align_right: bool = false, animate: bool = true) -> void:
 	var msg := CHAT_MESSAGE_SCENE.instantiate()
 	msg.setup_image(texture, align_right)
@@ -257,6 +381,7 @@ func _append_image(texture: Texture2D, align_right: bool = false, animate: bool 
 	chat_feed.add_child(msg)
 	
 	
+## Phát một âm thanh hiệu ứng đã được gán stream.
 func play_sfx() -> void:
 	# . Tạo một Node phát âm thanh mới
 	var sfx_player := AudioStreamPlayer.new()
@@ -270,6 +395,7 @@ func play_sfx() -> void:
 	sfx_player.finished.connect(sfx_player.queue_free)
 
 
+## Cuộn khung hội thoại xuống dòng mới nhất sau khi layout cập nhật.
 func _scroll_to_bottom() -> void:
 	if not is_inside_tree() or not is_instance_valid(scroll_container):
 		return
@@ -283,17 +409,20 @@ func _scroll_to_bottom() -> void:
 	v_scroll.value = v_scroll.max_value
 
 
+## Cập nhật gợi ý tiếp tục theo trạng thái truyện và lựa chọn.
 func _update_continue_hint() -> void:
 	var waiting_choice: bool = choice_container.get_parent().visible
 	continue_hint.visible = not story_finished and not waiting_choice
 
 
+## Lấy lựa chọn gắn trực tiếp với dòng thoại đang hiển thị.
 func _current_line_choices() -> Array:
 	if dialogue_index < 0 or dialogue_index >= current_dialogues.size():
 		return []
 	return current_dialogues[dialogue_index].get("choices", [])
 
 
+## Hiển thị lựa chọn nội tuyến nếu dòng hiện tại có khai báo.
 func _try_show_inline_choices() -> void:
 	var choices := _current_line_choices()
 	if choices.is_empty() or _inline_choice_resolved:
@@ -301,6 +430,7 @@ func _try_show_inline_choices() -> void:
 	show_choices(choices)
 
 
+## Thêm dòng hiện tại, chuyển file JSON kế tiếp hoặc tiến cảnh khi hết thoại.
 func show_current_line() -> void:
 	# KIỂM TRA ĐỔI FILE KHI ĐÃ ĐỌC HẾT CÂU THOẠI CỦA FILE JSON HIỆN TẠI
 	if dialogue_index >= current_dialogues.size():
@@ -325,7 +455,7 @@ func show_current_line() -> void:
 	_update_continue_hint()
 
 
-# HÀM BỔ TRỢ ĐỔI FILE JSON AN TOÀN
+## Tải file truyện kế tiếp theo tên file được JSON chỉ định.
 func _trigger_next_file(next_file_name: String) -> void:
 	var clean_file_name = next_file_name.get_file() # Chống lỗi bị lặp/cộng dồn đường dẫn dài
 	var full_path = "res://data/chap1_story/" + clean_file_name
@@ -340,7 +470,7 @@ func _trigger_next_file(next_file_name: String) -> void:
 		save_progress()
 
 
-# SỬ DỤNG _INPUT ĐỂ NHẬN DIỆN CÚ CLICK CHUỘT TOÀN MÀN HÌNH MƯỢT MÀ
+## Tiếp tục hội thoại khi nhấn xác nhận hoặc click vùng trống.
 func _input(event: InputEvent) -> void:
 	if choice_container.get_parent().visible or story_finished:
 		return
@@ -361,6 +491,7 @@ func _input(event: InputEvent) -> void:
 		save_progress()
 
 
+## Chuyển sang cảnh hoặc tập kế tiếp, kết thúc chương nếu đã hết dữ liệu.
 func advance_scene() -> void:
 	if story_finished:
 		return
@@ -386,6 +517,7 @@ func advance_scene() -> void:
 	save_progress()
 
 
+## Tạo các nút lựa chọn từ dữ liệu JSON của truyện.
 func show_choices(choices: Array) -> void:
 	for child in choice_container.get_children():
 		child.queue_free()
@@ -415,6 +547,7 @@ func show_choices(choices: Array) -> void:
 	continue_hint.visible = false
 
 
+## Áp dụng lựa chọn và điều hướng đến nhánh thoại tương ứng.
 func _on_choice_selected(choice: Dictionary) -> void:
 	choice_container.get_parent().visible = false
 	for child in choice_container.get_children():
@@ -429,18 +562,7 @@ func _on_choice_selected(choice: Dictionary) -> void:
 
 	# TÍNH NĂNG MỚI: Nếu lựa chọn yêu cầu đổi sang file JSON khác
 	if choice.has("next_file"):
-		var next_file_name = str(choice["next_file"])
-		var full_path = "res://data/chap1_story/" + next_file_name
-		
-		# Nạp file mới và thiết lập lại từ đầu file đó
-		if load_story(full_path):
-			selected_choice_index = -1
-			dialogue_index = 0
-			_lines_shown = 0
-			_last_speaker = ""
-			load_scene_dialogues(false) # Không chèn lại vạch ngăn cách location nếu không cần
-			show_current_line()
-			save_progress()
+		_trigger_next_file(str(choice["next_file"]))
 		return
 
 	if choice.has("dialogues"):
@@ -464,17 +586,7 @@ func _on_choice_selected(choice: Dictionary) -> void:
 	save_progress()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if choice_container.get_parent().visible or story_finished:
-		return
-	if event.is_action_pressed("ui_accept") or (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
-		if event is InputEventMouseButton and _is_pointer_over_button():
-			return
-		dialogue_index += 1
-		show_current_line()
-		save_progress()
-
-
+## Kiểm tra con trỏ có đang nằm trên nút để không tiến thoại khi chọn.
 func _is_pointer_over_button() -> bool:
 	var hovered_control := get_viewport().gui_get_hovered_control()
 	while hovered_control != null:
@@ -484,6 +596,7 @@ func _is_pointer_over_button() -> bool:
 	return false
 
 
+## Khôi phục chỉ số tập, cảnh, lựa chọn và dòng thoại từ bản lưu.
 func restore_progress() -> void:
 	var save_data: Dictionary = GameManager.load_game()
 	if save_data.get("current_scene", "") != scene_file_path:
@@ -495,6 +608,7 @@ func restore_progress() -> void:
 	dialogue_index = maxi(int(save_data.get("dialogue_index", 0)), 0)
 
 
+## Lưu vị trí hội thoại hiện tại để tiếp tục ở lần chơi sau.
 func save_progress() -> void:
 	GameManager.save_game({
 		"episode_index": episode_index,
