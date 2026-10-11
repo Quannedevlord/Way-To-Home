@@ -7,6 +7,7 @@ const APPEAR_DURATION := 0.7
 @onready var nine_patch_rect: NinePatchRect = $Panel/NinePatchRect
 
 
+## Ẩn menu toàn cục, chạy hiệu ứng hiện logo rồi chuyển sang menu chính.
 func _ready() -> void:
 	GlobalMenu.get_node("CanvasLayer").hide()
 	nine_patch_rect.pivot_offset = nine_patch_rect.size / 2.0

@@ -11,6 +11,8 @@ const SettingsScript = preload("res://scenes/settings/settings.gd")
 var cursor_normal = preload("res://assets/backgrounds/ui/cursor.png")
 var cursor_hover = preload("res://assets/backgrounds/ui/cursor_hover.png")
 
+
+## Thiết lập menu chính, cập nhật nút tiếp tục theo dữ liệu lưu và kết nối sự kiện.
 func _ready() -> void:
 	GlobalMenu.get_node("CanvasLayer").hide()	
 	SettingsScript.apply_saved_audio_settings()
@@ -26,22 +28,24 @@ func _ready() -> void:
 		button.mouse_exited.connect(_on_button_mouse_exited)
 
 
-# Chỉ thay icon chuột; âm thanh hover được xử lý trong hover_sfx.gd.
+## Đổi con trỏ sang trạng thái hover khi chuột đi vào một nút.
 func _on_button_mouse_entered() -> void:
 	Input.set_custom_mouse_cursor(cursor_hover)
 
 
-# Rời nút thì trả cursor về trạng thái bình thường.
+## Khôi phục con trỏ mặc định khi chuột rời khỏi nút.
 func _on_button_mouse_exited() -> void:
 	Input.set_custom_mouse_cursor(cursor_normal)
 	
 
 
+## Bắt đầu trò chơi mới rồi mở màn đầu tiên của chương 1.
 func _on_start_pressed() -> void:
 	GameManager.start_new_game()
 	GameManager.change_scene("res://scenes/chapters/chapter_01/chapter1.tscn")
 
 
+## Tải dữ liệu lưu và tiếp tục nếu màn đã lưu hợp lệ; nếu không thì ẩn nút.
 func _on_continue_pressed() -> void:
 	var save_data: Dictionary = GameManager.load_game()
 	var saved_scene: String = save_data.get("current_scene", "")
@@ -51,11 +55,13 @@ func _on_continue_pressed() -> void:
 	GameManager.change_scene(saved_scene)
 
 
+## Tạo và mở màn hình cài đặt từ menu chính.
 func _on_setting_pressed() -> void:
 	var settings_scene := preload("res://scenes/settings/settings.tscn")
 	var settings_instance := settings_scene.instantiate()
 	get_tree().root.add_child(settings_instance)
 
 
+## Thoát ứng dụng.
 func _on_exit_pressed() -> void:
 	get_tree().quit()

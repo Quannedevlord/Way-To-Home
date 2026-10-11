@@ -37,6 +37,7 @@ var _lines_shown := 0
 var _last_speaker := ""
 var _inline_choice_resolved := false
 var _background_tween: Tween
+var _background_transition_layer: TextureRect
 var _fade_tween: Tween
 var _fade_overlay: ColorRect
 
@@ -246,13 +247,22 @@ func _append_line(line: Dictionary, scroll: bool = true, play_sound: bool = true
 ## Ví dụ: {"event":{"type":"change_background","path":"res://assets/school.png"}}
 ## Có thể dùng events:[{"type":"fade_out"},{"type":"change_background","path":"res://assets/dream.png"},{"type":"fade_in"}].
 func _process_json_events(line: Dictionary, animate: bool) -> void:
+	var events_to_run: Array = []
+	var line_type := str(line.get("type", "narration" if not line.has("speaker") else "dialogue"))
+	var background_path := str(line.get("path", line.get("illustration", ""))) if line_type == "image" else str(line.get("illustration", ""))
+	# Ẩn bckground vongtay.png
+	if not background_path.is_empty() and background_path.get_file().to_lower() != "vongtay.png":
+		events_to_run.append({"type": "change_background", "path": background_path})
+
 	var events: Variant = line.get("events", line.get("event", []))
 	if events is Dictionary:
-		call_deferred("_run_json_events", [events], animate)
+		events_to_run.append(events)
 	elif events is Array:
-		call_deferred("_run_json_events", events.duplicate(true), animate)
+		events_to_run.append_array(events.duplicate(true))
 	elif events != null and events != "":
 		push_error("[Chapter1] Trường event/events phải là object hoặc array.")
+	if not events_to_run.is_empty():
+		call_deferred("_run_json_events", events_to_run, animate)
 
 
 ## Chạy lần lượt các sự kiện để những hiệu ứng fade không ghi đè lẫn nhau.
@@ -278,7 +288,8 @@ func _process_json_event(event: Variant, animate: bool) -> void:
 			var use_fade := bool(event.get("fade", true))
 			var background_changed := change_background(path, duration, use_fade)
 			if background_changed and animate and use_fade and duration > 0.0:
-				await _background_tween.finished
+				if is_instance_valid(_background_tween) and _background_tween.is_running():
+					await _background_tween.finished
 		"fade", "fade_in", "fade_out":
 			if not animate:
 				return
@@ -286,7 +297,8 @@ func _process_json_event(event: Variant, animate: bool) -> void:
 			if event_type == "fade":
 				direction = str(event.get("direction", "out"))
 			fade_screen(direction, duration)
-			await _fade_tween.finished
+			if is_instance_valid(_fade_tween) and _fade_tween.is_running():
+				await _fade_tween.finished
 		_:
 			push_error("[Chapter1] Loại sự kiện JSON không được hỗ trợ: %s" % event_type)
 
@@ -303,21 +315,40 @@ func change_background(path: String, duration: float = 0.35, use_fade: bool = tr
 
 	if is_instance_valid(_background_tween) and _background_tween.is_running():
 		_background_tween.kill()
+	_clear_background_transition_layer()
 	if not use_fade or duration <= 0.0:
 		background.texture = texture
 		background.modulate.a = 1.0
 		return true
 
+	var previous_texture := background.texture
+	background.texture = texture
+	background.modulate.a = 1.0
+	if previous_texture == null:
+		return true
+
+	_background_transition_layer = TextureRect.new()
+	_background_transition_layer.name = "BackgroundTransition"
+	_background_transition_layer.texture = previous_texture
+	_background_transition_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_background_transition_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_background_transition_layer.stretch_mode = background.stretch_mode
+	_background_transition_layer.expand_mode = background.expand_mode
+	_background_transition_layer.self_modulate = background.self_modulate
+	add_child(_background_transition_layer)
+	move_child(_background_transition_layer, background.get_index() + 1)
+
 	_background_tween = create_tween()
-	_background_tween.tween_property(background, "modulate:a", 0.0, duration * 0.5)
-	_background_tween.tween_callback(_set_background_texture.bind(texture))
-	_background_tween.tween_property(background, "modulate:a", 1.0, duration * 0.5)
+	_background_tween.tween_property(_background_transition_layer, "modulate:a", 0.0, maxf(duration, 0.0)).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_background_tween.tween_callback(_clear_background_transition_layer)
 	return true
 
 
-## Gán texture mới vào node nền tại điểm giữa của hiệu ứng fade.
-func _set_background_texture(texture: Texture2D) -> void:
-	background.texture = texture
+## Xóa lớp nền cũ sau khi hiệu ứng chuyển ảnh hoàn tất.
+func _clear_background_transition_layer() -> void:
+	if is_instance_valid(_background_transition_layer):
+		_background_transition_layer.queue_free()
+	_background_transition_layer = null
 
 
 ## Fade màn hình theo hướng `out` (đen dần) hoặc `in` (hiện dần).

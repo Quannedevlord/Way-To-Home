@@ -14,6 +14,7 @@ const DEFAULT_FULLSCREEN := false
 @export var returnMainMenu_button: Button
 
 
+## Khởi tạo cài đặt, nối các nút giao diện và nạp giá trị đã lưu.
 func _ready() -> void:
     process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -37,17 +38,20 @@ func _ready() -> void:
     _load_settings()
 
 
+## Bỏ tạm dừng trò chơi và đóng cửa sổ cài đặt.
 func _on_close_pressed() -> void:
     GameManager.set_paused(false)
     queue_free()
 
 
+## Bỏ tạm dừng, đóng cài đặt và chuyển về menu chính.
 func _on_return_to_main_menu_pressed() -> void:
     GameManager.set_paused(false)
     queue_free()
     GameManager.change_scene("res://scenes/main_menu/main_menu.tscn")
 
 
+## Cập nhật âm lượng nhạc theo thanh trượt rồi lưu cài đặt.
 func _on_music_volume_changed(value: float) -> void:
     AudioServer.set_bus_volume_db(
         AudioServer.get_bus_index("Music"),
@@ -56,6 +60,7 @@ func _on_music_volume_changed(value: float) -> void:
     _save_settings()
 
 
+## Cập nhật âm lượng hiệu ứng âm thanh theo thanh trượt rồi lưu cài đặt.
 func _on_sfx_volume_changed(value: float) -> void:
     AudioServer.set_bus_volume_db(
         AudioServer.get_bus_index("SFX"),
@@ -64,11 +69,13 @@ func _on_sfx_volume_changed(value: float) -> void:
     _save_settings()
 
 
+## Áp dụng trạng thái toàn màn hình đã chọn rồi lưu cài đặt.
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
     _apply_fullscreen_setting(toggled_on)
     _save_settings()
 
 
+## Ghi các giá trị hiện tại của thanh trượt và tùy chọn hiển thị vào tệp.
 func _save_settings() -> void:
     var config := ConfigFile.new()
 
@@ -91,6 +98,7 @@ func _save_settings() -> void:
         push_warning("Không thể lưu Settings: " + str(error))
 
 
+## Đọc cài đặt từ tệp, cập nhật giao diện và áp dụng chúng vào trò chơi.
 func _load_settings() -> void:
     var config := ConfigFile.new()
     config.load(SETTINGS_PATH)
@@ -120,6 +128,7 @@ func _load_settings() -> void:
     _apply_audio_settings(music_volume, sfx_volume)
 
 
+## Chuyển cửa sổ giữa chế độ toàn màn hình và cửa sổ thường.
 static func _apply_fullscreen_setting(fullscreen_enabled: bool) -> void:
     var window_mode := (
         DisplayServer.WINDOW_MODE_FULLSCREEN
@@ -130,6 +139,7 @@ static func _apply_fullscreen_setting(fullscreen_enabled: bool) -> void:
     DisplayServer.window_set_mode(window_mode)
 
 
+## Đọc và áp dụng cài đặt đã lưu; có thể gọi từ màn hình khác lúc khởi động.
 static func apply_saved_audio_settings() -> void:
     var config := ConfigFile.new()
     config.load(SETTINGS_PATH)
@@ -150,6 +160,7 @@ static func apply_saved_audio_settings() -> void:
     _apply_audio_settings(music_volume, sfx_volume)
 
 
+## Chuyển âm lượng tuyến tính sang decibel và áp dụng cho các bus âm thanh.
 static func _apply_audio_settings(
     music_volume: float,
     sfx_volume: float

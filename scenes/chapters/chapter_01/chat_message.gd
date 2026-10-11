@@ -4,7 +4,7 @@ const BUBBLE_LEFT := Color(0.30, 0.30, 0.30, 1.0)
 const BUBBLE_RIGHT := Color(0.29, 0.47, 0.50, 1.0)
 const BUBBLE_NARRATION := Color(0.16, 0.16, 0.18, 0.9)
 const NAME_COLOR := Color(0.72, 0.72, 0.74, 1.0)
-const AVATAR_SIZE := 56
+const AVATAR_SIZE := 64
 const BUBBLE_RADIUS := 14
 const MAX_BUBBLE_WIDTH := 420
 const ENTRANCE_DURATION := 0.18
@@ -13,6 +13,7 @@ var _font: Font
 var _entrance_prepared := false
 
 
+## Thiết lập lề cho tin nhắn và phát hiệu ứng nếu tin nhắn đã được chuẩn bị.
 func _ready() -> void:
 	add_theme_constant_override("margin_left", 18)
 	add_theme_constant_override("margin_right", 18)
@@ -22,12 +23,14 @@ func _ready() -> void:
 		call_deferred("_play_entrance")
 
 
+## Đặt tin nhắn ở trạng thái ban đầu trước khi hiện hiệu ứng xuất hiện.
 func prepare_entrance() -> void:
 	_entrance_prepared = true
 	modulate.a = 0.0
 	scale = Vector2(0.96, 0.96)
 
 
+## Làm tin nhắn hiện dần và phóng nhẹ về kích thước bình thường.
 func _play_entrance() -> void:
 	pivot_offset = size * 0.5
 
@@ -37,10 +40,13 @@ func _play_entrance() -> void:
 	tween.tween_property(self, "scale", Vector2.ONE, ENTRANCE_DURATION)
 
 
+## Lưu font để áp dụng cho các nhãn được tạo sau đó.
 func set_font(font: Font) -> void:
 	_font = font
 
 
+## Tạo hàng hội thoại gồm tên người nói, bong bóng tin nhắn và ảnh đại diện.
+## `align_right` chọn phía hiển thị; `compact` ẩn tên và ảnh đại diện.
 func setup_dialogue(speaker: String, message: String, avatar_tex: Texture2D, align_right: bool, compact: bool = false) -> void:
 	if avatar_tex == null:
 		avatar_tex = _make_placeholder_avatar()
@@ -71,6 +77,7 @@ func setup_dialogue(speaker: String, message: String, avatar_tex: Texture2D, ali
 		row.add_child(spacer)
 
 
+## Hiển thị lời dẫn ở giữa màn hình trong một bong bóng riêng.
 func setup_narration(message: String) -> void:
 	var center := CenterContainer.new()
 	center.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -85,6 +92,7 @@ func setup_narration(message: String) -> void:
 	center.add_child(panel)
 
 
+## Hiển thị tên địa điểm như một dòng phân cách ở giữa màn hình.
 func setup_location_divider(location: String) -> void:
 	var center := CenterContainer.new()
 	center.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -94,6 +102,7 @@ func setup_location_divider(location: String) -> void:
 	center.add_child(label)
 
 
+## Hiển thị ảnh trong khung; `align_right` chọn phía căn ảnh.
 func setup_image(texture: Texture2D, align_right: bool = false) -> void:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 400)
@@ -136,12 +145,14 @@ func setup_image(texture: Texture2D, align_right: bool = false) -> void:
 		row.add_child(spacer)
 
 
+## Tạo ô trống có kích thước ảnh đại diện để giữ thẳng hàng nội dung.
 func _avatar_spacer() -> Control:
 	var spacer := Control.new()
 	spacer.custom_minimum_size = Vector2(AVATAR_SIZE, AVATAR_SIZE)
 	return spacer
 
 
+## Ghép tên người nói (nếu không ở chế độ gọn) với bong bóng tin nhắn.
 func _build_message_column(speaker: String, message: String, bubble_color: Color, align_right: bool, compact: bool) -> VBoxContainer:
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 4)
@@ -162,6 +173,7 @@ func _build_message_column(speaker: String, message: String, bubble_color: Color
 	return col
 
 
+## Tạo ảnh đại diện dạng tròn và cắt ảnh nguồn cho vừa khung.
 func _build_avatar(avatar_tex: Texture2D) -> Control:
 	var wrapper := Control.new()
 	wrapper.custom_minimum_size = Vector2(AVATAR_SIZE, AVATAR_SIZE)
@@ -185,6 +197,7 @@ func _build_avatar(avatar_tex: Texture2D) -> Control:
 	return wrapper
 
 
+## Tạo kiểu nền cho bong bóng với màu và bán kính góc được chỉ định.
 func _make_bubble_style(color: Color, radius: int) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = color
@@ -196,6 +209,7 @@ func _make_bubble_style(color: Color, radius: int) -> StyleBoxFlat:
 	return style
 
 
+## Vẽ ảnh đại diện mặc định khi tin nhắn không có ảnh nguồn.
 func _make_placeholder_avatar() -> Texture2D:
 	var img := Image.create(AVATAR_SIZE, AVATAR_SIZE, false, Image.FORMAT_RGBA8)
 	img.fill(Color(0.28, 0.28, 0.30, 1.0))
@@ -214,6 +228,7 @@ func _make_placeholder_avatar() -> Texture2D:
 	return ImageTexture.create_from_image(img)
 
 
+## Tạo nhãn văn bản và áp dụng màu, cỡ chữ cùng font đã lưu.
 func _make_label(text: String, font_size: int, color: Color) -> Label:
 	var label := Label.new()
 	label.text = text
@@ -225,6 +240,7 @@ func _make_label(text: String, font_size: int, color: Color) -> Label:
 	return label
 
 
+## Bật xuống dòng khi nội dung nhãn vượt quá chiều rộng tối đa.
 func _fit_label(label: Label, max_w: float) -> void:
 	label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	if label.get_minimum_size().x > max_w:

@@ -9,8 +9,7 @@ const FIRST_CHAPTER_PATH := "res://scenes/chapters/chapter_01/chapter1.tscn"
 var current_scene_path: String = "res://scenes/main_menu/main_menu.tscn"
 
 
-# Bắt sự kiện đóng cửa sổ bằng nút X / Alt+F4 — không bắt được nút "Thoát" trong game
-# (nút đó gọi quit() trực tiếp, không đi qua notification này).
+## Lưu tiến trình khi đóng cửa sổ nếu đang ở ngoài menu chính, sau đó thoát game.
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		if current_scene_path != "res://scenes/main_menu/main_menu.tscn":
@@ -18,8 +17,7 @@ func _notification(what: int) -> void:
 		get_tree().quit()
 
 
-# Dùng hàm này thay cho get_tree().change_scene_to_file() ở mọi nơi trong game,
-# để current_scene_path luôn được cập nhật đúng.
+## Chuyển scene sau khi kiểm tra đường dẫn và cập nhật scene hiện tại khi thành công.
 func change_scene(path: String) -> void:
 	if path.is_empty() or not ResourceLoader.exists(path):
 		push_error("Không tìm thấy scene: %s" % path)
@@ -33,14 +31,17 @@ func change_scene(path: String) -> void:
 	current_scene_path = path
 
 
+## Tạm dừng hoặc tiếp tục toàn bộ scene trong cây trò chơi.
 func set_paused(paused: bool) -> void:
 	get_tree().paused = paused
 
 
+## Xóa dữ liệu lưu để chuẩn bị một lượt chơi mới.
 func start_new_game() -> void:
 	clear_save()
 
 
+## Mở chương kế tiếp và đặt lại chỉ số tiến trình; nếu hết chương thì mở phần cảm ơn.
 func change_to_next_chapter() -> void:
 	var next_chapter_path := get_next_chapter_path(current_scene_path)
 	if next_chapter_path.is_empty():
@@ -58,6 +59,7 @@ func change_to_next_chapter() -> void:
 	})
 
 
+## Tìm scene đầu tiên của chương có số thứ tự lớn hơn chương hiện tại.
 func get_next_chapter_path(current_path: String = current_scene_path) -> String:
 	var current_chapter_number := _get_chapter_number(current_path)
 	if current_chapter_number < 0:
@@ -79,6 +81,7 @@ func get_next_chapter_path(current_path: String = current_scene_path) -> String:
 	return _find_chapter_scene(CHAPTERS_PATH.path_join(next_chapter_directory))
 
 
+## Lấy số chương từ tên thư mục dạng `chapter_XX`; trả -1 nếu không hợp lệ.
 func _get_chapter_number(value: String) -> int:
 	var directory_name := value.get_file()
 	if value.contains("/"):
@@ -90,6 +93,7 @@ func _get_chapter_number(value: String) -> int:
 	return int(number_text) if number_text.is_valid_int() else -1
 
 
+## Tìm tệp scene có tên bắt đầu bằng `chapter` trong thư mục chương.
 func _find_chapter_scene(chapter_directory: String) -> String:
 	var scene_paths: Array[String] = []
 	for file_name in DirAccess.get_files_at(chapter_directory):
@@ -100,6 +104,7 @@ func _find_chapter_scene(chapter_directory: String) -> String:
 	return scene_paths[0] if not scene_paths.is_empty() else ""
 
 
+## Lưu scene hiện tại cùng các giá trị tiến trình được truyền vào tệp save.
 func save_game(progress: Dictionary = {}) -> bool:
 	var config := ConfigFile.new()
 	config.set_value("progress", "current_scene", current_scene_path)
@@ -108,6 +113,7 @@ func save_game(progress: Dictionary = {}) -> bool:
 	return config.save(SAVE_PATH) == OK
 
 
+## Đọc dữ liệu tiến trình từ tệp save; trả dictionary rỗng nếu không đọc được.
 func load_game() -> Dictionary:
 	var config := ConfigFile.new()
 	if config.load(SAVE_PATH) != OK:
@@ -118,6 +124,7 @@ func load_game() -> Dictionary:
 	return progress
 
 
+## Kiểm tra tệp save có tiến trình chưa hoàn tất và scene hợp lệ để tiếp tục không.
 func has_save() -> bool:
 	var save_data := load_game()
 	var saved_scene: String = save_data.get("current_scene", "")
@@ -130,6 +137,7 @@ func has_save() -> bool:
 		and ResourceLoader.exists(saved_scene)
 
 
+## Xóa tệp save nếu tệp đang tồn tại.
 func clear_save() -> void:
 	if FileAccess.file_exists(SAVE_PATH):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(SAVE_PATH))

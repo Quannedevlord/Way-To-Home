@@ -14,6 +14,7 @@ const HOVER_DURATION := 0.12
 var _hover_tween: Tween
 
 
+## Cấu hình menu chạy cả khi game tạm dừng, kết nối sự kiện và ẩn bảng tùy chọn ban đầu.
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	canvas_layer.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -40,18 +41,22 @@ func _ready() -> void:
 		popup_panel.hide()
 
 
+## Mở màn hình cài đặt khi người chơi nhấn nút menu.
 func _on_menu_button_pressed() -> void:
 	_open_settings()
 
 
+## Phóng nhẹ và làm sáng nút khi con trỏ đi vào.
 func _on_menu_button_mouse_entered() -> void:
 	_animate_menu_button(HOVER_SCALE, Color(1.12, 1.12, 1.12, 1.0))
 
 
+## Đưa nút về kích thước và màu ban đầu khi con trỏ rời khỏi.
 func _on_menu_button_mouse_exited() -> void:
 	_animate_menu_button(Vector2.ONE, Color.WHITE)
 
 
+## Chạy hiệu ứng đổi kích thước và màu; dừng hiệu ứng cũ nếu vẫn đang chạy.
 func _animate_menu_button(target_scale: Vector2, target_modulate: Color) -> void:
 	if _hover_tween != null and _hover_tween.is_running():
 		_hover_tween.kill()
@@ -61,6 +66,7 @@ func _animate_menu_button(target_scale: Vector2, target_modulate: Color) -> void
 	_hover_tween.tween_property(menu_button, "modulate", target_modulate, HOVER_DURATION)
 
 
+## Ẩn menu toàn cục ở các màn hình mở đầu, menu chính và phần cảm ơn.
 func _process(_delta: float) -> void:
 	var current_scene = get_tree().current_scene
 
@@ -73,6 +79,7 @@ func _process(_delta: float) -> void:
 		canvas_layer.visible = true
 
 
+## Mở cài đặt bằng phím Escape khi menu toàn cục đang hiển thị.
 func _input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed or event.echo:
 		return
@@ -85,12 +92,14 @@ func _input(event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 
+## Đóng bảng tùy chọn rồi mở màn hình cài đặt.
 func _on_setting_button_pressed() -> void:
 	if popup_panel != null:
 		popup_panel.visible = false
 	_open_settings()
 
 
+## Tạm dừng game và mở cài đặt dạng lớp phủ mà không đổi scene hiện tại.
 func _open_settings() -> void:
 	# Settings là lớp phủ, nên scene đang chơi và tiến độ hiện tại không bị thay đổi.
 	if get_tree().root.get_node_or_null("Setting") != null:
@@ -101,11 +110,13 @@ func _open_settings() -> void:
 	get_tree().root.add_child(settings_instance)
 
 
+## Ẩn bảng tùy chọn khi người chơi nhấn nút đóng.
 func _on_close_button_pressed() -> void:
 	if popup_panel != null:
 		popup_panel.hide()
 
 
+## Bỏ tạm dừng game và chuyển về menu chính.
 func _on_main_menu_button_pressed() -> void:
 	GameManager.set_paused(false)
 	GameManager.change_scene(GameManager.MAIN_MENU_PATH)

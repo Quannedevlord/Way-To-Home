@@ -7,6 +7,7 @@ var scroll_speed: float = 50.0
 var transition_started: bool = false
 
 
+## Cuộn phần chữ cảm ơn lên trên và bắt đầu chuyển cảnh khi chữ đi khỏi màn hình.
 func _process(delta: float) -> void:
 	credits_text.position.y -= scroll_speed * delta
 
@@ -16,6 +17,7 @@ func _process(delta: float) -> void:
 		_fade_out_and_return_to_main_menu()
 
 
+## Làm tối màn hình rồi chuyển về menu chính sau khi hiệu ứng kết thúc.
 func _fade_out_and_return_to_main_menu() -> void:
 	var fade_tween := create_tween()
 	fade_tween.tween_property(fade_overlay, "color:a", 1.0, 3.0)

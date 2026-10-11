@@ -2,7 +2,7 @@
 	{
 		"type": "narration",
 		"sfx": "schoolbell",
-		"time": "07:50" ,
+		"time": "07:50",
 		"illustration": "res://assets/school.png"
 	},
 	{
@@ -80,7 +80,7 @@
 	{
 		"type": "narration",
 		"sfx": "afterschool",
-		"time": "17:50" ,
+		"time": "17:50",
 		"illustration": "res://assets/hanhLang.png"
 	},
 	{
@@ -105,7 +105,7 @@
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "*vụt* Oái, cái gì vậy?",
-		"avatar": "res://assets/kien.png",
+		"avatar": "res://assets/kien.png"
 	},
 	{
 		"type": "dialogue",
@@ -155,7 +155,7 @@
 	},
 	{
 		"type": "narration",
-		"time": "18:30" ,
+		"time": "18:30",
 		"illustration": "res://assets/bedroom2.png"
 	},
 	{
@@ -172,7 +172,7 @@
 	},
 	{
 		"type": "narration",
-		"time": "???" ,
+		"time": "???",
 		"illustration": "res://assets/dream.png"
 	},
 	{
@@ -353,22 +353,22 @@
 		"type": "dialogue",
 		"speaker": "Vy",
 		"text": "Nên là...Xin cậu! Hãy giúp mình!!",
-		"avatar": "res://assets/vy.png",
+		"avatar": "res://assets/vy.png"
 	},
-  {
-	"type": "dialogue",
-	"speaker": "Kiên",
-	"text": "*bối rối*",
-	"avatar": "res://assets/kien.png",
-	"choices": [
-	  {
-		"text": "Tin lời Vy và hứa giúp",
-		"next_file": "dy.json"
-	  },
-	  {
-		"text": "Nghi ngờ và không tin",
-		"next_file": "tc.json"
-	  }
-	]
-}
+	{
+		"type": "dialogue",
+		"speaker": "Kiên",
+		"text": "*bối rối*",
+		"avatar": "res://assets/kien.png",
+		"choices": [
+			{
+				"text": "Tin lời Vy và hứa giúp",
+				"next_file": "dy.json"
+			},
+			{
+				"text": "Nghi ngờ và không tin",
+				"next_file": "tc.json"
+			}
+		]
+	}
 ]
