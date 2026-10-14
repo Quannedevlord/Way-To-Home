@@ -5,7 +5,7 @@
 [ext_resource type="VideoStream" uid="uid://dfgu8qw20bnei" path="res://assets/backgrounds/Way_To_Home_background.ogv" id="3_x2yjq"]
 [ext_resource type="FontFile" uid="uid://c48xj77famwca" path="res://assets/backgrounds/fonts/dearpix-1-94.otf" id="4_3ovsr"]
 [ext_resource type="Texture2D" uid="uid://mbmqpbumbw1v" path="res://assets/backgrounds/ten_game-Photoroom.png" id="5_3ovsr"]
-[ext_resource type="AudioStream" uid="uid://b2vm24pjjnyhw" path="res://assets/backgrounds/audio/bgm/afternoon.mp3" id="6_x2yjq"]
+[ext_resource type="AudioStream" uid="uid://dldftk77bgud4" path="res://assets/backgrounds/audio/bgm/Dream Portal.mp3" id="6_thkx5"]
 [ext_resource type="AudioStream" uid="uid://qxop7q0cwyxs" path="res://assets/backgrounds/audio/sfx/JDSherbert - Wooden UI SFX Pack - Cancel - 2.wav" id="7_sfx"]
 [ext_resource type="Script" uid="uid://dpw7scpxd3yqt" path="res://scenes/settings/ui_sound_manager.gd" id="7_thkx5"]
 [ext_resource type="AudioStream" uid="uid://dwsop0yuaq5d7" path="res://assets/backgrounds/audio/sfx/JDSherbert - Wooden UI SFX Pack - Cancel - 1.wav" id="10_x2yjq"]
@@ -147,7 +147,7 @@ texture = SubResource("AtlasTexture_vlew8")
 expand_mode = 1
 
 [node name="BGMPlayer" type="AudioStreamPlayer" parent="." unique_id=2101348592]
-stream = ExtResource("6_x2yjq")
+stream = ExtResource("6_thkx5")
 autoplay = true
 bus = &"Music"
 parameters/looping = true

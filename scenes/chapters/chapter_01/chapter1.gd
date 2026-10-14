@@ -7,6 +7,7 @@ extends Control
 @export var continue_hint: Control
 
 @onready var background: TextureRect = $Background
+@onready var bgm_player: AudioStreamPlayer = $BGMPlayer
 
 const STORY_PATH := "res://data/chap1_story/main_story.json"
 const CHAT_MESSAGE_SCENE := preload("res://scenes/chapters/chapter_01/chat_message.tscn")
@@ -271,7 +272,7 @@ func _run_json_events(events: Array, animate: bool) -> void:
 		await _process_json_event(event, animate)
 
 
-## Xử lý sự kiện JSON đổi nền hoặc fade màn hình.
+## Xử lý sự kiện JSON đổi nền, nhạc hoặc fade màn hình.
 func _process_json_event(event: Variant, animate: bool) -> void:
 	if not event is Dictionary:
 		push_error("[Chapter1] Mỗi sự kiện JSON phải là object.")
@@ -290,6 +291,18 @@ func _process_json_event(event: Variant, animate: bool) -> void:
 			if background_changed and animate and use_fade and duration > 0.0:
 				if is_instance_valid(_background_tween) and _background_tween.is_running():
 					await _background_tween.finished
+		"change_music":
+			var path := str(event.get("path", ""))
+			if path.is_empty() or not ResourceLoader.exists(path):
+				push_error("[Chapter1] Không tìm thấy file nhạc: %s" % path)
+				return
+			var music := ResourceLoader.load(path) as AudioStream
+			if music == null:
+				push_error("[Chapter1] File không phải AudioStream: %s" % path)
+				return
+			if bgm_player.stream != music:
+				bgm_player.stream = music
+				bgm_player.play()
 		"fade", "fade_in", "fade_out":
 			if not animate:
 				return

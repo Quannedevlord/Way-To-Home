@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/The_Way_Back_Home.mp3-ed0c580317624ab4883c8ed
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

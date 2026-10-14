@@ -173,7 +173,14 @@
 	{
 		"type": "narration",
 		"time": "???",
-		"illustration": "res://assets/dream.png"
+		"illustration": "res://assets/dream.png",
+		"events": [
+			{
+				"type": "change_music",
+				"path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+			}
+		]
+		
 	},
 	{
 		"type": "dialogue",
@@ -268,7 +275,7 @@
 	{
 		"type": "dialogue",
 		"speaker": "Vy",
-		"text": "Khhông ngờ lại có thể gặp được một người khác ngoài mình ở đây!! *Phán khích*",
+		"text": "Không ngờ lại có thể gặp được một người khác ngoài mình ở đây!! *Phấn khích*",
 		"avatar": "res://assets/vy.png"
 	},
 	{
@@ -322,7 +329,7 @@
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
-		"text": "(suy nghĩ) cậu ấy bị làm sao vậy nhỉ, có vẻ rất nghiêm trọng",
+		"text": "(Suy nghĩ) cậu ấy bị làm sao vậy nhỉ, có vẻ rất nghiêm trọng",
 		"avatar": "res://assets/kien.png"
 	},
 	{
