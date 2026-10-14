@@ -13,7 +13,8 @@ var _font: Font
 var _entrance_prepared := false
 
 
-## Thiết lập lề cho tin nhắn và phát hiệu ứng nếu tin nhắn đã được chuẩn bị.
+## Godot gọi khi tin nhắn vào cây scene: đặt lề và chạy hiệu ứng đã chuẩn bị.
+## Chỉ chạy hiệu ứng khi trước đó đã gọi `prepare_entrance()`.
 func _ready() -> void:
 	add_theme_constant_override("margin_left", 18)
 	add_theme_constant_override("margin_right", 18)
@@ -23,7 +24,8 @@ func _ready() -> void:
 		call_deferred("_play_entrance")
 
 
-## Đặt tin nhắn ở trạng thái ban đầu trước khi hiện hiệu ứng xuất hiện.
+## Chuẩn bị tin nhắn mới: ẩn hoàn toàn và thu nhỏ nhẹ trước khi chạy hiệu ứng.
+## Gọi trước khi thêm node vào cây scene để tránh tin nhắn hiện lên quá sớm.
 func prepare_entrance() -> void:
 	_entrance_prepared = true
 	modulate.a = 0.0
@@ -31,6 +33,7 @@ func prepare_entrance() -> void:
 
 
 ## Làm tin nhắn hiện dần và phóng nhẹ về kích thước bình thường.
+## Chỉnh `ENTRANCE_DURATION` để đổi tốc độ; chỉnh Tween ở đây để đổi kiểu chuyển động.
 func _play_entrance() -> void:
 	pivot_offset = size * 0.5
 
@@ -40,13 +43,14 @@ func _play_entrance() -> void:
 	tween.tween_property(self, "scale", Vector2.ONE, ENTRANCE_DURATION)
 
 
-## Lưu font để áp dụng cho các nhãn được tạo sau đó.
+## Lưu `font` để các nhãn tạo sau đó dùng chung kiểu chữ; không đổi nhãn đã tạo.
 func set_font(font: Font) -> void:
 	_font = font
 
 
 ## Tạo hàng hội thoại gồm tên người nói, bong bóng tin nhắn và ảnh đại diện.
-## `align_right` chọn phía hiển thị; `compact` ẩn tên và ảnh đại diện.
+## `align_right` căn sang phải; `compact` ẩn tên/avatar nhưng giữ chỗ cho avatar.
+## Nếu `avatar_tex` rỗng, tự tạo avatar thay thế; màu bong bóng nằm ở các hằng BUBBLE_*.
 func setup_dialogue(speaker: String, message: String, avatar_tex: Texture2D, align_right: bool, compact: bool = false) -> void:
 	if avatar_tex == null:
 		avatar_tex = _make_placeholder_avatar()
@@ -77,7 +81,7 @@ func setup_dialogue(speaker: String, message: String, avatar_tex: Texture2D, ali
 		row.add_child(spacer)
 
 
-## Hiển thị lời dẫn ở giữa màn hình trong một bong bóng riêng.
+## Hiển thị `message` dưới dạng lời dẫn, căn giữa và dùng màu nền BUBBLE_NARRATION.
 func setup_narration(message: String) -> void:
 	var center := CenterContainer.new()
 	center.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -92,7 +96,7 @@ func setup_narration(message: String) -> void:
 	center.add_child(panel)
 
 
-## Hiển thị tên địa điểm như một dòng phân cách ở giữa màn hình.
+## Hiển thị `location` thành một dòng phân cách căn giữa để đánh dấu địa điểm mới.
 func setup_location_divider(location: String) -> void:
 	var center := CenterContainer.new()
 	center.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -102,7 +106,8 @@ func setup_location_divider(location: String) -> void:
 	center.add_child(label)
 
 
-## Hiển thị ảnh trong khung; `align_right` chọn phía căn ảnh.
+## Hiển thị `texture` trong khung ảnh; `align_right` chọn phía căn ảnh.
+## Chỉnh kích thước, viền và bo góc của ảnh chat ngay trong hàm này.
 func setup_image(texture: Texture2D, align_right: bool = false) -> void:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 400)
@@ -145,14 +150,15 @@ func setup_image(texture: Texture2D, align_right: bool = false) -> void:
 		row.add_child(spacer)
 
 
-## Tạo ô trống có kích thước ảnh đại diện để giữ thẳng hàng nội dung.
+## Trả về ô trống rộng bằng avatar để ảnh chat thẳng hàng với các bong bóng thoại.
 func _avatar_spacer() -> Control:
 	var spacer := Control.new()
 	spacer.custom_minimum_size = Vector2(AVATAR_SIZE, AVATAR_SIZE)
 	return spacer
 
 
-## Ghép tên người nói (nếu không ở chế độ gọn) với bong bóng tin nhắn.
+## Trả về cột chứa tên người nói và bong bóng có màu `bubble_color`.
+## `compact` bỏ tên; `align_right` căn tên sang phải. Chỉnh cỡ chữ thoại ở đây.
 func _build_message_column(speaker: String, message: String, bubble_color: Color, align_right: bool, compact: bool) -> VBoxContainer:
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 4)
@@ -173,7 +179,8 @@ func _build_message_column(speaker: String, message: String, bubble_color: Color
 	return col
 
 
-## Tạo ảnh đại diện dạng tròn và cắt ảnh nguồn cho vừa khung.
+## Trả về khung avatar tròn, cắt `avatar_tex` cho vừa khung.
+## Chỉnh `AVATAR_SIZE` để đổi kích thước chung của avatar.
 func _build_avatar(avatar_tex: Texture2D) -> Control:
 	var wrapper := Control.new()
 	wrapper.custom_minimum_size = Vector2(AVATAR_SIZE, AVATAR_SIZE)
@@ -197,7 +204,8 @@ func _build_avatar(avatar_tex: Texture2D) -> Control:
 	return wrapper
 
 
-## Tạo kiểu nền cho bong bóng với màu và bán kính góc được chỉ định.
+## Trả về kiểu nền bong bóng theo `color` và bán kính bo góc `radius`.
+## Các giá trị content_margin ở đây quyết định khoảng cách giữa chữ và mép bong bóng.
 func _make_bubble_style(color: Color, radius: int) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = color
@@ -209,7 +217,7 @@ func _make_bubble_style(color: Color, radius: int) -> StyleBoxFlat:
 	return style
 
 
-## Vẽ ảnh đại diện mặc định khi tin nhắn không có ảnh nguồn.
+## Vẽ và trả về avatar hình người đơn giản khi nhân vật chưa có ảnh đại diện.
 func _make_placeholder_avatar() -> Texture2D:
 	var img := Image.create(AVATAR_SIZE, AVATAR_SIZE, false, Image.FORMAT_RGBA8)
 	img.fill(Color(0.28, 0.28, 0.30, 1.0))
@@ -228,7 +236,8 @@ func _make_placeholder_avatar() -> Texture2D:
 	return ImageTexture.create_from_image(img)
 
 
-## Tạo nhãn văn bản và áp dụng màu, cỡ chữ cùng font đã lưu.
+## Trả về nhãn chứa `text`, dùng `font_size`, `color` và font đã đặt bằng `set_font()`.
+## Nhãn chưa tự xuống dòng; `_fit_label()` sẽ kiểm tra việc xuống dòng sau đó.
 func _make_label(text: String, font_size: int, color: Color) -> Label:
 	var label := Label.new()
 	label.text = text
@@ -240,7 +249,8 @@ func _make_label(text: String, font_size: int, color: Color) -> Label:
 	return label
 
 
-## Bật xuống dòng khi nội dung nhãn vượt quá chiều rộng tối đa.
+## Nếu chữ rộng hơn `max_w`, bật xuống dòng theo từ và giới hạn chiều rộng nhãn.
+## Nhãn ngắn hơn giới hạn giữ nguyên một dòng.
 func _fit_label(label: Label, max_w: float) -> void:
 	label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	if label.get_minimum_size().x > max_w:

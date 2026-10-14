@@ -1,12 +1,9 @@
 [gd_scene format=3 uid="uid://b7m4ge3yak2rv"]
 
-[ext_resource type="Script" path="res://scenes/chapters/chapter_02/chapter2.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/chapters/base/chapter_base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/chapters/chapter_02/chapter2.gd" id="2_script"]
 
-[node name="Chapter2" type="Control" unique_id=1405558368]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_script")
+[node name="Chapter2" unique_id=1405558368 instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+chapter_id = "chapter_02"
+chapter_name = "Chương 2"

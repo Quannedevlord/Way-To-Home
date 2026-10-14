@@ -115,7 +115,8 @@
 	},
 	{
 		"type": "narration",
-		"illustration": "res://assets/VongTay.png"
+		"illustration": "res://assets/VongTay.png",
+		"use_as_background": false
 	},
 	{
 		"type": "dialogue",
