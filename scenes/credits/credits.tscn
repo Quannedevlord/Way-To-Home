@@ -3,6 +3,74 @@
 [ext_resource type="Script" uid="uid://35hc2id23r3c" path="res://scenes/credits/credits.gd" id="1_dr3ri"]
 [ext_resource type="AudioStream" uid="uid://boqanmp2422qs" path="res://assets/backgrounds/audio/bgm/The_Way_Back_Home.mp3" id="2_8n0nl"]
 [ext_resource type="FontFile" uid="uid://c48xj77famwca" path="res://assets/backgrounds/fonts/dearpix-1-94.otf" id="2_c8xcy"]
+[ext_resource type="Texture2D" uid="uid://mbmqpbumbw1v" path="res://assets/backgrounds/ten_game-Photoroom.png" id="3_huu5m"]
+[ext_resource type="Script" uid="uid://btdv0ycxgeqvl" path="res://scenes/credits/credit_entry.gd" id="4_entry_script"]
+[ext_resource type="Texture2D" uid="uid://dvyxvcqt1tp07" path="res://assets/backgrounds/bg.png" id="4_huu5m"]
+
+[sub_resource type="Resource" id="CreditEntry_1"]
+script = ExtResource("4_entry_script")
+text = "
+
+
+
+
+Một hành trình nhỏ
+trên con đường tìm về nhà."
+image = ExtResource("3_huu5m")
+
+[sub_resource type="Resource" id="CreditEntry_2"]
+script = ExtResource("4_entry_script")
+text = "CREATED BY
+
+
+TRẦN MINH QUÂN
+
+&
+
+NGUYỄN LÊ HOÀNG PHÚC
+
+
+────────────────────
+
+
+GAME DESIGN
+PROGRAMMING
+PIXEL ART
+MUSIC & SOUND
+
+
+────────────────────
+
+
+DEVELOPED WITH
+GODOT ENGINE
+
+
+────────────────────
+
+
+SPECIAL THANKS
+
+
+Cảm ơn giảng viên
+đã hướng dẫn và hỗ trợ dự án.
+
+
+Cảm ơn tất cả những người
+đã đồng hành cùng chúng tôi.
+
+
+────────────────────
+
+
+CẢM ƠN BẠN ĐÃ CHƠI
+
+
+WAY TO HOME
+
+
+THE JOURNEY ENDS HERE."
+image = ExtResource("4_huu5m")
 
 [node name="Credits" type="Control" unique_id=1277510854]
 layout_mode = 3
@@ -12,6 +80,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dr3ri")
+credit_entries = Array[ExtResource("4_entry_script")]([SubResource("CreditEntry_1"), SubResource("CreditEntry_2")])
 
 [node name="Background" type="ColorRect" parent="." unique_id=1560066497]
 layout_mode = 1
@@ -22,7 +91,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.06666667, 0.07450981, 0.10980392, 1)
 
-[node name="CreditsText" type="Label" parent="." unique_id=336662439]
+[node name="CreditsContent" type="VBoxContainer" parent="." unique_id=2104119955]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -35,12 +104,15 @@ offset_right = 173.0
 offset_bottom = 2145.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 64
+
+[node name="CreditsText" type="Label" parent="CreditsContent" unique_id=336662439]
+custom_minimum_size = Vector2(335, 2049)
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_c8xcy")
 theme_override_font_sizes/font_size = 30
-text = "WAY TO HOME
-
-
-Một hành trình nhỏ
+text = "Một hành trình nhỏ
 trên con đường tìm về nhà.
 
 
