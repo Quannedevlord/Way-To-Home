@@ -1,19 +1,45 @@
 [gd_scene format=3 uid="uid://cd30ub4mkftfl"]
 
 [ext_resource type="Script" uid="uid://bur7bqymusqn3" path="res://scenes/chapters/base/chapter_base.gd" id="1_script"]
-[ext_resource type="FontFile" uid="uid://x8p4edifovu1" path="res://assets/backgrounds/fonts/Roboto-Light.ttf" id="2_font"]
+[ext_resource type="FontFile" uid="uid://c48xj77famwca" path="res://assets/backgrounds/fonts/dearpix-1-94.otf" id="2_font"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/ui/clock.svg" id="3_clock"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
-bg_color = Color(0.145, 0.145, 0.155, 0.98)
-border_width_bottom = 1
-border_color = Color(0.22, 0.22, 0.24, 1)
+content_margin_left = 18.0
+content_margin_top = 6.0
+content_margin_right = 18.0
+content_margin_bottom = 6.0
+bg_color = Color(0.066667, 0.105882, 0.188235, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.588235, 0.454902, 0.278431, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_left = 4
+corner_radius_bottom_right = 4
+shadow_color = Color(0.015686, 0.035294, 0.070588, 0.55)
+shadow_size = 4
+shadow_offset = Vector2(0, 3)
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hint"]
-content_margin_left = 12.0
+content_margin_left = 20.0
 content_margin_top = 8.0
-content_margin_right = 12.0
+content_margin_right = 20.0
 content_margin_bottom = 8.0
-bg_color = Color(0.145, 0.145, 0.155, 0.92)
+bg_color = Color(0.066667, 0.105882, 0.188235, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.552941, 0.45098, 0.313726, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_left = 4
+corner_radius_bottom_right = 4
+anti_aliasing = false
 
 [node name="ChapterBase" type="Control" unique_id=1406911119 node_paths=PackedStringArray("chat_feed", "scroll_container", "location_label", "choice_container", "continue_hint")]
 layout_mode = 3
@@ -25,7 +51,7 @@ grow_vertical = 2
 script = ExtResource("1_script")
 chat_feed = NodePath("ChatLayout/ScrollContainer/ChatFeed")
 scroll_container = NodePath("ChatLayout/ScrollContainer")
-location_label = NodePath("ChatLayout/Header/LocationLabel")
+location_label = NodePath("ChatLayout/Header/ClockBadge/ClockRow/LocationLabel")
 choice_container = NodePath("ChoiceOverlay/ChoiceContainer")
 continue_hint = NodePath("ChatLayout/ContinueHint")
 
@@ -50,16 +76,40 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Header" type="PanelContainer" parent="ChatLayout" unique_id=1089425095]
-custom_minimum_size = Vector2(0, 52)
+[node name="Header" type="CenterContainer" parent="ChatLayout" unique_id=1089425095]
+custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
+mouse_filter = 2
+
+[node name="ClockBadge" type="PanelContainer" parent="ChatLayout/Header"]
+custom_minimum_size = Vector2(176, 48)
+layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_header")
 
-[node name="LocationLabel" type="Label" parent="ChatLayout/Header" unique_id=1168529968]
+[node name="ClockRow" type="HBoxContainer" parent="ChatLayout/Header/ClockBadge"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.85, 0.87, 1)
+mouse_filter = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="ClockIcon" type="TextureRect" parent="ChatLayout/Header/ClockBadge/ClockRow"]
+texture_filter = 1
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("3_clock")
+stretch_mode = 3
+
+[node name="LocationLabel" type="Label" parent="ChatLayout/Header/ClockBadge/ClockRow" unique_id=1168529968]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.968627, 0.858824, 0.580392, 1)
+theme_override_colors/font_outline_color = Color(0.039216, 0.066667, 0.12549, 1)
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 30
+text = "07:50"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -74,17 +124,25 @@ size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/separation = 6
 
-[node name="ContinueHint" type="PanelContainer" parent="ChatLayout" unique_id=1582733713]
-custom_minimum_size = Vector2(0, 36)
+[node name="ContinueHint" type="MarginContainer" parent="ChatLayout" unique_id=1582733713]
+visible = false
 layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 16
+
+[node name="HintPanel" type="PanelContainer" parent="ChatLayout/ContinueHint"]
+layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hint")
 
-[node name="HintLabel" type="Label" parent="ChatLayout/ContinueHint" unique_id=1240731170]
+[node name="HintLabel" type="Label" parent="ChatLayout/ContinueHint/HintPanel" unique_id=1240731170]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.45, 0.45, 0.48, 1)
+theme_override_colors/font_color = Color(0.87451, 0.831373, 0.701961, 1)
 theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 13
-text = "Nhấn để tiếp tục..."
+theme_override_font_sizes/font_size = 22
+text = "Nhấn chuột hoặc Enter để tiếp tục"
 horizontal_alignment = 1
 
 [node name="ChoiceOverlay" type="Control" parent="." unique_id=88634947]

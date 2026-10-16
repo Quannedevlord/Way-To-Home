@@ -41,6 +41,7 @@ var _chat_history: Array = []
 var _dialogue_override: Array = []
 var _has_dialogue_override := false
 var _progress_initialized := false
+var _continue_hint_dismissed := false
 var _exiting := false
 
 var story_data: Dictionary = {}
@@ -82,6 +83,8 @@ func _ready() -> void:
 		return
 
 	var save_data: Dictionary = GameManager.load_game()
+	# Save cũ đã có tiến trình được xem là người chơi đã biết cách tiếp tục.
+	_continue_hint_dismissed = bool(save_data.get("continue_hint_dismissed", not save_data.is_empty()))
 	var has_saved_progress: bool = save_data.get("current_scene", "") == scene_file_path and save_data.has("dialogue_index") and not bool(save_data.get("completed", false))
 	var path := str(save_data.get("current_story_path", story_path)) if has_saved_progress else story_path
 	if path.is_empty():
@@ -487,7 +490,11 @@ func _process_json_event(event: Variant, animate: bool) -> void:
 					show_current_line()
 			save_progress()
 		_:
-			if animate and not await _handle_chapter_event(event):
+			if not animate:
+				return
+			# Gọi động vì chapter con có thể override hook bằng coroutine.
+			var handled: bool = await call("_handle_chapter_event", event)
+			if not handled:
 				push_error("[ChapterBase] Loại sự kiện JSON không được hỗ trợ: %s" % event_type)
 
 
@@ -642,11 +649,11 @@ func _scroll_to_bottom() -> void:
 	v_scroll.value = v_scroll.max_value
 
 
-## Hiện gợi ý tiếp tục khi truyện đã khởi tạo và người chơi được phép đọc dòng tiếp.
+## Chỉ hướng dẫn trước lần tiếp tục đầu tiên của lượt chơi; trạng thái được lưu.
 ## Ẩn gợi ý lúc chờ lựa chọn, chạy sự kiện/minigame hoặc đã hoàn thành chapter.
 func _update_continue_hint() -> void:
 	var waiting_choice: bool = choice_container.get_parent().visible
-	continue_hint.visible = _progress_initialized and not story_finished and not waiting_choice and not _events_running and not is_instance_valid(_active_minigame)
+	continue_hint.visible = _progress_initialized and not _continue_hint_dismissed and not story_finished and not waiting_choice and not _events_running and not is_instance_valid(_active_minigame)
 
 
 ## Trả mảng choices gắn ngay trên dòng thoại hiện tại, còn gọi là lựa chọn nội tuyến.
@@ -729,6 +736,8 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") or (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
 		if event is InputEventMouseButton and _is_pointer_over_button():
 			return
+		_continue_hint_dismissed = true
+		continue_hint.hide()
 		# Kiểm tra nếu click chuột ở câu thoại cuối cùng của file hiện tại để sẵn sàng chuyển file nhánh
 		if dialogue_index >= current_dialogues.size() - 1:
 			if current_dialogues.size() > 0:
@@ -898,6 +907,7 @@ func get_progress() -> Dictionary:
 		"episode_index": episode_index,
 		"scene_index": scene_index,
 		"dialogue_index": dialogue_index,
+		"continue_hint_dismissed": _continue_hint_dismissed,
 		"selected_choice_index": selected_choice_index,
 		"inline_choice_resolved": _inline_choice_resolved,
 		"has_dialogue_override": _has_dialogue_override,

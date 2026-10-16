@@ -28,12 +28,13 @@ Save vẫn là `user://savegame.save`, định dạng `ConfigFile`. Ngoài các 
 - `fade_alpha` để khôi phục trạng thái cuối của fade, không phát lại animation khi dựng lịch sử.
 - `minigame_state` lưu kết quả theo ID; `pending_minigame` lưu sự kiện và trạng thái minigame đang chơi.
 - `chapter_state` dành cho trạng thái đặc thù của chapter.
+- `continue_hint_dismissed` ghi nhận lần tiếp tục đầu tiên bằng chuột hoặc bàn phím. Hướng dẫn ẩn sau thao tác này và không hiện lại khi Continue, đổi file hay chuyển chapter. Chơi mới xóa cờ; save cũ thiếu cờ được xem là đã biết cách tiếp tục.
 
 `next_file` được giải tương đối theo **thư mục file truyện hiện tại**, giữ cả thư mục con và `../`. Đường dẫn `res://` đầy đủ vẫn được chấp nhận. Chuyển file luôn đặt lại episode/scene/dialogue/lựa chọn; lịch sử chat tiếp tục như cũ.
 
 Save cũ thiếu `current_story_path` dùng `story_path` trong Inspector, với index được giới hạn trong dữ liệu hiện tại. Save cũ không ghi file nhánh nên không thể suy ra chính xác nhánh đã chọn; mặc định trở về file đầu chương. Nếu file đã lưu bị gỡ, thử lại file đầu chương và reset tiến trình của chương. Không đoán nhánh bằng index.
 
-`GameManager.save_game()` lấy snapshot trực tiếp từ chapter đang hoạt động và giữ các trường đã lưu của cùng scene. Chuyển chapter xóa section progress của scene trước rồi tạo index mới. `save_progress()` kiểm tra chủ sở hữu scene và bỏ qua chapter đã hoàn thành, tránh callback từ chapter cũ ghi đè save chapter mới. Về menu giữ save chapter; credits giữ `completed = true`. Biến `GameManager.save_path` chỉ được bộ kiểm thử đổi sang file riêng.
+`GameManager.save_game()` lấy snapshot trực tiếp từ chapter đang hoạt động và giữ các trường đã lưu của cùng scene. Chuyển chapter xóa section progress của scene trước rồi tạo index mới, giữ riêng `continue_hint_dismissed` cho cả lượt chơi. `save_progress()` kiểm tra chủ sở hữu scene và bỏ qua chapter đã hoàn thành, tránh callback từ chapter cũ ghi đè save chapter mới. Về menu giữ save chapter; credits giữ `completed = true`. Biến `GameManager.save_path` chỉ được bộ kiểm thử đổi sang file riêng.
 
 ## Tạo Chapter 3
 
@@ -88,9 +89,11 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . --script res://tests/c
 
 Bộ kiểm thử dùng `tests/.tmp/savegame.save`, không đọc/ghi save thật. Nó kiểm tra scene kế thừa và Inspector, chơi mới, lựa chọn, cả hai nhánh, Continue main story và từng dòng trong các file nhánh, nền/nhạc xuyên file, fade, lưu lúc thoát, save cũ, chống scene cũ ghi đè, chuyển Chapter 2/credits, minigame/state/kết quả/không chạy lại và JSON dạng episodes với choices.
 
-Kết quả thực tế trên Godot 4.7.2: import thành công, **113 checks, 0 failures**, tiến trình kiểm thử thoát với mã 0, không có lỗi script/resource trong log cuối. `git diff --check` cũng đạt.
+Kết quả thực tế trên Godot 4.7.2: import thành công, **142 checks, 0 failures**, tiến trình kiểm thử thoát với mã 0, không có lỗi script/resource trong log cuối. Bao gồm kiểm tra giờ trong truyện, hướng dẫn lần đầu, chuột/bàn phím, input bị khóa, Continue, chuyển nhánh/chapter, chơi mới và hook sự kiện đồng bộ/bất đồng bộ. `git diff --check` cũng đạt.
 
 Headless kiểm tra node/resource, tiến trình và trạng thái hiệu ứng; chưa xác nhận bằng mắt cách bố trí trên cửa sổ thật, chất lượng chuyển fade, nghe nhạc/SFX, click chuột thật, thao tác settings hoặc đóng cửa sổ bằng nút X. Tương đương logic lưu khi đóng cửa sổ được kiểm tra bằng `GameManager.save_game()`; chưa chạy thử chu kỳ đóng/mở ứng dụng thật qua GUI.
+
+Riêng UI đồng hồ và hướng dẫn đã được render bằng Godot OpenGL ở 1280 × 720, kiểm tra ảnh trước/sau lần tiếp tục đầu tiên. Ô đồng hồ dùng font/icon pixel và khung xanh đêm viền vàng; khung hướng dẫn gọn ở giữa phía dưới, khi ẩn sẽ trả lại toàn bộ chiều cao cho vùng cuộn hội thoại. Bản xem trước dùng save riêng trong `.godot/`.
 
 Kiểm tra trong editor:
 

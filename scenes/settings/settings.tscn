@@ -1,21 +1,13 @@
 [gd_scene format=3 uid="uid://ckf6c34awldoe"]
 
 [ext_resource type="Script" uid="uid://dkdr2d4t2x6rv" path="res://scenes/settings/settings.gd" id="1_5p8wc"]
-[ext_resource type="Texture2D" uid="uid://h48herv1hm0s" path="res://assets/backgrounds/ui/settings/Setting menu.png" id="2_vu5fi"]
+[ext_resource type="Texture2D" uid="uid://b36h7jpwuknst" path="res://assets/backgrounds/ui/settings/UI_Setting.png" id="2_h6son"]
 [ext_resource type="FontFile" uid="uid://c48xj77famwca" path="res://assets/backgrounds/fonts/dearpix-1-94.otf" id="3_v1hle"]
 [ext_resource type="Texture2D" uid="uid://rryk8vakamfp" path="res://assets/backgrounds/ui/settings/All Icons.png" id="5_h6son"]
 [ext_resource type="Script" uid="uid://dpw7scpxd3yqt" path="res://scenes/settings/ui_sound_manager.gd" id="6_p7ghj"]
 [ext_resource type="AudioStream" uid="uid://qxop7q0cwyxs" path="res://assets/backgrounds/audio/sfx/JDSherbert - Wooden UI SFX Pack - Cancel - 2.wav" id="6_vimye"]
 [ext_resource type="AudioStream" uid="uid://dwsop0yuaq5d7" path="res://assets/backgrounds/audio/sfx/JDSherbert - Wooden UI SFX Pack - Cancel - 1.wav" id="8_p57yh"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_3ovsr"]
-thickness = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6d6q"]
-bg_color = Color(0.63529414, 0.41960785, 0.28235295, 1)
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_5seab"]
-thickness = 8
+[ext_resource type="Theme" path="res://themes/settings_slider_theme.tres" id="9_slider_theme"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vghtj"]
 atlas = ExtResource("5_h6son")
@@ -75,7 +67,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.5882353)
+color = Color(0, 0, 0, 0.8156863)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=787504244]
 layout_mode = 1
@@ -84,66 +76,76 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -229.0
-offset_top = -180.0
-offset_right = 229.0
-offset_bottom = 180.0
+offset_left = -335.0
+offset_top = -209.0
+offset_right = 340.0
+offset_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_vu5fi")
-region_rect = Rect2(138.02373, 10.119884, 108.33768, 125.68714)
-patch_margin_left = 12
+texture = ExtResource("2_h6son")
+region_rect = Rect2(0.18935394, -1.7948608, 1669.8153, 942.5635)
 patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
 [node name="OptionsBox" type="VBoxContainer" parent="NinePatchRect" unique_id=22288951]
 layout_mode = 0
-offset_left = 13.0
-offset_top = 121.0
-offset_right = 830.0
-offset_bottom = 578.0
+offset_left = 140.0
+offset_top = 117.0
+offset_right = 570.0
+offset_bottom = 261.0
+theme_override_constants/separation = 12
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="NinePatchRect/OptionsBox" unique_id=75003055]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="NinePatchRect/OptionsBox/HBoxContainer2" unique_id=1610445095]
+custom_minimum_size = Vector2(114, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2901961, 0.18039216, 0.101960786, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.2784314)
+theme_override_colors/font_color = Color(0.9490196, 0.9372549, 0.9098039, 1)
+theme_override_colors/font_outline_color = Color(0.043137256, 0.0627451, 0.1254902, 1)
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("3_v1hle")
 theme_override_font_sizes/font_size = 30
 text = "Nhạc nền"
 
 [node name="HSlider" type="HSlider" parent="NinePatchRect/OptionsBox/HBoxContainer2" unique_id=1976948138]
-custom_minimum_size = Vector2(300, 10)
+texture_filter = 1
+custom_minimum_size = Vector2(300, 36)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
-theme_override_styles/slider = SubResource("StyleBoxLine_3ovsr")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r6d6q")
+mouse_default_cursor_shape = 2
+theme = ExtResource("9_slider_theme")
 max_value = 2.0
 step = 0.05
 value = 1.0
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="NinePatchRect/OptionsBox" unique_id=1428609877]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="NinePatchRect/OptionsBox/HBoxContainer3" unique_id=719560118]
+custom_minimum_size = Vector2(114, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2901961, 0.18039216, 0.101960786, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.2784314)
+theme_override_colors/font_color = Color(0.9490196, 0.9372549, 0.9098039, 1)
+theme_override_colors/font_outline_color = Color(0.043137256, 0.0627451, 0.1254902, 1)
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("3_v1hle")
 theme_override_font_sizes/font_size = 30
 text = "Hiệu ứng"
 
 [node name="HSlider" type="HSlider" parent="NinePatchRect/OptionsBox/HBoxContainer3" unique_id=2064140750]
-custom_minimum_size = Vector2(300, 10)
+texture_filter = 1
+custom_minimum_size = Vector2(300, 36)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
-theme_override_styles/slider = SubResource("StyleBoxLine_5seab")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r6d6q")
+mouse_default_cursor_shape = 2
+theme = ExtResource("9_slider_theme")
 max_value = 2.0
 step = 0.05
 value = 1.0
@@ -153,8 +155,9 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="NinePatchRect/OptionsBox/HBoxContainer4" unique_id=2083108784]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2901961, 0.18039216, 0.101960786, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.2784314)
+theme_override_colors/font_color = Color(0.9490196, 0.9372549, 0.9098039, 1)
+theme_override_colors/font_outline_color = Color(0.043137256, 0.0627451, 0.1254902, 1)
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("3_v1hle")
 theme_override_font_sizes/font_size = 30
 text = "Toàn màn hình"
@@ -169,10 +172,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 196.0
-offset_top = -173.0
-offset_right = 221.0
-offset_bottom = -149.0
+offset_left = 304.0
+offset_top = -198.0
+offset_right = 329.0
+offset_bottom = -174.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"FlatButton"
@@ -184,15 +187,15 @@ script = SubResource("GDScript_h6son")
 
 [node name="exit" type="Button" parent="." unique_id=372707746]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -75.0
-offset_top = -220.0
-offset_right = 68.0
-offset_bottom = -190.0
+anchors_preset = -1
+anchor_left = 0.49400002
+anchor_top = 0.83000004
+anchor_right = 0.49400002
+anchor_bottom = 0.83000004
+offset_left = -69.32001
+offset_top = -12.600037
+offset_right = 73.67999
+offset_bottom = 17.399963
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 3
@@ -209,13 +212,15 @@ text = "Về giao diện chính"
 
 [node name="Label" type="Label" parent="." unique_id=346487124]
 layout_mode = 0
-offset_left = 573.0
-offset_top = 217.0
-offset_right = 708.0
-offset_bottom = 272.0
-theme_override_colors/font_color = Color(0.2901961, 0.18039216, 0.101960786, 1)
+offset_left = 576.0
+offset_top = 170.0
+offset_right = 711.0
+offset_bottom = 225.0
+theme_override_colors/font_color = Color(0.9647059, 0.8352941, 0.5411765, 1)
+theme_override_colors/font_outline_color = Color(0.043137256, 0.0627451, 0.1254902, 1)
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("3_v1hle")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 40
 text = "Cài đặt"
 horizontal_alignment = 1
 vertical_alignment = 1

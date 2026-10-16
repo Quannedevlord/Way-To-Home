@@ -137,7 +137,10 @@ func save_game(progress: Dictionary = {}, source_scene_path: String = "") -> boo
 	var config := ConfigFile.new()
 	config.load(save_path)
 	if config.get_value("progress", "current_scene", "") != current_scene_path and config.has_section("progress"):
+		# Hướng dẫn chỉ hiện một lần trong lượt chơi, kể cả khi chuyển chapter.
+		var continue_hint_dismissed := bool(config.get_value("progress", "continue_hint_dismissed", true))
 		config.erase_section("progress")
+		config.set_value("progress", "continue_hint_dismissed", continue_hint_dismissed)
 	config.set_value("progress", "current_scene", current_scene_path)
 	for key in progress:
 		config.set_value("progress", key, progress[key])
