@@ -11,12 +11,12 @@ chapter_name = "Chương 1"
 story_path = "res://data/chap1_story/main_story.json"
 avatar_paths = {
 "???": "",
-"Kiên": "res://assets/avatars/kien.png",
+"Kiên": "res://assets/avatars/Avatar_Kien.png",
 "Mẹ Kiên": "",
-"Nhân vật": "res://assets/avatars/vy.png",
-"Thư": "res://assets/avatars/thu.png",
+"Nhân vật": "res://assets/avatars/Avatar_Vy.png",
+"Thư": "res://assets/avatars/Avatar_Thu.png",
 "Thầy giáo": "",
-"Vy": "res://assets/avatars/vy.png"
+"Vy": "res://assets/avatars/Avatar_Vy.png"
 }
 protagonist_speakers = Array[String](["Kiên"])
 choice_speaker = "Kiên"

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iqaurn0lbx5i"
-path="res://.godot/imported/thu.png-38993c1f48025329a5ef1fd4c309cb56.ctex"
+uid="uid://kwykaihm8dt7"
+path="res://.godot/imported/Cổng trường sau giờ tan học.png-5fffa2b7343a977ec9458dbca8c32deb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/avatars/thu.png"
-dest_files=["res://.godot/imported/thu.png-38993c1f48025329a5ef1fd4c309cb56.ctex"]
+source_file="res://assets/chapter1/Cổng trường sau giờ tan học.png"
+dest_files=["res://.godot/imported/Cổng trường sau giờ tan học.png-5fffa2b7343a977ec9458dbca8c32deb.ctex"]
 
 [params]
 

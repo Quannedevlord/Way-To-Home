@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3opo0lwx3vik"
-path="res://.godot/imported/cat-night-scenery.jpg-c1eb7319d5538d9d23a46926f4fa4520.ctex"
+uid="uid://dupakvsa5xquo"
+path="res://.godot/imported/Avatar_Vy_Sad.png-30856a2959e8245bf8ebada690994a0e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/cat-night-scenery.jpg"
-dest_files=["res://.godot/imported/cat-night-scenery.jpg-c1eb7319d5538d9d23a46926f4fa4520.ctex"]
+source_file="res://assets/avatars/Avatar_Vy_Sad.png"
+dest_files=["res://.godot/imported/Avatar_Vy_Sad.png-30856a2959e8245bf8ebada690994a0e.ctex"]
 
 [params]
 

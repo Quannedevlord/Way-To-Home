@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://k0aftcd0sk5r"
-path="res://.godot/imported/vy.png-eac5d437644889d2684fe2b379f83370.ctex"
+uid="uid://d2f2ydvcllaie"
+path="res://.godot/imported/Cổng trường buổi sáng lúc 7 giờ.png-d6ffe06839f11864210d8535b5639ce3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/avatars/vy.png"
-dest_files=["res://.godot/imported/vy.png-eac5d437644889d2684fe2b379f83370.ctex"]
+source_file="res://assets/chapter1/Cổng trường buổi sáng lúc 7 giờ.png"
+dest_files=["res://.godot/imported/Cổng trường buổi sáng lúc 7 giờ.png-d6ffe06839f11864210d8535b5639ce3.ctex"]
 
 [params]
 

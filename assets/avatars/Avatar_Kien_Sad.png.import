@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h48herv1hm0s"
-path="res://.godot/imported/Setting menu.png-63f9d5d38560547acaa7ff5e77c9bf66.ctex"
+uid="uid://cgs6kp40w0qo2"
+path="res://.godot/imported/Avatar_Kien_Sad.png-e713659b3771c752dac11ba707998954.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/ui/settings/Setting menu.png"
-dest_files=["res://.godot/imported/Setting menu.png-63f9d5d38560547acaa7ff5e77c9bf66.ctex"]
+source_file="res://assets/avatars/Avatar_Kien_Sad.png"
+dest_files=["res://.godot/imported/Avatar_Kien_Sad.png-e713659b3771c752dac11ba707998954.ctex"]
 
 [params]
 

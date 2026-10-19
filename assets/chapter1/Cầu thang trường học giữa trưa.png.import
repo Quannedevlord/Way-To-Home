@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpomobgcdjkqo"
-path="res://.godot/imported/kien.png-b42bf42c32a1b6d85b598f8327642076.ctex"
+uid="uid://cur7cctwmgrex"
+path="res://.godot/imported/Cầu thang trường học giữa trưa.png-4088d22888f594820de1385e534ef4eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/avatars/kien.png"
-dest_files=["res://.godot/imported/kien.png-b42bf42c32a1b6d85b598f8327642076.ctex"]
+source_file="res://assets/chapter1/Cầu thang trường học giữa trưa.png"
+dest_files=["res://.godot/imported/Cầu thang trường học giữa trưa.png-4088d22888f594820de1385e534ef4eb.ctex"]
 
 [params]
 

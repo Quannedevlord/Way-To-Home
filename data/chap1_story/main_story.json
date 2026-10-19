@@ -39,7 +39,7 @@
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Vâng ạ, em xin lỗi thầy",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_Sudden.png"
 	},
 	{
 		"type": "dialogue",
@@ -51,31 +51,31 @@
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Hehe..., đừng trêu tớ nữa, Thư",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Thư",
 		"text": "Hôm nay vẫn phải ở lại cuối giờ để họp nhóm làm báo cáo bài tập lớn đấy nhé",
-		"avatar": "res://assets/thu.png"
+		"avatar": "res://assets/Avatar_Thu.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Thư",
 		"text": "Đừng có quên đấy (¬_ ´¬ )",
-		"avatar": "res://assets/thu.png"
+		"avatar": "res://assets/Avatar_Thu.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Hảaaaaaa, lại nữa à?!!!! ",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Haizzz.....tớ biết rồi",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_Sad.png"
 	},
 	{
 		"type": "narration",
@@ -87,31 +87,31 @@
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Yeyyy, cuối cùng cũng xong rồiiii",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Về nhà thôi",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "*Thu dọn đồ đạc*",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "*vụt* Oái, cái gì vậy?",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_Sudden.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Là của ai vậy nhỉ?",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_Sudden.png"
 	},
 	{
 		"type": "narration",
@@ -122,37 +122,37 @@
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Là một chiếc vòng tay!",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_Sudden.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "*Hoài nghi* Không có ai ở đây sao chiếc vòng lại...",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_NoE.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Thôi, để mai tính",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_NoE.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Tạm giữ lại, mai mang lên phòng hỗ trợ học sinh nộp vậy",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_NoE.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Mẹ ơi, con về rồi",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "*Mệt mỏi* Con lên phòng nghĩ một lát đây ạ",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien.png"
 	},
 	{
 		"type": "narration",
@@ -163,13 +163,13 @@
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "*Thởi dàii* Mìn...h m..ệt q....uá",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_NoE.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "*Thiếp đi*",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien.png"
 	},
 	{
 		"type": "narration",
@@ -187,19 +187,19 @@
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Hể... Đây là đâu vậy nhỉ? Một căn phòng trắng?!",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_Sudden.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "*Nhìn sang bên phải*",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_Sudden.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Là một cánh cửa? *tiến tới*",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_Sudden.png"
 	},
 	{
 		"type": "dialogue",
@@ -211,7 +211,7 @@
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "*Ngạc nhiên* Ai đó?!",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_Sudden.png"
 	},
 	{
 		"type": "dialogue",
@@ -235,7 +235,7 @@
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "*Giật mình* oáiii, có MAaaaaaa",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_Sudden.png"
 	},
 	{
 		"type": "dialogue",
@@ -247,7 +247,7 @@
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "...",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_Sudden.png"
 	},
 	{
 		"type": "dialogue",
@@ -259,13 +259,13 @@
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "À...Mình có thắc mắc. Sao cậu lại xuất hiện ở đây? Đây là đâu? và...",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_NoE.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Cậu thật sự là cái gì vậy... *hơi run* ",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_NoE.png"
 	},
 	{
 		"type": "dialogue",
@@ -277,97 +277,97 @@
 		"type": "dialogue",
 		"speaker": "Vy",
 		"text": "Không ngờ lại có thể gặp được một người khác ngoài mình ở đây!! *Phấn khích*",
-		"avatar": "res://assets/vy.png"
+		"avatar": "res://assets/Avatar_Vy.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Vậy ra mình đã thiếp đi ròi à? *thì thầm*",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_NoE.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "À...Vừa rồi cậu bảo là cần giúp đỡ? Ý là gì vậy?",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "*Hoài nghi*",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Vy",
 		"text": "Mình đã bị kẹt ở nơi đây...",
-		"avatar": "res://assets/vy.png"
+		"avatar": "res://assets/Avatar_Vy.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Hử, là sao?",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_NoE.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Vy",
 		"text": "Mình không nhớ rõ, mình chỉ nhớ được rằng vào buổi chiều tan trường mình đang trở về nhà...",
-		"avatar": "res://assets/vy.png"
+		"avatar": "res://assets/Avatar_Vy.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Vy",
 		"text": "Trông chờ vào bữa tối của mẹ thì...*ký ức mờ nhạt* urhhh",
-		"avatar": "res://assets/vy.png"
+		"avatar": "res://assets/Avatar_Vy.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Vy",
 		"text": "Mình...mình không còn nhớ được gì nữa",
-		"avatar": "res://assets/vy.png"
+		"avatar": "res://assets/Avatar_Vy_NoE.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "(Suy nghĩ) cậu ấy bị làm sao vậy nhỉ, có vẻ rất nghiêm trọng",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_NoE.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Vậy nói tóm lại cậu là học sinh và bằng một cách nào đó đã bị giam ở đây à? *nghi vấn*",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_NoE.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Thật phi lí",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_NoE.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "Mà...hình như cậu cũng học cùng trường với mình nhỉ?",
-		"avatar": "res://assets/kien.png"
+		"avatar": "res://assets/Avatar_Kien_NoE.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Vy",
 		"text": "Không biết phải giải thích với cậu thế nào nhưng mình khẳng định những gì đang diễn ra là sự thật ",
-		"avatar": "res://assets/vy.png"
+		"avatar": "res://assets/Avatar_Vy.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Vy",
 		"text": "Nên là...Xin cậu! Hãy giúp mình!!",
-		"avatar": "res://assets/vy.png"
+		"avatar": "res://assets/Avatar_Vy_Sad.png"
 	},
 	{
 		"type": "dialogue",
 		"speaker": "Kiên",
 		"text": "*bối rối*",
-		"avatar": "res://assets/kien.png",
+		"avatar": "res://assets/Avatar_Kien_Sudden.png",
 		"choices": [
 			{
 				"text": "Tin lời Vy và hứa giúp",

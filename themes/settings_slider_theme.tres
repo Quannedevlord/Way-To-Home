@@ -1,28 +1,8 @@
-[gd_resource type="Theme" load_steps=7 format=3]
+[gd_resource type="Theme" format=3 uid="uid://qaags6f804rn"]
 
-[ext_resource type="Texture2D" path="res://assets/backgrounds/ui/settings/slider_grabber.svg" id="1_grabber"]
-[ext_resource type="Texture2D" path="res://assets/backgrounds/ui/settings/slider_grabber_highlight.svg" id="2_highlight"]
-[ext_resource type="Texture2D" path="res://assets/backgrounds/ui/settings/slider_grabber_disabled.svg" id="3_disabled"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_track"]
-content_margin_left = 0.0
-content_margin_top = 6.0
-content_margin_right = 0.0
-content_margin_bottom = 6.0
-bg_color = Color(0.047059, 0.07451, 0.141176, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.239216, 0.282353, 0.396078, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_left = 2
-corner_radius_bottom_right = 2
-shadow_color = Color(0.023529, 0.035294, 0.07451, 0.65)
-shadow_size = 2
-shadow_offset = Vector2(0, 2)
-anti_aliasing = false
+[ext_resource type="Texture2D" uid="uid://cry48wvaqtuns" path="res://assets/backgrounds/ui/settings/slider_grabber.svg" id="1_grabber"]
+[ext_resource type="Texture2D" uid="uid://dsvp2qtwiasak" path="res://assets/backgrounds/ui/settings/slider_grabber_highlight.svg" id="2_highlight"]
+[ext_resource type="Texture2D" uid="uid://dvoqssruwpsau" path="res://assets/backgrounds/ui/settings/slider_grabber_disabled.svg" id="3_disabled"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill"]
 content_margin_left = 0.0
@@ -48,12 +28,32 @@ border_color = Color(1, 0.878431, 0.592157, 1)
 border_blend = true
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_track"]
+content_margin_left = 0.0
+content_margin_top = 6.0
+content_margin_right = 0.0
+content_margin_bottom = 6.0
+bg_color = Color(0.047059, 0.07451, 0.141176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.239216, 0.282353, 0.396078, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0.023529, 0.035294, 0.07451, 0.65)
+shadow_size = 2
+shadow_offset = Vector2(0, 2)
+anti_aliasing = false
+
 [resource]
 HSlider/constants/center_grabber = 0
 HSlider/constants/grabber_offset = 0
 HSlider/icons/grabber = ExtResource("1_grabber")
-HSlider/icons/grabber_highlight = ExtResource("2_highlight")
 HSlider/icons/grabber_disabled = ExtResource("3_disabled")
-HSlider/styles/slider = SubResource("StyleBoxFlat_track")
+HSlider/icons/grabber_highlight = ExtResource("2_highlight")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_fill")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_fill_highlight")
+HSlider/styles/slider = SubResource("StyleBoxFlat_track")
