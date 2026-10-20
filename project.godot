@@ -8,37 +8,31 @@
 
 config_version=5
 
-; Tên game và scene khởi động (UID của scenes/splash/splash.tscn).
 [application]
 
 config/name="Way To Home"
 run/main_scene="uid://c6mp5vwswbpf0"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
-; Layout có bus Music/SFX để điều chỉnh nhạc và hiệu ứng riêng.
 [audio]
 
 buses/default_bus_layout="uid://b4bgpc8lt02km"
 
-; Hai node tồn tại qua mọi lần chuyển scene: quản lý save và menu/Auto toàn cục.
 [autoload]
 
 GameManager="*res://autoload/game_manager.gd"
 GlobalMenu="*uid://d1igt8yqm17se"
 
-; Kích thước thiết kế 1280 x 720; canvas_items co giãn UI theo cửa sổ.
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 
-; Lựa chọn backend vật lý 3D của project.
 [physics]
 
 3d/physics_engine="Jolt Physics"
 
-; Dùng renderer Compatibility; các tùy chọn driver/nén phục vụ cấu hình nền tảng.
 [rendering]
 
 rendering_device/driver.windows="d3d12"

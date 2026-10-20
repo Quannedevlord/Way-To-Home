@@ -53,3 +53,22 @@ Các kiểm thử dùng save trong `tests/.tmp/`, không sửa save thật. Bộ
 Kết quả trên Godot 4.7.2: **266 kiểm tra truyện + 147 kiểm tra hồi quy, 0 lỗi**; cả hai tiến trình thoát mã 0. Bộ hồi quy đã kiểm tra thêm save trỏ tới file truyện bị gỡ. Kiểm tra editor/import thành công. Trình kiểm tra dữ liệu xác nhận 54 cảnh đều tới được, 11 câu đố có đáp án hợp lệ và không thiếu asset hay đích chuyển cảnh. Log cuối không có lỗi script/resource hoặc cảnh báo rò tài nguyên.
 
 Ảnh kiểm tra giao diện 1280 × 720 nằm trong `.godot/story_*.png`, được render bằng Godot OpenGL với save riêng. Chưa thực hiện playtest nghe âm thanh, thao tác cảm ứng trên thiết bị thật hoặc xuất bản build.
+
+## Kiểm tra chuyển chương sau export
+
+Trong PCK, `DirAccess.get_files_at()` liệt kê scene thành `chapter2.tscn.remap`; lọc riêng đuôi `.tscn` sẽ không tìm được chương tiếp theo và mở credits ngay sau chương 1. `GameManager._find_chapter_scene()` dùng `ResourceLoader.list_directory()` để nhận tên tài nguyên gốc trong cả editor và bản export. Xem [tài liệu ResourceLoader](https://docs.godotengine.org/en/4.7/classes/class_resourceloader.html#class-resourceloader-method-list-directory).
+
+`tests/export_regression.gd` kiểm tra nạp nội dung JSON của cả năm chương, chuyển chương qua signal hoàn thành và chỉ ghi save hoàn tất khi tới credits sau chương 5. Chạy bằng Godot editor binary với PCK thật, trong thư mục riêng để không đọc nhầm tài nguyên từ project nguồn:
+
+```powershell
+$exportCheckDir = Join-Path (Get-Location) '.godot/export_check'
+New-Item -ItemType Directory -Path $exportCheckDir -Force | Out-Null
+Godot_v4.7.2-stable_win64_console.exe --headless --editor --path . --export-pack "WAY TO HOME" "$exportCheckDir/windows.pck"
+Godot_v4.7.2-stable_win64_console.exe --headless --path "$exportCheckDir" --main-pack "$exportCheckDir/windows.pck" --script res://tests/export_regression.gd -- "--test-output-dir=$exportCheckDir/windows_save"
+Godot_v4.7.2-stable_win64_console.exe --headless --editor --path . --export-pack "Way To Home" "$exportCheckDir/android.pck"
+Godot_v4.7.2-stable_win64_console.exe --headless --path "$exportCheckDir" --main-pack "$exportCheckDir/android.pck" --script res://tests/export_regression.gd -- "--test-output-dir=$exportCheckDir/android_save"
+```
+
+Đã tái hiện lỗi trên PCK Windows cũ; sau sửa, cả PCK Windows và PCK từ preset Android đạt **24 kiểm tra, 0 lỗi** mỗi gói trên Godot 4.7.2. Cả năm JSON đều có trong gói với cấu hình export hiện tại. Đây là kiểm tra dữ liệu đóng gói và luồng chuyển chương; chưa kiểm tra APK trên thiết bị Android thật.
+
+Sau khi sửa code cần export lại EXE/APK. Preset Windows hiện dùng `embed_pck=false`, nên khi chuyển bản game phải giữ EXE và PCK mới cùng thư mục.

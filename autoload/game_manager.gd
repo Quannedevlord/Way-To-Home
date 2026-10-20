@@ -156,7 +156,8 @@ func _get_chapter_number(value: String) -> int:
 ## Nếu có nhiều file, lấy tên đầu tiên theo thứ tự chữ; không tìm thấy thì trả chuỗi rỗng.
 func _find_chapter_scene(chapter_directory: String) -> String:
 	var scene_paths: Array[String] = []
-	for file_name in DirAccess.get_files_at(chapter_directory):
+	# ResourceLoader giữ tên .tscn gốc khi bản export lưu scene dưới dạng .tscn.remap.
+	for file_name in ResourceLoader.list_directory(chapter_directory):
 		if file_name.get_extension().to_lower() == "tscn" and file_name.get_basename().to_lower().begins_with("chapter"):
 			scene_paths.append(chapter_directory.path_join(file_name))
 
