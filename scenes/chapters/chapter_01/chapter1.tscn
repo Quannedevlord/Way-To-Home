@@ -1,21 +1,19 @@
 [gd_scene format=3 uid="uid://cqn28ke6tf87y"]
+; Cấu hình Chương 1 kế thừa bố cục chapter_base.tscn và gắn chapter1.gd.
+; story_path chọn JSON; avatar_paths, choice_speaker và default_music cấu hình phần hiển thị/âm thanh.
 
-[ext_resource type="PackedScene" uid="uid://cd30ub4mkftfl" path="res://scenes/chapters/base/chapter_base.tscn" id="1_base"]
-[ext_resource type="Script" uid="uid://b0ghs0vegibxa" path="res://scenes/chapters/chapter_01/chapter1.gd" id="2_script"]
-[ext_resource type="AudioStream" uid="uid://dvrugvm21uunj" path="res://assets/backgrounds/audio/bgm/in game3.mp3" id="3_bgm"]
+[ext_resource type="PackedScene" path="res://scenes/chapters/base/chapter_base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/chapters/chapter_01/chapter1.gd" id="2_script"]
+[ext_resource type="AudioStream" path="res://assets/backgrounds/audio/bgm/in game3.mp3" id="3_bgm"]
 
-[node name="Chapter1" unique_id=1406911119 instance=ExtResource("1_base")]
+[node name="Chapter1" instance=ExtResource("1_base")]
 script = ExtResource("2_script")
 chapter_id = "chapter_01"
-chapter_name = "Chương 1"
-story_path = "res://data/chap1_story/main_story.json"
+chapter_name = "Chương 1 · Người lạ trong giấc mơ"
+story_path = "res://data/story/chapter_01.json"
 avatar_paths = {
-"???": "",
 "Kiên": "res://assets/avatars/Avatar_Kien.png",
-"Mẹ Kiên": "",
-"Nhân vật": "res://assets/avatars/Avatar_Vy.png",
 "Thư": "res://assets/avatars/Avatar_Thu.png",
-"Thầy giáo": "",
 "Vy": "res://assets/avatars/Avatar_Vy.png"
 }
 protagonist_speakers = Array[String](["Kiên"])

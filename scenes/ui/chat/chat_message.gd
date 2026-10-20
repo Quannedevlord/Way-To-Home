@@ -1,5 +1,8 @@
 extends MarginContainer
+## Dựng một phần tử của luồng chat: hội thoại, lời dẫn, địa điểm hoặc ảnh minh họa.
+## ChapterBase tạo instance rồi gọi setup_*; file này quản lý bố cục và hiệu ứng xuất hiện.
 
+# Màu, kích thước tính bằng pixel và thời lượng tính bằng giây dùng chung cho các tin nhắn.
 const BUBBLE_LEFT := Color(0.30, 0.30, 0.30, 1.0)
 const BUBBLE_RIGHT := Color(0.29, 0.47, 0.50, 1.0)
 const BUBBLE_NARRATION := Color(0.16, 0.16, 0.18, 0.9)

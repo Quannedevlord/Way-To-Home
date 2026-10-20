@@ -1,4 +1,6 @@
 [gd_scene format=3 uid="uid://c6mp5vwswbpf0"]
+; Scene khởi động được project.godot mở đầu tiên.
+; splash.gd chạy hiệu ứng trên Panel/NinePatchRect rồi chuyển sang menu chính.
 
 [ext_resource type="Script" uid="uid://by2qdra3ha6g1" path="res://scenes/splash/splash.gd" id="1_splash"]
 [ext_resource type="Texture2D" uid="uid://mbmqpbumbw1v" path="res://assets/backgrounds/ten_game-Photoroom.png" id="2_cwtag"]

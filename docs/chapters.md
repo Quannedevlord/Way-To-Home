@@ -1,5 +1,7 @@
 # Chapter dùng chung trong Way To Home
 
+> Cập nhật: game hiện chạy đủ 5 chương theo kịch bản DOCX qua lớp `StoryChapter`. Xem [bản truyện 5 chương](story_campaign.md) cho nội dung, gameplay, mốc lưu và kiểm thử hiện hành. Tài liệu bên dưới mô tả nền `ChapterBase` và đợt refactor trước; các đoạn nói Chapter 2 còn là scene tạm là trạng thái trước khi có bản truyện mới.
+
 Project dùng Godot 4.7, đã chạy kiểm tra bằng Godot 4.7.2. Không thêm Autoload hoặc plugin.
 
 ## Các file và trách nhiệm
@@ -11,7 +13,7 @@ Project dùng Godot 4.7, đã chạy kiểm tra bằng Godot 4.7.2. Không thêm
 | Sửa | `scenes/chapters/chapter_01/chapter1.gd`, `.tscn` | Script kế thừa `ChapterBase`; inherited scene chỉ cấu hình Chapter 1, avatar, người nói lựa chọn, nhân vật căn phải và nhạc gốc. |
 | Sửa | `scenes/chapters/chapter_02/chapter2.gd`, `.tscn` | Kế thừa cùng nền, gọi `super._ready()`. Khi `story_path` trống, báo hoàn thành ở deferred call và tự chuyển chapter/credits như scene tạm trước đây. Nếu đã cấu hình story thì chạy nền bình thường. |
 | Sửa | `autoload/game_manager.gd` | Nhận signal hoàn thành, điều phối scene/chapter, ghi/đọc save. Không chứa gameplay chapter. |
-| Sửa | `data/chap1_story/main_story.json` | Chỉ thêm `use_as_background: false` cho ảnh vòng tay; giữ nguyên nội dung/thứ tự/asset/sự kiện/lựa chọn. Các JSON nhánh không đổi. |
+| Dữ liệu kiểm thử cũ | `tests/fixtures/legacy_chapter_01/main_story.json` | Bản truyện của đợt refactor trước, hiện chỉ dùng cho kiểm thử. Có `use_as_background: false` cho ảnh vòng tay. Nội dung game hiện hành nằm trong `data/story/`. |
 | Tạo | `tests/chapter_regression.gd`, `.gd.uid`, `tests/.gitignore` | Kiểm tra hồi quy headless; tạo dữ liệu và đối tượng giả trong `tests/.tmp/`, không thêm minigame chơi được. |
 | Tạo | `docs/chapters.md` | Hướng dẫn này. |
 

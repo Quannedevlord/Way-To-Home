@@ -1,0 +1,21 @@
+[gd_scene format=3]
+; Cấu hình Chương 4, nơi người chơi quay lại các việc chuẩn bị cho kết thúc.
+; story_path chọn dữ liệu chứa mốc preparation; UI và xử lý save được kế thừa.
+
+[ext_resource type="PackedScene" path="res://scenes/chapters/base/chapter_base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/chapters/chapter_04/chapter4.gd" id="2_script"]
+[ext_resource type="AudioStream" path="res://assets/backgrounds/audio/bgm/in game3.mp3" id="3_bgm"]
+
+[node name="Chapter4" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+chapter_id = "chapter_04"
+chapter_name = "Chương 4 · Điều chưa kịp nói"
+story_path = "res://data/story/chapter_04.json"
+avatar_paths = {
+"Kiên": "res://assets/avatars/Avatar_Kien.png",
+"Thư": "res://assets/avatars/Avatar_Thu.png",
+"Vy": "res://assets/avatars/Avatar_Vy.png"
+}
+protagonist_speakers = Array[String](["Kiên"])
+choice_speaker = "Kiên"
+default_music = ExtResource("3_bgm")

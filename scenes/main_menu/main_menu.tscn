@@ -1,4 +1,6 @@
 [gd_scene format=3 uid="uid://vdokwuvkkuvq"]
+; Menu chính gồm nền video, logo, bốn nút chức năng, nhạc và âm thanh UI.
+; NodePath trên root nối các nút với main_menu.gd; Continue được script ẩn nếu không có save hợp lệ.
 
 [ext_resource type="Theme" uid="uid://dw0edg512es" path="res://themes/main_theme.tres" id="1_rtw2f"]
 [ext_resource type="Script" uid="uid://ccaiigwio7fyb" path="res://scenes/main_menu/main_menu.gd" id="2_oa1go"]

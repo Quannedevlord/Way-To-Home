@@ -1,6 +1,8 @@
 extends Control
+## Màn hình khởi động: hiện logo bằng tween rồi nhờ GameManager mở menu chính.
 
 const MAIN_MENU_SCENE := "res://scenes/main_menu/main_menu.tscn"
+# Thời gian tính bằng giây; SPLASH_DURATION tính từ lúc mở splash, gồm cả hiệu ứng xuất hiện.
 const SPLASH_DURATION := 1.8
 const APPEAR_DURATION := 0.7
 

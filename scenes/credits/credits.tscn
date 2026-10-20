@@ -1,4 +1,6 @@
 [gd_scene format=3 uid="uid://dw53eiplirwd2"]
+; Màn hình cảm ơn: các CreditEntry chứa chữ/ảnh, CreditsContent là vùng cuộn.
+; credits.gd dựng danh sách và dùng FadeOverlay trước khi trở về menu chính.
 
 [ext_resource type="Script" uid="uid://35hc2id23r3c" path="res://scenes/credits/credits.gd" id="1_dr3ri"]
 [ext_resource type="AudioStream" uid="uid://boqanmp2422qs" path="res://assets/backgrounds/audio/bgm/The_Way_Back_Home.mp3" id="2_8n0nl"]

@@ -1,6 +1,9 @@
 
 extends Control
+## Lớp phủ cài đặt âm lượng nhạc/SFX và toàn màn hình, hoạt động cả khi game pause.
+## Các hàm static cũng áp dụng cài đặt lúc vào menu/chapter mà không cần mở giao diện.
 
+## Lưu tùy chọn riêng với save cốt truyện để chơi mới vẫn giữ cài đặt của người chơi.
 const SETTINGS_PATH := "user://settings.cfg"
 
 const DEFAULT_MUSIC_VOLUME := 1.0
@@ -13,10 +16,14 @@ const DEFAULT_FULLSCREEN := false
 @export var fullscreen_toggle: CheckButton
 @export var returnMainMenu_button: Button
 
+# Giữ nút đang dùng trước khi mở để đóng cài đặt xong có thể tiếp tục bằng bàn phím.
+var _previous_focus: Control
+
 
 ## Khởi tạo cài đặt, nối các nút giao diện và nạp giá trị đã lưu.
 func _ready() -> void:
     process_mode = Node.PROCESS_MODE_ALWAYS
+    _previous_focus = get_viewport().gui_get_focus_owner()
 
     if close_button:
         close_button.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -36,11 +43,24 @@ func _ready() -> void:
         fullscreen_toggle.toggled.connect(_on_fullscreen_toggled)
 
     _load_settings()
+    if close_button:
+        close_button.tooltip_text = "Đóng cài đặt (Esc)"
+        close_button.grab_focus()
+
+
+## Esc đóng lớp phủ, kể cả khi minigame đang tạm dừng ở phía dưới.
+func _input(event: InputEvent) -> void:
+    if event is InputEventKey and event.pressed and not event.echo \
+            and (event.keycode == KEY_ESCAPE or event.physical_keycode == KEY_ESCAPE):
+        get_viewport().set_input_as_handled()
+        _on_close_pressed()
 
 
 ## Bỏ tạm dừng trò chơi và đóng cửa sổ cài đặt.
 func _on_close_pressed() -> void:
     GameManager.set_paused(false)
+    if is_instance_valid(_previous_focus) and _previous_focus.is_visible_in_tree():
+        _previous_focus.grab_focus()
     queue_free()
 
 
@@ -115,6 +135,7 @@ func _load_settings() -> void:
         "display", "fullscreen", DEFAULT_FULLSCREEN
     )
 
+    # Nạp UI không phát signal, tránh ghi đè file cài đặt trong lúc mới đọc được một phần.
     if music_slider:
         music_slider.set_value_no_signal(music_volume)
 

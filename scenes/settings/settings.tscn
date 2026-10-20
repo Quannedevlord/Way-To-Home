@@ -1,4 +1,6 @@
 [gd_scene format=3 uid="uid://ckf6c34awldoe"]
+; Lớp phủ cài đặt gồm âm lượng Music/SFX, toàn màn hình, đóng và về menu.
+; Các tham chiếu @export gán trên root được settings.gd dùng để nạp/lưu tùy chọn.
 
 [ext_resource type="Script" uid="uid://dkdr2d4t2x6rv" path="res://scenes/settings/settings.gd" id="1_5p8wc"]
 [ext_resource type="Texture2D" uid="uid://b36h7jpwuknst" path="res://assets/backgrounds/ui/settings/UI_Setting.png" id="2_h6son"]
@@ -53,14 +55,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_5p8wc")
-close_button = NodePath("close")
-music_slider = NodePath("NinePatchRect/OptionsBox/HBoxContainer2/HSlider")
-sfx_slider = NodePath("NinePatchRect/OptionsBox/HBoxContainer3/HSlider")
-fullscreen_toggle = NodePath("NinePatchRect/OptionsBox/HBoxContainer4/CheckButton")
-returnMainMenu_button = NodePath("exit")
+close_button = NodePath("CanvasLayer/close")
+music_slider = NodePath("CanvasLayer/NinePatchRect/OptionsBox/HBoxContainer2/HSlider")
+sfx_slider = NodePath("CanvasLayer/NinePatchRect/OptionsBox/HBoxContainer3/HSlider")
+fullscreen_toggle = NodePath("CanvasLayer/NinePatchRect/OptionsBox/HBoxContainer4/CheckButton")
+returnMainMenu_button = NodePath("CanvasLayer/exit")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=503215908]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+; Layer 101 giữ toàn bộ cài đặt trên GlobalMenu (100), kể cả khi đang mở minigame.
+layer = 101
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=503215908]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -69,7 +76,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.8156863)
 
-[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=787504244]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer" unique_id=787504244]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -88,7 +95,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="OptionsBox" type="VBoxContainer" parent="NinePatchRect" unique_id=22288951]
+[node name="OptionsBox" type="VBoxContainer" parent="CanvasLayer/NinePatchRect" unique_id=22288951]
 layout_mode = 0
 offset_left = 140.0
 offset_top = 117.0
@@ -96,12 +103,12 @@ offset_right = 570.0
 offset_bottom = 261.0
 theme_override_constants/separation = 12
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="NinePatchRect/OptionsBox" unique_id=75003055]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/NinePatchRect/OptionsBox" unique_id=75003055]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="NinePatchRect/OptionsBox/HBoxContainer2" unique_id=1610445095]
+[node name="Label" type="Label" parent="CanvasLayer/NinePatchRect/OptionsBox/HBoxContainer2" unique_id=1610445095]
 custom_minimum_size = Vector2(114, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9490196, 0.9372549, 0.9098039, 1)
@@ -111,7 +118,7 @@ theme_override_fonts/font = ExtResource("3_v1hle")
 theme_override_font_sizes/font_size = 30
 text = "Nhạc nền"
 
-[node name="HSlider" type="HSlider" parent="NinePatchRect/OptionsBox/HBoxContainer2" unique_id=1976948138]
+[node name="HSlider" type="HSlider" parent="CanvasLayer/NinePatchRect/OptionsBox/HBoxContainer2" unique_id=1976948138]
 texture_filter = 1
 custom_minimum_size = Vector2(300, 36)
 layout_mode = 2
@@ -123,12 +130,12 @@ max_value = 2.0
 step = 0.05
 value = 1.0
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="NinePatchRect/OptionsBox" unique_id=1428609877]
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/NinePatchRect/OptionsBox" unique_id=1428609877]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="NinePatchRect/OptionsBox/HBoxContainer3" unique_id=719560118]
+[node name="Label" type="Label" parent="CanvasLayer/NinePatchRect/OptionsBox/HBoxContainer3" unique_id=719560118]
 custom_minimum_size = Vector2(114, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9490196, 0.9372549, 0.9098039, 1)
@@ -138,7 +145,7 @@ theme_override_fonts/font = ExtResource("3_v1hle")
 theme_override_font_sizes/font_size = 30
 text = "Hiệu ứng"
 
-[node name="HSlider" type="HSlider" parent="NinePatchRect/OptionsBox/HBoxContainer3" unique_id=2064140750]
+[node name="HSlider" type="HSlider" parent="CanvasLayer/NinePatchRect/OptionsBox/HBoxContainer3" unique_id=2064140750]
 texture_filter = 1
 custom_minimum_size = Vector2(300, 36)
 layout_mode = 2
@@ -150,10 +157,10 @@ max_value = 2.0
 step = 0.05
 value = 1.0
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="NinePatchRect/OptionsBox" unique_id=607965698]
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/NinePatchRect/OptionsBox" unique_id=607965698]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="NinePatchRect/OptionsBox/HBoxContainer4" unique_id=2083108784]
+[node name="Label" type="Label" parent="CanvasLayer/NinePatchRect/OptionsBox/HBoxContainer4" unique_id=2083108784]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9490196, 0.9372549, 0.9098039, 1)
 theme_override_colors/font_outline_color = Color(0.043137256, 0.0627451, 0.1254902, 1)
@@ -162,10 +169,10 @@ theme_override_fonts/font = ExtResource("3_v1hle")
 theme_override_font_sizes/font_size = 30
 text = "Toàn màn hình"
 
-[node name="CheckButton" type="CheckButton" parent="NinePatchRect/OptionsBox/HBoxContainer4" unique_id=442894790]
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/NinePatchRect/OptionsBox/HBoxContainer4" unique_id=442894790]
 layout_mode = 2
 
-[node name="close" type="TextureButton" parent="." unique_id=1477463204]
+[node name="close" type="TextureButton" parent="CanvasLayer" unique_id=1477463204]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -185,7 +192,7 @@ ignore_texture_size = true
 stretch_mode = 0
 script = SubResource("GDScript_h6son")
 
-[node name="exit" type="Button" parent="." unique_id=372707746]
+[node name="exit" type="Button" parent="CanvasLayer" unique_id=372707746]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.49400002
@@ -210,7 +217,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_vghtj")
 text = "Về giao diện chính"
 
-[node name="Label" type="Label" parent="." unique_id=346487124]
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=346487124]
 layout_mode = 0
 offset_left = 576.0
 offset_top = 170.0

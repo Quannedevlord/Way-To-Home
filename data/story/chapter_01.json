@@ -1,0 +1,519 @@
+{
+  "version": 1,
+  "source": "Way_To_Home_Kich_ban_5_chapter.docx",
+  "episodes": [
+	{
+	  "title": "Người lạ trong giấc mơ",
+	  "scenes": [
+		{
+		  "id": "c1s1",
+		  "location": "Buổi sáng quen thuộc",
+		  "dialogues": [
+			{
+			  "type": "narration",
+			  "text": "Chương 1 · Người lạ trong giấc mơ\nNgày 1. Kiên chạy qua sân trường, dây cặp tuột khỏi một bên vai.",
+			  "time": "07:50",
+			  "events": [
+				{
+				  "type": "change_background",
+				  "path": "res://assets/school.png",
+				  "duration": 0.2
+				},
+				{
+				  "type": "change_music",
+				  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+				}
+			  ]
+			},
+			{
+			  "type": "narration",
+			  "text": "Chuông vào lớp vang lên.",
+			  "sfx": "schoolbell"
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Thôi tiêu rồi! Sao hôm nào cái cổng cũng xa thế này!"
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Em xin lỗi thầy, em đi muộn ạ!"
+			},
+			{
+			  "speaker": "Thầy giáo",
+			  "text": "Hôm nay lại đi muộn nữa à, Kiên?"
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Dạ, tại…"
+			},
+			{
+			  "speaker": "Thầy giáo",
+			  "text": "Về chỗ đi. Lần sau đến đúng giờ."
+			},
+			{
+			  "speaker": "Thư",
+			  "text": "Vẫn như mọi khi nhỉ."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Đừng trêu tớ nữa. Hôm nay tớ đã chạy nhanh lắm rồi."
+			},
+			{
+			  "speaker": "Thư",
+			  "text": "Chiều họp nhóm làm báo cáo. Bốn đứa mình, phòng học cuối dãy. Đừng quên."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Lại ở lại nữa à?"
+			},
+			{
+			  "speaker": "Thư",
+			  "text": "Phần hình của cậu vẫn chưa xong."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Rồi, rồi. Lần này tớ nhớ."
+			},
+			{
+			  "type": "narration",
+			  "text": "Thầy quay lên bảng. Viên phấn nằm yên trong tay thầy vài giây rồi mới bắt đầu viết. Thư nhìn theo."
+			},
+			{
+			  "type": "narration",
+			  "text": "Bảng thông báo bên cạnh bàn có một tờ giấy mới.",
+			  "choices": [
+				{
+				  "text": "Xem thông báo trưng bày tranh",
+				  "go": "c1notice"
+				},
+				{
+				  "text": "Ngồi vào bàn",
+				  "go": "c1s2"
+				}
+			  ]
+			}
+		  ],
+		  "next": ""
+		},
+		{
+		  "id": "c1notice",
+		  "location": "Bảng thông báo",
+		  "dialogues": [
+			{
+			  "type": "narration",
+			  "text": "Trường đang nhận tranh của học sinh cho một buổi trưng bày. Những ô cửa sổ được vẽ quanh dòng tiêu đề."
+			}
+		  ],
+		  "next": "c1s2"
+		},
+		{
+		  "id": "c1s2",
+		  "location": "Chiếc vòng dưới chân bàn",
+		  "dialogues": [
+			{
+			  "type": "narration",
+			  "text": "17 giờ 05. Buổi họp nhóm bốn người đã xong. Hai bạn khác về trước; Thư chờ Kiên thu dọn.",
+			  "time": "17:05",
+			  "events": [
+				{
+				  "type": "change_background",
+				  "path": "res://assets/class.png",
+				  "duration": 0.2
+				},
+				{
+				  "type": "change_music",
+				  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+				}
+			  ]
+			},
+			{
+			  "speaker": "Thư",
+			  "text": "Tớ gửi phần sửa vào nhóm rồi. Cậu nhớ xem."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Ừ. Cậu về trước đi, tớ đóng cửa."
+			},
+			{
+			  "speaker": "Thư",
+			  "text": "Đừng ngủ luôn ở đây đấy."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Cậu nghĩ tớ là ai chứ?"
+			},
+			{
+			  "type": "narration",
+			  "text": "Thu dọn phòng học",
+			  "event": {
+				"type": "minigame",
+				"id": "c1_find",
+				"scene": "res://scenes/minigames/story_puzzle.tscn",
+				"config": {
+				  "title": "Thu dọn phòng học",
+				  "instruction": "Chọn ba vật còn để lại trên bàn và dưới chân bàn.",
+				  "items": [
+					"Tờ phân công",
+					"Cây bút",
+                    "Mẩu giấy dưới chân bàn"
+				  ],
+				  "answer": [
+					0,
+					1,
+					2
+				  ],
+				  "mode": "select",
+				  "hint": "Còn mẩu giấy dưới chân bàn. Cúi xuống sẽ thấy rõ hơn.",
+				  "success": "Tờ phân công có bốn dòng tên. Dưới mẩu giấy là một chiếc vòng tay."
+				}
+			  }
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Hửm… vòng tay của ai đây?"
+			},
+			{
+			  "type": "narration",
+			  "text": "Mặt vòng là một ngôi nhà nhỏ, mái bị mẻ, có chữ V khắc bên trong và nút thắt xanh. Khóa hơi lỏng. Âm thanh sân trường bỗng tắt đi một nhịp.",
+			  "illustration": "res://assets/VongTay.png",
+			  "use_as_background": false
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Chắc của Thư. Mai hỏi vậy."
+			},
+			{
+			  "type": "narration",
+			  "text": "Kiên cất chiếc vòng hình ngôi nhà vào ngăn nhỏ của cặp. Cậu sẽ hỏi chủ nhân vào ngày mai.",
+			  "clue": {
+				"id": "bracelet",
+				"title": "Chiếc vòng nhặt được",
+				"source": "Quan sát ngoài đời",
+				"text": "Kiên cất chiếc vòng hình ngôi nhà vào ngăn nhỏ của cặp. Cậu sẽ hỏi chủ nhân vào ngày mai."
+			  },
+			  "set": {
+				"bracelet_found": true
+			  }
+			}
+		  ],
+		  "next": "c1s3"
+		},
+		{
+		  "id": "c1s3",
+		  "location": "Một giấc ngủ lúc chiều muộn",
+		  "dialogues": [
+			{
+			  "type": "narration",
+			  "text": "18 giờ 30. Kiên đặt vòng cạnh đèn bàn. Mẹ gọi từ bếp.",
+			  "time": "18:30",
+			  "events": [
+				{
+				  "type": "change_background",
+				  "path": "res://assets/bedroom2.png",
+				  "duration": 0.2
+				},
+				{
+				  "type": "change_music",
+				  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+				}
+			  ]
+			},
+			{
+			  "speaker": "Mẹ Kiên",
+			  "text": "Chút nữa ăn cơm nhé con."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Dạ. Con nằm một lát thôi."
+			},
+			{
+			  "type": "narration",
+			  "text": "Tiếng quạt chậm dần. Con đường quen thuộc không còn tiếng xe. Đồng hồ cổng trường đứng ở 17 giờ 20.",
+			  "time": "17:20",
+			  "events": [
+				{
+				  "type": "change_background",
+				  "path": "res://assets/dream.png",
+				  "duration": 0.2
+				},
+				{
+				  "type": "change_music",
+				  "path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+				}
+			  ]
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Mình vừa… đi đâu ấy nhỉ?"
+			},
+			{
+			  "speaker": "Giọng nữ",
+			  "text": "Cậu có nghe thấy mình không?"
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Ai vậy?"
+			},
+			{
+			  "speaker": "Giọng nữ",
+			  "text": "Khoan! Đừng đi. Mình cần cậu giúp."
+			},
+			{
+			  "type": "narration",
+			  "text": "Một nữ sinh bước ra khỏi bóng cây. Gió chỉ làm cỏ quanh Kiên lay động."
+			}
+		  ],
+		  "next": "c1s4"
+		},
+		{
+		  "id": "c1s4",
+		  "location": "Vy",
+		  "dialogues": [
+			{
+			  "speaker": "Kiên",
+			  "text": "Đây là đâu? Sao cậu lại ở đây?"
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Và… cậu thật sự là cái gì vậy?"
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Mình là Vy. Câu cuối nghe hơi buồn đấy."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Xin lỗi. Tại chỗ này…"
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Tớ cũng không biết rõ. Có lẽ là giấc mơ của cậu."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Vậy ra mình ngủ thật rồi."
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Nhưng tớ đã ở đây từ trước. Lâu lắm. Hay mới một lúc thôi? Tớ không biết nữa."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Cậu bảo cần giúp đỡ?"
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Tớ muốn về nhà. Đi đến ngã rẽ kia là lại quay về cổng trường."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Thế trước khi đến đây, cậu ở đâu?"
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Tan học. Tớ đang về… Mẹ có nói tối ấy nấu món tớ thích."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Rồi sao nữa?"
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Có tiếng mưa. Với…"
+			},
+			{
+			  "type": "narration",
+			  "text": "Tiếng nước vọng lên. Vy ôm đầu; biển tên trường bị xóa trắng trong một nhịp."
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Xin lỗi. Tớ không nhớ được."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Đồng phục của cậu giống trường tớ."
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Vậy có khi chúng mình ở gần nhau thật. Nếu cậu tìm được đường… cho tớ đi cùng được không?"
+			},
+			{
+			  "type": "narration",
+			  "text": "Vy chờ câu trả lời của Kiên.",
+			  "choices": [
+				{
+				  "text": "Tớ sẽ giúp. Nhưng mình phải tìm hiểu từng chút một.",
+				  "go": "c1a",
+				  "set": {
+					"promise_vy": "help"
+				  }
+				},
+				{
+				  "text": "Cho tớ một điều có thể kiểm chứng trước.",
+				  "go": "c1b",
+				  "set": {
+					"promise_vy": "verify"
+				  }
+				},
+				{
+				  "text": "Tớ sợ. Tớ muốn tỉnh lại trước.",
+				  "go": "c1c",
+				  "set": {
+					"promise_vy": "avoid"
+				  }
+				}
+			  ]
+			}
+		  ],
+		  "next": ""
+		},
+		{
+		  "id": "c1a",
+		  "location": "Nhận lời giúp",
+		  "dialogues": [
+			{
+			  "speaker": "Kiên",
+			  "text": "Tớ chưa biết chuyện gì đang xảy ra. Nhưng tớ sẽ quay lại nếu có thể."
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Thật à?"
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Đừng bắt tớ hứa tìm được ngay. Đường đi học tớ còn suýt lạc vì buồn ngủ."
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Vậy tớ sẽ đi chậm thôi."
+			},
+			{
+			  "type": "narration",
+			  "text": "Vy cười, chỉ cho Kiên một ngọn đèn nhỏ ở cuối đường."
+			}
+		  ],
+		  "next": "c1s5"
+		},
+		{
+		  "id": "c1b",
+		  "location": "Giữ sự hoài nghi",
+		  "dialogues": [
+			{
+			  "speaker": "Kiên",
+			  "text": "Nếu đây là mơ, tỉnh dậy tớ có thể quên hết."
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Tớ cũng sợ thế."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Cậu nhớ nhà mình có gì đặc biệt không?"
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Cửa sơn xanh. Trước hiên có một chậu hoa trắng. Tớ vẫn hay vẽ nó."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Tớ sẽ thử tìm. Cậu đừng nghĩ tớ đang gọi cậu là kẻ nói dối."
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Tớ biết. Chỉ là tớ chẳng còn nhiều thứ để chứng minh mình có thật."
+			},
+			{
+			  "type": "narration",
+			  "text": "Vy nhớ nhà có cửa sơn xanh, trước hiên có chậu hoa trắng. Chưa được đối chiếu ngoài đời.",
+			  "clue": {
+				"id": "blue_door",
+				"title": "Cửa xanh và hoa trắng",
+				"source": "Kể lại trong mơ",
+				"text": "Vy nhớ nhà có cửa sơn xanh, trước hiên có chậu hoa trắng. Chưa được đối chiếu ngoài đời."
+			  }
+			}
+		  ],
+		  "next": "c1s5"
+		},
+		{
+		  "id": "c1c",
+		  "location": "Tìm cách rời đi",
+		  "dialogues": [
+			{
+			  "speaker": "Kiên",
+			  "text": "Xin lỗi. Tớ không làm được đâu."
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Ừ… Tớ làm cậu sợ phải không?"
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Không phải chỉ cậu. Tất cả chỗ này."
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Nếu cậu thấy nhà có cửa xanh… thôi, không sao. Cậu đi đi."
+			},
+			{
+			  "type": "narration",
+			  "text": "Kiên quay lưng. Cậu nghe Vy thử gọi mẹ, nhưng không có tiếng trả lời."
+			}
+		  ],
+		  "next": "c1s5"
+		},
+		{
+		  "id": "c1s5",
+		  "location": "Tiếng gọi từ căn bếp",
+		  "dialogues": [
+			{
+			  "speaker": "Mẹ Kiên",
+			  "text": "Kiên! Xuống ăn cơm đi con!"
+			},
+			{
+			  "speaker": "Vy",
+			  "text": "Có người đang gọi cậu kìa."
+			},
+			{
+			  "type": "narration",
+			  "text": "Con đường kéo về phía tiếng gọi. Kiên tỉnh dậy, va đầu vào mép giường. Vòng thật vẫn nằm cạnh đèn bàn.",
+			  "time": "19:30",
+			  "events": [
+				{
+				  "type": "change_background",
+				  "path": "res://assets/bedroom2.png",
+				  "duration": 0.2
+				},
+				{
+				  "type": "change_music",
+				  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+				}
+			  ]
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Ái da… Mới nằm một tí mà hết cả tiếng rồi à?"
+			},
+			{
+			  "speaker": "Mẹ Kiên",
+			  "text": "Mẹ gọi mấy lần rồi đấy."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Dạ, con xuống ngay."
+			},
+			{
+			  "speaker": "Kiên",
+			  "text": "Chắc tại mình mệt quá thôi."
+			},
+			{
+			  "type": "narration",
+			  "text": "Vết mẻ trên mặt vòng giống đường sáng trong mơ. Không có hiện tượng gì khi Kiên chạm vào. Tiếng bát đũa vọng lên từ bếp."
+			}
+		  ],
+		  "next": ""
+		}
+	  ]
+	}
+  ]
+}

@@ -1,4 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://qaags6f804rn"]
+; Theme riêng của thanh trượt âm lượng: rãnh, phần đã kéo và núm ở ba trạng thái.
+; Sửa các StyleBox bên dưới để đổi màu/viền; hình núm lấy từ các SVG trong assets.
 
 [ext_resource type="Texture2D" uid="uid://cry48wvaqtuns" path="res://assets/backgrounds/ui/settings/slider_grabber.svg" id="1_grabber"]
 [ext_resource type="Texture2D" uid="uid://dsvp2qtwiasak" path="res://assets/backgrounds/ui/settings/slider_grabber_highlight.svg" id="2_highlight"]
@@ -49,6 +51,7 @@ shadow_offset = Vector2(0, 2)
 anti_aliasing = false
 
 [resource]
+; Gán texture và style cho HSlider; dùng chung giữa thanh Music và SFX.
 HSlider/constants/center_grabber = 0
 HSlider/constants/grabber_offset = 0
 HSlider/icons/grabber = ExtResource("1_grabber")

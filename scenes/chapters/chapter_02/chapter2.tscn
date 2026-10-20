@@ -1,9 +1,21 @@
 [gd_scene format=3 uid="uid://b7m4ge3yak2rv"]
+; Cấu hình Chương 2: dùng UI gốc và StoryChapter qua chapter2.gd.
+; story_path nạp chapter_02.json; luật rẽ tuyến nằm trong JSON, không phải cây node.
 
 [ext_resource type="PackedScene" path="res://scenes/chapters/base/chapter_base.tscn" id="1_base"]
 [ext_resource type="Script" path="res://scenes/chapters/chapter_02/chapter2.gd" id="2_script"]
+[ext_resource type="AudioStream" path="res://assets/backgrounds/audio/bgm/in game3.mp3" id="3_bgm"]
 
-[node name="Chapter2" unique_id=1405558368 instance=ExtResource("1_base")]
+[node name="Chapter2" instance=ExtResource("1_base")]
 script = ExtResource("2_script")
 chapter_id = "chapter_02"
-chapter_name = "Chương 2"
+chapter_name = "Chương 2 · Chiếc vòng không có người nhận"
+story_path = "res://data/story/chapter_02.json"
+avatar_paths = {
+"Kiên": "res://assets/avatars/Avatar_Kien.png",
+"Thư": "res://assets/avatars/Avatar_Thu.png",
+"Vy": "res://assets/avatars/Avatar_Vy.png"
+}
+protagonist_speakers = Array[String](["Kiên"])
+choice_speaker = "Kiên"
+default_music = ExtResource("3_bgm")

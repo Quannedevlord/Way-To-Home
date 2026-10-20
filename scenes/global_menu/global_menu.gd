@@ -1,10 +1,13 @@
 extends Control
+## Autoload hiển thị nút cài đặt và Auto trên các chương, kể cả khi game tạm dừng.
+## CanvasLayer giữ nút phía trên gameplay; cài đặt được mở thành lớp phủ riêng.
 
 const SETTINGS_SCENE := preload("res://scenes/settings/settings.tscn")
 const HOVER_SCALE := Vector2(1.12, 1.12)
 const HOVER_DURATION := 0.12
 
 @onready var menu_button: TextureButton = $CanvasLayer/MenuButton
+@onready var auto_button: Button = $CanvasLayer/AutoButton
 @onready var canvas_layer: CanvasLayer = $CanvasLayer as CanvasLayer
 @onready var popup_panel: Control = get_node_or_null("CanvasLayer/PopupPanel") as Control
 @onready var settings_button: Button = get_node_or_null("CanvasLayer/PopupPanel/VBoxContainer/setting") as Button
@@ -12,6 +15,8 @@ const HOVER_DURATION := 0.12
 @onready var close_button: Button = get_node_or_null("CanvasLayer/PopupPanel/VBoxContainer/close") as Button
 
 var _hover_tween: Tween
+## Chế độ đọc tự động: 0 = tắt, 1 = thường, 2 = x2; giữ qua các chapter, không ghi vào save.
+var auto_mode := 0
 
 
 ## Cấu hình menu chạy cả khi game tạm dừng, kết nối sự kiện và ẩn bảng tùy chọn ban đầu.
@@ -22,6 +27,9 @@ func _ready() -> void:
 		push_error("[GlobalMenu] Không tìm thấy CanvasLayer/MenuButton.")
 		return
 	menu_button.process_mode = Node.PROCESS_MODE_ALWAYS
+	menu_button.tooltip_text = "Mở cài đặt (Esc)"
+	auto_button.pressed.connect(_on_auto_button_pressed)
+	_update_auto_button()
 	if popup_panel != null:
 		popup_panel.process_mode = Node.PROCESS_MODE_ALWAYS
 	menu_button.pivot_offset = menu_button.size * 0.5
@@ -67,20 +75,48 @@ func _animate_menu_button(target_scale: Vector2, target_modulate: Color) -> void
 
 
 ## Ẩn menu toàn cục ở các màn hình mở đầu, menu chính và phần cảm ơn.
-func _process(_delta: float) -> void:
+## Mỗi frame chuyển delta/chế độ Auto cho chapter; rời chapter thì đặt Auto về tắt.
+func _process(delta: float) -> void:
 	var current_scene = get_tree().current_scene
 
 	if current_scene == null:
+		canvas_layer.hide()
 		return
 
 	if current_scene.name == "MainMenu" or current_scene.name == "Splash" or current_scene.name == "Credits":
 		canvas_layer.visible = false
 	else:
 		canvas_layer.visible = true
+	auto_button.visible = current_scene is ChapterBase
+	if current_scene is ChapterBase:
+		current_scene.update_auto_play(delta, auto_mode)
+	elif auto_mode != 0:
+		auto_mode = 0
+		_update_auto_button()
+
+
+## Một nút luân phiên: tắt → Auto thường → Auto x2 → tắt.
+func _on_auto_button_pressed() -> void:
+	auto_mode = (auto_mode + 1) % 3
+	_update_auto_button()
+	var chapter := get_tree().current_scene as ChapterBase
+	if chapter != null:
+		chapter.update_auto_play(0.0, auto_mode)
+
+
+## Cập nhật chữ, trạng thái bật và tooltip theo auto_mode mà không phát lại signal nút.
+func _update_auto_button() -> void:
+	auto_button.text = ["Auto: Tắt", "Auto", "Auto x2"][auto_mode]
+	auto_button.set_pressed_no_signal(auto_mode != 0)
+	var next_action: String = ["Bấm để bật tự động đọc thoại.", "Bấm để chuyển sang tốc độ x2.", "Bấm để tắt tự động đọc thoại."][auto_mode]
+	auto_button.tooltip_text = next_action + "\nAuto chờ khi mở cài đặt, sổ tay, gặp lựa chọn hoặc minigame."
 
 
 ## Mở cài đặt bằng phím Escape khi menu toàn cục đang hiển thị.
 func _input(event: InputEvent) -> void:
+	# Bảng cài đặt tự nhận Esc để đóng và chặn phím mở lại trong cùng lượt input.
+	if get_tree().root.get_node_or_null("Setting") != null:
+		return
 	if not event is InputEventKey or not event.pressed or event.echo:
 		return
 	if event.keycode != KEY_ESCAPE and event.physical_keycode != KEY_ESCAPE:

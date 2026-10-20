@@ -1,4 +1,6 @@
 [gd_scene format=3 uid="uid://cd30ub4mkftfl"]
+; Scene gốc cho các chương: nền, đồng hồ, chat, lựa chọn và vùng chứa minigame.
+; Các NodePath trên root nối UI với biến @export trong chapter_base.gd.
 
 [ext_resource type="Script" uid="uid://bur7bqymusqn3" path="res://scenes/chapters/base/chapter_base.gd" id="1_script"]
 [ext_resource type="FontFile" uid="uid://c48xj77famwca" path="res://assets/backgrounds/fonts/dearpix-1-94.otf" id="2_font"]
@@ -56,6 +58,7 @@ choice_container = NodePath("ChoiceOverlay/ChoiceContainer")
 continue_hint = NodePath("ChatLayout/ContinueHint")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1296590629]
+; Nền được làm tối để chữ dễ đọc; mouse_filter = 2 cho thao tác đi qua lớp trang trí.
 self_modulate = Color(0.1584723, 0.1584723, 0.15847233, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -103,6 +106,7 @@ texture = ExtResource("3_clock")
 stretch_mode = 3
 
 [node name="LocationLabel" type="Label" parent="ChatLayout/Header/ClockBadge/ClockRow" unique_id=1168529968]
+; Bộ đọc thay text bằng time trong JSON; tên LocationLabel được giữ để nối script.
 layout_mode = 2
 theme_override_colors/font_color = Color(0.968627, 0.858824, 0.580392, 1)
 theme_override_colors/font_outline_color = Color(0.039216, 0.066667, 0.12549, 1)
@@ -125,6 +129,7 @@ mouse_filter = 2
 theme_override_constants/separation = 6
 
 [node name="ContinueHint" type="MarginContainer" parent="ChatLayout" unique_id=1582733713]
+; Hướng dẫn trước lần tiếp tục đầu tiên; ẩn node này sẽ trả lại chiều cao cho vùng chat.
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
@@ -146,6 +151,7 @@ text = "Nhấn chuột hoặc Enter để tiếp tục"
 horizontal_alignment = 1
 
 [node name="ChoiceOverlay" type="Control" parent="." unique_id=88634947]
+; Lớp lựa chọn phủ toàn màn hình, các nút được script tạo trong ChoiceContainer.
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -182,6 +188,7 @@ alignment = 1
 bus = &"Music"
 
 [node name="MinigameContainer" type="Control" parent="." unique_id=1643660964]
+; Chứa instance minigame và chặn click xuyên xuống chat; GlobalMenu nằm trên CanvasLayer riêng.
 visible = false
 z_index = 50
 layout_mode = 1

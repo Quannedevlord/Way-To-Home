@@ -1,4 +1,6 @@
 extends Node
+## Autoload quản lý chuyển màn hình, lưu/tiếp tục và trạng thái truyện xuyên chương.
+## Chapter cung cấp get_progress(); GameManager chịu trách nhiệm ghi snapshot xuống đĩa.
 
 const SAVE_PATH := "user://savegame.save"
 const MAIN_MENU_PATH := "res://scenes/main_menu/main_menu.tscn"
@@ -9,6 +11,46 @@ const FIRST_CHAPTER_PATH := "res://scenes/chapters/chapter_01/chapter1.tscn"
 var current_scene_path: String = "res://scenes/main_menu/main_menu.tscn"
 # Cho phép bài kiểm tra dùng save riêng; game luôn dùng SAVE_PATH mặc định.
 var save_path: String = SAVE_PATH
+## Cờ lựa chọn, việc chuẩn bị và manh mối dùng chung cho cả năm chương.
+var campaign_state: Dictionary = {}
+## Snapshot theo ID mốc; mỗi mốc giữ cả vị trí đọc và campaign_state tại thời điểm đó.
+var story_checkpoints: Dictionary = {}
+## Bộ sưu tập kết thúc đã đọc xong, được giữ lại khi bắt đầu lượt chơi mới.
+var seen_endings: Array = []
+
+
+## Nạp trạng thái truyện, mốc quay lại và bộ sưu tập từ save; thiếu dữ liệu thì dùng giá trị rỗng.
+## Gọi trước khi dựng chapter hoặc sổ tay để UI đọc đúng trạng thái đã lưu.
+func load_campaign() -> void:
+	var config := ConfigFile.new()
+	config.load(save_path)
+	campaign_state = config.get_value("campaign", "state", {}).duplicate(true)
+	story_checkpoints = config.get_value("campaign", "checkpoints", {}).duplicate(true)
+	seen_endings = config.get_value("collection", "endings", []).duplicate()
+
+
+## Chụp bản sao sâu của tiến trình và cờ truyện tại mốc id, rồi lưu cùng lượt chơi.
+## Bản sao sâu giúp các lựa chọn về sau không sửa ngược dữ liệu bên trong mốc.
+func remember_checkpoint(id: String, progress: Dictionary) -> void:
+	var snapshot := progress.duplicate(true)
+	snapshot["current_scene"] = current_scene_path
+	snapshot["story_state"] = campaign_state.duplicate(true)
+	story_checkpoints[id] = snapshot
+	save_game()
+
+
+## Chuyển về scene của mốc, phục hồi cờ truyện và ghi vị trí để chapter nạp lại khi khởi tạo.
+## Trả false nếu không có mốc, chuyển scene thất bại hoặc không ghi được save.
+func restore_checkpoint(id: String) -> bool:
+	if not story_checkpoints.has(id):
+		return false
+	var snapshot: Dictionary = story_checkpoints[id].duplicate(true)
+	if not change_scene(str(snapshot["current_scene"])):
+		return false
+	campaign_state = snapshot["story_state"].duplicate(true)
+	snapshot.erase("story_state")
+	snapshot["completed"] = false
+	return save_game(snapshot)
 
 
 ## Nhận thông báo của Godot; khi đóng cửa sổ, lưu tiến trình ngoài menu rồi thoát.
@@ -43,7 +85,7 @@ func set_paused(paused: bool) -> void:
 	get_tree().paused = paused
 
 
-## Xóa save để chuẩn bị lượt chơi mới; hàm này chưa mở scene chapter đầu tiên.
+## Xóa tiến trình và mốc để chơi mới, giữ bộ sưu tập kết thúc; chưa mở chapter đầu tiên.
 func start_new_game() -> void:
 	clear_save()
 
@@ -144,6 +186,9 @@ func save_game(progress: Dictionary = {}, source_scene_path: String = "") -> boo
 	config.set_value("progress", "current_scene", current_scene_path)
 	for key in progress:
 		config.set_value("progress", key, progress[key])
+	config.set_value("campaign", "state", campaign_state)
+	config.set_value("campaign", "checkpoints", story_checkpoints)
+	config.set_value("collection", "endings", seen_endings)
 	return config.save(save_path) == OK
 
 
@@ -175,7 +220,16 @@ func has_save() -> bool:
 		and ResourceLoader.exists(saved_scene)
 
 
-## Xóa file tại `save_path` nếu nó tồn tại; dùng để bỏ tiến trình trước lượt chơi mới.
+## Xóa tiến trình và mốc của lượt chơi, giữ riêng bộ sưu tập kết thúc đã xem.
 func clear_save() -> void:
+	campaign_state = {}
+	story_checkpoints = {}
+	var config := ConfigFile.new()
+	config.load(save_path)
+	seen_endings = config.get_value("collection", "endings", []).duplicate()
 	if FileAccess.file_exists(save_path):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(save_path))
+	if not seen_endings.is_empty():
+		var collection := ConfigFile.new()
+		collection.set_value("collection", "endings", seen_endings)
+		collection.save(save_path)

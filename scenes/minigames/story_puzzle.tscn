@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3]
+; Root phủ kín vùng minigame; toàn bộ thẻ, bản đồ và nút được story_puzzle.gd dựng từ config.
+; ChapterBase tạo scene này khi gặp event minigame và quản lý vòng đời của instance.
+
+[ext_resource type="Script" path="res://scenes/minigames/story_puzzle.gd" id="1"]
+
+[node name="StoryPuzzle" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")

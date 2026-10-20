@@ -1,6 +1,9 @@
 class_name ChapterBase
 extends Control
+## Nền dùng chung của mọi chương: đọc JSON, dựng chat, chạy sự kiện/minigame và lưu/tiếp tục.
+## StoryChapter bổ sung luật truyện năm chương; chapter_base.tscn cung cấp các node UI bên dưới.
 
+# Tham chiếu gán trên scene gốc trong Inspector; scene kế thừa dùng lại cùng bố cục.
 @export var chat_feed: VBoxContainer
 @export var scroll_container: ScrollContainer
 @export var location_label: Label
@@ -10,16 +13,25 @@ extends Control
 @onready var background: TextureRect = $Background
 @onready var bgm_player: AudioStreamPlayer = $BGMPlayer
 
+## Báo hoàn thành một lần để GameManager chọn chương tiếp theo hoặc credits.
 signal chapter_completed
+## Đánh thức đoạn xử lý sự kiện đang chờ kết quả, hoặc hủy chờ khi chapter bị đóng.
 signal minigame_completed(event_id: String, result: Dictionary)
 
 @export_group("Chapter")
+## ID ổn định của chương; cũng dùng tạo ID cảnh khi nạp JSON dạng mảng cũ.
 @export var chapter_id := ""
+## Tên hiển thị mặc định khi cảnh chưa cung cấp địa điểm hoặc giờ.
 @export var chapter_name := ""
+## File truyện đầu chương; current_story_path có thể chuyển sang file nhánh trong lúc chơi.
 @export_file("*.json") var story_path := ""
+## Ánh xạ tên nhân vật sang đường dẫn ảnh đại diện mặc định.
 @export var avatar_paths: Dictionary = {}
+## Những người nói thuộc nhân vật chính, được căn bong bóng thoại sang phải.
 @export var protagonist_speakers: Array[String] = []
+## Tên người nói khi thêm câu trả lời do người chơi chọn vào lịch sử chat.
 @export var choice_speaker := ""
+## Nền/nhạc khởi đầu; sự kiện trong truyện có thể thay đổi sau đó.
 @export var default_background: Texture2D
 @export var default_music: AudioStream
 
@@ -30,21 +42,30 @@ const CHAT_FONT := preload("res://assets/backgrounds/fonts/Roboto-Light.ttf")
 const SettingsScript = preload("res://scenes/settings/settings.gd")
 
 var current_story_path := ""
+# Kết quả theo ID của minigame đã xong; pending giữ sự kiện và trạng thái ván chưa hoàn tất.
 var minigame_state: Dictionary = {}
 var _active_minigame: Node
 var _active_minigame_id := ""
 var _pending_minigame: Dictionary = {}
+# Hàng đợi chạy tuần tự và khóa input trong lúc await hiệu ứng hoặc minigame.
 var _event_queue: Array = []
 var _events_running := false
+# Dựng lại lịch sử chỉ phục hồi phần nhìn/nghe liên tục, không phát lại tác động gameplay.
 var _rebuilding_history := false
 var _chat_history: Array = []
+# Nhánh chứa dialogues riêng có thể thay danh sách thoại mặc định của cảnh hiện tại.
 var _dialogue_override: Array = []
 var _has_dialogue_override := false
+# Chỉ cho lưu sau khi đã nạp truyện; _exiting chặn coroutine tiếp tục dùng chapter bị đóng.
 var _progress_initialized := false
 var _continue_hint_dismissed := false
 var _exiting := false
+# Bộ đếm Auto tính bằng giây; tốc độ 0 = tắt, 1 = thường, 2 = x2.
+var _auto_elapsed := 0.0
+var _auto_speed := 0
 
 var story_data: Dictionary = {}
+# Ba index đều bắt đầu từ 0, lần lượt trỏ episode, cảnh và dòng trong file đang mở.
 var episode_index := 0
 var scene_index := 0
 var dialogue_index := 0
@@ -52,9 +73,11 @@ var current_dialogues: Array = []
 var story_finished := false
 var selected_choice_index := -1
 var _current_scene_id := ""
+# Số dòng đã dựng trong cảnh giúp show_current_line() không thêm trùng dòng hiện tại.
 var _lines_shown := 0
 var _last_speaker := ""
 var _inline_choice_resolved := false
+# Tween/lớp phủ là trạng thái hiển thị tạm; save chỉ giữ dữ liệu truyện và alpha fade cuối.
 var _background_tween: Tween
 var _background_transition_layer: TextureRect
 var _fade_tween: Tween
@@ -89,6 +112,10 @@ func _ready() -> void:
 	var path := str(save_data.get("current_story_path", story_path)) if has_saved_progress else story_path
 	if path.is_empty():
 		path = story_path
+	# Save có thể trỏ tới nội dung đã gỡ; dùng đầu chương mới, không giữ index nhánh cũ.
+	if has_saved_progress and path != story_path and not FileAccess.file_exists(path):
+		path = story_path
+		has_saved_progress = false
 	if not load_story(path):
 		# File đã bị gỡ: khởi động lại chương thay vì dùng index của file khác.
 		if path == story_path or not load_story(story_path):
@@ -677,6 +704,7 @@ func _try_show_inline_choices() -> void:
 ## Nếu hết thoại: chờ lựa chọn, chuyển next_file nếu có, hoặc sang cảnh truyện kế tiếp.
 ## Sau khi thêm dòng, cập nhật lựa chọn nội tuyến và gợi ý tiếp tục.
 func show_current_line() -> void:
+	_auto_elapsed = 0.0
 	# KIỂM TRA ĐỔI FILE KHI ĐÃ ĐỌC HẾT CÂU THOẠI CỦA FILE JSON HIỆN TẠI
 	if dialogue_index >= current_dialogues.size():
 		if choice_container.get_parent().visible:
@@ -730,25 +758,59 @@ func _resolve_story_path(path: String) -> String:
 ## Bỏ qua khi chờ lựa chọn, chạy sự kiện/minigame, truyện chưa sẵn sàng hoặc đã kết thúc.
 ## Click lên Button không tiến thoại; dòng cuối có next_file sẽ chuyển file trước.
 func _input(event: InputEvent) -> void:
-	if not _progress_initialized or choice_container.get_parent().visible or story_finished or _events_running or is_instance_valid(_active_minigame):
+	if not can_advance_dialogue():
 		return
 		
 	if event.is_action_pressed("ui_accept") or (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
 		if event is InputEventMouseButton and _is_pointer_over_button():
 			return
-		_continue_hint_dismissed = true
-		continue_hint.hide()
-		# Kiểm tra nếu click chuột ở câu thoại cuối cùng của file hiện tại để sẵn sàng chuyển file nhánh
-		if dialogue_index >= current_dialogues.size() - 1:
-			if current_dialogues.size() > 0:
-				var last_line: Dictionary = current_dialogues[current_dialogues.size() - 1]
-				if last_line.has("next_file"):
-					_trigger_next_file(str(last_line["next_file"]))
-					return # Đổi file thành công thì dừng tại đây, không tăng index bừa bãi
-		
-		dialogue_index += 1
-		show_current_line()
-		save_progress()
+		advance_dialogue()
+
+
+## Dùng chung cho thao tác đọc tay và Auto; chapter con có thể thêm điều kiện chờ.
+func can_advance_dialogue() -> bool:
+	return _progress_initialized and not _exiting and not get_tree().paused and not choice_container.get_parent().visible and not story_finished and not _events_running and not is_instance_valid(_active_minigame)
+
+
+## Tiến đúng một dòng, giữ nguyên xử lý nhánh, sự kiện và lưu tiến trình.
+func advance_dialogue() -> void:
+	if not can_advance_dialogue():
+		return
+	_auto_elapsed = 0.0
+	_continue_hint_dismissed = true
+	continue_hint.hide()
+	if dialogue_index >= current_dialogues.size() - 1 and not current_dialogues.is_empty():
+		var last_line: Dictionary = current_dialogues.back()
+		if last_line.has("next_file"):
+			_trigger_next_file(str(last_line["next_file"]))
+			return
+	dialogue_index += 1
+	show_current_line()
+	save_progress()
+
+
+## Thời gian đọc ở tốc độ thường: tối thiểu 2 giây, tăng theo độ dài dòng thoại.
+func get_auto_read_delay() -> float:
+	if dialogue_index < 0 or dialogue_index >= current_dialogues.size():
+		return 2.0
+	var line: Dictionary = current_dialogues[dialogue_index]
+	var message := str(line.get("message", line.get("text", "")))
+	return maxf(2.0, 1.0 + message.length() / 24.0)
+
+
+## GlobalMenu gọi cả khi pause để xóa thời gian chờ, tránh đọc nhảy ngay lúc đóng menu.
+## Chỉ tăng tốc chuyển thoại; không đổi tốc độ animation, âm thanh hoặc minigame.
+func update_auto_play(delta: float, speed: int) -> void:
+	speed = clampi(speed, 0, 2)
+	if _auto_speed != speed:
+		_auto_speed = speed
+		_auto_elapsed = 0.0
+	if speed == 0 or not can_advance_dialogue():
+		_auto_elapsed = 0.0
+		return
+	_auto_elapsed += delta
+	if _auto_elapsed >= get_auto_read_delay() / float(speed):
+		advance_dialogue()
 
 
 ## Tăng scene_index, sang episode tiếp theo nếu hết cảnh, rồi hiện dòng đầu cảnh mới.
@@ -995,6 +1057,8 @@ func start_minigame(scene: PackedScene, event_id: String, event: Dictionary = {}
 	minigame_container.show()
 	choice_container.get_parent().hide()
 	_update_continue_hint()
+	if instance.has_method("configure"):
+		instance.call("configure", event.get("config", {}))
 	minigame_container.add_child(instance)
 	if instance.has_method("restore_state"):
 		instance.call("restore_state", saved_state)

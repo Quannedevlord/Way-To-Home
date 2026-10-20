@@ -1,4 +1,6 @@
 extends Control
+## Dựng và cuộn danh sách cảm ơn từ CreditEntry; kết thúc bằng fade rồi về menu chính.
+## Chỉnh nội dung/thứ tự trong credit_entries của credits.tscn qua Inspector.
 
 @export_group("Credits")
 ## Mỗi mục gồm Text ở trên và Image ở dưới; các mục cuộn theo đúng thứ tự danh sách.

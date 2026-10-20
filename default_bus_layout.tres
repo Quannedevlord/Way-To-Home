@@ -1,4 +1,6 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://b4bgpc8lt02km"]
+; Chia âm thanh thành Music và SFX, cùng gửi về Master.
+; Tên bus phải khớp settings.gd và các AudioStreamPlayer để thanh âm lượng tác động đúng nhóm.
 
 [resource]
 bus/1/name = &"Music"

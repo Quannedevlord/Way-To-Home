@@ -1,0 +1,712 @@
+{
+  "version": 1,
+  "source": "Way_To_Home_Kich_ban_5_chapter.docx",
+  "episodes": [
+    {
+      "title": "Người vắng mặt trong bức ảnh",
+      "scenes": [
+        {
+          "id": "c3s1",
+          "location": "Điều có thể kiểm tra",
+          "dialogues": [
+            {
+              "type": "narration",
+              "text": "Chương 3 · Người vắng mặt trong bức ảnh\nNgày 3. Thư mang danh mục tranh cô cho phép sao lại, chỉ gồm tác giả và tên tranh.",
+              "time": "06:45",
+              "events": [
+                {
+                  "type": "change_background",
+                  "path": "res://assets/school.png",
+                  "duration": 0.2
+                },
+                {
+                  "type": "change_music",
+                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                }
+              ]
+            },
+            {
+              "speaker": "Thư",
+              "text": "Bức này tên là Đường về. Cô xác nhận Vy vẽ."
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Cậu biết bạn ấy à?"
+            },
+            {
+              "speaker": "Thư",
+              "text": "Tớ từng phụ treo tranh. Chưa nói chuyện nhiều. Tớ tiếc vì đến giờ mới nhớ mặt bạn ấy rõ."
+            },
+            {
+              "type": "narration",
+              "text": "Kiên nhìn danh mục trên tay Thư.",
+              "choices": [
+                {
+                  "text": "Kể thêm về giấc mơ",
+                  "go": "c3tell",
+                  "set": {
+                    "thu_informed": true
+                  },
+                  "when": {
+                    "thu_informed": false
+                  }
+                },
+                {
+                  "text": "Tiếp tục tìm chủ chiếc vòng",
+                  "go": "c3school"
+                }
+              ]
+            }
+          ],
+          "next": ""
+        },
+        {
+          "id": "c3tell",
+          "location": "Điều Kiên chưa kể",
+          "dialogues": [
+            {
+              "speaker": "Kiên",
+              "text": "Tớ đã gặp Vy trong mơ. Bạn ấy cứ tìm đường về nhà."
+            },
+            {
+              "speaker": "Thư",
+              "text": "Vậy mình bắt đầu từ những điều kiểm tra được nhé."
+            }
+          ],
+          "next": "c3school"
+        },
+        {
+          "id": "c3school",
+          "location": "Một lời xin lỗi",
+          "dialogues": [
+            {
+              "speaker": "Kiên",
+              "text": "Người ở chỗ xem bói hôm qua là cậu à?",
+              "when": {
+                "route2": "outside"
+              }
+            },
+            {
+              "speaker": "Thư",
+              "text": "Là tớ. Cô nhờ trả cái hộp ông ấy cho mượn để đựng tranh.",
+              "when": {
+                "route2": "outside"
+              }
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Còn chuyện con đường không có lối ra?",
+              "when": {
+                "route2": "outside"
+              }
+            },
+            {
+              "speaker": "Thư",
+              "text": "Tớ mơ cứ tìm mãi không ra lớp. Chắc do ôn kiểm tra. Cậu nghĩ chỉ mình cậu biết mơ à?",
+              "when": {
+                "route2": "outside"
+              }
+            },
+            {
+              "speaker": "Thư",
+              "text": "Tớ cũng ngủ không yên từ khi biết một bạn cùng trường mất.",
+              "when": {
+                "route2": "sleep"
+              }
+            },
+            {
+              "type": "narration",
+              "text": "Trong tiết học, thầy thông báo bài hôm qua chỉ dùng để ôn, không lấy điểm. Nhà trường sắp xếp thầy nghỉ những buổi tiếp theo."
+            },
+            {
+              "speaker": "Thầy giáo",
+              "text": "Chuyện riêng không phải lý do để thầy cư xử như vậy với các em."
+            },
+            {
+              "type": "narration",
+              "text": "Sau giờ học, Kiên chọn cách tìm hiểu tiếp.",
+              "choices": [
+                {
+                  "text": "Cùng Thư hỏi cô và gia đình Vy",
+                  "go": "c3a1",
+                  "set": {
+                    "route3": "thu"
+                  }
+                },
+                {
+                  "text": "Thử trở lại con đường trong mơ",
+                  "go": "c3b1",
+                  "set": {
+                    "route3": "vy"
+                  }
+                }
+              ]
+            }
+          ],
+          "next": ""
+        },
+        {
+          "id": "c3a1",
+          "location": "Tấm ảnh được cho phép xem",
+          "dialogues": [
+            {
+              "type": "narration",
+              "text": "Kiên đưa vòng cho cô đối chiếu. Cô gọi mẹ Vy xác nhận và xin phép hai bạn đến thăm cùng mẹ Kiên."
+            },
+            {
+              "speaker": "Cô giáo",
+              "text": "Chiếc vòng này cô nhớ, nhưng để người nhà xác nhận sẽ chắc hơn."
+            },
+            {
+              "speaker": "Thư",
+              "text": "Bọn em có thể gửi lại cô trước ạ."
+            },
+            {
+              "speaker": "Cô giáo",
+              "text": "Cô vừa hỏi rồi. Mẹ bạn muốn trực tiếp nhận và cảm ơn các em."
+            },
+            {
+              "type": "narration",
+              "text": "Đối chiếu chiếc vòng",
+              "event": {
+                "type": "minigame",
+                "id": "c3_photo",
+                "scene": "res://scenes/minigames/story_puzzle.tscn",
+                "config": {
+                  "title": "Đối chiếu chiếc vòng",
+                  "instruction": "Chọn ba chi tiết gia đình và ảnh trưng bày cùng xác nhận.",
+                  "items": [
+                    "Mặt ngôi nhà",
+                    "Mặt hình ngôi sao",
+                    "Vết mẻ trên mái",
+                    "Nút thắt xanh"
+                  ],
+                  "answer": [
+                    0,
+                    2,
+                    3
+                  ],
+                  "mode": "select",
+                  "image": "res://assets/VongTay.png",
+                  "hint": "Mặt nhà, mái bị mẻ và nút thắt xanh trùng với chiếc vòng trong ảnh.",
+                  "success": "Ba chi tiết trùng khớp. Mẹ Vy xác nhận chiếc vòng là của con mình."
+                }
+              }
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Vậy cậu ấy đã từng ngồi trong phòng đó thật."
+            },
+            {
+              "speaker": "Thư",
+              "text": "Ừ. Cậu có thể chắc điều ấy."
+            }
+          ],
+          "next": "c3a2"
+        },
+        {
+          "id": "c3a2",
+          "location": "Căn nhà có cửa xanh",
+          "dialogues": [
+            {
+              "type": "narration",
+              "text": "Mẹ đưa Kiên và Thư tới nhà Vy. Cửa xanh, chậu hoa trắng, mái hiên giống bản vẽ. Trong ảnh gia đình, bố Vy chính là thầy giáo.",
+              "time": "16:30",
+              "events": [
+                {
+                  "type": "change_background",
+                  "path": "res://assets/chapter1/Sân ga mộng và cánh cửa xanh.png",
+                  "duration": 0.2
+                },
+                {
+                  "type": "change_music",
+                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                }
+              ]
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Thầy…"
+            },
+            {
+              "speaker": "Thầy giáo",
+              "text": "Em là người nhặt được vòng của con bé à?"
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Dạ."
+            },
+            {
+              "speaker": "Thầy giáo",
+              "text": "Nó làm rơi trước hôm xảy ra tai nạn. Cả nhà đã tìm mãi."
+            },
+            {
+              "speaker": "Mẹ Vy",
+              "text": "Vòng mẹ buộc lại cho nó. Cái khóa cứ lỏng hoài, con bé vẫn nhất định đeo."
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Cháu xin lỗi vì bây giờ mới mang tới."
+            },
+            {
+              "speaker": "Mẹ Vy",
+              "text": "Cháu giữ giúp được là quý rồi."
+            },
+            {
+              "type": "narration",
+              "text": "Vy là con của thầy giáo. Bạn đã mất trong tai nạn ở đường ven mương; chiếc vòng rơi trước hôm tai nạn.",
+              "clue": {
+                "id": "identity",
+                "title": "Vy và gia đình",
+                "source": "Cô giáo và gia đình xác nhận",
+                "text": "Vy là con của thầy giáo. Bạn đã mất trong tai nạn ở đường ven mương; chiếc vòng rơi trước hôm tai nạn."
+              },
+              "set": {
+                "identity_confirmed": true
+              }
+            },
+            {
+              "type": "narration",
+              "text": "Mẹ Vy nhìn ảnh con. Kiên có thể hỏi tiếp hoặc ngồi yên cùng gia đình.",
+              "choices": [
+                {
+                  "text": "Chiều hôm ấy bạn định đi đâu?",
+                  "go": "c3record"
+                },
+                {
+                  "text": "Im lặng, để gia đình nghỉ ngơi",
+                  "go": "c3borrow"
+                }
+              ]
+            }
+          ],
+          "next": ""
+        },
+        {
+          "id": "c3record",
+          "location": "Lời nhắn lúc 17 giờ 12",
+          "dialogues": [
+            {
+              "type": "narration",
+              "text": "Mẹ Vy chủ động mở tin nhắn thoại con gửi lúc 17 giờ 12."
+            },
+            {
+              "speaker": "Vy trong ghi âm",
+              "text": "Mẹ ơi, con về hơi muộn chút. Con mang tranh về cho mẹ xem. Mẹ để phần canh cho con nhé."
+            },
+            {
+              "speaker": "Mẹ Vy",
+              "text": "Người dân báo tai nạn khoảng 17 giờ 20, ở đoạn ven mương. Nó vẫn đang về nhà mà."
+            },
+            {
+              "speaker": "Thầy giáo",
+              "text": "Hai bố con cãi nhau buổi sáng. Nhưng thầy chưa từng cấm con về nhà."
+            },
+            {
+              "speaker": "Mẹ Vy",
+              "text": "Vy ơi, mẹ nghe con. Con không cần xin lỗi vì muốn về nhà."
+            },
+            {
+              "type": "narration",
+              "text": "Kiên đối chiếu: cuộc cãi nhau xảy ra trước lời nhắn. Vy vẫn muốn về.",
+              "set": {
+                "memory_verified": true
+              },
+              "clue": {
+                "id": "last_afternoon",
+                "title": "Buổi chiều cuối cùng",
+                "source": "Gia đình xác nhận",
+                "text": "Cãi nhau buổi sáng → lời nhắn về ăn cơm lúc 17:12 → tai nạn khoảng 17:20. Vy vẫn định về nhà. Bố chưa từng cấm Vy trở về."
+              }
+            }
+          ],
+          "next": "c3borrow"
+        },
+        {
+          "id": "c3borrow",
+          "location": "Lời hẹn trả vòng",
+          "dialogues": [
+            {
+              "speaker": "Kiên",
+              "text": "Cháu xin mượn vòng một đêm để vẽ bổ sung bức tranh tưởng nhớ bạn, được không ạ?"
+            },
+            {
+              "speaker": "Mẹ Vy",
+              "text": "Được. Ngày mai con mang lại nhé."
+            },
+            {
+              "type": "narration",
+              "text": "Mẹ đồng ý với lời hẹn. Kiên mang vòng về một cách công khai."
+            }
+          ],
+          "next": "c3s2"
+        },
+        {
+          "id": "c3b1",
+          "location": "Đi theo tiếng nước",
+          "dialogues": [
+            {
+              "type": "narration",
+              "text": "Kiên về nhà, để vòng cạnh giường, mở sổ bản đồ rồi ngủ trong tiếng mẹ dưới bếp.",
+              "time": "17:20",
+              "events": [
+                {
+                  "type": "change_background",
+                  "path": "res://assets/dream.png",
+                  "duration": 0.2
+                },
+                {
+                  "type": "change_music",
+                  "path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+                }
+              ]
+            },
+            {
+              "speaker": "Vy",
+              "text": "Hôm nay cậu đến sớm."
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Tớ đã thấy tranh của cậu ở trường."
+            },
+            {
+              "speaker": "Vy",
+              "text": "Có ai đứng xem không?"
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Có. Tớ."
+            },
+            {
+              "speaker": "Vy",
+              "text": "Chỉ một người cũng được."
+            },
+            {
+              "type": "narration",
+              "text": "Kiên hỏi về phía có tiếng nước. Vy lắc đầu.",
+              "choices": [
+                {
+                  "text": "Đi chậm, cậu có thể dừng bất cứ lúc nào.",
+                  "go": "c3loop"
+                },
+                {
+                  "text": "Mình đứng đây nhìn trước.",
+                  "go": "c3loop"
+                }
+              ]
+            }
+          ],
+          "next": ""
+        },
+        {
+          "id": "c3loop",
+          "location": "Con đường lặp",
+          "dialogues": [
+            {
+              "type": "narration",
+              "text": "Đánh dấu điều không khớp",
+              "event": {
+                "type": "minigame",
+                "id": "c3_loop",
+                "scene": "res://scenes/minigames/story_puzzle.tscn",
+                "config": {
+                  "title": "Đánh dấu điều không khớp",
+                  "instruction": "Đường đã rẽ hai lần. Chi tiết nào vẫn không đổi như thể mình đứng nguyên một chỗ?",
+                  "items": [
+                    "Bóng cây vẫn ở cùng phía",
+                    "Biển hướng đã quay",
+                    "Tiếng xe xa dần"
+                  ],
+                  "answer": [
+                    0
+                  ],
+                  "mode": "select",
+                  "hint": "Vy chỉ vào bóng cây: đường đã rẽ, bóng vẫn nằm nguyên một phía.",
+                  "help_label": "Nghe Vy chỉ đường"
+                }
+              }
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Cảnh vật cứ kéo mình về đây."
+            },
+            {
+              "speaker": "Vy",
+              "text": "Không phải đường. Là tớ không muốn nhìn tiếp."
+            },
+            {
+              "type": "narration",
+              "text": "Ở mép đường, cuốn sổ vẽ hiện ra dưới mưa đứng yên. Đó là hình ảnh trong ký ức."
+            }
+          ],
+          "next": "c3b2"
+        },
+        {
+          "id": "c3b2",
+          "location": "Câu nói còn mắc lại",
+          "dialogues": [
+            {
+              "speaker": "Vy",
+              "text": "“Con tự về được.”"
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Cậu nói gì?"
+            },
+            {
+              "speaker": "Vy",
+              "text": "Tớ nhớ mình đã nói thế. Với bố."
+            },
+            {
+              "speaker": "Giọng bố trong ký ức",
+              "text": "Cất tranh đi. Chuyện học còn chưa xong…"
+            },
+            {
+              "speaker": "Vy",
+              "text": "Tớ đã nói những lời rất tệ."
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Hai người cãi nhau à?"
+            },
+            {
+              "speaker": "Vy",
+              "text": "Tớ nghĩ… bố không muốn tớ về nữa."
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Cậu nghe bố nói vậy, hay cậu sợ như vậy?"
+            },
+            {
+              "speaker": "Vy",
+              "text": "Tớ không nhớ câu sau là thật hay tớ tự nghĩ ra."
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Vậy mình đừng kết luận vội."
+            },
+            {
+              "type": "narration",
+              "text": "Vy nhớ “Con tự về được” và “Mẹ chờ cơm”, nhưng chưa rõ thứ tự. Cô sợ bố không muốn mình về; chưa có lời người nhà xác nhận điều ấy.",
+              "clue": {
+                "id": "fear",
+                "title": "Nỗi sợ bị bỏ lại",
+                "source": "Ký ức chưa kiểm chứng",
+                "text": "Vy nhớ “Con tự về được” và “Mẹ chờ cơm”, nhưng chưa rõ thứ tự. Cô sợ bố không muốn mình về; chưa có lời người nhà xác nhận điều ấy."
+              }
+            },
+            {
+              "type": "narration",
+              "text": "Tiếng gọi cuối đường",
+              "event": {
+                "type": "minigame",
+                "id": "c3_call",
+                "scene": "res://scenes/minigames/story_puzzle.tscn",
+                "config": {
+                  "title": "Tiếng gọi cuối đường",
+                  "instruction": "Lắng nghe dấu hiệu đã đưa Kiên tỉnh ở những lần trước.",
+                  "items": [
+                    "Tiếng vọng phía mương",
+                    "Mẹ gọi ăn cơm từ vùng sáng ấm",
+                    "Tiếng mưa ở cổng"
+                  ],
+                  "answer": [
+                    1
+                  ],
+                  "mode": "select",
+                  "hint": "Mẹ đã gọi Kiên từ căn bếp ở cả hai lần trước."
+                }
+              }
+            },
+            {
+              "type": "narration",
+              "text": "Trước khi tỉnh, Kiên nhìn rõ phù hiệu người bố: đó là thầy giáo của mình."
+            }
+          ],
+          "next": "c3b3"
+        },
+        {
+          "id": "c3b3",
+          "location": "Xác nhận ở đời thực",
+          "dialogues": [
+            {
+              "type": "narration",
+              "text": "Chiều tối, Kiên cho mẹ xem chiếc vòng. Mẹ gọi bạn cũ xin phép dẫn Kiên đến thăm.",
+              "time": "18:10",
+              "events": [
+                {
+                  "type": "change_background",
+                  "path": "res://assets/bedroom2.png",
+                  "duration": 0.2
+                },
+                {
+                  "type": "change_music",
+                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                }
+              ]
+            },
+            {
+              "speaker": "Mẹ Kiên",
+              "text": "Con hỏi những điều này làm mẹ lo. Con có đang ngủ được không?"
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Con muốn kể, nhưng nghe sẽ kỳ lắm."
+            },
+            {
+              "speaker": "Mẹ Kiên",
+              "text": "Kỳ cũng cứ kể. Mẹ nghe trước đã."
+            },
+            {
+              "type": "narration",
+              "text": "Kiên kể mình bị những giấc mơ ám ảnh. Mẹ đi cùng cậu tới nhà Vy. Ảnh gia đình và lời bố mẹ xác nhận Vy đã mất vì tai nạn."
+            },
+            {
+              "speaker": "Thầy giáo",
+              "text": "Hôm ấy thầy cứ nghĩ tối về hai bố con sẽ nói tiếp. Có những câu thầy đã để dành quá lâu."
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Bạn ấy… thích vẽ nhà lắm phải không thầy?"
+            },
+            {
+              "speaker": "Thầy giáo",
+              "text": "Ừ. Ngôi nhà nào nó cũng vẽ có một ô cửa sáng."
+            },
+            {
+              "type": "narration",
+              "text": "Vy là con của thầy giáo, đã mất trong tai nạn ở đường ven mương. Gia đình nhận ra vòng và đồng ý cho Kiên mượn một đêm để vẽ tranh tưởng nhớ.",
+              "clue": {
+                "id": "identity",
+                "title": "Vy và gia đình",
+                "source": "Gia đình xác nhận trực tiếp",
+                "text": "Vy là con của thầy giáo, đã mất trong tai nạn ở đường ven mương. Gia đình nhận ra vòng và đồng ý cho Kiên mượn một đêm để vẽ tranh tưởng nhớ."
+              },
+              "set": {
+                "identity_confirmed": true
+              }
+            }
+          ],
+          "next": "c3s2"
+        },
+        {
+          "id": "c3s2",
+          "location": "Nói điều khó nói",
+          "dialogues": [
+            {
+              "type": "narration",
+              "text": "Tối ngày 3, Kiên trở lại giấc mơ sau chuyến thăm.",
+              "time": "17:20",
+              "events": [
+                {
+                  "type": "change_background",
+                  "path": "res://assets/dream.png",
+                  "duration": 0.2
+                },
+                {
+                  "type": "change_music",
+                  "path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+                }
+              ]
+            },
+            {
+              "speaker": "Vy",
+              "text": "Cậu tìm thấy nhà tớ rồi à?"
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Rồi. Cửa xanh. Chậu hoa trắng."
+            },
+            {
+              "speaker": "Vy",
+              "text": "Mẹ vẫn để nó ở hiên à?"
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Ừ."
+            },
+            {
+              "speaker": "Vy",
+              "text": "Sao cậu buồn thế?"
+            },
+            {
+              "type": "narration",
+              "text": "Kiên ngồi xuống bên Vy.",
+              "choices": [
+                {
+                  "text": "Tớ có chuyện rất khó nói.",
+                  "go": "c3truth"
+                },
+                {
+                  "text": "Mình ngồi xuống một chút được không?",
+                  "go": "c3truth"
+                }
+              ]
+            }
+          ],
+          "next": ""
+        },
+        {
+          "id": "c3truth",
+          "location": "Sự thật",
+          "dialogues": [
+            {
+              "speaker": "Kiên",
+              "text": "Tớ đã gặp bố mẹ cậu. Vy… có một tai nạn trên đường về. Cậu đã mất rồi."
+            },
+            {
+              "speaker": "Vy",
+              "text": "Không. Tớ chỉ chưa tìm được đường thôi."
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Tớ cũng đã mong là thế."
+            },
+            {
+              "speaker": "Vy",
+              "text": "Nếu tớ mất rồi… ai là người đứng đây?"
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Tớ chưa biết gọi điều này là gì. Nhưng tớ đang nghe cậu."
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Mẹ cậu vẫn giữ lời nhắn cậu đang về.",
+              "when": {
+                "memory_verified": true
+              }
+            },
+            {
+              "speaker": "Vy",
+              "text": "Lần sau cho tớ nghe lại nhé.",
+              "when": {
+                "memory_verified": true
+              }
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Tớ chưa hiểu hết buổi chiều ấy. Tớ sẽ hỏi thêm.",
+              "when": {
+                "memory_verified": false
+              }
+            },
+            {
+              "speaker": "Vy",
+              "text": "Tớ không sợ chuyện không về được… Tớ sợ về đến nơi rồi, không ai còn muốn mở cửa."
+            },
+            {
+              "speaker": "Kiên",
+              "text": "Vậy lần tới, mình sẽ nghe điều họ thật sự muốn nói."
+            },
+            {
+              "type": "narration",
+              "text": "Một ô cửa xanh hiện rồi tắt. Đồng hồ vẫn là 17 giờ 20 nhưng mặt kính bắt đầu nứt. Một đoạn đường phía sau biến mất."
+            }
+          ],
+          "next": ""
+        }
+      ]
+    }
+  ]
+}

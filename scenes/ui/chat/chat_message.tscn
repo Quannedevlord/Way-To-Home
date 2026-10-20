@@ -1,4 +1,6 @@
 [gd_scene format=3 uid="uid://dgw22ptwkt4sq"]
+; Khung MarginContainer cho một mục chat; chat_message.gd tạo node con theo lời gọi setup_*.
+; ChapterBase thêm các instance vào ChatFeed, không cần tạo sẵn từng bong bóng trong editor.
 
 [ext_resource type="Script" uid="uid://d01kpuucoe42x" path="res://scenes/ui/chat/chat_message.gd" id="1_script"]
 

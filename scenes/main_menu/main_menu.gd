@@ -1,7 +1,10 @@
 extends Control
+## Điều khiển menu chính: chơi mới, Continue từ save, cài đặt và thoát.
+## Nếu đã có mốc hoặc kết thúc, thêm sổ tay để người chơi xem lại ngay tại menu.
 
 const SettingsScript = preload("res://scenes/settings/settings.gd")
 
+# Bốn nút được gán trên root của main_menu.tscn trong Inspector.
 @export var start_button: Button
 @export var continue_button: Button
 @export var setting_button: Button
@@ -14,6 +17,9 @@ var cursor_hover = preload("res://assets/backgrounds/ui/cursor_hover.png")
 
 ## Thiết lập menu chính, cập nhật nút tiếp tục theo dữ liệu lưu và kết nối sự kiện.
 func _ready() -> void:
+	GameManager.load_campaign()
+	if not GameManager.story_checkpoints.is_empty() or not GameManager.seen_endings.is_empty():
+		add_child(preload("res://scenes/ui/story_notebook.gd").new())
 	GlobalMenu.get_node("CanvasLayer").hide()	
 	SettingsScript.apply_saved_audio_settings()
 	continue_button.visible = GameManager.has_save()

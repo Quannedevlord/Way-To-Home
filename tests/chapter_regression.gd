@@ -1,7 +1,10 @@
 extends SceneTree
+## Kiểm thử bộ đọc ChapterBase bằng truyện cũ: nhánh file, save/Continue, fade và giao thức minigame.
+## Chạy Godot --headless --path . --script res://tests/chapter_regression.gd; scene/save tạm nằm trong tests/.tmp/.
 
-const CHAPTER1 := "res://scenes/chapters/chapter_01/chapter1.tscn"
-const MAIN_STORY := "res://data/chap1_story/main_story.json"
+# Scene thử nghiệm được tạo từ chapter1.tscn, nhưng dùng ChapterBase và fixture thay cho chiến dịch mới.
+const CHAPTER1 := "res://tests/.tmp/chapter_01/chapter1.tscn"
+const MAIN_STORY := "res://tests/fixtures/legacy_chapter_01/main_story.json"
 const TEMP := "res://tests/.tmp"
 
 var manager: Node
@@ -9,10 +12,12 @@ var failures := 0
 var checks := 0
 
 
+## Bắt đầu sau khi autoload đã có trong cây scene.
 func _initialize() -> void:
 	call_deferred("_run")
 
 
+## Tăng tổng kiểm tra và báo lỗi có mô tả khi điều kiện không đạt.
 func check(condition: bool, description: String) -> void:
 	checks += 1
 	if not condition:
@@ -20,11 +25,12 @@ func check(condition: bool, description: String) -> void:
 		push_error("FAIL: " + description)
 
 
+## Đợi scene và sự kiện ổn định, không chờ minigame cần thao tác; báo lỗi nếu hàng đợi quá lâu.
 func settle() -> void:
 	for frame in range(4):
 		await process_frame
 	var attempts := 0
-	while current_scene != null and bool(current_scene.get("_events_running")) and not is_instance_valid(current_scene.get("_active_minigame")):
+	while current_scene != null and current_scene.has_method("get_progress") and bool(current_scene.get("_events_running")) and not is_instance_valid(current_scene.get("_active_minigame")):
 		await process_frame
 		attempts += 1
 		if attempts > 300:
@@ -32,6 +38,7 @@ func settle() -> void:
 			break
 
 
+## Mở chapter fixture và trả node sau khởi tạo; new_game xóa tiến trình trong save kiểm thử.
 func open_chapter(new_game: bool = false) -> Node:
 	if new_game:
 		manager.start_new_game()
@@ -40,6 +47,7 @@ func open_chapter(new_game: bool = false) -> Node:
 	return current_scene
 
 
+## Gửi ui_accept trực tiếp đến chapter để thử tiếp tục thoại hoặc khóa input.
 func accept(chapter: Node) -> void:
 	var event := InputEventAction.new()
 	event.action = "ui_accept"
@@ -48,6 +56,7 @@ func accept(chapter: Node) -> void:
 	await settle()
 
 
+## Lưu, về menu và mở lại fixture để mô phỏng Continue bằng một instance chapter mới.
 func resume_chapter() -> Node:
 	manager.save_game()
 	manager.change_scene(manager.MAIN_MENU_PATH)
@@ -57,15 +66,30 @@ func resume_chapter() -> Node:
 	return await open_chapter()
 
 
+## Ghi dữ liệu JSON tạm cho từng tình huống kiểm thử vào đường dẫn do bộ kiểm thử cung cấp.
 func write_json(path: String, data: Variant) -> void:
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data))
 
 
+## Tạo fixture scene rồi chạy các kiểm tra đọc truyện, lưu nhánh, save cũ và chuyển chapter.
+## Gọi thêm các nhóm kiểm tra chuyên biệt và trả mã thoát khác 0 nếu có lỗi.
 func _run() -> void:
 	manager = root.get_node("GameManager")
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(TEMP))
 	manager.save_path = TEMP + "/savegame.save"
+	# Dùng truyện gốc làm fixture để tiếp tục kiểm tra bộ đọc cũ độc lập với nội dung chiến dịch.
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(TEMP + "/chapter_01"))
+	var legacy_script := FileAccess.open(TEMP + "/chapter_01/chapter1.gd", FileAccess.WRITE)
+	legacy_script.store_string("extends ChapterBase\n")
+	legacy_script.close()
+	var fixture := FileAccess.get_file_as_string("res://scenes/chapters/chapter_01/chapter1.tscn")
+	fixture = fixture.replace("uid=\"uid://cqn28ke6tf87y\"", "")
+	fixture = fixture.replace("res://scenes/chapters/chapter_01/chapter1.gd", TEMP + "/chapter_01/chapter1.gd")
+	fixture = fixture.replace("res://data/story/chapter_01.json", MAIN_STORY)
+	var legacy_scene := FileAccess.open(CHAPTER1, FileAccess.WRITE)
+	legacy_scene.store_string(fixture)
+	legacy_scene.close()
 	var chapter: Node = await open_chapter(true)
 	check(chapter.get_script().get_base_script().get_global_name() == "ChapterBase", "Chapter 1 kế thừa ChapterBase")
 	for property in ["chat_feed", "scroll_container", "location_label", "choice_container", "continue_hint", "minigame_container"]:
@@ -128,7 +152,11 @@ func _run() -> void:
 		await process_frame
 		await process_frame
 		await process_frame
-		check(manager.current_scene_path == manager.CREDITS_PATH, "Chapter 2 chưa có story tự chuyển credits")
+		check(manager.current_scene_path.ends_with("chapter2.tscn") and not current_scene.story_path.is_empty(), "Chapter 2 mở nội dung mới thay vì bỏ qua")
+		for remaining_chapter in range(4):
+			current_scene.complete_chapter()
+			await settle()
+		check(manager.current_scene_path == manager.CREDITS_PATH, "Hết Chapter 5 chuyển credits")
 		manager.save_game()
 		check(bool(manager.load_game().get("completed", false)) and not manager.has_save(), "Thoát tại credits giữ trạng thái completed")
 
@@ -147,6 +175,22 @@ func _run() -> void:
 	check(manager.load_game() == before, "save_game lúc thoát giữ snapshot đầy đủ")
 	check(not manager.save_game({"dialogue_index": 0}, "res://old_chapter.tscn"), "Từ chối lưu từ chapter cũ")
 
+	# File truyện đã gỡ: bỏ vị trí/lịch sử nhánh cũ và mở lại đầu chương.
+	manager.change_scene(manager.MAIN_MENU_PATH)
+	await settle()
+	manager.current_scene_path = CHAPTER1
+	manager.clear_save()
+	manager.save_game({
+		"current_story_path": "res://removed_story/branch.json",
+		"episode_index": 0, "scene_index": 0, "dialogue_index": 2,
+		"chat_history": [{"text": "Lịch sử của nhánh đã gỡ"}],
+		"selected_choice_index": 1,
+	})
+	chapter = await open_chapter()
+	check(chapter.current_story_path == MAIN_STORY and chapter.dialogue_index == 0, "Truyện đã gỡ trở về đầu chương hiện hành")
+	check(chapter.selected_choice_index == -1 and chapter._chat_history.size() == 2, "Không phục hồi lựa chọn hoặc lịch sử của file đã gỡ")
+	check(manager.load_game().get("current_story_path", "") == MAIN_STORY, "Lưu lại đường dẫn truyện hiện hành sau khi phục hồi")
+
 	# Events fade chạy tuần tự, thay nền, khôi phục opacity cuối cùng.
 	chapter._queue_json_events([
 		{"type": "fade_out", "duration": 0.01},
@@ -157,7 +201,7 @@ func _run() -> void:
 	check(is_zero_approx(chapter._fade_overlay.color.a), "Fade out/background/in hoàn tất")
 	check(chapter.background.texture.resource_path == "res://assets/bedroom2.png", "Event đổi nền")
 	check(not is_instance_valid(chapter._background_transition_layer), "Dọn transition layer")
-	check(chapter._resolve_story_path("sub/../dy.json") == "res://data/chap1_story/dy.json", "next_file giữ đường dẫn tương đối theo file hiện tại")
+	check(chapter._resolve_story_path("sub/../dy.json") == "res://tests/fixtures/legacy_chapter_01/dy.json", "next_file giữ đường dẫn tương đối theo file hiện tại")
 	chapter.fade_screen("out", 0.01)
 	await create_timer(0.02).timeout
 	chapter = await resume_chapter()
@@ -186,6 +230,7 @@ func _run() -> void:
 	quit(1 if failures else 0)
 
 
+## Xác nhận hướng dẫn chỉ ẩn sau lần đọc tiếp hợp lệ và giữ trạng thái qua Continue/chơi mới.
 func test_continue_hint(chapter: Node) -> void:
 	chapter._queue_json_events([{"type": "fade_in", "duration": 0.01}])
 	await accept(chapter)
@@ -214,6 +259,8 @@ func test_continue_hint(chapter: Node) -> void:
 	await process_frame
 
 
+## Tạo minigame giả để thử signal/state, khôi phục ván dở và chuyển nhánh theo kết quả.
+## Kiểm tra minigame đã hoàn thành không bị chạy lại khi dựng lịch sử.
 func test_minigame() -> void:
 	# Test double chỉ kiểm tra giao thức signal/state, không có gameplay mẫu.
 	var stub_source := "extends Control\nsignal finished(result: Dictionary)\nvar state: Dictionary = {}\nfunc get_save_state() -> Dictionary:\n\treturn state\nfunc restore_state(value: Dictionary) -> void:\n\tstate = value\n"
@@ -272,6 +319,8 @@ func test_minigame() -> void:
 	check(chapter.dialogue_index == 1, "Sau minigame tiếp tục truyện")
 
 
+## Thử JSON dạng episodes/scenes với lựa chọn ở cấp cảnh và ngay trong dòng thoại.
+## Sau Continue, nhánh dialogues riêng phải được phục hồi đúng.
 func test_structured_story() -> void:
 	write_json(TEMP + "/structured.json", {"episodes": [{"scenes": [
 		{"id": "first", "location": "test", "choices": [{"text": "choose", "dialogues": [{"text": "chosen"}, {"text": "chosen2"}]}]},
@@ -298,6 +347,7 @@ func test_structured_story() -> void:
 	check(chapter.current_dialogues[0]["message"] == "override" and not chapter.choice_container.get_parent().visible, "Khôi phục dialogues từ inline choice")
 
 
+## Tạo chapter giả có hook đồng bộ/bất đồng bộ; chỉ chạy hook lúc chơi, bỏ qua khi dựng lịch sử.
 func test_chapter_event_hooks() -> void:
 	for asynchronous in [false, true]:
 		var mode := "async" if asynchronous else "sync"
@@ -317,6 +367,7 @@ func test_chapter_event_hooks() -> void:
 		chapter.free()
 
 
+## Dừng và gỡ các AudioStreamPlayer trước khi thoát để không giữ tài nguyên âm thanh.
 func stop_audio(node: Node) -> void:
 	if node is AudioStreamPlayer:
 		node.stop()

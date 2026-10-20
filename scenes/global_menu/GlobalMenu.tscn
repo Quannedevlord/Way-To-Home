@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://d1igt8yqm17se"]
+; Scene autoload luôn có trong cây, cung cấp nút bánh răng và Auto ở góc trên phải.
+; global_menu.gd quyết định khi nào hiển thị, mở cài đặt và cập nhật chế độ đọc.
 
 [ext_resource type="Script" uid="uid://cnhkouiwnxckn" path="res://scenes/global_menu/global_menu.gd" id="1_wj43r"]
 [ext_resource type="Texture2D" uid="uid://rryk8vakamfp" path="res://assets/backgrounds/ui/settings/All Icons.png" id="2_wj43r"]
 [ext_resource type="Script" uid="uid://dpw7scpxd3yqt" path="res://scenes/settings/ui_sound_manager.gd" id="3_pj4yf"]
 [ext_resource type="AudioStream" uid="uid://qxop7q0cwyxs" path="res://assets/backgrounds/audio/sfx/JDSherbert - Wooden UI SFX Pack - Cancel - 2.wav" id="4_wjivj"]
 [ext_resource type="AudioStream" uid="uid://dwsop0yuaq5d7" path="res://assets/backgrounds/audio/sfx/JDSherbert - Wooden UI SFX Pack - Cancel - 1.wav" id="5_l0uk6"]
+[ext_resource type="FontFile" path="res://assets/backgrounds/fonts/dearpix-1-94.otf" id="6_font"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vlew8"]
 atlas = ExtResource("2_wj43r")
@@ -13,6 +16,54 @@ region = Rect2(48.855877, 1.2395058, 14.363525, 13.928263)
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3cpi"]
 atlas = ExtResource("2_wj43r")
 region = Rect2(144.89493, 1.3786871, 14.364, 13.928)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auto"]
+content_margin_left = 10.0
+content_margin_top = 3.0
+content_margin_right = 10.0
+content_margin_bottom = 3.0
+bg_color = Color(0.067, 0.106, 0.188, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.59, 0.45, 0.28, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_left = 4
+corner_radius_bottom_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auto_hover"]
+content_margin_left = 10.0
+content_margin_top = 3.0
+content_margin_right = 10.0
+content_margin_bottom = 3.0
+bg_color = Color(0.13, 0.19, 0.29, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.97, 0.86, 0.58, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_left = 4
+corner_radius_bottom_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auto_active"]
+content_margin_left = 10.0
+content_margin_top = 3.0
+content_margin_right = 10.0
+content_margin_bottom = 3.0
+bg_color = Color(0.89, 0.73, 0.43, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.9, 0.66, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_left = 4
+corner_radius_bottom_right = 4
 
 [node name="GlobalMenu" type="Control" unique_id=2108833488]
 layout_mode = 3
@@ -24,6 +75,7 @@ grow_vertical = 2
 script = ExtResource("1_wj43r")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1679136798]
+; Layer 100 đặt nút trên chapter/minigame; cài đặt ở layer 101 để nhận thao tác trước.
 layer = 100
 
 [node name="MenuButton" type="TextureButton" parent="CanvasLayer" unique_id=1240334255]
@@ -39,6 +91,29 @@ texture_normal = SubResource("AtlasTexture_vlew8")
 texture_hover = SubResource("AtlasTexture_i3cpi")
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
+
+[node name="AutoButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -176.0
+offset_top = 8.0
+offset_right = -56.0
+offset_bottom = 38.0
+grow_horizontal = 0
+focus_mode = 0
+toggle_mode = true
+theme_override_colors/font_color = Color(0.88, 0.83, 0.7, 1)
+theme_override_colors/font_hover_color = Color(1, 0.94, 0.8, 1)
+theme_override_colors/font_pressed_color = Color(0.06, 0.09, 0.15, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.06, 0.09, 0.15, 1)
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_auto")
+theme_override_styles/hover = SubResource("StyleBoxFlat_auto_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_auto_active")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_auto_active")
+text = "Auto: Tắt"
 
 [node name="UISoundManager" type="Node" parent="." unique_id=1405993702]
 script = ExtResource("3_pj4yf")

@@ -1,4 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://dw0edg512es"]
+; Resource theme tối giản; hiện chỉ khai báo default_font_size.
+; Những override trực tiếp trên control hoặc trong script quyết định giao diện riêng của từng màn hình.
 
 [resource]
 default_font_size = 0
