@@ -7,6 +7,7 @@ const MAIN_MENU_PATH := "res://scenes/main_menu/main_menu.tscn"
 const CHAPTERS_PATH := "res://scenes/chapters"
 const CREDITS_PATH := "res://scenes/credits/credits.tscn"
 const FIRST_CHAPTER_PATH := "res://scenes/chapters/chapter_01/chapter1.tscn"
+const ChapterTransition := preload("res://scenes/ui/chapter_transition.gd")
 
 var current_scene_path: String = "res://scenes/main_menu/main_menu.tscn"
 # Cho phép bài kiểm tra dùng save riêng; game luôn dùng SAVE_PATH mặc định.
@@ -109,11 +110,29 @@ func change_to_next_chapter() -> void:
 		})
 
 
-## Nhận thông báo hoàn thành từ `chapter` và điều phối sang chapter/credits kế tiếp.
+## Nhận thông báo hoàn thành từ `chapter` và hiện hộp thoại hỏi tiếp tục hay về menu.
 ## Bỏ qua thông báo của scene cũ để tránh chuyển chapter hai lần.
+## Nếu hết chapter (sẽ vào credits), chuyển thẳng mà không hỏi.
 func on_chapter_completed(chapter: Node) -> void:
-	if get_tree().current_scene == chapter and chapter.scene_file_path == current_scene_path:
+	if get_tree().current_scene != chapter or chapter.scene_file_path != current_scene_path:
+		return
+	var next_path := get_next_chapter_path(current_scene_path)
+	if next_path.is_empty():
+		# Hết chapter → credits, chuyển thẳng.
 		change_to_next_chapter()
+		return
+	_show_chapter_transition()
+
+
+## Hiện hộp thoại chuyển cảnh; nếu chọn "Có" thì chuyển chapter, "Không" thì về menu chính.
+func _show_chapter_transition() -> void:
+	var dialog := ChapterTransition.new()
+	get_tree().root.add_child(dialog)
+	var continue_next: bool = await dialog.choice_made
+	if continue_next:
+		change_to_next_chapter()
+	else:
+		change_scene(MAIN_MENU_PATH)
 
 
 ## Tìm chapter có số thứ tự nhỏ nhất nhưng lớn hơn chapter trong `current_path`.

@@ -144,6 +144,13 @@ func _run() -> void:
 		event.action = "ui_accept"
 		event.pressed = true
 		chapter._input(event)
+		# Hộp thoại chuyển cảnh đang hiện; chọn "Có" để tiếp tục chapter tiếp theo.
+		await settle()
+		var dialog := root.get_children().filter(func(n): return n.has_signal("choice_made"))
+		check(not dialog.is_empty(), "Hộp thoại chuyển cảnh xuất hiện khi kết thúc chapter")
+		if not dialog.is_empty():
+			dialog[0]._on_yes_pressed()
+			await settle()
 		check(manager.current_scene_path.ends_with("chapter2.tscn"), "Hoàn thành Chapter 1 chuyển Chapter 2")
 		chapter.save_progress()
 		check(manager.load_game().get("current_scene", "").ends_with("chapter2.tscn"), "Scene cũ không ghi đè save chapter mới")
@@ -156,6 +163,11 @@ func _run() -> void:
 		for remaining_chapter in range(4):
 			current_scene.complete_chapter()
 			await settle()
+			# Chapters 2-4 hiện hộp thoại chuyển cảnh; chapter 5 vào credits trực tiếp.
+			var transition := root.get_children().filter(func(n): return n.has_signal("choice_made"))
+			if not transition.is_empty():
+				transition[0]._on_yes_pressed()
+				await settle()
 		check(manager.current_scene_path == manager.CREDITS_PATH, "Hết Chapter 5 chuyển credits")
 		manager.save_game()
 		check(bool(manager.load_game().get("completed", false)) and not manager.has_save(), "Thoát tại credits giữ trạng thái completed")
