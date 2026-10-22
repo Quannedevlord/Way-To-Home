@@ -18,6 +18,8 @@ var campaign_state: Dictionary = {}
 var story_checkpoints: Dictionary = {}
 ## Bộ sưu tập kết thúc đã đọc xong, được giữ lại khi bắt đầu lượt chơi mới.
 var seen_endings: Array = []
+var _chapter_transition: CanvasLayer
+var _paused_before_transition := false
 
 
 ## Nạp trạng thái truyện, mốc quay lại và bộ sưu tập từ save; thiếu dữ liệu thì dùng giá trị rỗng.
@@ -65,19 +67,51 @@ func _notification(what: int) -> void:
 
 ## Lưu chapter đang chơi rồi chuyển sang scene tại `path`.
 ## Trả true khi yêu cầu chuyển thành công; false nếu thiếu scene hoặc Godot báo lỗi.
-func change_scene(path: String) -> bool:
+func change_scene(path: String, show_chapter_intro: bool = false) -> bool:
+	if is_chapter_transition_active():
+		return false
 	if path.is_empty() or not ResourceLoader.exists(path):
 		push_error("Không tìm thấy scene: %s" % path)
 		return false
 	var active_scene := get_tree().current_scene
 	if active_scene != null and active_scene.has_method("get_progress") and active_scene.scene_file_path == current_scene_path:
 		save_game()
+	if show_chapter_intro:
+		_paused_before_transition = get_tree().paused
+		_chapter_transition = ChapterTransition.new()
+		get_tree().root.add_child(_chapter_transition)
+		get_tree().paused = true
 	var result := get_tree().change_scene_to_file(path)
 	if result != OK:
+		_finish_chapter_transition()
 		push_error("Không thể chuyển đến scene %s: %s" % [path, error_string(result)])
 		return false
 	current_scene_path = path
+	if show_chapter_intro:
+		_play_chapter_intro()
 	return true
+
+
+## Lớp phủ giữ game tạm dừng để thao tác và Auto không đọc mất dòng đầu chương.
+func is_chapter_transition_active() -> bool:
+	return is_instance_valid(_chapter_transition)
+
+
+## Đợi chapter mới khởi tạo rồi lấy tên từ scene, dùng chung cho chơi mới và chuyển chương.
+func _play_chapter_intro() -> void:
+	await get_tree().scene_changed
+	var chapter := get_tree().current_scene
+	await _chapter_transition.play(str(chapter.get("chapter_name")))
+	_finish_chapter_transition()
+
+
+## Dọn lớp phủ và trả lại trạng thái pause, kể cả khi không thể mở scene mới.
+func _finish_chapter_transition() -> void:
+	if not is_chapter_transition_active():
+		return
+	_chapter_transition.queue_free()
+	_chapter_transition = null
+	get_tree().paused = _paused_before_transition
 
 
 ## Đặt trạng thái tạm dừng của cây scene theo `paused`.
@@ -99,7 +133,7 @@ func change_to_next_chapter() -> void:
 		if change_scene(CREDITS_PATH):
 			save_game({"completed": true})
 		return
-	if change_scene(next_chapter_path):
+	if change_scene(next_chapter_path, true):
 		save_game({
 			"current_story_path": "",
 			"episode_index": 0,
@@ -110,29 +144,13 @@ func change_to_next_chapter() -> void:
 		})
 
 
-## Nhận thông báo hoàn thành từ `chapter` và hiện hộp thoại hỏi tiếp tục hay về menu.
+## Nhận thông báo hoàn thành và tự mở chương tiếp theo với màn hình giới thiệu.
 ## Bỏ qua thông báo của scene cũ để tránh chuyển chapter hai lần.
 ## Nếu hết chapter (sẽ vào credits), chuyển thẳng mà không hỏi.
 func on_chapter_completed(chapter: Node) -> void:
 	if get_tree().current_scene != chapter or chapter.scene_file_path != current_scene_path:
 		return
-	var next_path := get_next_chapter_path(current_scene_path)
-	if next_path.is_empty():
-		# Hết chapter → credits, chuyển thẳng.
-		change_to_next_chapter()
-		return
-	_show_chapter_transition()
-
-
-## Hiện hộp thoại chuyển cảnh; nếu chọn "Có" thì chuyển chapter, "Không" thì về menu chính.
-func _show_chapter_transition() -> void:
-	var dialog := ChapterTransition.new()
-	get_tree().root.add_child(dialog)
-	var continue_next: bool = await dialog.choice_made
-	if continue_next:
-		change_to_next_chapter()
-	else:
-		change_scene(MAIN_MENU_PATH)
+	change_to_next_chapter()
 
 
 ## Tìm chapter có số thứ tự nhỏ nhất nhưng lớn hơn chapter trong `current_path`.

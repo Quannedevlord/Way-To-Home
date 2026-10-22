@@ -11,18 +11,13 @@ var notebook: Control
 var _story_clock := ""
 
 
-## Nạp cờ truyện trước khi lớp cha mở thoại, sau đó tạo sổ tay và đặt khung lựa chọn.
+## Nạp cờ truyện trước khi lớp cha mở thoại, sau đó tạo sổ tay.
 ## Ghi mốc bằng call_deferred để chapter đã đăng ký với GameManager và phục hồi xong save.
 func _ready() -> void:
 	GameManager.load_campaign()
 	super._ready()
 	notebook = Notebook.new()
 	add_child(notebook)
-	choice_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	choice_container.offset_left = -370
-	choice_container.offset_top = -230
-	choice_container.offset_right = 370
-	choice_container.offset_bottom = 230
 	call_deferred("_record_entry_checkpoint")
 
 
@@ -97,12 +92,12 @@ func show_current_line() -> void:
 ## Tạo đoạn tổng kết việc đã làm/còn thiếu từ các cờ hiện tại, không thay đổi điều kiện kết thúc.
 func preparation_summary() -> String:
 	var lines: Array[String] = ["Trước khi nhắm mắt"]
-	var ready := true
+	var all_preparations_ready := true
 	for key in PREPARATIONS:
 		var done := bool(GameManager.campaign_state.get(key, false))
-		ready = ready and done
+		all_preparations_ready = all_preparations_ready and done
 		lines.append("%s — %s" % [PREPARATIONS[key], "Đã có" if done else "Còn thiếu"])
-	lines.append("Bạn đã chuẩn bị được cách đưa lời chào về nhà và đưa Kiên trở lại." if ready else "Bạn vẫn có thể đi tiếp. Một số cách kết thúc chưa sẵn sàng.")
+	lines.append("Bạn đã chuẩn bị được cách đưa lời chào về nhà và đưa Kiên trở lại." if all_preparations_ready else "Bạn vẫn có thể đi tiếp. Một số cách kết thúc chưa sẵn sàng.")
 	return "\n".join(lines)
 
 
@@ -118,22 +113,12 @@ func _current_line_choices() -> Array:
 ## Dựng nút lựa chọn, khóa nút chưa đủ requires và ghi rõ việc chuẩn bị còn thiếu.
 ## Đặt focus vào nút khả dụng đầu tiên để người chơi có thể chọn bằng bàn phím.
 func show_choices(choices: Array) -> void:
-	# Tách nút cũ khỏi container ngay; queue_free đơn lẻ chỉ xóa cuối frame, làm lệch chỉ số nút.
-	for child in choice_container.get_children():
-		choice_container.remove_child(child)
-		child.queue_free()
 	super.show_choices(choices)
 	for index in range(choices.size()):
 		var choice: Dictionary = choices[index]
 		var button := choice_container.get_child(index) as Button
-		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		button.custom_minimum_size.y = 48
 		button.disabled = not matches(choice.get("requires", {}))
 		if button.disabled:
-			var disabled_style := button.get_theme_stylebox("normal").duplicate() as StyleBoxFlat
-			disabled_style.bg_color = Color(0.14, 0.20, 0.24, 1)
-			button.add_theme_stylebox_override("disabled", disabled_style)
-			button.add_theme_color_override("font_disabled_color", Color(0.78, 0.80, 0.80))
 			var missing: Array[String] = []
 			for key in choice.get("requires", {}):
 				if not bool(GameManager.campaign_state.get(key, false)):
@@ -141,10 +126,7 @@ func show_choices(choices: Array) -> void:
 			button.text += "\nCòn thiếu: " + ", ".join(missing)
 		elif choice.has("description"):
 			button.text += "\n" + str(choice["description"])
-	for button in choice_container.get_children():
-		if not button.disabled:
-			button.grab_focus()
-			break
+	_focus_available_choices()
 
 
 ## Xử lý xác nhận/hủy/tải mốc trước khi áp dụng lựa chọn và chuyển cảnh bằng go.
@@ -170,7 +152,7 @@ func _on_choice_selected(choice: Dictionary) -> void:
 		GameManager.restore_checkpoint(str(choice["checkpoint"]))
 		return
 	apply_effects(choice)
-	choice_container.get_parent().hide()
+	choice_overlay.hide()
 	_inline_choice_resolved = true
 	_append_line({"speaker": choice_speaker, "text": choice["text"]})
 	if choice.has("go"):

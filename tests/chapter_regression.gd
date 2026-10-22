@@ -29,6 +29,12 @@ func check(condition: bool, description: String) -> void:
 func settle() -> void:
 	for frame in range(4):
 		await process_frame
+	var intro_deadline := Time.get_ticks_msec() + 6000
+	while manager.is_chapter_transition_active():
+		await process_frame
+		if Time.get_ticks_msec() > intro_deadline:
+			check(false, "Màn giới thiệu chương không kết thúc")
+			break
 	var attempts := 0
 	while current_scene != null and current_scene.has_method("get_progress") and bool(current_scene.get("_events_running")) and not is_instance_valid(current_scene.get("_active_minigame")):
 		await process_frame
@@ -112,11 +118,11 @@ func _run() -> void:
 				check(chapter.location_label.text == "17:50", "Ô đồng hồ cập nhật khi thời gian truyện đổi")
 			if chapter.dialogue_index == 19:
 				check(chapter.background.texture.resource_path == "res://assets/hanhLang.png", "Ảnh vòng tay chỉ nằm trong chat")
-		check(chapter.choice_container.get_parent().visible, "Hai lựa chọn xuất hiện cuối main_story")
+		check(chapter.choice_overlay.visible, "Hai lựa chọn xuất hiện cuối main_story")
 		check(chapter.choice_container.get_child_count() == 2, "Giữ đủ hai lựa chọn")
 		check(chapter.bgm_player.stream.resource_path.ends_with("Dream Portal (1).mp3"), "Đổi nhạc tại giấc mơ")
 		chapter = await resume_chapter()
-		check(chapter.choice_container.get_parent().visible, "Continue khi đang chờ lựa chọn")
+		check(chapter.choice_overlay.visible, "Continue khi đang chờ lựa chọn")
 		var choice: Dictionary = chapter._current_line_choices()[branch_index]
 		chapter._on_choice_selected(choice)
 		await settle()
@@ -144,30 +150,16 @@ func _run() -> void:
 		event.action = "ui_accept"
 		event.pressed = true
 		chapter._input(event)
-		# Hộp thoại chuyển cảnh đang hiện; chọn "Có" để tiếp tục chapter tiếp theo.
-		await settle()
-		var dialog := root.get_children().filter(func(n): return n.has_signal("choice_made"))
-		check(not dialog.is_empty(), "Hộp thoại chuyển cảnh xuất hiện khi kết thúc chapter")
-		if not dialog.is_empty():
-			dialog[0]._on_yes_pressed()
-			await settle()
+		check(manager.is_chapter_transition_active(), "Màn giới thiệu xuất hiện khi kết thúc chapter")
 		check(manager.current_scene_path.ends_with("chapter2.tscn"), "Hoàn thành Chapter 1 chuyển Chapter 2")
 		chapter.save_progress()
 		check(manager.load_game().get("current_scene", "").ends_with("chapter2.tscn"), "Scene cũ không ghi đè save chapter mới")
 		check(bool(manager.load_game().get("continue_hint_dismissed", false)), "Chuyển chapter giữ trạng thái đã xem hướng dẫn")
-		await process_frame
-		await process_frame
-		await process_frame
-		await process_frame
+		await settle()
 		check(manager.current_scene_path.ends_with("chapter2.tscn") and not current_scene.story_path.is_empty(), "Chapter 2 mở nội dung mới thay vì bỏ qua")
 		for remaining_chapter in range(4):
 			current_scene.complete_chapter()
 			await settle()
-			# Chapters 2-4 hiện hộp thoại chuyển cảnh; chapter 5 vào credits trực tiếp.
-			var transition := root.get_children().filter(func(n): return n.has_signal("choice_made"))
-			if not transition.is_empty():
-				transition[0]._on_yes_pressed()
-				await settle()
 		check(manager.current_scene_path == manager.CREDITS_PATH, "Hết Chapter 5 chuyển credits")
 		manager.save_game()
 		check(bool(manager.load_game().get("completed", false)) and not manager.has_save(), "Thoát tại credits giữ trạng thái completed")
@@ -345,18 +337,18 @@ func test_structured_story() -> void:
 	manager.current_scene_path = CHAPTER1
 	manager.save_game({"current_story_path": TEMP + "/structured.json", "episode_index": 0, "scene_index": 0, "dialogue_index": 0})
 	var chapter: Node = await open_chapter()
-	check(chapter.choice_container.get_parent().visible, "JSON episodes hỗ trợ choices của scene")
+	check(chapter.choice_overlay.visible, "JSON episodes hỗ trợ choices của scene")
 	chapter._on_choice_selected(chapter.get_current_scene()["choices"][0])
 	await settle()
 	chapter = await resume_chapter()
 	check(chapter.selected_choice_index == 0 and chapter.current_dialogues[0]["message"] == "chosen", "Khôi phục thoại/lựa chọn trong scene có choices")
 	await accept(chapter)
 	await accept(chapter)
-	check(chapter.scene_index == 1 and chapter.choice_container.get_parent().visible, "Chuyển scene rồi hiện inline choices")
+	check(chapter.scene_index == 1 and chapter.choice_overlay.visible, "Chuyển scene rồi hiện inline choices")
 	chapter._on_choice_selected(chapter._current_line_choices()[0])
 	await settle()
 	chapter = await resume_chapter()
-	check(chapter.current_dialogues[0]["message"] == "override" and not chapter.choice_container.get_parent().visible, "Khôi phục dialogues từ inline choice")
+	check(chapter.current_dialogues[0]["message"] == "override" and not chapter.choice_overlay.visible, "Khôi phục dialogues từ inline choice")
 
 
 ## Tạo chapter giả có hook đồng bộ/bất đồng bộ; chỉ chạy hook lúc chơi, bỏ qua khi dựng lịch sử.

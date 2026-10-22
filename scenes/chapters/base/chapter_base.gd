@@ -12,6 +12,7 @@ extends Control
 
 @onready var background: TextureRect = $Background
 @onready var bgm_player: AudioStreamPlayer = $BGMPlayer
+@onready var choice_overlay: Control = $ChoiceOverlay
 
 ## Báo hoàn thành một lần để GameManager chọn chương tiếp theo hoặc credits.
 signal chapter_completed
@@ -94,7 +95,7 @@ func _ready() -> void:
 	call_deferred("_register_current_chapter")
 	chapter_completed.connect(GameManager.on_chapter_completed.bind(self))
 	location_label.text = chapter_name
-	choice_container.get_parent().hide()
+	choice_overlay.hide()
 	minigame_container.hide()
 	if default_background != null:
 		background.texture = default_background
@@ -298,7 +299,7 @@ func load_scene_dialogues(show_location: bool = true) -> void:
 	_last_speaker = ""
 	_inline_choice_resolved = false
 
-	choice_container.get_parent().visible = false
+	choice_overlay.visible = false
 	for child in choice_container.get_children():
 		child.queue_free()
 
@@ -372,15 +373,18 @@ func _append_line(line: Dictionary, scroll: bool = true, play_sound: bool = true
 		"narration":
 			_last_speaker = ""
 			if illustration != "" and ResourceLoader.exists(illustration):
-				_append_image(load(illustration), false, animate)
+				_append_image(load(illustration), HORIZONTAL_ALIGNMENT_CENTER, animate)
 			if message != "":
 				_append_narration(message, animate)
 		"image":
 			_last_speaker = ""
 			var image_path: String = str(line.get("path", illustration))
 			if image_path != "" and ResourceLoader.exists(image_path):
-				var align_right := str(line.get("align", "left")) == "right"
-				_append_image(load(image_path), align_right, animate)
+				var alignment := HORIZONTAL_ALIGNMENT_LEFT
+				match str(line.get("align", "left")):
+					"center": alignment = HORIZONTAL_ALIGNMENT_CENTER
+					"right": alignment = HORIZONTAL_ALIGNMENT_RIGHT
+				_append_image(load(image_path), alignment, animate)
 		_:
 			var speaker: String = str(line.get("speaker", "???"))
 			var avatar_path: String = str(line.get("avatar", avatar_paths.get(speaker, "")))
@@ -638,11 +642,11 @@ func _append_location_divider(location: String) -> void:
 	chat_feed.add_child(msg)
 
 
-## Thêm ảnh minh họa vào chat; align_right chọn căn phải, animate bật hiệu ứng xuất hiện.
+## Thêm ảnh minh họa vào chat; alignment chọn trục căn, animate bật hiệu ứng xuất hiện.
 ## Hàm này chỉ tạo ảnh trong chat; việc đổi nền do _process_json_events() quyết định.
-func _append_image(texture: Texture2D, align_right: bool = false, animate: bool = true) -> void:
+func _append_image(texture: Texture2D, alignment: HorizontalAlignment = HORIZONTAL_ALIGNMENT_CENTER, animate: bool = true) -> void:
 	var msg := CHAT_MESSAGE_SCENE.instantiate()
-	msg.setup_image(texture, align_right)
+	msg.setup_image(texture, alignment)
 	if animate:
 		msg.prepare_entrance()
 	chat_feed.add_child(msg)
@@ -679,7 +683,7 @@ func _scroll_to_bottom() -> void:
 ## Chỉ hướng dẫn trước lần tiếp tục đầu tiên của lượt chơi; trạng thái được lưu.
 ## Ẩn gợi ý lúc chờ lựa chọn, chạy sự kiện/minigame hoặc đã hoàn thành chapter.
 func _update_continue_hint() -> void:
-	var waiting_choice: bool = choice_container.get_parent().visible
+	var waiting_choice: bool = choice_overlay.visible
 	continue_hint.visible = _progress_initialized and not _continue_hint_dismissed and not story_finished and not waiting_choice and not _events_running and not is_instance_valid(_active_minigame)
 
 
@@ -707,7 +711,7 @@ func show_current_line() -> void:
 	_auto_elapsed = 0.0
 	# KIỂM TRA ĐỔI FILE KHI ĐÃ ĐỌC HẾT CÂU THOẠI CỦA FILE JSON HIỆN TẠI
 	if dialogue_index >= current_dialogues.size():
-		if choice_container.get_parent().visible:
+		if choice_overlay.visible:
 			return
 			
 		if current_dialogues.size() > 0:
@@ -769,7 +773,7 @@ func _input(event: InputEvent) -> void:
 
 ## Dùng chung cho thao tác đọc tay và Auto; chapter con có thể thêm điều kiện chờ.
 func can_advance_dialogue() -> bool:
-	return _progress_initialized and not _exiting and not get_tree().paused and not choice_container.get_parent().visible and not story_finished and not _events_running and not is_instance_valid(_active_minigame)
+	return _progress_initialized and not _exiting and not get_tree().paused and not choice_overlay.visible and not story_finished and not _events_running and not is_instance_valid(_active_minigame)
 
 
 ## Tiến đúng một dòng, giữ nguyên xử lý nhánh, sự kiện và lưu tiến trình.
@@ -844,31 +848,68 @@ func advance_scene() -> void:
 ## Chỉnh màu, font, bo góc và khoảng đệm của nút tại đây; hiện overlay và ẩn Continue.
 func show_choices(choices: Array) -> void:
 	for child in choice_container.get_children():
+		choice_container.remove_child(child)
 		child.queue_free()
 
 	for choice in choices:
 		var btn := Button.new()
 		btn.text = str(choice.get("text", choice.get("description", choice.get("option", "..."))))
 		btn.add_theme_font_override("font", CHAT_FONT)
-		btn.add_theme_font_size_override("font_size", 16)
-		btn.add_theme_color_override("font_color", Color(1, 1, 1, 1))
-		var style := StyleBoxFlat.new()
-		style.bg_color = Color(0.29, 0.47, 0.50, 1)
-		style.set_corner_radius_all(10)
-		style.content_margin_left = 16
-		style.content_margin_top = 10
-		style.content_margin_right = 16
-		style.content_margin_bottom = 10
-		btn.add_theme_stylebox_override("normal", style)
-		var hover := style.duplicate()
-		hover.bg_color = Color(0.35, 0.55, 0.58, 1)
-		btn.add_theme_stylebox_override("hover", hover)
-		btn.add_theme_stylebox_override("pressed", hover)
+		btn.add_theme_font_size_override("font_size", 18)
+		btn.add_theme_color_override("font_color", Color(0.88, 0.92, 0.93))
+		btn.add_theme_color_override("font_hover_color", Color(1.0, 0.94, 0.80))
+		btn.add_theme_color_override("font_focus_color", Color(1.0, 0.94, 0.80))
+		btn.add_theme_color_override("font_pressed_color", Color(1.0, 0.94, 0.80))
+		btn.add_theme_color_override("font_disabled_color", Color(0.57, 0.63, 0.66))
+		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		btn.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		btn.custom_minimum_size.y = 64
+		btn.add_theme_stylebox_override("normal", _choice_button_style(Color(0.10, 0.18, 0.22), Color(0.23, 0.34, 0.38)))
+		btn.add_theme_stylebox_override("hover", _choice_button_style(Color(0.16, 0.29, 0.33), Color(0.77, 0.63, 0.40)))
+		btn.add_theme_stylebox_override("pressed", _choice_button_style(Color(0.08, 0.15, 0.19), Color(0.89, 0.74, 0.47)))
+		btn.add_theme_stylebox_override("disabled", _choice_button_style(Color(0.075, 0.12, 0.15), Color(0.17, 0.23, 0.26)))
+		var focus_style := _choice_button_style(Color.TRANSPARENT, Color(0.94, 0.79, 0.50))
+		focus_style.draw_center = false
+		focus_style.set_border_width_all(2)
+		btn.add_theme_stylebox_override("focus", focus_style)
 		btn.pressed.connect(_on_choice_selected.bind(choice))
 		choice_container.add_child(btn)
 
-	choice_container.get_parent().visible = true
+	choice_overlay.visible = true
 	continue_hint.visible = false
+	_focus_available_choices()
+
+
+## Giữ vòng di chuyển bàn phím trong các lựa chọn khả dụng, bỏ qua nút bị khóa.
+func _focus_available_choices() -> void:
+	var buttons: Array[Button] = []
+	for child in choice_container.get_children():
+		if child is Button and not child.disabled:
+			buttons.append(child)
+	for index in range(buttons.size()):
+		var button := buttons[index]
+		var previous_path := button.get_path_to(buttons[(index - 1 + buttons.size()) % buttons.size()])
+		var next_path := button.get_path_to(buttons[(index + 1) % buttons.size()])
+		button.focus_neighbor_top = previous_path
+		button.focus_neighbor_bottom = next_path
+		button.focus_previous = previous_path
+		button.focus_next = next_path
+	if not buttons.is_empty():
+		buttons[0].grab_focus()
+
+
+## Dùng cùng bo góc và khoảng đệm cho cả trạng thái thường, hover, focus và khóa.
+func _choice_button_style(background_color: Color, border_color: Color) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = background_color
+	style.border_color = border_color
+	style.set_border_width_all(1)
+	style.set_corner_radius_all(12)
+	style.content_margin_left = 22
+	style.content_margin_right = 22
+	style.content_margin_top = 16
+	style.content_margin_bottom = 16
+	return style
 
 
 ## Nhận lựa chọn vừa bấm, đóng overlay và hiện lời lựa chọn bằng choice_speaker.
@@ -877,7 +918,7 @@ func show_choices(choices: Array) -> void:
 func _on_choice_selected(choice: Dictionary) -> void:
 	if story_finished or _events_running or is_instance_valid(_active_minigame):
 		return
-	choice_container.get_parent().visible = false
+	choice_overlay.visible = false
 	for child in choice_container.get_children():
 		child.queue_free()
 
@@ -1055,7 +1096,7 @@ func start_minigame(scene: PackedScene, event_id: String, event: Dictionary = {}
 	# Deferred để minigame có thể phát kết quả trong _ready mà bên gọi vẫn kịp await.
 	instance.connect("finished", _on_minigame_finished, CONNECT_ONE_SHOT | CONNECT_DEFERRED)
 	minigame_container.show()
-	choice_container.get_parent().hide()
+	choice_overlay.hide()
 	_update_continue_hint()
 	if instance.has_method("configure"):
 		instance.call("configure", event.get("config", {}))

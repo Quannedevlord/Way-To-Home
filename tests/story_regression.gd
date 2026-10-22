@@ -31,6 +31,12 @@ func check(ok: bool, description: String) -> void:
 func settle() -> void:
 	for frame in range(4):
 		await process_frame
+	var intro_deadline := Time.get_ticks_msec() + 6000
+	while manager.is_chapter_transition_active():
+		await process_frame
+		if Time.get_ticks_msec() > intro_deadline:
+			check(false, "Chapter intro timed out")
+			break
 	var count := 0
 	while current_scene != null and current_scene.has_method("get_progress") and current_scene._events_running and not is_instance_valid(current_scene._active_minigame):
 		await process_frame
@@ -121,7 +127,7 @@ func walk(options: Dictionary, stop_at_final: bool = true) -> void:
 		seen[id] = true
 		if is_instance_valid(chapter._active_minigame):
 			await solve(bool(options.get("assisted", false)))
-		elif chapter.choice_container.get_parent().visible:
+		elif chapter.choice_overlay.visible:
 			if id == "c5choice" and stop_at_final:
 				return
 			var target: String = options.get(id, "")
@@ -158,7 +164,7 @@ func finish_ending(id: String) -> void:
 func until_choice(id: String) -> void:
 	for step in range(100):
 		await settle()
-		if current_scene._current_scene_id == id and current_scene.choice_container.get_parent().visible:
+		if current_scene._current_scene_id == id and current_scene.choice_overlay.visible:
 			return
 		if is_instance_valid(current_scene._active_minigame):
 			await solve(true)
@@ -219,12 +225,12 @@ func run() -> void:
 			check(manager.restore_checkpoint("final_choice"), "Restore before E4")
 			await settle()
 			await choose_target("e4warning")
-			while not current_scene.choice_container.get_parent().visible:
+			while not current_scene.choice_overlay.visible:
 				await advance()
 			await choose_target("c5choice")
 			check(not manager.campaign_state.has("ending_id"), "E4 cancellation returns without committing")
 			await choose_target("e4warning")
-			while not current_scene.choice_container.get_parent().visible:
+			while not current_scene.choice_overlay.visible:
 				await advance()
 			await choose_target("e4")
 			await walk({}, false)

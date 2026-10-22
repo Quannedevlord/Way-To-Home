@@ -7,7 +7,7 @@ const BUBBLE_LEFT := Color(0.30, 0.30, 0.30, 1.0)
 const BUBBLE_RIGHT := Color(0.29, 0.47, 0.50, 1.0)
 const BUBBLE_NARRATION := Color(0.16, 0.16, 0.18, 0.9)
 const NAME_COLOR := Color(0.72, 0.72, 0.74, 1.0)
-const AVATAR_SIZE := 80
+const AVATAR_SIZE := 90
 const BUBBLE_RADIUS := 14
 const MAX_BUBBLE_WIDTH := 420
 const ENTRANCE_DURATION := 0.18
@@ -109,11 +109,11 @@ func setup_location_divider(location: String) -> void:
 	center.add_child(label)
 
 
-## Hiển thị `texture` trong khung ảnh; `align_right` chọn phía căn ảnh.
+## Hiển thị `texture` trong khung ảnh; lời dẫn dùng căn giữa, ảnh chat có thể căn trái/phải.
 ## Chỉnh kích thước, viền và bo góc của ảnh chat ngay trong hàm này.
-func setup_image(texture: Texture2D, align_right: bool = false) -> void:
+func setup_image(texture: Texture2D, alignment: HorizontalAlignment = HORIZONTAL_ALIGNMENT_CENTER) -> void:
 	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 400)
+	row.add_theme_constant_override("separation", 10)
 	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_child(row)
 
@@ -138,19 +138,16 @@ func setup_image(texture: Texture2D, align_right: bool = false) -> void:
 	tex_rect.custom_minimum_size = Vector2(348, 208)
 	frame.add_child(tex_rect)
 
-	if align_right:
+	if alignment == HORIZONTAL_ALIGNMENT_CENTER:
+		row.alignment = BoxContainer.ALIGNMENT_CENTER
+		row.add_child(frame)
+	elif alignment == HORIZONTAL_ALIGNMENT_RIGHT:
 		row.alignment = BoxContainer.ALIGNMENT_END
-		var spacer := Control.new()
-		spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		row.add_child(spacer)
 		row.add_child(frame)
 		row.add_child(_avatar_spacer())
 	else:
 		row.add_child(_avatar_spacer())
 		row.add_child(frame)
-		var spacer := Control.new()
-		spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		row.add_child(spacer)
 
 
 ## Trả về ô trống rộng bằng avatar để ảnh chat thẳng hàng với các bong bóng thoại.

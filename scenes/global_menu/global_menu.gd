@@ -77,6 +77,9 @@ func _animate_menu_button(target_scale: Vector2, target_modulate: Color) -> void
 ## Ẩn menu toàn cục ở các màn hình mở đầu, menu chính và phần cảm ơn.
 ## Mỗi frame chuyển delta/chế độ Auto cho chapter; rời chapter thì đặt Auto về tắt.
 func _process(delta: float) -> void:
+	if GameManager.is_chapter_transition_active():
+		canvas_layer.hide()
+		return
 	var current_scene = get_tree().current_scene
 
 	if current_scene == null:
@@ -114,6 +117,8 @@ func _update_auto_button() -> void:
 
 ## Mở cài đặt bằng phím Escape khi menu toàn cục đang hiển thị.
 func _input(event: InputEvent) -> void:
+	if GameManager.is_chapter_transition_active():
+		return
 	# Bảng cài đặt tự nhận Esc để đóng và chặn phím mở lại trong cùng lượt input.
 	if get_tree().root.get_node_or_null("Setting") != null:
 		return
@@ -137,6 +142,8 @@ func _on_setting_button_pressed() -> void:
 
 ## Tạm dừng game và mở cài đặt dạng lớp phủ mà không đổi scene hiện tại.
 func _open_settings() -> void:
+	if GameManager.is_chapter_transition_active():
+		return
 	# Settings là lớp phủ, nên scene đang chơi và tiến độ hiện tại không bị thay đổi.
 	if get_tree().root.get_node_or_null("Setting") != null:
 		return

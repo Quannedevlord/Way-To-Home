@@ -2,7 +2,7 @@ extends Control
 ## Sổ tay tạo hoàn toàn bằng code, dùng trong chapter và menu chính.
 ## Hiển thị manh mối, việc chuẩn bị, kết thúc đã xem và các mốc có thể tải lại.
 
-const FONT := preload("res://assets/backgrounds/fonts/Roboto-Light.ttf")
+const FONT := preload("res://assets/backgrounds/fonts/dearpix-1-94.otf")
 const FLAGS := {"memory_verified": "Xác minh lời nhắn", "farewell_ready": "Lời chào do Vy chọn", "anchor_ready": "Thử đường về của Kiên"}
 const ENDINGS := {"E1": "Nhà vẫn chờ", "E2": "Lời chào bên cửa sổ", "E3": "Người trở về một mình", "E4": "Buổi chiều không tắt"}
 var overlay: ColorRect

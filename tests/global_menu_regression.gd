@@ -41,6 +41,8 @@ func escape(echo: bool = false) -> void:
 
 ## Gửi di chuyển chuột và click trái vào tâm control để kiểm tra đường xử lý input thực của UI.
 func click(control: Control) -> void:
+	# Container cần hoàn tất bố cục trước khi lấy tọa độ của nút vừa tạo.
+	await settle()
 	var point := control.get_global_rect().get_center()
 	var motion := InputEventMouseMotion.new()
 	motion.position = point
@@ -233,7 +235,7 @@ func test_auto_play(global_menu: Node, manager: Node) -> void:
 	chapter.show_current_line()
 	line_index = chapter.dialogue_index
 	global_menu._process(60.0)
-	check(chapter.dialogue_index == line_index and chapter.choice_container.get_parent().visible, "Auto waits for the player's story choice")
+	check(chapter.dialogue_index == line_index and chapter.choice_overlay.visible, "Auto waits for the player's story choice")
 	await click(chapter.choice_container.get_child(0))
 	check(chapter._current_scene_id == "c1notice" and chapter.dialogue_index == 0, "Player choice works while Auto is enabled")
 	global_menu._process(0.2)
@@ -245,6 +247,9 @@ func test_auto_play(global_menu: Node, manager: Node) -> void:
 	await create_timer(0.4).timeout
 	global_menu._process(0.2)
 	check(current_scene.chapter_id == "chapter_02" and global_menu.auto_mode == 1, "Auto mode carries across chapter transitions")
+	check(manager.is_chapter_transition_active() and paused, "Chapter intro pauses reading")
+	await create_timer(4.0).timeout
+	check(not manager.is_chapter_transition_active() and not paused, "Reading resumes after chapter intro")
 	manager.change_scene(manager.FIRST_CHAPTER_PATH)
 	await create_timer(0.4).timeout
 	global_menu.set_process(true)

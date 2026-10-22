@@ -47,8 +47,10 @@ func _on_button_mouse_exited() -> void:
 
 ## Bắt đầu trò chơi mới rồi mở màn đầu tiên của chương 1.
 func _on_start_pressed() -> void:
+	if GameManager.is_chapter_transition_active():
+		return
 	GameManager.start_new_game()
-	GameManager.change_scene("res://scenes/chapters/chapter_01/chapter1.tscn")
+	GameManager.change_scene(GameManager.FIRST_CHAPTER_PATH, true)
 
 
 ## Tải dữ liệu lưu và tiếp tục nếu màn đã lưu hợp lệ; nếu không thì ẩn nút.

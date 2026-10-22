@@ -5,6 +5,27 @@
 [ext_resource type="Script" uid="uid://bur7bqymusqn3" path="res://scenes/chapters/base/chapter_base.gd" id="1_script"]
 [ext_resource type="FontFile" uid="uid://c48xj77famwca" path="res://assets/backgrounds/fonts/dearpix-1-94.otf" id="2_font"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/ui/clock.svg" id="3_clock"]
+[ext_resource type="Script" path="res://scenes/ui/choice_overlay.gd" id="4_choices"]
+[ext_resource type="FontFile" path="res://assets/backgrounds/fonts/Roboto-Light.ttf" id="5_choice_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_choices"]
+content_margin_left = 28.0
+content_margin_top = 24.0
+content_margin_right = 28.0
+content_margin_bottom = 28.0
+bg_color = Color(0.055, 0.09, 0.125, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.56, 0.45, 0.29, 0.85)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_left = 20
+corner_radius_bottom_right = 20
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 24
+shadow_offset = Vector2(0, 10)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
 content_margin_left = 18.0
@@ -54,7 +75,7 @@ script = ExtResource("1_script")
 chat_feed = NodePath("ChatLayout/ScrollContainer/ChatFeed")
 scroll_container = NodePath("ChatLayout/ScrollContainer")
 location_label = NodePath("ChatLayout/Header/ClockBadge/ClockRow/LocationLabel")
-choice_container = NodePath("ChoiceOverlay/ChoiceContainer")
+choice_container = NodePath("ChoiceOverlay/Center/Panel/Content/Scroll/ChoiceContainer")
 continue_hint = NodePath("ChatLayout/ContinueHint")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1296590629]
@@ -152,12 +173,14 @@ horizontal_alignment = 1
 
 [node name="ChoiceOverlay" type="Control" parent="." unique_id=88634947]
 ; Lớp lựa chọn phủ toàn màn hình, các nút được script tạo trong ChoiceContainer.
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_choices")
 
 [node name="Dimmer" type="ColorRect" parent="ChoiceOverlay" unique_id=501491178]
 layout_mode = 1
@@ -166,23 +189,53 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.4392157)
+color = Color(0.01, 0.02, 0.035, 0.5)
 
-[node name="ChoiceContainer" type="VBoxContainer" parent="ChoiceOverlay" unique_id=2141976339]
+[node name="Center" type="CenterContainer" parent="ChoiceOverlay"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -220.0
-offset_top = -80.0
-offset_right = 220.0
-offset_bottom = 80.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 80.0
+offset_right = -24.0
+offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="ChoiceOverlay/Center"]
+custom_minimum_size = Vector2(780, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_choices")
+
+[node name="Content" type="VBoxContainer" parent="ChoiceOverlay/Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Heading" type="Label" parent="ChoiceOverlay/Center/Panel/Content"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_choice_font")
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.94, 0.81, 0.56, 1)
+text = "Lựa chọn của bạn"
+autowrap_mode = 3
+
+[node name="Divider" type="ColorRect" parent="ChoiceOverlay/Center/Panel/Content"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.64, 0.52, 0.34, 0.3)
+
+[node name="Scroll" type="ScrollContainer" parent="ChoiceOverlay/Center/Panel/Content"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="ChoiceContainer" type="VBoxContainer" parent="ChoiceOverlay/Center/Panel/Content/Scroll" unique_id=2141976339]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 12
-alignment = 1
 
 [node name="BGMPlayer" type="AudioStreamPlayer" parent="." unique_id=1966378470]
 bus = &"Music"
