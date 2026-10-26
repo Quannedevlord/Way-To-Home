@@ -5,7 +5,7 @@ extends ChapterBase
 
 const Notebook = preload("res://scenes/ui/story_notebook.gd")
 ## Ba cờ chuẩn bị dùng để tổng kết và giải thích điều kiện mở kết thúc E1.
-const PREPARATIONS := {"memory_verified": "Xác minh lời nhắn", "farewell_ready": "Lời chào do Vy chọn", "anchor_ready": "Thử đường về của Kiên"}
+const PREPARATIONS = Notebook.FLAGS
 var notebook: Control
 # Giữ giờ gần nhất trong JSON để tên địa điểm của cảnh mới không ghi đè đồng hồ.
 var _story_clock := ""
@@ -91,13 +91,13 @@ func show_current_line() -> void:
 
 ## Tạo đoạn tổng kết việc đã làm/còn thiếu từ các cờ hiện tại, không thay đổi điều kiện kết thúc.
 func preparation_summary() -> String:
-	var lines: Array[String] = ["Trước khi nhắm mắt"]
+	var lines: Array[String] = ["Những việc đã chuẩn bị trước khi ngủ"]
 	var all_preparations_ready := true
 	for key in PREPARATIONS:
 		var done := bool(GameManager.campaign_state.get(key, false))
 		all_preparations_ready = all_preparations_ready and done
-		lines.append("%s — %s" % [PREPARATIONS[key], "Đã có" if done else "Còn thiếu"])
-	lines.append("Bạn đã chuẩn bị được cách đưa lời chào về nhà và đưa Kiên trở lại." if all_preparations_ready else "Bạn vẫn có thể đi tiếp. Một số cách kết thúc chưa sẵn sàng.")
+		lines.append("%s: %s" % ["Đã làm xong" if done else "Chưa làm xong", PREPARATIONS[key]])
+	lines.append("Bạn đã chuẩn bị đủ để Vy nói trọn lời chào và Kiên trở về." if all_preparations_ready else "Bạn vẫn có thể đi tiếp, nhưng cần làm đủ các việc trên để mở thêm lựa chọn kết thúc.")
 	return "\n".join(lines)
 
 
@@ -123,7 +123,7 @@ func show_choices(choices: Array) -> void:
 			for key in choice.get("requires", {}):
 				if not bool(GameManager.campaign_state.get(key, false)):
 					missing.append(PREPARATIONS.get(key, key))
-			button.text += "\nCòn thiếu: " + ", ".join(missing)
+			button.text += "\nCần làm thêm: " + ", ".join(missing)
 		elif choice.has("description"):
 			button.text += "\n" + str(choice["description"])
 	_focus_available_choices()
@@ -154,7 +154,10 @@ func _on_choice_selected(choice: Dictionary) -> void:
 	apply_effects(choice)
 	choice_overlay.hide()
 	_inline_choice_resolved = true
-	_append_line({"speaker": choice_speaker, "text": choice["text"]})
+	var reply := {"speaker": choice_speaker, "text": choice["text"]}
+	if choice.has("avatar"):
+		reply["avatar"] = choice["avatar"]
+	_append_line(reply)
 	if choice.has("go"):
 		go_to_scene(str(choice["go"]))
 	else:

@@ -10,7 +10,7 @@ Nút **Auto** nằm sát bên trái bánh răng ở góc trên phải. Bấm l�
 
 Trong lúc chơi, bấm bánh răng hoặc **Esc** để mở cài đặt trên minigame. Bấm **Esc** lần nữa hoặc nút X để đóng và tiếp tục đúng tiến độ. Lớp cài đặt tạm dừng game, dùng CanvasLayer 101 phía trên nút GlobalMenu/Auto (100) và các lớp của chapter. Kiểm tra riêng bằng `res://tests/global_menu_regression.gd`: 59 kiểm tra đạt, gồm Auto thường/x2, click chuột, Esc, tạm dừng và lưu/tiếp tục câu đố.
 
-Nút **Sổ tay · Mốc truyện** hiển thị manh mối cùng nguồn: quan sát ngoài đời, lời gia đình xác nhận, gợi ý chưa thử hoặc ký ức trong mơ. Đến chương 4, sổ có thêm trạng thái ba việc chuẩn bị. Các mốc đầu chương 4 và trước lựa chọn cuối có thể tải từ sổ tay; sau credits có thể mở lại từ menu chính. Tải mốc phục hồi cả vị trí, cờ, manh mối và trạng thái câu đố của mốc đó.
+Nút **Sổ tay của Kiên** hiển thị các ghi chú, kèm dòng **Thông tin từ** giải thích Kiên đã tìm thấy ngoài đời, nghe gia đình xác nhận hay chỉ nghe Vy kể trong mơ. Cách giải thích nguồn này áp dụng cả với ghi chú đã lưu từ trước. Đến chương 4, sổ có thêm ba việc chuẩn bị với trạng thái **Đã làm xong / Chưa làm xong**. Phần **Chơi lại từ đoạn đã lưu** cho phép quay lại phần chuẩn bị ở Chương 4 hoặc chọn lại kết thúc ở Chương 5; sau credits có thể mở lại từ menu chính. Hộp xác nhận nêu rõ phần đã chơi sau đoạn được chọn sẽ cần làm lại. Việc quay lại phục hồi cả vị trí, cờ, manh mối và trạng thái câu đố của mốc đó.
 
 ## Các kết thúc
 

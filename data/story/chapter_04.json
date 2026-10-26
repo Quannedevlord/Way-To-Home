@@ -11,7 +11,7 @@
           "dialogues": [
             {
               "type": "narration",
-              "text": "Chương 4 · Điều chưa kịp nói\nSáng ngày 4. Kiên đọc một dòng ba lần, nhầm tiếng chuông xe với tiếng mặt vòng.",
+              "text": "Chương 4 · Điều chưa kịp nói\nSáng ngày 4. Kiên đọc đi đọc lại một dòng tới ba lần, còn tiếng chuông xe thì nghe nhầm thành tiếng mặt vòng.",
               "time": "07:00",
               "events": [
                 {
@@ -27,43 +27,50 @@
             },
             {
               "speaker": "Thư",
-              "text": "Cậu vừa đọc một dòng ba lần."
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
+              "text": "Ông đọc một dòng tới ba lần rồi đó."
             },
             {
               "speaker": "Kiên",
-              "text": "Tớ đang nghĩ."
+              "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
+              "text": "Tui đang suy nghĩ chút chuyện."
             },
             {
               "speaker": "Thư",
-              "text": "Tớ biết. Cậu có muốn tớ nghe cùng không?"
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
+              "text": "Tui biết. Ông có muốn tui nghe cùng không?"
             },
             {
               "speaker": "Thư",
-              "text": "Giấc mơ đã thay đổi thế nào?",
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
+              "text": "Giấc mơ thay đổi ra sao rồi?",
               "when": {
                 "thu_informed": true
               }
             },
             {
               "speaker": "Thư",
-              "text": "Tớ mới biết cậu đang tìm đồ của Vy. Cậu cần giải thích thêm để tớ giúp.",
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
+              "text": "Tui chỉ mới biết ông đang tìm đồ của Vy thôi. Ông kể thêm thì tui mới biết đường giúp chớ.",
               "when": {
                 "thu_informed": false
               }
             },
             {
               "type": "narration",
-              "text": "Kiên đã mệt vì giữ mọi chuyện một mình.",
+              "text": "Giữ mọi chuyện trong lòng khiến Kiên ngày càng mệt.",
               "choices": [
                 {
                   "text": "Kể đầy đủ và nhờ Thư giúp",
+                  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
                   "go": "c4support",
                   "set": {
                     "thu_informed": true
                   }
                 },
                 {
-                  "text": "Thừa nhận mất ngủ và nhờ hỗ trợ",
+                  "text": "Nói mình bị mất ngủ và nhờ giúp",
+                  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
                   "go": "c4support"
                 }
               ]
@@ -78,23 +85,27 @@
           "dialogues": [
             {
               "speaker": "Kiên",
-              "text": "Tớ nghĩ còn một lần đi được đến nhà Vy. Nhưng tớ sợ mình không tỉnh lại."
+              "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
+              "text": "Tui nghĩ mình còn tới nhà Vy được một lần nữa. Mà tui sợ đi rồi không tỉnh lại được."
             },
             {
               "speaker": "Thư",
-              "text": "Vậy trước khi nghĩ cách đi, nghĩ cách về đã."
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
+              "text": "Vậy trước khi tính đường đi, mình tính đường về trước đã."
             },
             {
               "speaker": "Kiên",
-              "text": "Nếu cậu không tin thì sao?"
+              "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
+              "text": "Lỡ bà không tin thì sao?"
             },
             {
               "speaker": "Thư",
-              "text": "Tớ có thể chưa tin cách cậu giải thích. Tớ vẫn tin cậu đang sợ."
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
+              "text": "Tui có thể chưa tin cách ông giải thích mọi chuyện. Nhưng tui tin là ông đang sợ."
             },
             {
               "type": "narration",
-              "text": "Mẹ đưa Kiên tới trả vòng đúng hẹn. Kiên xin giữ đến sáng mai để hoàn tất tranh tưởng nhớ. Mẹ Vy đồng ý cho mượn thêm."
+              "text": "Mẹ đưa Kiên tới trả vòng đúng hẹn. Kiên xin mượn thêm tới sáng mai để vẽ xong bức tranh tưởng nhớ Vy. Mẹ Vy đồng ý."
             }
           ],
           "next": "c4hub"
@@ -105,22 +116,26 @@
           "dialogues": [
             {
               "type": "narration",
-              "text": "Ba việc có thể làm theo thứ tự bạn muốn. Sổ tay ghi phần đã có và phần còn thiếu.",
+              "text": "Bạn có thể làm ba việc này theo thứ tự tùy ý. Sổ tay sẽ ghi lại việc nào đã xong, việc nào còn thiếu.",
               "choices": [
                 {
-                  "text": "Xác minh lời nhắn buổi chiều cuối",
+                  "text": "Kiểm tra lại lời nhắn buổi chiều cuối",
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "go": "c4a"
                 },
                 {
                   "text": "Giúp Vy viết lời chào",
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "go": "c4b"
                 },
                 {
                   "text": "Chuẩn bị và thử đường về của Kiên",
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "go": "c4c"
                 },
                 {
                   "text": "Bắt đầu giấc mơ cuối",
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "go": "c4summary"
                 }
               ]
@@ -130,11 +145,11 @@
         },
         {
           "id": "c4a",
-          "location": "Xác minh buổi chiều cuối cùng",
+          "location": "Tìm hiểu rõ buổi chiều cuối cùng",
           "dialogues": [
             {
               "type": "narration",
-              "text": "Mẹ liên hệ gia đình Vy, xin một lúc thuận tiện để cùng nghe lời nhắn.",
+              "text": "Mẹ liên hệ với gia đình Vy, hẹn lúc mọi người tiện để cùng nghe lại lời nhắn.",
               "time": "10:30",
               "events": [
                 {
@@ -150,30 +165,32 @@
             },
             {
               "type": "narration",
-              "text": "Kiên đã nghe bản ghi âm. Hôm nay cậu xem lại nguồn và thứ tự sự việc.",
+              "text": "Kiên đã nghe lời nhắn ghi âm. Hôm nay cậu kiểm tra lại ai đã xác nhận từng chuyện và chuyện nào xảy ra trước.",
               "when": {
                 "memory_verified": true
               }
             },
             {
               "speaker": "Mẹ Vy",
-              "text": "Cô nghe đi nghe lại. Không phải để tìm lỗi của ai. Cô chỉ muốn nghe con gọi mẹ."
+              "text": "Cô nghe đi nghe lại hoài. Không phải để coi ai có lỗi đâu. Cô chỉ muốn nghe con gọi mẹ thôi."
             },
             {
               "speaker": "Kiên",
-              "text": "Nếu cô không muốn mở thì cháu có thể chờ ạ."
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
+              "text": "Dạ, nếu cô chưa muốn mở thì con chờ cũng được."
             },
             {
               "speaker": "Mẹ Vy",
-              "text": "Hôm nay cô muốn có người nghe cùng."
+              "text": "Hôm nay cô muốn có người ngồi nghe cùng."
             },
             {
               "speaker": "Vy trong ghi âm",
-              "text": "Mẹ ơi, con về hơi muộn chút. Con mang tranh về cho mẹ xem. Mẹ để phần canh cho con nhé."
+              "avatar": "res://assets/avatars/Avatar_Vy.png",
+              "text": "Mẹ ơi, con về trễ chút nha. Con đem tranh về cho mẹ coi. Mẹ chừa canh cho con nha mẹ."
             },
             {
               "type": "narration",
-              "text": "Mẹ xác nhận lời nhắn gửi lúc 17:12. Thầy nói hai bố con cãi nhau buổi sáng và chưa từng cấm Vy về. Tai nạn được báo khoảng 17:20."
+              "text": "Mẹ Vy xác nhận lời nhắn được gửi lúc 17:12. Thầy kể hai ba con cãi nhau buổi sáng, nhưng thầy chưa bao giờ cấm Vy về. Tin tai nạn được báo lúc khoảng 17:20."
             },
             {
               "type": "narration",
@@ -184,7 +201,7 @@
                 "scene": "res://scenes/minigames/story_puzzle.tscn",
                 "config": {
                   "title": "Buổi chiều ấy đã diễn ra thế nào?",
-                  "instruction": "Chọn ba thẻ theo thứ tự thời gian. Bạn có thể đọc lại nguồn trên mỗi thẻ.",
+                  "instruction": "Chọn ba thẻ theo thứ tự chuyện xảy ra trước đến sau. Mỗi thẻ ghi rõ ai đã xác nhận thông tin.",
                   "items": [
                     "Mẹ xác nhận: lời nhắn về ăn cơm · 17:12",
                     "Gia đình được báo: tai nạn · khoảng 17:20",
@@ -196,7 +213,7 @@
                     1
                   ],
                   "mode": "order",
-                  "hint": "Cuộc cãi nhau xảy ra buổi sáng. Lời nhắn về ăn cơm được gửi sau đó, trước tai nạn."
+                  "hint": "Hai ba con cãi nhau vào buổi sáng. Sau đó Vy nhắn về ăn cơm, rồi mới xảy ra tai nạn."
                 },
                 "set": {
                   "memory_verified": true
@@ -205,29 +222,30 @@
                   "id": "last_afternoon",
                   "title": "Buổi chiều cuối cùng",
                   "source": "Gia đình xác nhận",
-                  "text": "Cãi nhau buổi sáng → lời nhắn về ăn cơm lúc 17:12 → tai nạn khoảng 17:20. Vy vẫn định về nhà. Bố chưa từng cấm Vy trở về."
+                  "text": "Cãi nhau buổi sáng → nhắn về ăn cơm lúc 17:12 → tai nạn khoảng 17:20. Vy vẫn định về nhà. Ba chưa bao giờ cấm Vy về."
                 }
               }
             },
             {
               "speaker": "Kiên",
-              "text": "Cháu đã nghĩ một câu nói lúc giận có thể là điều cuối cùng bạn muốn nói."
+              "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
+              "text": "Con cứ tưởng câu nói lúc giận đó là lời cuối cùng bạn muốn nói."
             },
             {
               "speaker": "Thầy giáo",
-              "text": "Thầy cũng cứ tự nhốt mình trong đúng một câu ấy."
+              "text": "Thầy cũng cứ nghĩ mãi về đúng câu đó, không thoát ra được."
             },
             {
               "speaker": "Mẹ Vy",
-              "text": "Nhưng con bé còn nhắn về ăn cơm mà."
+              "text": "Nhưng sau đó con bé vẫn nhắn về ăn cơm mà."
             },
             {
               "type": "narration",
-              "text": "Kiên xin phép dùng một câu mẹ Vy đọc cho bức tranh tưởng nhớ. Cô đồng ý."
+              "text": "Kiên xin phép dùng một câu mẹ Vy đọc để đưa vào bức tranh tưởng nhớ. Cô đồng ý."
             },
             {
               "speaker": "Mẹ Vy",
-              "text": "Vy ơi, mẹ nghe con. Con không cần xin lỗi vì muốn về nhà."
+              "text": "Vy ơi, mẹ nghe con nè. Con muốn về nhà thì đâu có gì phải xin lỗi."
             }
           ],
           "next": "c4hub"
@@ -238,7 +256,7 @@
           "dialogues": [
             {
               "type": "narration",
-              "text": "Trong giấc ngủ ngắn, Kiên gặp Vy bên bàn ngoài hiên trường. Vòng thật vẫn ở cạnh giường; đây là bản sao trong mơ.",
+              "text": "Trong giấc ngủ ngắn, Kiên gặp Vy bên chiếc bàn ngoài hiên trường. Chiếc vòng thật vẫn nằm cạnh giường; chiếc vòng ở đây chỉ có trong mơ.",
               "time": "17:20",
               "events": [
                 {
@@ -254,40 +272,47 @@
             },
             {
               "speaker": "Vy",
-              "text": "Tớ nhớ mình đã nói bố đừng quản tớ nữa. Tớ cứ nghĩ câu ấy làm mọi thứ thành ra thế này."
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
+              "text": "Mình nhớ đã nói ba đừng quản mình nữa. Mình cứ nghĩ tại câu đó mà mọi chuyện mới ra nông nỗi này."
             },
             {
               "speaker": "Kiên",
-              "text": "Cậu cãi nhau với bố buổi sáng. Đến 17:12, cậu vẫn nhắn mẹ để phần canh. Cậu đã định về.",
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
+              "text": "Bạn cãi nhau với ba hồi sáng. Tới 17:12, bạn vẫn nhắn mẹ chừa canh cho mình. Lúc đó bạn vẫn định về nhà mà.",
               "when": {
                 "memory_verified": true
               }
             },
             {
               "speaker": "Kiên",
-              "text": "Tớ chưa kiểm tra được phần này. Tớ không muốn nói thay bố mẹ cậu.",
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
+              "text": "Chuyện này mình chưa kiểm tra được. Mình không muốn nói thay ba mẹ bạn.",
               "when": {
                 "memory_verified": false
               }
             },
             {
               "speaker": "Kiên",
-              "text": "Nếu có một lời gửi về, cậu muốn nói gì?"
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
+              "text": "Nếu được gửi một lời về nhà, bạn muốn nói gì?"
             },
             {
               "speaker": "Vy",
-              "text": "Tớ nên xin lỗi trước chứ?"
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
+              "text": "Chắc mình phải xin lỗi trước hả?"
             },
             {
               "type": "narration",
-              "text": "Trang giấy trước Vy vẫn trắng.",
+              "text": "Trang giấy trước mặt Vy vẫn còn trắng.",
               "choices": [
                 {
-                  "text": "Cậu muốn nói gì cũng được. Tớ sẽ nghe.",
+                  "text": "Bạn muốn nói gì cũng được. Mình nghe nè.",
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "go": "c4b1"
                 },
                 {
-                  "text": "Cứ viết rằng mọi chuyện đều ổn để mọi người đỡ buồn.",
+                  "text": "Cứ viết là mọi chuyện đều ổn, để mọi người đỡ buồn.",
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "go": "c4b2",
                   "when": {
                     "farewell_ready": false
@@ -295,6 +320,7 @@
                 },
                 {
                   "text": "Đọc lại lời Vy đã chọn",
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "go": "c4reread",
                   "when": {
                     "farewell_ready": true
@@ -311,30 +337,34 @@
           "dialogues": [
             {
               "speaker": "Vy",
-              "text": "Nhưng mọi chuyện đâu có ổn."
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
+              "text": "Nhưng mọi chuyện có ổn đâu."
             },
             {
               "speaker": "Kiên",
-              "text": "Vậy không cần viết là ổn."
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
+              "text": "Vậy thì đâu cần viết là ổn."
             },
             {
               "speaker": "Vy",
-              "text": "Tớ giận bố. Rồi lại nhớ bố. Hai chuyện ấy có được ở cùng nhau không?"
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
+              "text": "Mình giận ba. Mà cũng nhớ ba nữa. Vừa giận vừa nhớ như vậy có được không?"
             },
             {
               "speaker": "Kiên",
-              "text": "Tớ nghĩ có."
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
+              "text": "Mình nghĩ là được chứ."
             },
             {
               "type": "narration",
-              "text": "Sắp lời chào của Vy",
+              "text": "Ghép các ý trong lời chào của Vy",
               "event": {
                 "type": "minigame",
                 "id": "c4_letter",
                 "scene": "res://scenes/minigames/story_puzzle.tscn",
                 "config": {
-                  "title": "Sắp lời chào của Vy",
-                  "instruction": "Chọn ba ý theo thứ tự bất kỳ. Đây là lời Vy muốn nói.",
+                  "title": "Ghép các ý trong lời chào của Vy",
+                  "instruction": "Chọn đủ ba ý, không cần theo thứ tự. Đây là những điều Vy muốn nói.",
                   "items": [
                     "Nhớ gia đình",
                     "Điều chưa kịp nói",
@@ -346,30 +376,33 @@
                     2
                   ],
                   "mode": "select",
-                  "hint": "Không có thứ tự đúng sai. Cả ba ý đều thuộc về Vy."
+                  "hint": "Chọn ý nào trước cũng được. Vy muốn nói cả ba ý này."
                 }
               }
             },
             {
               "speaker": "Vy",
-              "text": "Mẹ ơi, hôm ấy con đã định về. Bố ơi, con vẫn muốn cho bố xem bức tranh. Con còn giận nhiều điều, nhưng con chưa bao giờ muốn không còn là con của bố mẹ. Nếu bố mẹ nhớ con, thỉnh thoảng cứ kể chuyện về con nhé. Cả những chuyện con làm bố mẹ bực nữa. Con chào bố mẹ."
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
+              "text": "Mẹ ơi, hôm đó con đã định về nhà. Ba ơi, con vẫn muốn cho ba coi bức tranh. Con còn giận nhiều chuyện, nhưng chưa bao giờ con muốn mình không còn là con của ba mẹ. Lúc nào nhớ con, ba mẹ cứ kể chuyện về con nha. Kể cả mấy chuyện con làm ba mẹ bực nữa. Con chào ba mẹ."
             },
             {
               "speaker": "Kiên",
-              "text": "Cậu muốn sửa gì không?"
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
+              "text": "Bạn có muốn sửa gì không?"
             },
             {
               "speaker": "Vy",
-              "text": "Không. Lần này đúng là điều tớ muốn nói."
+              "avatar": "res://assets/avatars/Avatar_Vy.png",
+              "text": "Không. Lần này đúng là những gì mình muốn nói rồi."
             },
             {
               "type": "narration",
-              "text": "Mẹ ơi, hôm ấy con đã định về. Bố ơi, con vẫn muốn cho bố xem bức tranh. Con còn giận nhiều điều, nhưng con chưa bao giờ muốn không còn là con của bố mẹ. Nếu bố mẹ nhớ con, thỉnh thoảng cứ kể chuyện về con nhé. Cả những chuyện con làm bố mẹ bực nữa. Con chào bố mẹ.",
+              "text": "Mẹ ơi, hôm đó con đã định về nhà. Ba ơi, con vẫn muốn cho ba coi bức tranh. Con còn giận nhiều chuyện, nhưng chưa bao giờ con muốn mình không còn là con của ba mẹ. Lúc nào nhớ con, ba mẹ cứ kể chuyện về con nha. Kể cả mấy chuyện con làm ba mẹ bực nữa. Con chào ba mẹ.",
               "clue": {
                 "id": "farewell",
                 "title": "Lời chào Vy tự viết",
                 "source": "Gặp trong mơ, chép từ trí nhớ",
-                "text": "Mẹ ơi, hôm ấy con đã định về. Bố ơi, con vẫn muốn cho bố xem bức tranh. Con còn giận nhiều điều, nhưng con chưa bao giờ muốn không còn là con của bố mẹ. Nếu bố mẹ nhớ con, thỉnh thoảng cứ kể chuyện về con nhé. Cả những chuyện con làm bố mẹ bực nữa. Con chào bố mẹ."
+                "text": "Mẹ ơi, hôm đó con đã định về nhà. Ba ơi, con vẫn muốn cho ba coi bức tranh. Con còn giận nhiều chuyện, nhưng chưa bao giờ con muốn mình không còn là con của ba mẹ. Lúc nào nhớ con, ba mẹ cứ kể chuyện về con nha. Kể cả mấy chuyện con làm ba mẹ bực nữa. Con chào ba mẹ."
               },
               "set": {
                 "farewell_ready": true
@@ -377,7 +410,7 @@
             },
             {
               "type": "narration",
-              "text": "Kiên tỉnh và chép lời nhắn vào sổ, ghi rõ nguồn là giấc mơ.",
+              "text": "Kiên tỉnh dậy, chép lời nhắn vào sổ và ghi rõ mình nghe được trong mơ.",
               "time": "14:00",
               "events": [
                 {
@@ -400,18 +433,19 @@
           "dialogues": [
             {
               "speaker": "Vy",
-              "text": "Mẹ ơi, hôm ấy con đã định về. Bố ơi, con vẫn muốn cho bố xem bức tranh. Con còn giận nhiều điều, nhưng con chưa bao giờ muốn không còn là con của bố mẹ. Nếu bố mẹ nhớ con, thỉnh thoảng cứ kể chuyện về con nhé. Cả những chuyện con làm bố mẹ bực nữa. Con chào bố mẹ."
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
+              "text": "Mẹ ơi, hôm đó con đã định về nhà. Ba ơi, con vẫn muốn cho ba coi bức tranh. Con còn giận nhiều chuyện, nhưng chưa bao giờ con muốn mình không còn là con của ba mẹ. Lúc nào nhớ con, ba mẹ cứ kể chuyện về con nha. Kể cả mấy chuyện con làm ba mẹ bực nữa. Con chào ba mẹ."
             },
             {
               "type": "narration",
-              "text": "Kiên giữ nguyên lời Vy đã tự chọn. Không cần làm lại phần sắp ý."
+              "text": "Kiên giữ nguyên lời Vy đã chọn, không cần ghép các ý lại lần nữa."
             }
           ],
           "next": "c4hub"
         },
         {
           "id": "c4b2",
-          "location": "Một câu nói không vừa",
+          "location": "Lời viết chưa đúng ý",
           "dialogues": [
             {
               "type": "narration",
@@ -419,15 +453,18 @@
             },
             {
               "speaker": "Vy",
-              "text": "Nhưng tớ không thấy thế."
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
+              "text": "Nhưng mình đâu có thấy vậy."
             },
             {
               "speaker": "Kiên",
-              "text": "Tớ chỉ muốn mọi người đỡ đau."
+              "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
+              "text": "Mình chỉ muốn mọi người đỡ đau lòng thôi."
             },
             {
               "speaker": "Vy",
-              "text": "Tớ biết. Nhưng đây nghe giống lời cậu hơn."
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
+              "text": "Mình biết. Nhưng nghe giống lời của bạn hơn là của mình."
             },
             {
               "type": "narration",
@@ -435,10 +472,12 @@
               "choices": [
                 {
                   "text": "Xin lỗi, để Vy tự viết",
+                  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
                   "go": "c4b1"
                 },
                 {
                   "text": "Tạm dừng, quay lại sau",
+                  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
                   "go": "c4hub"
                 }
               ]
@@ -452,7 +491,7 @@
           "dialogues": [
             {
               "type": "narration",
-              "text": "Mẹ biết Kiên gặp ác mộng, đồng ý ngồi gần khi cậu nghỉ. Thư ở lại tới lúc mẹ về.",
+              "text": "Biết Kiên gặp ác mộng, mẹ đồng ý ngồi gần lúc cậu nghỉ. Thư ở lại với Kiên cho tới khi mẹ về.",
               "time": "16:00",
               "events": [
                 {
@@ -468,48 +507,57 @@
             },
             {
               "speaker": "Kiên",
-              "text": "Một cái tên, một âm thanh, một đồ vật… Ông ấy đã nhắc vậy.",
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
+              "text": "Một cái tên, một âm thanh, một món đồ… Ông thầy bói có nhắc vậy.",
               "when": {
                 "heard_anchor_hint": true
               }
             },
             {
               "speaker": "Thư",
-              "text": "Hai lần trước cậu đều tỉnh khi nghe mẹ gọi. Mình thử nhớ những thứ quen thuộc với cậu nhé.",
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
+              "text": "Hai lần trước ông đều tỉnh khi nghe mẹ gọi. Tụi mình thử nhớ mấy thứ quen thuộc với ông nha.",
               "when": {
                 "heard_anchor_hint": false
               }
             },
             {
               "speaker": "Thư",
-              "text": "Chọn những thứ thuộc về cậu. Đừng dùng chiếc vòng của Vy làm dấu đường về cho mình."
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
+              "text": "Chọn thứ gì của ông đó. Đừng lấy chiếc vòng của Vy làm dấu để tìm đường về nhà mình."
             },
             {
               "speaker": "Kiên",
-              "text": "Tên tớ, tiếng mẹ gọi… còn đồ vật?"
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
+              "text": "Tên tui, tiếng mẹ gọi… Còn món đồ thì lấy gì?"
             },
             {
               "speaker": "Thư",
-              "text": "Cái móc khóa cậu cứ quên mang ấy."
+              "avatar": "res://assets/avatars/Avatar_Thu.png",
+              "text": "Cái móc khóa ông hay quên đem theo đó."
             },
             {
               "speaker": "Kiên",
-              "text": "Nó chưa từng làm được việc gì lớn thế."
+              "avatar": "res://assets/avatars/Avatar_Kien.png",
+              "text": "Từ trước giờ nó có làm chuyện gì lớn vậy đâu."
             },
             {
               "speaker": "Thư",
-              "text": "Hôm nay cho nó cơ hội."
+              "avatar": "res://assets/avatars/Avatar_Thu.png",
+              "text": "Bữa nay cho nó thử đi."
             },
             {
               "type": "narration",
-              "text": "Chuẩn bị cách trở lại trước khi đi xa hơn.",
+              "text": "Chuẩn bị cách quay về trước khi đi xa hơn.",
               "choices": [
                 {
-                  "text": "Chuẩn bị và thử ba điểm neo",
+                  "text": "Chuẩn bị và thử ba dấu hiệu để tìm đường về",
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "go": "c4anchor"
                 },
                 {
-                  "text": "Con tự lo được, chưa cần chuẩn bị",
+                  "text": "Tự lo được, chưa cần chuẩn bị",
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "go": "c4hub"
                 }
               ]
@@ -530,7 +578,7 @@
                 "scene": "res://scenes/minigames/story_puzzle.tscn",
                 "config": {
                   "title": "Đường về của Kiên",
-                  "instruction": "Chọn ba thứ thuộc về Kiên để mang vào trí nhớ.",
+                  "instruction": "Chọn ba điều quen thuộc với Kiên để ghi nhớ trước khi ngủ.",
                   "items": [
                     "Tên Kiên",
                     "Chiếc vòng của Vy",
@@ -543,14 +591,14 @@
                     3
                   ],
                   "mode": "select",
-                  "hint": "Chiếc vòng kết nối với Vy. Chọn tên Kiên, tiếng mẹ gọi và chìa khóa nhà Kiên.",
-                  "success": "Mẹ đọc câu gọi quen thuộc. Kiên đặt chìa khóa bên giường và thử một giấc ngủ ngắn."
+                  "hint": "Chiếc vòng gắn với Vy. Để tìm đường về cho Kiên, chọn tên cậu, tiếng mẹ gọi và chìa khóa nhà cậu.",
+                  "success": "Mẹ gọi Kiên bằng câu quen thuộc. Cậu đặt chìa khóa bên giường rồi thử ngủ một lát."
                 }
               }
             },
             {
               "type": "narration",
-              "text": "Mẹ ngồi gần. Kiên thử nhận ra đường về trong một giấc mơ ngắn.",
+              "text": "Mẹ ngồi gần bên. Kiên ngủ một lát để thử nhận ra đường về trong mơ.",
               "time": "17:20",
               "events": [
                 {
@@ -573,7 +621,7 @@
                 "scene": "res://scenes/minigames/story_puzzle.tscn",
                 "config": {
                   "title": "Thử đường trở lại",
-                  "instruction": "Nhận ra đúng ba dấu hiệu vừa chuẩn bị.",
+                  "instruction": "Chọn đúng ba dấu hiệu Kiên vừa ghi nhớ.",
                   "items": [
                     "Kiên",
                     "Tiếng nước ven mương",
@@ -586,7 +634,7 @@
                     3
                   ],
                   "mode": "select",
-                  "hint": "Tên mình, tiếng mẹ gọi và chiếc chìa khóa thuộc về đời sống của Kiên."
+                  "hint": "Tên Kiên, tiếng mẹ gọi và chìa khóa nhà là những điều quen thuộc của cậu ngoài đời."
                 },
                 "set": {
                   "anchor_ready": true
@@ -595,13 +643,13 @@
                   "id": "anchor",
                   "title": "Đường về của Kiên",
                   "source": "Đã thử trong truyện",
-                  "text": "Tên Kiên, tiếng mẹ gọi ăn cơm, chìa khóa nhà Kiên. Kiên đã thử nhận ra ba dấu hiệu trong giấc ngủ ngắn và tỉnh lại."
+                  "text": "Tên Kiên, tiếng mẹ gọi ăn cơm và chìa khóa nhà Kiên. Cậu đã nhận ra cả ba dấu hiệu trong lần ngủ thử và tỉnh lại được."
                 }
               }
             },
             {
               "type": "narration",
-              "text": "Kiên tỉnh. Mẹ vẫn ngồi gần, chiếc chìa khóa còn ở cạnh giường.",
+              "text": "Kiên tỉnh dậy. Mẹ vẫn ngồi gần bên, chiếc chìa khóa còn nằm cạnh giường.",
               "time": "16:20",
               "events": [
                 {
@@ -633,10 +681,12 @@
               "choices": [
                 {
                   "text": "Chuẩn bị thêm",
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "go": "c4hub"
                 },
                 {
                   "text": "Đi tiếp",
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "go": "c4s2"
                 }
               ]
@@ -650,23 +700,27 @@
           "dialogues": [
             {
               "speaker": "Thư",
-              "text": "Cậu không cần chứng minh mọi thứ với tớ trong một đêm."
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
+              "text": "Ông đâu cần chứng minh hết mọi chuyện với tui trong một đêm."
             },
             {
               "speaker": "Kiên",
-              "text": "Tớ biết."
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
+              "text": "Tui biết mà."
             },
             {
               "speaker": "Thư",
-              "text": "Vậy mai nhớ đến trường đúng giờ."
+              "avatar": "res://assets/avatars/Avatar_Thu.png",
+              "text": "Vậy mai nhớ đi học đúng giờ nha."
             },
             {
               "speaker": "Kiên",
-              "text": "Câu này khó hơn phần chuẩn bị vừa rồi đấy."
+              "avatar": "res://assets/avatars/Avatar_Kien.png",
+              "text": "Cái này còn khó hơn mấy chuyện chuẩn bị hồi nãy nữa đó."
             },
             {
               "type": "narration",
-              "text": "Thư về nhà. Mẹ kéo ghế ngồi ngoài cửa phòng. Kiên đặt vòng bên giường."
+              "text": "Thư về nhà. Mẹ kéo ghế ngồi ngoài cửa phòng, còn Kiên đặt chiếc vòng bên giường."
             },
             {
               "type": "narration",
@@ -677,7 +731,7 @@
             },
             {
               "type": "narration",
-              "text": "Tiếng quạt tắt dần. Đồng hồ 17 giờ 20 rơi mất kim phút. Vy đứng trước cổng trường chỉ còn một nửa.",
+              "text": "Tiếng quạt nhỏ dần rồi tắt. Chiếc đồng hồ chỉ 17 giờ 20 rơi mất kim phút. Cổng trường chỉ còn lại một nửa. Vy đứng ngay trước cổng.",
               "time": "17:20",
               "events": [
                 {

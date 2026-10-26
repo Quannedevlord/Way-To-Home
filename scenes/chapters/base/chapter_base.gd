@@ -77,6 +77,7 @@ var _current_scene_id := ""
 # Số dòng đã dựng trong cảnh giúp show_current_line() không thêm trùng dòng hiện tại.
 var _lines_shown := 0
 var _last_speaker := ""
+var _last_avatar_path := ""
 var _inline_choice_resolved := false
 # Tween/lớp phủ là trạng thái hiển thị tạm; save chỉ giữ dữ liệu truyện và alpha fade cuối.
 var _background_tween: Tween
@@ -239,6 +240,8 @@ func _normalize_choices(choices: Array) -> Array:
 		if not item is Dictionary:
 			continue
 		var choice: Dictionary = item.duplicate(true)
+		if choice.has("avatar"):
+			choice["avatar"] = _remap_asset(str(choice["avatar"]))
 		if choice.get("dialogues") is Array:
 			choice["dialogues"] = _normalize_script(choice["dialogues"])
 		out.append(choice)
@@ -599,7 +602,7 @@ func fade_screen(direction: String, duration: float = 0.35) -> void:
 
 
 ## Tạo một bong bóng thoại từ speaker, message và avatar_path rồi thêm vào chat.
-## Nhân vật trong protagonist_speakers căn phải; nói liên tiếp thì ẩn tên/avatar lặp lại.
+## Nhân vật trong protagonist_speakers căn phải; chỉ ẩn avatar lặp khi người nói và biểu cảm đều giống nhau.
 ## animate bật hiệu ứng xuất hiện; hình dáng và animation của bubble nằm trong chat_message.gd.
 func _append_dialogue(speaker: String, message: String, avatar_path: String = "", animate: bool = true) -> void:
 	var msg := CHAT_MESSAGE_SCENE.instantiate()
@@ -610,8 +613,9 @@ func _append_dialogue(speaker: String, message: String, avatar_path: String = ""
 	if avatar_path != "" and ResourceLoader.exists(avatar_path):
 		avatar_tex = load(avatar_path)
 	var align_right := speaker in protagonist_speakers
-	var compact := speaker == _last_speaker and speaker != ""
+	var compact := speaker == _last_speaker and speaker != "" and avatar_path == _last_avatar_path
 	msg.setup_dialogue(speaker, message, avatar_tex, align_right, compact)
+	_last_avatar_path = avatar_path
 	if animate:
 		msg.prepare_entrance()
 	chat_feed.add_child(msg)
@@ -925,7 +929,10 @@ func _on_choice_selected(choice: Dictionary) -> void:
 	_inline_choice_resolved = true
 	var chosen_text := str(choice.get("text", choice.get("description", "")))
 	if chosen_text != "":
-		_append_line({"type": "dialogue", "speaker": choice_speaker, "message": chosen_text})
+		var reply := {"type": "dialogue", "speaker": choice_speaker, "message": chosen_text}
+		if choice.has("avatar"):
+			reply["avatar"] = choice["avatar"]
+		_append_line(reply)
 		call_deferred("_scroll_to_bottom")
 		_last_speaker = choice_speaker
 
