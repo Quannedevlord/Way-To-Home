@@ -16,7 +16,7 @@
 			  "events": [
 				{
 				  "type": "change_background",
-				  "path": "res://assets/school.png",
+				  "path": "res://Giao_Dien/bg_san_truong_sang.png",
 				  "duration": 0.2
 				},
 				{
@@ -32,73 +32,67 @@
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
-			  "text": "Tiêu rồi! Sao bữa nào cái cổng trường cũng xa dữ vậy!"
+			  "text": "Thôi tiêu rồi! Sao hôm nào cái cổng cũng xa thế này!"
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
-			  "text": "Dạ, em xin lỗi thầy, em tới trễ!"
+			  "text": "Em xin lỗi thầy, em đi muộn ạ!",
+			  "event": {
+				"type": "change_background",
+				"path": "res://Giao_Dien/bg_lop_hoc_sang.png",
+				"duration": 0.4
+			  }
 			},
 			{
 			  "speaker": "Thầy giáo",
-			  "text": "Bữa nay lại đi trễ nữa hả Kiên?"
+			  "text": "Hôm nay lại đi muộn nữa à, Kiên?"
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "text": "Dạ, tại…"
 			},
 			{
 			  "speaker": "Thầy giáo",
-			  "text": "Về chỗ đi em. Lần sau nhớ tới đúng giờ."
+			  "text": "Về chỗ đi. Lần sau đến đúng giờ."
 			},
 			{
 			  "speaker": "Thư",
-			  "avatar": "res://assets/avatars/Avatar_Thu.png",
-			  "text": "Vẫn y như mọi bữa ha."
+			  "text": "Vẫn như mọi khi nhỉ."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
-			  "text": "Đừng chọc tui nữa. Bữa nay tui chạy hết sức rồi đó."
+			  "text": "Đừng trêu tớ nữa. Hôm nay tớ đã chạy nhanh lắm rồi."
 			},
 			{
 			  "speaker": "Thư",
-			  "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
-			  "text": "Chiều bốn đứa mình họp nhóm làm báo cáo ở phòng cuối dãy nha. Đừng quên đó."
+			  "text": "Chiều họp nhóm làm báo cáo. Bốn đứa mình, phòng học cuối dãy. Đừng quên."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
-			  "text": "Lại phải ở lại nữa hả?"
+			  "text": "Lại ở lại nữa à?"
 			},
 			{
 			  "speaker": "Thư",
-			  "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
-			  "text": "Phần hình của ông còn chưa xong kìa."
+			  "text": "Phần hình của cậu vẫn chưa xong."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien.png",
-			  "text": "Rồi, rồi. Lần này tui nhớ mà."
+			  "text": "Rồi, rồi. Lần này tớ nhớ."
 			},
 			{
 			  "type": "narration",
-			  "text": "Thầy quay lên bảng, cầm viên phấn đứng yên vài giây rồi mới viết. Thư nhìn theo."
+			  "text": "Thầy quay lên bảng. Viên phấn nằm yên trong tay thầy vài giây rồi mới bắt đầu viết. Thư nhìn theo."
 			},
 			{
 			  "type": "narration",
-			  "text": "Trên bảng thông báo cạnh bàn có dán một tờ giấy mới.",
+			  "text": "Bảng thông báo bên cạnh bàn có một tờ giấy mới.",
 			  "choices": [
 				{
 				  "text": "Xem thông báo trưng bày tranh",
-				  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 				  "go": "c1notice"
 				},
 				{
 				  "text": "Ngồi vào bàn",
-				  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 				  "go": "c1s2"
 				}
 			  ]
@@ -112,7 +106,7 @@
 		  "dialogues": [
 			{
 			  "type": "narration",
-			  "text": "Trường đang nhận tranh học sinh vẽ để tổ chức trưng bày. Quanh dòng tiêu đề trên thông báo có vẽ những ô cửa sổ."
+			  "text": "Trường đang nhận tranh của học sinh cho một buổi trưng bày. Những ô cửa sổ được vẽ quanh dòng tiêu đề."
 			}
 		  ],
 		  "next": "c1s2"
@@ -123,12 +117,12 @@
 		  "dialogues": [
 			{
 			  "type": "narration",
-			  "text": "17 giờ 05. Nhóm bốn người vừa họp xong. Hai bạn kia về trước, còn Thư ở lại chờ Kiên dọn đồ.",
+			  "text": "17 giờ 05. Buổi họp nhóm bốn người đã xong. Hai bạn khác về trước; Thư chờ Kiên thu dọn.",
 			  "time": "17:05",
 			  "events": [
 				{
 				  "type": "change_background",
-				  "path": "res://assets/class.png",
+				  "path": "res://Giao_Dien/bg_lop_hoc_chieu.png",
 				  "duration": 0.2
 				},
 				{
@@ -139,23 +133,19 @@
 			},
 			{
 			  "speaker": "Thư",
-			  "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
-			  "text": "Tui gửi phần sửa vô nhóm rồi. Ông nhớ coi nha."
+			  "text": "Tớ gửi phần sửa vào nhóm rồi. Cậu nhớ xem."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien.png",
-			  "text": "Ừ, bà về trước đi. Để tui đóng cửa."
+			  "text": "Ừ. Cậu về trước đi, tớ đóng cửa."
 			},
 			{
 			  "speaker": "Thư",
-			  "avatar": "res://assets/avatars/Avatar_Thu.png",
-			  "text": "Đừng có ngủ luôn ở đây nha."
+			  "text": "Đừng ngủ luôn ở đây đấy."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien.png",
-			  "text": "Bà nghĩ tui là ai vậy trời?"
+			  "text": "Cậu nghĩ tớ là ai chứ?"
 			},
 			{
 			  "type": "narration",
@@ -185,28 +175,26 @@
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
-			  "text": "Ủa… vòng tay của ai đây ta?"
+			  "text": "Hửm… vòng tay của ai đây?"
 			},
 			{
 			  "type": "narration",
-			  "text": "Mặt vòng có hình ngôi nhà nhỏ, phần mái bị mẻ. Bên trong có khắc chữ V, dây có nút thắt màu xanh. Khóa vòng hơi lỏng. Tiếng động ngoài sân trường bỗng im bặt trong thoáng chốc.",
+			  "text": "Mặt vòng là một ngôi nhà nhỏ, mái bị mẻ, có chữ V khắc bên trong và nút thắt xanh. Khóa hơi lỏng. Âm thanh sân trường bỗng tắt đi một nhịp.",
 			  "illustration": "res://assets/VongTay.png",
 			  "use_as_background": false
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
-			  "text": "Chắc của Thư. Để mai hỏi thử."
+			  "text": "Chắc của Thư. Mai hỏi vậy."
 			},
 			{
 			  "type": "narration",
-			  "text": "Kiên cất chiếc vòng hình ngôi nhà vào ngăn nhỏ trong cặp, định ngày mai hỏi xem của ai.",
+			  "text": "Kiên cất chiếc vòng hình ngôi nhà vào ngăn nhỏ của cặp. Cậu sẽ hỏi chủ nhân vào ngày mai.",
 			  "clue": {
 				"id": "bracelet",
 				"title": "Chiếc vòng nhặt được",
 				"source": "Quan sát ngoài đời",
-				"text": "Kiên cất chiếc vòng hình ngôi nhà vào ngăn nhỏ trong cặp, định ngày mai hỏi xem của ai."
+				"text": "Kiên cất chiếc vòng hình ngôi nhà vào ngăn nhỏ của cặp. Cậu sẽ hỏi chủ nhân vào ngày mai."
 			  },
 			  "set": {
 				"bracelet_found": true
@@ -217,16 +205,16 @@
 		},
 		{
 		  "id": "c1s3",
-		  "location": "Giấc ngủ lúc chiều tối",
+		  "location": "Một giấc ngủ lúc chiều muộn",
 		  "dialogues": [
 			{
 			  "type": "narration",
-			  "text": "18 giờ 30. Kiên đặt chiếc vòng cạnh đèn bàn. Mẹ gọi lên từ bếp.",
+			  "text": "18 giờ 30. Kiên đặt vòng cạnh đèn bàn. Mẹ gọi từ bếp.",
 			  "time": "18:30",
 			  "events": [
 				{
 				  "type": "change_background",
-				  "path": "res://assets/bedroom2.png",
+				  "path": "res://Giao_Dien/bg_phong_ngu_chieu_muon.png",
 				  "duration": 0.2
 				},
 				{
@@ -237,21 +225,20 @@
 			},
 			{
 			  "speaker": "Mẹ Kiên",
-			  "text": "Lát nữa ăn cơm nha con."
+			  "text": "Chút nữa ăn cơm nhé con."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
-			  "text": "Dạ, con nằm chút xíu thôi."
+			  "text": "Dạ. Con nằm một lát thôi."
 			},
 			{
 			  "type": "narration",
-			  "text": "Tiếng quạt chậm dần. Trên con đường quen thuộc, tiếng xe đã im bặt. Đồng hồ ở cổng trường dừng lại lúc 17 giờ 20.",
+			  "text": "Tiếng quạt chậm dần. Con đường quen thuộc không còn tiếng xe. Đồng hồ cổng trường đứng ở 17 giờ 20.",
 			  "time": "17:20",
 			  "events": [
 				{
 				  "type": "change_background",
-				  "path": "res://assets/dream.png",
+				  "path": "res://Giao_Dien/bg_mong_cong_truong_1720.png",
 				  "duration": 0.2
 				},
 				{
@@ -262,25 +249,23 @@
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
-			  "text": "Ủa, mình vừa… đi đâu vậy ta?"
+			  "text": "Mình vừa… đi đâu ấy nhỉ?"
 			},
 			{
 			  "speaker": "Giọng nữ",
-			  "text": "Bạn có nghe mình nói không?"
+			  "text": "Cậu có nghe thấy mình không?"
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
 			  "text": "Ai vậy?"
 			},
 			{
 			  "speaker": "Giọng nữ",
-			  "text": "Khoan, đừng đi! Mình cần bạn giúp."
+			  "text": "Khoan! Đừng đi. Mình cần cậu giúp."
 			},
 			{
 			  "type": "narration",
-			  "text": "Một bạn nữ mặc đồng phục bước ra khỏi bóng cây. Gió thổi, nhưng chỉ có cỏ quanh Kiên lay động."
+			  "text": "Một nữ sinh bước ra khỏi bóng cây. Gió chỉ làm cỏ quanh Kiên lay động."
 			}
 		  ],
 		  "next": "c1s4"
@@ -291,111 +276,92 @@
 		  "dialogues": [
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
-			  "text": "Đây là đâu vậy? Sao bạn lại ở đây?"
+			  "text": "Đây là đâu? Sao cậu lại ở đây?"
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
-			  "text": "Với lại… rốt cuộc bạn là gì vậy?"
+			  "text": "Và… cậu thật sự là cái gì vậy?"
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
-			  "text": "Mình là Vy. Bạn hỏi câu cuối làm mình hơi buồn đó."
+			  "text": "Mình là Vy. Câu cuối nghe hơi buồn đấy."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
-			  "text": "Xin lỗi bạn. Tại chỗ này…"
+			  "text": "Xin lỗi. Tại chỗ này…"
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_NoE.png",
-			  "text": "Mình cũng không rõ nữa. Có khi đây là giấc mơ của bạn."
+			  "text": "Tớ cũng không biết rõ. Có lẽ là giấc mơ của cậu."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
-			  "text": "Vậy là mình ngủ thiệt rồi."
+			  "text": "Vậy ra mình ngủ thật rồi."
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
-			  "text": "Nhưng mình đã ở đây từ trước rồi. Lâu lắm… hay mới có chút xíu thôi? Mình cũng không biết nữa."
+			  "text": "Nhưng tớ đã ở đây từ trước. Lâu lắm. Hay mới một lúc thôi? Tớ không biết nữa."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
-			  "text": "Bạn nói cần mình giúp chuyện gì?"
+			  "text": "Cậu bảo cần giúp đỡ?"
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
-			  "text": "Mình muốn về nhà. Mà cứ đi tới ngã rẽ kia là lại quay về cổng trường."
+			  "text": "Tớ muốn về nhà. Đi đến ngã rẽ kia là lại quay về cổng trường."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
-			  "text": "Vậy trước khi tới đây, bạn đang ở đâu?"
+			  "text": "Thế trước khi đến đây, cậu ở đâu?"
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_NoE.png",
-			  "text": "Lúc đó mới tan học. Mình đang về… Mẹ có nói tối đó nấu món mình thích."
+			  "text": "Tan học. Tớ đang về… Mẹ có nói tối ấy nấu món tớ thích."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "text": "Rồi sao nữa?"
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
-			  "text": "Có tiếng mưa. Rồi…"
+			  "text": "Có tiếng mưa. Với…"
 			},
 			{
 			  "type": "narration",
-			  "text": "Tiếng nước vọng lên. Vy ôm đầu. Chữ trên bảng tên trường bỗng biến mất trong thoáng chốc."
+			  "text": "Tiếng nước vọng lên. Vy ôm đầu; biển tên trường bị xóa trắng trong một nhịp."
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
-			  "text": "Xin lỗi. Mình không nhớ ra."
+			  "text": "Xin lỗi. Tớ không nhớ được."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
-			  "text": "Đồng phục của bạn giống trường mình."
+			  "text": "Đồng phục của cậu giống trường tớ."
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_NoE.png",
-			  "text": "Vậy có khi tụi mình ở gần nhau thiệt. Nếu bạn tìm được đường… cho mình đi chung được không?"
+			  "text": "Vậy có khi chúng mình ở gần nhau thật. Nếu cậu tìm được đường… cho tớ đi cùng được không?"
 			},
 			{
 			  "type": "narration",
 			  "text": "Vy chờ câu trả lời của Kiên.",
 			  "choices": [
 				{
-				  "text": "Mình sẽ giúp. Nhưng tụi mình phải tìm hiểu từ từ nha.",
-				  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
+				  "text": "Tớ sẽ giúp. Nhưng mình phải tìm hiểu từng chút một.",
 				  "go": "c1a",
 				  "set": {
 					"promise_vy": "help"
 				  }
 				},
 				{
-				  "text": "Bạn kể một điều để mình kiểm tra trước được không?",
-				  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
+				  "text": "Cho tớ một điều có thể kiểm chứng trước.",
 				  "go": "c1b",
 				  "set": {
 					"promise_vy": "verify"
 				  }
 				},
 				{
-				  "text": "Mình sợ quá. Mình muốn tỉnh dậy trước đã.",
-				  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
+				  "text": "Tớ sợ. Tớ muốn tỉnh lại trước.",
 				  "go": "c1c",
 				  "set": {
 					"promise_vy": "avoid"
@@ -412,23 +378,19 @@
 		  "dialogues": [
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
-			  "text": "Mình chưa hiểu chuyện gì đang xảy ra. Nhưng nếu được, mình sẽ quay lại."
+			  "text": "Tớ chưa biết chuyện gì đang xảy ra. Nhưng tớ sẽ quay lại nếu có thể."
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_Sudden.png",
-			  "text": "Thiệt hả?"
+			  "text": "Thật à?"
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien.png",
-			  "text": "Mà đừng bắt mình hứa tìm ra đường liền nha. Đi học mình còn suýt lạc vì buồn ngủ nữa."
+			  "text": "Đừng bắt tớ hứa tìm được ngay. Đường đi học tớ còn suýt lạc vì buồn ngủ."
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy.png",
-			  "text": "Vậy mình đi chậm thôi."
+			  "text": "Vậy tớ sẽ đi chậm thôi."
 			},
 			{
 			  "type": "narration",
@@ -439,46 +401,40 @@
 		},
 		{
 		  "id": "c1b",
-		  "location": "Còn nghi ngờ",
+		  "location": "Giữ sự hoài nghi",
 		  "dialogues": [
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
-			  "text": "Nếu đây là giấc mơ, có khi tỉnh dậy mình quên hết."
+			  "text": "Nếu đây là mơ, tỉnh dậy tớ có thể quên hết."
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
-			  "text": "Mình cũng sợ vậy."
+			  "text": "Tớ cũng sợ thế."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
-			  "text": "Bạn nhớ nhà có gì dễ nhận ra không?"
+			  "text": "Cậu nhớ nhà mình có gì đặc biệt không?"
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy.png",
-			  "text": "Cửa sơn màu xanh. Trước hiên có chậu hoa trắng. Mình hay vẽ nó lắm."
+			  "text": "Cửa sơn xanh. Trước hiên có một chậu hoa trắng. Tớ vẫn hay vẽ nó."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
-			  "text": "Mình sẽ thử tìm. Bạn đừng nghĩ là mình nói bạn nói dối nha."
+			  "text": "Tớ sẽ thử tìm. Cậu đừng nghĩ tớ đang gọi cậu là kẻ nói dối."
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
-			  "text": "Mình biết. Chỉ là mình không còn mấy thứ để chứng minh mình có thật."
+			  "text": "Tớ biết. Chỉ là tớ chẳng còn nhiều thứ để chứng minh mình có thật."
 			},
 			{
 			  "type": "narration",
-			  "text": "Vy nhớ nhà có cửa sơn xanh, trước hiên có chậu hoa trắng. Kiên chưa kiểm tra những chi tiết này ngoài đời.",
+			  "text": "Vy nhớ nhà có cửa sơn xanh, trước hiên có chậu hoa trắng. Chưa được đối chiếu ngoài đời.",
 			  "clue": {
 				"id": "blue_door",
 				"title": "Cửa xanh và hoa trắng",
 				"source": "Kể lại trong mơ",
-				"text": "Vy nhớ nhà có cửa sơn xanh, trước hiên có chậu hoa trắng. Kiên chưa kiểm tra những chi tiết này ngoài đời."
+				"text": "Vy nhớ nhà có cửa sơn xanh, trước hiên có chậu hoa trắng. Chưa được đối chiếu ngoài đời."
 			  }
 			}
 		  ],
@@ -490,23 +446,19 @@
 		  "dialogues": [
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
-			  "text": "Xin lỗi bạn. Mình không làm được đâu."
+			  "text": "Xin lỗi. Tớ không làm được đâu."
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
-			  "text": "Ừ… Mình làm bạn sợ hả?"
+			  "text": "Ừ… Tớ làm cậu sợ phải không?"
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
-			  "text": "Không phải chỉ vì bạn đâu. Mình sợ cả chỗ này nữa."
+			  "text": "Không phải chỉ cậu. Tất cả chỗ này."
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
-			  "text": "Nếu bạn thấy căn nhà có cửa xanh… Thôi, không sao. Bạn đi đi."
+			  "text": "Nếu cậu thấy nhà có cửa xanh… thôi, không sao. Cậu đi đi."
 			},
 			{
 			  "type": "narration",
@@ -525,17 +477,16 @@
 			},
 			{
 			  "speaker": "Vy",
-			  "avatar": "res://assets/avatars/Avatar_Vy_NoE.png",
-			  "text": "Có người gọi bạn kìa."
+			  "text": "Có người đang gọi cậu kìa."
 			},
 			{
 			  "type": "narration",
-			  "text": "Con đường như bị kéo về phía có tiếng gọi. Kiên giật mình tỉnh dậy, đụng đầu vào mép giường. Chiếc vòng ngoài đời vẫn nằm cạnh đèn bàn.",
+			  "text": "Con đường kéo về phía tiếng gọi. Kiên tỉnh dậy, va đầu vào mép giường. Vòng thật vẫn nằm cạnh đèn bàn.",
 			  "time": "19:30",
 			  "events": [
 				{
 				  "type": "change_background",
-				  "path": "res://assets/bedroom2.png",
+				  "path": "res://Giao_Dien/bg_phong_ngu_dem.png",
 				  "duration": 0.2
 				},
 				{
@@ -546,26 +497,23 @@
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
-			  "text": "Ui da… Mới nằm chút xíu mà hết cả tiếng rồi hả?"
+			  "text": "Ái da… Mới nằm một tí mà hết cả tiếng rồi à?"
 			},
 			{
 			  "speaker": "Mẹ Kiên",
-			  "text": "Mẹ gọi mấy lần rồi đó con."
+			  "text": "Mẹ gọi mấy lần rồi đấy."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
-			  "text": "Dạ, con xuống liền."
+			  "text": "Dạ, con xuống ngay."
 			},
 			{
 			  "speaker": "Kiên",
-			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "text": "Chắc tại mình mệt quá thôi."
 			},
 			{
 			  "type": "narration",
-			  "text": "Vết mẻ trên mặt vòng giống vệt sáng trong mơ. Kiên chạm vào nhưng không có gì xảy ra. Tiếng chén đũa vọng lên từ bếp."
+			  "text": "Vết mẻ trên mặt vòng giống đường sáng trong mơ. Không có hiện tượng gì khi Kiên chạm vào. Tiếng bát đũa vọng lên từ bếp."
 			}
 		  ],
 		  "next": ""

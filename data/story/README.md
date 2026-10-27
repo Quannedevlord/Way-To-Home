@@ -38,27 +38,11 @@ Mỗi file hiện có một episode chứa các cảnh. `StoryChapter.go_to_scen
 | `line.choices` | Danh sách lựa chọn, chặn đọc tiếp cho đến khi được giải quyết. |
 | `line.event`, `line.events` | Một sự kiện hoặc danh sách sự kiện chạy tuần tự. Với dữ liệu có cả hai, bộ đọc ưu tiên `events`. |
 
-## Avatar theo lời thoại
-
-Các câu thoại của Kiên, Thư, Vy và lời ghi âm của Vy có trường `avatar` riêng. Chọn ảnh theo cảm xúc của câu nói:
-
-| Tên ảnh trong `assets/avatars/` | Biểu cảm |
-| --- | --- |
-| `Avatar_Kien.png`, `Avatar_Thu.png`, `Avatar_Vy.png` | Cười nhẹ, vui hoặc nhẹ nhõm. |
-| `Avatar_*_NoE.png` | Bình thường, suy nghĩ hoặc nói chuyện nghiêm túc. |
-| `Avatar_*_Sad.png` | Buồn, lo lắng hoặc day dứt. |
-| `Avatar_*_Sudden.png` | Ngạc nhiên, giật mình hoặc hoảng hốt. |
-
-Ví dụ: `"avatar": "res://assets/avatars/Avatar_Vy_Sad.png"`. Nếu không ghi `avatar`, game dùng ảnh mặc định theo tên người nói trong scene. Giọng nói chưa rõ danh tính và nhân vật chưa có ảnh riêng vẫn dùng ảnh thay thế.
-
-Khi một nhân vật nói liên tiếp, avatar chỉ được ẩn bớt nếu biểu cảm vẫn giống câu trước. Đổi ảnh sẽ hiện lại avatar để người chơi thấy thay đổi. Lịch sử chat lưu cả đường dẫn avatar, nên tiếp tục ván đã lưu vẫn giữ biểu cảm của những câu đã đọc. Lịch sử được lưu trước khi bổ sung avatar vẫn dùng ảnh mặc định cho những dòng cũ chưa có trường này.
-
 ## Lựa chọn
 
 | Trường | Tác dụng |
 | --- | --- |
 | `text` | Chữ trên nút và câu trả lời thêm vào lịch sử khi lựa chọn được chấp nhận. |
-| `avatar` | Biểu cảm của nhân vật chính khi câu lựa chọn được thêm vào chat; được giữ qua bước xác nhận và khi lưu/tiếp tục. |
 | `description` | Mô tả bổ sung trên nút khả dụng. |
 | `when` | Quyết định có hiển thị lựa chọn hay không. |
 | `requires` | Quyết định có được bấm hay không; lựa chọn vẫn hiện khi khóa, kèm việc còn thiếu. |
