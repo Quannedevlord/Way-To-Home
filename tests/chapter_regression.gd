@@ -102,7 +102,7 @@ func _run() -> void:
 		check(is_instance_valid(chapter.get(property)), "Inspector/node: " + property)
 	check(chapter.current_story_path == MAIN_STORY and chapter.dialogue_index == 0, "Chơi mới mở đúng file và dòng đầu")
 	check(chapter.background.texture.resource_path == "res://assets/school.png", "Background đầu chương")
-	check(chapter.bgm_player.stream.resource_path.ends_with("in game3.mp3"), "Nhạc mặc định")
+	check(root.get_node("MusicManager").current_track_id == "BGM_DAILY", "Nhạc mặc định")
 	check(chapter.location_label.text == "07:50", "Ô đồng hồ hiển thị giờ từ truyện")
 	check(chapter.continue_hint.visible, "Chơi mới hiện hướng dẫn tiếp tục")
 	chapter = await resume_chapter()
@@ -120,7 +120,7 @@ func _run() -> void:
 				check(chapter.background.texture.resource_path == "res://assets/hanhLang.png", "Ảnh vòng tay chỉ nằm trong chat")
 		check(chapter.choice_overlay.visible, "Hai lựa chọn xuất hiện cuối main_story")
 		check(chapter.choice_container.get_child_count() == 2, "Giữ đủ hai lựa chọn")
-		check(chapter.bgm_player.stream.resource_path.ends_with("Dream Portal (1).mp3"), "Đổi nhạc tại giấc mơ")
+		check(root.get_node("MusicManager").current_path.ends_with("Dream Portal (1).mp3"), "Đổi nhạc tại giấc mơ")
 		chapter = await resume_chapter()
 		check(chapter.choice_overlay.visible, "Continue khi đang chờ lựa chọn")
 		var choice: Dictionary = chapter._current_line_choices()[branch_index]
@@ -137,7 +137,7 @@ func _run() -> void:
 			check(chapter._chat_history.size() == history_size, "Giữ lịch sử và lời lựa chọn ở " + branch_file)
 			check(not chapter.continue_hint.visible, "Tải lại file nhánh vẫn ẩn hướng dẫn")
 			check(chapter.background.texture.resource_path == "res://assets/dream.png", "Khôi phục background từ file trước")
-			check(chapter.bgm_player.stream.resource_path.ends_with("Dream Portal (1).mp3"), "Khôi phục nhạc từ file trước")
+			check(root.get_node("MusicManager").current_path.ends_with("Dream Portal (1).mp3"), "Khôi phục nhạc từ file trước")
 			await accept(chapter)
 		check(chapter.current_story_path.ends_with("endbranch.json"), "Nhánh nối đến endbranch")
 		for line_index in range(chapter.current_dialogues.size()):

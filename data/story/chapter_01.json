@@ -21,7 +21,7 @@
 				},
 				{
 				  "type": "change_music",
-				  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+				  "id": "BGM_DAILY"
 				}
 			  ]
 			},
@@ -106,7 +106,8 @@
 		  "dialogues": [
 			{
 			  "type": "narration",
-			  "text": "Trường đang nhận tranh của học sinh cho một buổi trưng bày. Những ô cửa sổ được vẽ quanh dòng tiêu đề."
+			  "text": "Trường đang nhận tranh của học sinh cho một buổi trưng bày. Những ô cửa sổ được vẽ quanh dòng tiêu đề.",
+				"events": [{"type": "change_music", "id": "BGM_DAILY"}]
 			}
 		  ],
 		  "next": "c1s2"
@@ -127,7 +128,7 @@
 				},
 				{
 				  "type": "change_music",
-				  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+				  "id": "BGM_DAILY"
 				}
 			  ]
 			},
@@ -219,7 +220,7 @@
 				},
 				{
 				  "type": "change_music",
-				  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+				  "id": "BGM_DAILY"
 				}
 			  ]
 			},
@@ -243,7 +244,7 @@
 				},
 				{
 				  "type": "change_music",
-				  "path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+				  "id": "BGM_DREAM"
 				}
 			  ]
 			},
@@ -276,7 +277,8 @@
 		  "dialogues": [
 			{
 			  "speaker": "Kiên",
-			  "text": "Đây là đâu? Sao cậu lại ở đây?"
+			  "text": "Đây là đâu? Sao cậu lại ở đây?",
+				"events": [{"type": "change_music", "id": "BGM_DREAM"}]
 			},
 			{
 			  "speaker": "Kiên",
@@ -378,7 +380,8 @@
 		  "dialogues": [
 			{
 			  "speaker": "Kiên",
-			  "text": "Tớ chưa biết chuyện gì đang xảy ra. Nhưng tớ sẽ quay lại nếu có thể."
+			  "text": "Tớ chưa biết chuyện gì đang xảy ra. Nhưng tớ sẽ quay lại nếu có thể.",
+				"events": [{"type": "change_music", "id": "BGM_DREAM"}]
 			},
 			{
 			  "speaker": "Vy",
@@ -405,7 +408,8 @@
 		  "dialogues": [
 			{
 			  "speaker": "Kiên",
-			  "text": "Nếu đây là mơ, tỉnh dậy tớ có thể quên hết."
+			  "text": "Nếu đây là mơ, tỉnh dậy tớ có thể quên hết.",
+				"events": [{"type": "change_music", "id": "BGM_DREAM"}]
 			},
 			{
 			  "speaker": "Vy",
@@ -446,7 +450,8 @@
 		  "dialogues": [
 			{
 			  "speaker": "Kiên",
-			  "text": "Xin lỗi. Tớ không làm được đâu."
+			  "text": "Xin lỗi. Tớ không làm được đâu.",
+				"events": [{"type": "change_music", "id": "BGM_DREAM"}]
 			},
 			{
 			  "speaker": "Vy",
@@ -473,7 +478,8 @@
 		  "dialogues": [
 			{
 			  "speaker": "Mẹ Kiên",
-			  "text": "Kiên! Xuống ăn cơm đi con!"
+			  "text": "Kiên! Xuống ăn cơm đi con!",
+				"events": [{"type": "change_music", "id": "BGM_DREAM"}]
 			},
 			{
 			  "speaker": "Vy",
@@ -491,7 +497,7 @@
 				},
 				{
 				  "type": "change_music",
-				  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+				  "id": "BGM_DAILY"
 				}
 			  ]
 			},

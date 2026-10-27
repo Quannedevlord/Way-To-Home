@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c755jlkx5v3x6"
+path="res://.godot/imported/Cautisna Espero.mp3-0d14123c17df02bb364502c0d6702350.mp3str"
+
+[deps]
+
+source_file="res://assets/backgrounds/audio/bgm/Cautisna Espero.mp3"
+dest_files=["res://.godot/imported/Cautisna Espero.mp3-0d14123c17df02bb364502c0d6702350.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

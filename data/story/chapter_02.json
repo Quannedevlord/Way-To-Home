@@ -21,7 +21,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_DAILY"
                 }
               ]
             },
@@ -100,7 +100,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_DAILY"
                 }
               ]
             },
@@ -171,7 +171,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_DAILY"
                 }
               ]
             },
@@ -242,7 +242,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+                  "id": "BGM_DREAM"
                 }
               ]
             },
@@ -396,7 +396,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_DAILY"
                 }
               ]
             },
@@ -447,7 +447,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_DAILY"
                 }
               ]
             },
@@ -521,7 +521,8 @@
           "dialogues": [
             {
               "speaker": "Thầy bói",
-              "text": "Trước khi ngủ, thử ghi lại một cái tên, một âm thanh, một đồ vật quen thuộc. Nhưng vẫn phải hỏi người thật, việc thật trước."
+              "text": "Trước khi ngủ, thử ghi lại một cái tên, một âm thanh, một đồ vật quen thuộc. Nhưng vẫn phải hỏi người thật, việc thật trước.",
+              "events": [{"type": "change_music", "id": "BGM_DAILY"}]
             },
             {
               "type": "narration",
@@ -542,7 +543,8 @@
           "dialogues": [
             {
               "type": "narration",
-              "text": "Mẹ đi ngang gọi Kiên về. Mẹ vừa dự đám tang con gái một người bạn cũ. Kiên cho mẹ xem hộp cơm."
+              "text": "Mẹ đi ngang gọi Kiên về. Mẹ vừa dự đám tang con gái một người bạn cũ. Kiên cho mẹ xem hộp cơm.",
+              "events": [{"type": "change_music", "id": "BGM_DAILY"}]
             },
             {
               "speaker": "Mẹ Kiên",
@@ -575,7 +577,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_DAILY"
                 }
               ]
             },
@@ -646,7 +648,8 @@
           "dialogues": [
             {
               "speaker": "Kiên",
-              "text": "Tớ đã gặp một bạn tên Vy trong mơ, trước khi nghe mẹ kể chuyện đám tang."
+              "text": "Tớ đã gặp một bạn tên Vy trong mơ, trước khi nghe mẹ kể chuyện đám tang.",
+              "events": [{"type": "change_music", "id": "BGM_DAILY"}]
             },
             {
               "speaker": "Thư",
@@ -661,7 +664,8 @@
           "dialogues": [
             {
               "speaker": "Thư",
-              "text": "Tớ sẽ hỏi cô. Cậu đừng đăng ảnh kèm tên người mất lên nhóm lớp nhé."
+              "text": "Tớ sẽ hỏi cô. Cậu đừng đăng ảnh kèm tên người mất lên nhóm lớp nhé.",
+              "events": [{"type": "change_music", "id": "BGM_INVESTIGATION"}]
             }
           ],
           "next": "c2s5"
@@ -682,7 +686,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+                  "id": "BGM_DREAM"
                 }
               ],
               "when": {
@@ -769,7 +773,8 @@
               "text": "Kiên xem lại bản đồ, thấy đường viền quanh ngôi nhà giống mặt vòng.",
               "when": {
                 "route2": "sleep"
-              }
+              },
+              "events": [{"type": "change_music", "id": "BGM_INVESTIGATION"}]
             },
             {
               "speaker": "Kiên",
@@ -790,7 +795,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_INVESTIGATION"
                 }
               ]
             },

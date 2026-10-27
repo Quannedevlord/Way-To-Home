@@ -13,6 +13,16 @@ def validate():
     total_scenes = total_lines = 0
     puzzle_ids = set()
     checkpoints = set()
+    music = json.loads((ROOT / 'data/audio/music.json').read_text(encoding='utf-8'))
+    tracks = music['tracks']
+    assert music['crossfade_seconds'] >= 0
+    assert set(tracks) == {'BGM_DAILY', 'BGM_DREAM', 'BGM_INVESTIGATION',
+                           'BGM_GRIEF', 'BGM_TRUST', 'BGM_FINAL_ROAD',
+                           *(f'BGM_ENDING_E{i}' for i in range(1, 5))}
+    for track_id, track in tracks.items():
+        assert isinstance(track['loop'], bool), track_id
+        if track['path']:
+            assert (ROOT / track['path'].removeprefix('res://')).is_file(), track_id
     expected_ends = {1: {'c1s5'}, 2: {'c2s5'}, 3: {'c3truth'},
                      4: {'c4s2'}, 5: {'e1', 'e2', 'e3', 'e4'}}
 
@@ -55,6 +65,9 @@ def validate():
                 # Câu đố phải có ID duy nhất toàn chiến dịch và đáp án nằm trong chỉ số items.
                 events = line.get('events', [line['event']] if 'event' in line else [])
                 for event in events:
+                    if event['type'] == 'change_music':
+                        assert event['id'] in tracks, event
+                        assert 'path' not in event, 'Campaign cues must use configured IDs'
                     if event['type'] != 'minigame':
                         continue
                     assert event['id'] not in puzzle_ids, event['id']
@@ -77,6 +90,7 @@ def validate():
     assert checkpoints == {'preparation', 'final_choice'}
     print(f'STORY DATA: {total_scenes} reachable scenes, {total_lines} lines, '
           f'{len(puzzle_ids)} puzzles; all targets and assets valid')
+    print('MUSIC: unassigned IDs: ' + ', '.join(key for key, value in tracks.items() if not value['path']))
 
 
 if __name__ == '__main__':

@@ -4,7 +4,6 @@
 
 [ext_resource type="PackedScene" path="res://scenes/chapters/base/chapter_base.tscn" id="1_base"]
 [ext_resource type="Script" path="res://scenes/chapters/chapter_02/chapter2.gd" id="2_script"]
-[ext_resource type="AudioStream" path="res://assets/backgrounds/audio/bgm/in game3.mp3" id="3_bgm"]
 
 [node name="Chapter2" instance=ExtResource("1_base")]
 script = ExtResource("2_script")
@@ -18,4 +17,4 @@ avatar_paths = {
 }
 protagonist_speakers = Array[String](["Kiên"])
 choice_speaker = "Kiên"
-default_music = ExtResource("3_bgm")
+default_music_id = "BGM_DAILY"

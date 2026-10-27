@@ -20,6 +20,7 @@ buses/default_bus_layout="uid://b4bgpc8lt02km"
 
 [autoload]
 
+MusicManager="*res://autoload/music_manager.gd"
 GameManager="*res://autoload/game_manager.gd"
 GlobalMenu="*uid://d1igt8yqm17se"
 

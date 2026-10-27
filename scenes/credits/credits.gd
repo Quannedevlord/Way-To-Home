@@ -22,6 +22,12 @@ var transition_started: bool = false
 
 ## Tạo các mục chữ–ảnh đã gán trong Inspector rồi chờ cập nhật chiều cao của khung credits.
 func _ready() -> void:
+	GameManager.load_campaign()
+	var ending := str(GameManager.campaign_state.get("ending_id", ""))
+	if ending in ["E1", "E2", "E3", "E4"]:
+		MusicManager.play_track("BGM_ENDING_" + ending)
+	else:
+		MusicManager.play_event({"path": "res://assets/backgrounds/audio/bgm/The_Way_Back_Home.mp3", "loop": false})
 	set_process(false)
 	_build_credit_entries()
 	if credits_content.get_child_count() == 0:

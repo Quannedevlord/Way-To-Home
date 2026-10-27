@@ -189,6 +189,9 @@ func test_auto_play(global_menu: Node, manager: Node) -> void:
 	check(chapter.dialogue_index == line_index + 1, "x2 advances at half the normal delay")
 	check(int(manager.load_game().get("dialogue_index", -1)) == chapter.dialogue_index, "Auto saves progress after advancing")
 	check(is_equal_approx(Engine.time_scale, 1.0), "x2 does not change game, music or minigame speed")
+	# Dòng vừa tới có đổi nền; chờ mở khóa input trước khi thử Enter thủ công.
+	while chapter._events_running:
+		await process_frame
 	if DisplayServer.get_name() != "headless":
 		await RenderingServer.frame_post_draw
 		root.get_texture().get_image().save_png("res://.godot/auto_button_x2.png")

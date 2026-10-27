@@ -21,7 +21,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+                  "id": "BGM_FINAL_ROAD"
                 }
               ]
             },
@@ -111,11 +111,17 @@
             {
               "type": "narration",
               "text": "Ở ngã rẽ ven mương, tiếng phanh xe và nước vang lên. Chỉ còn mặt đường, một vệt sáng và trang giấy ướt.",
-              "event": {
-                "type": "change_background",
-                "path": "res://Giao_Dien/bg_mong_duong_ven_muong.png",
-                "duration": 0.4
-              }
+              "events": [
+                {
+                  "type": "change_background",
+                  "path": "res://Giao_Dien/bg_mong_duong_ven_muong.png",
+                  "duration": 0.4
+                },
+                {
+                  "type": "change_music",
+                  "id": "BGM_FINAL_ROAD"
+                }
+              ]
             },
             {
               "speaker": "Vy",
@@ -197,7 +203,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+                  "id": "BGM_FINAL_ROAD"
                 }
               ]
             },
@@ -292,7 +298,8 @@
                   "checkpoint": "preparation",
                   "confirm": "Tải mốc Chương 4 — thay tiến trình bằng trạng thái của mốc"
                 }
-              ]
+              ],
+              "events": [{"type": "change_music", "id": "BGM_FINAL_ROAD"}]
             }
           ],
           "next": "",
@@ -304,7 +311,8 @@
           "dialogues": [
             {
               "speaker": "Kiên",
-              "text": "Tớ ở đây. Khi cậu sẵn sàng thì nói."
+              "text": "Tớ ở đây. Khi cậu sẵn sàng thì nói.",
+              "events": [{"type": "change_music", "id": "BGM_ENDING_E1"}]
             },
             {
               "speaker": "Vy",
@@ -350,7 +358,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_ENDING_E1"
                 }
               ]
             },
@@ -390,7 +398,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_ENDING_E1"
                 }
               ]
             },
@@ -415,7 +423,8 @@
           "dialogues": [
             {
               "speaker": "Kiên",
-              "text": "Tớ không chắc mình biết đủ để đi xa hơn. Nhưng tớ có thể đưa cậu tới đây."
+              "text": "Tớ không chắc mình biết đủ để đi xa hơn. Nhưng tớ có thể đưa cậu tới đây.",
+              "events": [{"type": "change_music", "id": "BGM_ENDING_E2"}]
             },
             {
               "speaker": "Vy",
@@ -495,7 +504,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_ENDING_E2"
                 }
               ]
             },
@@ -524,7 +533,8 @@
           "dialogues": [
             {
               "speaker": "Kiên",
-              "text": "Tớ xin lỗi. Tớ không đi tiếp được."
+              "text": "Tớ xin lỗi. Tớ không đi tiếp được.",
+              "events": [{"type": "change_music", "id": "BGM_ENDING_E3"}]
             },
             {
               "speaker": "Vy",
@@ -592,7 +602,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_ENDING_E3"
                 }
               ]
             },
@@ -621,7 +631,8 @@
           "dialogues": [
             {
               "speaker": "Vy",
-              "text": "Nếu cậu ở lại, chúng mình có thể chỉ cùng chờ. Cậu hiểu không?"
+              "text": "Nếu cậu ở lại, chúng mình có thể chỉ cùng chờ. Cậu hiểu không?",
+              "events": [{"type": "change_music", "id": "BGM_FINAL_ROAD"}]
             },
             {
               "speaker": "Kiên",
@@ -660,14 +671,16 @@
               "text": "Kiên chủ động buông chiếc chìa khóa trong mơ.",
               "when": {
                 "anchor_ready": true
-              }
+              },
+              "events": [{"type": "change_music", "id": "BGM_ENDING_E4"}]
             },
             {
               "type": "narration",
               "text": "Vùng sáng phía sau tắt khi Kiên bước xa.",
               "when": {
                 "anchor_ready": false
-              }
+              },
+              "events": [{"type": "change_music", "id": "BGM_ENDING_E4"}]
             },
             {
               "type": "narration",

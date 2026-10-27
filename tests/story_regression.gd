@@ -9,6 +9,7 @@ var failures := 0
 var checks := 0
 var seen: Dictionary = {}
 var resumed := false
+var music: Node
 
 
 ## Chờ cây scene/autoload khởi tạo xong trước khi bắt đầu bộ kiểm thử.
@@ -107,6 +108,7 @@ func choose_target(target: String) -> void:
 			chapter._on_choice_selected(choice)
 			if choice.has("confirm"):
 				check(not manager.campaign_state.has("ending_id"), "Ending is not committed before confirmation")
+				check(music.current_track_id == "BGM_FINAL_ROAD", "Confirmation keeps decision music")
 				var confirmed: Dictionary = choice.duplicate(true)
 				confirmed.erase("confirm")
 				chapter._on_choice_selected(confirmed)
@@ -124,6 +126,7 @@ func walk(options: Dictionary, stop_at_final: bool = true) -> void:
 			return
 		var chapter: Node = current_scene
 		var id: String = chapter._current_scene_id
+		verify_music(chapter, id)
 		seen[id] = true
 		if is_instance_valid(chapter._active_minigame):
 			await solve(bool(options.get("assisted", false)))
@@ -151,7 +154,11 @@ func walk(options: Dictionary, stop_at_final: bool = true) -> void:
 ## Đọc hết kết thúc được chọn và xác nhận credits, cờ completed cùng bộ sưu tập đã lưu xuống đĩa.
 func finish_ending(id: String) -> void:
 	await choose_target(id.to_lower())
+	var ending_player: AudioStreamPlayer = music.active_player
+	var ending_stream: AudioStream = ending_player.stream
 	await walk({}, false)
+	check(music.current_track_id == "BGM_ENDING_" + id, "Credits retain ending track: " + id)
+	check(music.active_player == ending_player and ending_player.stream == ending_stream, "Credits retain the same player and stream")
 	check(manager.current_scene_path == manager.CREDITS_PATH, "Ending reaches credits: " + id)
 	check(manager.campaign_state.get("ending_id", "") == id, "Explicit ending selection: " + id)
 	check(manager.load_game().get("completed", false) and not manager.has_save(), "Credits preserve completion")
@@ -177,6 +184,7 @@ func until_choice(id: String) -> void:
 ## Đổi save_path trước mọi thao tác chơi mới; mã thoát khác 0 khi có kiểm tra thất bại.
 func run() -> void:
 	manager = root.get_node("GameManager")
+	music = root.get_node("MusicManager")
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://tests/.tmp"))
 	manager.save_path = "res://tests/.tmp/story_save.save"
 	var cases := [
@@ -221,6 +229,7 @@ func run() -> void:
 				check(manager.restore_checkpoint("final_choice"), "Restore final checkpoint")
 				await settle()
 				check(not manager.campaign_state.has("ending_id"), "Checkpoint clears later ending")
+				check(music.current_track_id == "BGM_FINAL_ROAD", "Checkpoint restores decision music")
 				await finish_ending(ending)
 			check(manager.restore_checkpoint("final_choice"), "Restore before E4")
 			await settle()
@@ -228,15 +237,18 @@ func run() -> void:
 			while not current_scene.choice_overlay.visible:
 				await advance()
 			await choose_target("c5choice")
+			check(music.current_track_id == "BGM_FINAL_ROAD", "Changing mind keeps decision music")
 			check(not manager.campaign_state.has("ending_id"), "E4 cancellation returns without committing")
 			await choose_target("e4warning")
 			while not current_scene.choice_overlay.visible:
 				await advance()
 			await choose_target("e4")
 			await walk({}, false)
+			check(music.current_track_id == "BGM_ENDING_E4", "E4 music continues through Credits")
 			check(manager.campaign_state.get("ending_id") == "E4" and manager.campaign_state.get("anchor_ready", false), "E4 respects prepared anchor and explicit consent")
 			check(manager.restore_checkpoint("preparation"), "Restore preparation checkpoint")
 			await settle()
+			check(music.current_track_id == "BGM_DAILY", "Preparation checkpoint restores its first line music")
 			check(not manager.campaign_state.get("anchor_ready", false) and not manager.campaign_state.get("farewell_ready", false), "Earlier checkpoint removes later preparation")
 			check(manager.campaign_state.get("memory_verified", false), "Earlier checkpoint retains facts already learned")
 			current_scene.go_to_scene("c4b")
@@ -262,6 +274,26 @@ func run() -> void:
 	await create_timer(0.2).timeout
 	print("STORY REGRESSION: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
+
+
+func verify_music(chapter: Node, id: String) -> void:
+	var expected := ""
+	match id:
+		"c1s3": expected = "BGM_DAILY" if chapter.dialogue_index < 3 else "BGM_DREAM"
+		"c2a": expected = "BGM_DREAM" if chapter.dialogue_index < 24 else "BGM_DAILY"
+		"c2s5": expected = "BGM_DREAM" if manager.campaign_state.get("route2") == "outside" and chapter.dialogue_index < 12 else "BGM_INVESTIGATION"
+		"c3a1": expected = "BGM_INVESTIGATION"
+		"c3a2", "c3record", "c3truth", "c4a": expected = "BGM_GRIEF"
+		"c3b1", "c3loop": expected = "BGM_DREAM"
+		"c3b3": expected = "BGM_DAILY" if chapter.dialogue_index < 4 else "BGM_GRIEF"
+		"c4b": expected = "BGM_DREAM" if chapter.dialogue_index < 4 else "BGM_TRUST"
+		"c4anchor": expected = "BGM_DREAM" if chapter.dialogue_index in [1, 2] else "BGM_TRUST"
+		"c4hub", "c4c", "c4summary": expected = "BGM_TRUST"
+		"c4s2": expected = "BGM_TRUST" if chapter.dialogue_index < 6 else "BGM_FINAL_ROAD"
+		"c5s1", "c5s2", "c5s3", "c5choice", "e4warning": expected = "BGM_FINAL_ROAD"
+		"e1", "e2", "e3", "e4": expected = "BGM_ENDING_" + id.to_upper()
+	if not expected.is_empty():
+		check(music.current_track_id == expected, "Music at %s:%d = %s" % [id, chapter.dialogue_index, expected])
 
 
 ## Dừng và gỡ stream của mọi player trước khi thoát để tài nguyên âm thanh được giải phóng.

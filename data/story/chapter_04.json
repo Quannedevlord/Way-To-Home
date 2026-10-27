@@ -21,7 +21,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_DAILY"
                 }
               ]
             },
@@ -35,7 +35,8 @@
             },
             {
               "speaker": "Thư",
-              "text": "Tớ biết. Cậu có muốn tớ nghe cùng không?"
+              "text": "Tớ biết. Cậu có muốn tớ nghe cùng không?",
+              "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
               "speaker": "Thư",
@@ -78,7 +79,8 @@
           "dialogues": [
             {
               "speaker": "Kiên",
-              "text": "Tớ nghĩ còn một lần đi được đến nhà Vy. Nhưng tớ sợ mình không tỉnh lại."
+              "text": "Tớ nghĩ còn một lần đi được đến nhà Vy. Nhưng tớ sợ mình không tỉnh lại.",
+              "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
               "speaker": "Thư",
@@ -123,7 +125,8 @@
                   "text": "Bắt đầu giấc mơ cuối",
                   "go": "c4summary"
                 }
-              ]
+              ],
+              "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             }
           ],
           "next": ""
@@ -144,7 +147,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_GRIEF"
                 }
               ]
             },
@@ -248,7 +251,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+                  "id": "BGM_DREAM"
                 }
               ]
             },
@@ -272,7 +275,8 @@
             },
             {
               "speaker": "Kiên",
-              "text": "Nếu có một lời gửi về, cậu muốn nói gì?"
+              "text": "Nếu có một lời gửi về, cậu muốn nói gì?",
+              "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
               "speaker": "Vy",
@@ -311,7 +315,8 @@
           "dialogues": [
             {
               "speaker": "Vy",
-              "text": "Nhưng mọi chuyện đâu có ổn."
+              "text": "Nhưng mọi chuyện đâu có ổn.",
+              "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
               "speaker": "Kiên",
@@ -387,7 +392,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_TRUST"
                 }
               ]
             }
@@ -400,7 +405,8 @@
           "dialogues": [
             {
               "speaker": "Vy",
-              "text": "Mẹ ơi, hôm ấy con đã định về. Bố ơi, con vẫn muốn cho bố xem bức tranh. Con còn giận nhiều điều, nhưng con chưa bao giờ muốn không còn là con của bố mẹ. Nếu bố mẹ nhớ con, thỉnh thoảng cứ kể chuyện về con nhé. Cả những chuyện con làm bố mẹ bực nữa. Con chào bố mẹ."
+              "text": "Mẹ ơi, hôm ấy con đã định về. Bố ơi, con vẫn muốn cho bố xem bức tranh. Con còn giận nhiều điều, nhưng con chưa bao giờ muốn không còn là con của bố mẹ. Nếu bố mẹ nhớ con, thỉnh thoảng cứ kể chuyện về con nhé. Cả những chuyện con làm bố mẹ bực nữa. Con chào bố mẹ.",
+              "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
               "type": "narration",
@@ -415,7 +421,8 @@
           "dialogues": [
             {
               "type": "narration",
-              "text": "Trang giấy chỉ có “Mọi chuyện đều ổn”. Mực nhòe đi."
+              "text": "Trang giấy chỉ có “Mọi chuyện đều ổn”. Mực nhòe đi.",
+              "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
               "speaker": "Vy",
@@ -462,7 +469,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_TRUST"
                 }
               ]
             },
@@ -524,29 +531,35 @@
             {
               "type": "narration",
               "text": "Đường về của Kiên",
-              "event": {
-                "type": "minigame",
-                "id": "c4_anchor",
-                "scene": "res://scenes/minigames/story_puzzle.tscn",
-                "config": {
-                  "title": "Đường về của Kiên",
-                  "instruction": "Chọn ba thứ thuộc về Kiên để mang vào trí nhớ.",
-                  "items": [
-                    "Tên Kiên",
-                    "Chiếc vòng của Vy",
-                    "Tiếng mẹ gọi ăn cơm",
-                    "Chìa khóa nhà Kiên"
-                  ],
-                  "answer": [
-                    0,
-                    2,
-                    3
-                  ],
-                  "mode": "select",
-                  "hint": "Chiếc vòng kết nối với Vy. Chọn tên Kiên, tiếng mẹ gọi và chìa khóa nhà Kiên.",
-                  "success": "Mẹ đọc câu gọi quen thuộc. Kiên đặt chìa khóa bên giường và thử một giấc ngủ ngắn."
+              "events": [
+                {
+                  "type": "minigame",
+                  "id": "c4_anchor",
+                  "scene": "res://scenes/minigames/story_puzzle.tscn",
+                  "config": {
+                    "title": "Đường về của Kiên",
+                    "instruction": "Chọn ba thứ thuộc về Kiên để mang vào trí nhớ.",
+                    "items": [
+                      "Tên Kiên",
+                      "Chiếc vòng của Vy",
+                      "Tiếng mẹ gọi ăn cơm",
+                      "Chìa khóa nhà Kiên"
+                    ],
+                    "answer": [
+                      0,
+                      2,
+                      3
+                    ],
+                    "mode": "select",
+                    "hint": "Chiếc vòng kết nối với Vy. Chọn tên Kiên, tiếng mẹ gọi và chìa khóa nhà Kiên.",
+                    "success": "Mẹ đọc câu gọi quen thuộc. Kiên đặt chìa khóa bên giường và thử một giấc ngủ ngắn."
+                  }
+                },
+                {
+                  "type": "change_music",
+                  "id": "BGM_TRUST"
                 }
-              }
+              ]
             },
             {
               "type": "narration",
@@ -560,7 +573,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+                  "id": "BGM_DREAM"
                 }
               ]
             },
@@ -611,7 +624,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_TRUST"
                 }
               ]
             }
@@ -625,7 +638,8 @@
             {
               "type": "narration",
               "text": "",
-              "summary": true
+              "summary": true,
+              "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
               "type": "narration",
@@ -650,7 +664,8 @@
           "dialogues": [
             {
               "speaker": "Thư",
-              "text": "Cậu không cần chứng minh mọi thứ với tớ trong một đêm."
+              "text": "Cậu không cần chứng minh mọi thứ với tớ trong một đêm.",
+              "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
               "speaker": "Kiên",
@@ -687,7 +702,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+                  "id": "BGM_FINAL_ROAD"
                 }
               ]
             }

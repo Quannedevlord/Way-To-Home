@@ -237,9 +237,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
-[node name="BGMPlayer" type="AudioStreamPlayer" parent="." unique_id=1966378470]
-bus = &"Music"
-
 [node name="MinigameContainer" type="Control" parent="." unique_id=1643660964]
 ; Chứa instance minigame và chặn click xuyên xuống chat; GlobalMenu nằm trên CanvasLayer riêng.
 visible = false

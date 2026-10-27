@@ -51,6 +51,34 @@ func _append_line(line: Dictionary, scroll: bool = true, play_sound: bool = true
 	super._append_line(line, scroll, play_sound, animate)
 
 
+func _can_restore_line(line: Dictionary) -> bool:
+	return not is_campaign() or matches(line.get("when", {}))
+
+
+## Save cũ lưu bản sao thoại trước khi có ID nhạc: lấy cue mới từ đúng dòng đã đọc.
+## Không xét lại when của lịch sử thật, vì cờ có thể đã đổi sau dòng đó.
+func _process_json_events(line: Dictionary, animate: bool) -> void:
+	if is_campaign() and not animate:
+		var restored := line.duplicate(true)
+		var events: Variant = restored.get("events", restored.get("event", []))
+		var kept: Array = []
+		for event in ([events] if events is Dictionary else events):
+			if event is Dictionary and str(event.get("type", "")) != "change_music":
+				kept.append(event)
+		for scene in story_data["episodes"][0]["scenes"]:
+			for authored in scene.get("dialogues", []):
+				if str(authored.get("text", "")) != str(line.get("text", line.get("message", ""))) or authored.get("speaker", "") != line.get("speaker", ""):
+					continue
+				var cues: Variant = authored.get("events", authored.get("event", []))
+				for cue in ([cues] if cues is Dictionary else cues):
+					if cue is Dictionary and str(cue.get("type", "")) == "change_music":
+						kept.append(cue)
+		restored["events"] = kept
+		super._process_json_events(restored, false)
+		return
+	super._process_json_events(line, animate)
+
+
 ## Trả true khi mọi cờ đều bằng giá trị yêu cầu; cờ chưa có được xem là false.
 ## Điều kiện rỗng luôn đúng, dùng cho dòng/nhánh mặc định.
 func matches(conditions: Dictionary) -> bool:

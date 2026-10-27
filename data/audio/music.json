@@ -1,0 +1,15 @@
+{
+  "crossfade_seconds": 1.5,
+  "tracks": {
+    "BGM_DAILY": {"title": "Before the Bell", "path": "res://assets/backgrounds/audio/bgm/Before the Bell.mp3", "loop": true},
+    "BGM_DREAM": {"title": "Seventeen Twenty", "path": "res://assets/backgrounds/audio/bgm/Seventeen Twenty.mp3", "loop": true},
+    "BGM_INVESTIGATION": {"title": "Traces of Her", "path": "res://assets/backgrounds/audio/bgm/Traces of Her.mp3", "loop": true},
+    "BGM_GRIEF": {"title": "The Empty Chair", "path": "", "loop": true},
+    "BGM_TRUST": {"title": "Words Left Unsaid", "path": "res://assets/backgrounds/audio/bgm/Words Left Unsaid.mp3", "loop": true},
+    "BGM_FINAL_ROAD": {"title": "One Last Road Home", "path": "res://assets/backgrounds/audio/bgm/One Last Road Home.mp3", "loop": true},
+    "BGM_ENDING_E1": {"title": "The Light Is Still On", "path": "res://assets/backgrounds/audio/bgm/The Light Is Still On.mp3", "loop": false},
+    "BGM_ENDING_E2": {"title": "Goodbye by the Window", "path": "res://assets/backgrounds/audio/bgm/Goodbye by the Window.mp3", "loop": false},
+    "BGM_ENDING_E3": {"title": "Home Without You", "path": "res://assets/backgrounds/audio/bgm/Home Without You.mp3", "loop": false},
+    "BGM_ENDING_E4": {"title": "Tomorrow Never Comes", "path": "res://assets/backgrounds/audio/bgm/Tomorrow Never Comes.mp3", "loop": false}
+  }
+}

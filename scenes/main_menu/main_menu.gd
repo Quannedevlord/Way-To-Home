@@ -22,6 +22,7 @@ func _ready() -> void:
 		add_child(preload("res://scenes/ui/story_notebook.gd").new())
 	GlobalMenu.get_node("CanvasLayer").hide()	
 	SettingsScript.apply_saved_audio_settings()
+	MusicManager.play_event({"path": "res://assets/backgrounds/audio/bgm/Dream Portal.mp3", "loop": true})
 	continue_button.visible = GameManager.has_save()
 	start_button.pressed.connect(_on_start_pressed)
 	continue_button.pressed.connect(_on_continue_pressed)

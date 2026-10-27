@@ -55,8 +55,11 @@ func set_font(font: Font) -> void:
 ## `align_right` căn sang phải; `compact` ẩn tên/avatar nhưng giữ chỗ cho avatar.
 ## Nếu `avatar_tex` rỗng, tự tạo avatar thay thế; màu bong bóng nằm ở các hằng BUBBLE_*.
 func setup_dialogue(speaker: String, message: String, avatar_tex: Texture2D, align_right: bool, compact: bool = false) -> void:
+	var avatar_inset := 0.0
 	if avatar_tex == null:
 		avatar_tex = _make_placeholder_avatar()
+		# Ảnh nhân vật có viền trong suốt khoảng 5% mỗi cạnh; avatar mặc định chừa tương tự.
+		avatar_inset = AVATAR_SIZE * 0.05
 
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 10)
@@ -65,7 +68,7 @@ func setup_dialogue(speaker: String, message: String, avatar_tex: Texture2D, ali
 
 	var bubble_color := BUBBLE_RIGHT if align_right else BUBBLE_LEFT
 	var message_col := _build_message_column(speaker, message, bubble_color, align_right, compact)
-	var avatar := _build_avatar(avatar_tex)
+	var avatar := _build_avatar(avatar_tex, avatar_inset)
 	if compact:
 		avatar.modulate.a = 0.0
 
@@ -181,17 +184,21 @@ func _build_message_column(speaker: String, message: String, bubble_color: Color
 
 ## Trả về khung avatar tròn, cắt `avatar_tex` cho vừa khung.
 ## Chỉnh `AVATAR_SIZE` để đổi kích thước chung của avatar.
-func _build_avatar(avatar_tex: Texture2D) -> Control:
+func _build_avatar(avatar_tex: Texture2D, inset: float = 0.0) -> Control:
 	var wrapper := Control.new()
 	wrapper.custom_minimum_size = Vector2(AVATAR_SIZE, AVATAR_SIZE)
 	wrapper.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 
 	var panel := Panel.new()
 	panel.set_anchors_preset(Control.PRESET_FULL_RECT)
+	panel.offset_left = inset
+	panel.offset_top = inset
+	panel.offset_right = -inset
+	panel.offset_bottom = -inset
 	panel.clip_children = Control.CLIP_CHILDREN_ONLY
 	var avatar_style := StyleBoxFlat.new()
 	avatar_style.bg_color = Color(0.18, 0.18, 0.20, 1.0)
-	avatar_style.set_corner_radius_all(int(AVATAR_SIZE / 2.0))
+	avatar_style.set_corner_radius_all(int((AVATAR_SIZE - inset * 2.0) / 2.0))
 	panel.add_theme_stylebox_override("panel", avatar_style)
 	wrapper.add_child(panel)
 

@@ -21,7 +21,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_INVESTIGATION"
                 }
               ]
             },
@@ -66,7 +66,8 @@
           "dialogues": [
             {
               "speaker": "Kiên",
-              "text": "Tớ đã gặp Vy trong mơ. Bạn ấy cứ tìm đường về nhà."
+              "text": "Tớ đã gặp Vy trong mơ. Bạn ấy cứ tìm đường về nhà.",
+              "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
               "speaker": "Thư",
@@ -84,7 +85,8 @@
               "text": "Người ở chỗ xem bói hôm qua là cậu à?",
               "when": {
                 "route2": "outside"
-              }
+              },
+              "events": [{"type": "change_music", "id": "BGM_DAILY"}]
             },
             {
               "speaker": "Thư",
@@ -112,7 +114,8 @@
               "text": "Tớ cũng ngủ không yên từ khi biết một bạn cùng trường mất.",
               "when": {
                 "route2": "sleep"
-              }
+              },
+              "events": [{"type": "change_music", "id": "BGM_DAILY"}]
             },
             {
               "type": "narration",
@@ -151,7 +154,8 @@
           "dialogues": [
             {
               "type": "narration",
-              "text": "Kiên đưa vòng cho cô đối chiếu. Cô gọi mẹ Vy xác nhận và xin phép hai bạn đến thăm cùng mẹ Kiên."
+              "text": "Kiên đưa vòng cho cô đối chiếu. Cô gọi mẹ Vy xác nhận và xin phép hai bạn đến thăm cùng mẹ Kiên.",
+              "events": [{"type": "change_music", "id": "BGM_INVESTIGATION"}]
             },
             {
               "speaker": "Cô giáo",
@@ -220,7 +224,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_GRIEF"
                 }
               ]
             },
@@ -288,7 +292,8 @@
           "dialogues": [
             {
               "type": "narration",
-              "text": "Mẹ Vy chủ động mở tin nhắn thoại con gửi lúc 17 giờ 12."
+              "text": "Mẹ Vy chủ động mở tin nhắn thoại con gửi lúc 17 giờ 12.",
+              "events": [{"type": "change_music", "id": "BGM_GRIEF"}]
             },
             {
               "speaker": "Vy trong ghi âm",
@@ -328,7 +333,8 @@
           "dialogues": [
             {
               "speaker": "Kiên",
-              "text": "Cháu xin mượn vòng một đêm để vẽ bổ sung bức tranh tưởng nhớ bạn, được không ạ?"
+              "text": "Cháu xin mượn vòng một đêm để vẽ bổ sung bức tranh tưởng nhớ bạn, được không ạ?",
+              "events": [{"type": "change_music", "id": "BGM_GRIEF"}]
             },
             {
               "speaker": "Mẹ Vy",
@@ -357,7 +363,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+                  "id": "BGM_DREAM"
                 }
               ]
             },
@@ -405,26 +411,32 @@
             {
               "type": "narration",
               "text": "Đánh dấu điều không khớp",
-              "event": {
-                "type": "minigame",
-                "id": "c3_loop",
-                "scene": "res://scenes/minigames/story_puzzle.tscn",
-                "config": {
-                  "title": "Đánh dấu điều không khớp",
-                  "instruction": "Đường đã rẽ hai lần. Chi tiết nào vẫn không đổi như thể mình đứng nguyên một chỗ?",
-                  "items": [
-                    "Bóng cây vẫn ở cùng phía",
-                    "Biển hướng đã quay",
-                    "Tiếng xe xa dần"
-                  ],
-                  "answer": [
-                    0
-                  ],
-                  "mode": "select",
-                  "hint": "Vy chỉ vào bóng cây: đường đã rẽ, bóng vẫn nằm nguyên một phía.",
-                  "help_label": "Nghe Vy chỉ đường"
+              "events": [
+                {
+                  "type": "minigame",
+                  "id": "c3_loop",
+                  "scene": "res://scenes/minigames/story_puzzle.tscn",
+                  "config": {
+                    "title": "Đánh dấu điều không khớp",
+                    "instruction": "Đường đã rẽ hai lần. Chi tiết nào vẫn không đổi như thể mình đứng nguyên một chỗ?",
+                    "items": [
+                      "Bóng cây vẫn ở cùng phía",
+                      "Biển hướng đã quay",
+                      "Tiếng xe xa dần"
+                    ],
+                    "answer": [
+                      0
+                    ],
+                    "mode": "select",
+                    "hint": "Vy chỉ vào bóng cây: đường đã rẽ, bóng vẫn nằm nguyên một phía.",
+                    "help_label": "Nghe Vy chỉ đường"
+                  }
+                },
+                {
+                  "type": "change_music",
+                  "id": "BGM_DREAM"
                 }
-              }
+              ]
             },
             {
               "speaker": "Kiên",
@@ -452,7 +464,8 @@
           "dialogues": [
             {
               "speaker": "Vy",
-              "text": "“Con tự về được.”"
+              "text": "“Con tự về được.”",
+              "events": [{"type": "change_music", "id": "BGM_GRIEF"}]
             },
             {
               "speaker": "Kiên",
@@ -546,7 +559,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/in game3.mp3"
+                  "id": "BGM_DAILY"
                 }
               ]
             },
@@ -564,7 +577,8 @@
             },
             {
               "type": "narration",
-              "text": "Kiên kể mình bị những giấc mơ ám ảnh. Mẹ đi cùng cậu tới nhà Vy. Ảnh gia đình và lời bố mẹ xác nhận Vy đã mất vì tai nạn."
+              "text": "Kiên kể mình bị những giấc mơ ám ảnh. Mẹ đi cùng cậu tới nhà Vy. Ảnh gia đình và lời bố mẹ xác nhận Vy đã mất vì tai nạn.",
+              "events": [{"type": "change_music", "id": "BGM_GRIEF"}]
             },
             {
               "speaker": "Thầy giáo",
@@ -610,7 +624,7 @@
                 },
                 {
                   "type": "change_music",
-                  "path": "res://assets/backgrounds/audio/bgm/Dream Portal (1).mp3"
+                  "id": "BGM_DREAM"
                 }
               ]
             },
@@ -632,7 +646,8 @@
             },
             {
               "speaker": "Vy",
-              "text": "Sao cậu buồn thế?"
+              "text": "Sao cậu buồn thế?",
+              "events": [{"type": "change_music", "id": "BGM_GRIEF"}]
             },
             {
               "type": "narration",
@@ -657,7 +672,8 @@
           "dialogues": [
             {
               "speaker": "Kiên",
-              "text": "Tớ đã gặp bố mẹ cậu. Vy… có một tai nạn trên đường về. Cậu đã mất rồi."
+              "text": "Tớ đã gặp bố mẹ cậu. Vy… có một tai nạn trên đường về. Cậu đã mất rồi.",
+              "events": [{"type": "change_music", "id": "BGM_GRIEF"}]
             },
             {
               "speaker": "Vy",

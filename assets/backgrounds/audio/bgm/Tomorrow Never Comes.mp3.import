@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c6eglxjtreblf"
+path="res://.godot/imported/Tomorrow Never Comes.mp3-9dc591cd4acd77797c80a6ee465bf176.mp3str"
+
+[deps]
+
+source_file="res://assets/backgrounds/audio/bgm/Tomorrow Never Comes.mp3"
+dest_files=["res://.godot/imported/Tomorrow Never Comes.mp3-9dc591cd4acd77797c80a6ee465bf176.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

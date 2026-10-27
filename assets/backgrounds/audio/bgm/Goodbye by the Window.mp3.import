@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://chf36ycj0w1mt"
+path="res://.godot/imported/Goodbye by the Window.mp3-71c8b1506a930046636ed7b2e81217b3.mp3str"
+
+[deps]
+
+source_file="res://assets/backgrounds/audio/bgm/Goodbye by the Window.mp3"
+dest_files=["res://.godot/imported/Goodbye by the Window.mp3-71c8b1506a930046636ed7b2e81217b3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

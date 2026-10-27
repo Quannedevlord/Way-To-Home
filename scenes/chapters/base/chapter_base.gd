@@ -11,7 +11,9 @@ extends Control
 @export var continue_hint: Control
 
 @onready var background: TextureRect = $Background
-@onready var bgm_player: AudioStreamPlayer = $BGMPlayer
+var bgm_player: AudioStreamPlayer:
+	get:
+		return MusicManager.active_player
 @onready var choice_overlay: Control = $ChoiceOverlay
 
 ## Báo hoàn thành một lần để GameManager chọn chương tiếp theo hoặc credits.
@@ -35,6 +37,8 @@ signal minigame_completed(event_id: String, result: Dictionary)
 ## Nền/nhạc khởi đầu; sự kiện trong truyện có thể thay đổi sau đó.
 @export var default_background: Texture2D
 @export var default_music: AudioStream
+@export var default_music_id := ""
+var _music_event: Dictionary = {}
 
 @onready var minigame_container: Control = $MinigameContainer
 
@@ -88,7 +92,7 @@ var _fade_target_alpha := 0.0
 
 
 ## Godot gọi khi chapter vào cây scene: chuẩn bị UI, âm thanh và lớp phủ fade.
-## Nhạc mặc định lấy từ Default Music trên node root trong Inspector.
+## Nhạc mặc định lấy từ Default Music ID; Default Music dành cho dữ liệu cũ.
 ## Bắt đầu truyện mới hoặc nạp đúng file/index đã lưu; chapter override phải gọi super._ready().
 func _ready() -> void:
 	SettingsScript.apply_saved_audio_settings()
@@ -100,9 +104,10 @@ func _ready() -> void:
 	minigame_container.hide()
 	if default_background != null:
 		background.texture = default_background
-	if default_music != null:
-		bgm_player.stream = default_music
-		bgm_player.play()
+	if not default_music_id.is_empty():
+		_music_event = {"id": default_music_id}
+	elif default_music != null:
+		_music_event = {"path": default_music.resource_path, "loop": true}
 	continue_hint.hide()
 	if story_path.is_empty():
 		return
@@ -127,6 +132,7 @@ func _ready() -> void:
 	if not has_saved_progress:
 		load_scene_dialogues(true)
 		show_current_line()
+		MusicManager.play_event(_music_event)
 		save_progress()
 		return
 
@@ -137,6 +143,10 @@ func _ready() -> void:
 	dialogue_index = clampi(saved_dialogue_index, 0, maxi(current_dialogues.size() - 1, 0))
 	_inline_choice_resolved = inline_choice_resolved
 	_rebuild_chat_history()
+	# Lịch sử chỉ gom cue cuối; tránh phát lướt qua mọi bản khi Continue.
+	if save_data.get("music_state") is Dictionary:
+		_music_event = save_data["music_state"].duplicate(true)
+	MusicManager.restore(_music_event)
 	restore_chapter_state(save_data.get("chapter_state", {}))
 	# Chỉ tiếp tục minigame chưa hoàn thành, sau khi dựng xong lịch sử.
 	if not _pending_minigame.is_empty():
@@ -337,7 +347,8 @@ func _rebuild_chat_history() -> void:
 		# Save cũ chỉ có index: dựng các dòng của file được xác định ở _ready.
 		_append_location_divider(get_current_scene().get("location", ""))
 		for i in range(mini(dialogue_index + 1, current_dialogues.size())):
-			_append_line(current_dialogues[i], false, false, false)
+			if _can_restore_line(current_dialogues[i]):
+				_append_line(current_dialogues[i], false, false, false)
 	else:
 		_rebuilding_history = true
 		for entry in _chat_history:
@@ -350,6 +361,10 @@ func _rebuild_chat_history() -> void:
 	_try_show_inline_choices()
 	_update_continue_hint()
 	call_deferred("_scroll_to_bottom")
+
+
+func _can_restore_line(_line: Dictionary) -> bool:
+	return true
 
 
 ## Đọc một dòng JSON rồi tạo thoại, lời dẫn hoặc ảnh và xử lý sự kiện kèm theo.
@@ -415,6 +430,16 @@ func _process_json_events(line: Dictionary, animate: bool) -> void:
 		events_to_run.append_array(events.duplicate(true))
 	elif events != null and events != "":
 		push_error("[ChapterBase] Trường event/events phải là object hoặc array.")
+	# Cue chạy cùng dòng thoại, không phải đợi hiệu ứng nền; khi dựng lịch sử chỉ ghi nhận.
+	var queued_events: Array = []
+	for event in events_to_run:
+		if event is Dictionary and str(event.get("type", "")) == "change_music":
+			_music_event = event.duplicate(true)
+			if animate:
+				MusicManager.play_event(_music_event)
+		else:
+			queued_events.append(event)
+	events_to_run = queued_events
 	if not events_to_run.is_empty():
 		if not animate:
 			for event in events_to_run:
@@ -478,17 +503,9 @@ func _process_json_event(event: Variant, animate: bool) -> void:
 				if is_instance_valid(_background_tween) and _background_tween.is_running():
 					await _background_tween.finished
 		"change_music":
-			var path := str(event.get("path", ""))
-			if path.is_empty() or not ResourceLoader.exists(path):
-				push_error("[ChapterBase] Không tìm thấy file nhạc: %s" % path)
-				return
-			var music := ResourceLoader.load(path) as AudioStream
-			if music == null:
-				push_error("[ChapterBase] File không phải AudioStream: %s" % path)
-				return
-			if bgm_player.stream != music:
-				bgm_player.stream = music
-				bgm_player.play()
+			_music_event = event.duplicate(true)
+			if animate:
+				MusicManager.play_event(_music_event)
 		"fade", "fade_in", "fade_out":
 			if not animate:
 				return
@@ -1023,6 +1040,7 @@ func get_progress() -> Dictionary:
 		"has_dialogue_override": _has_dialogue_override,
 		"dialogue_override": _dialogue_override,
 		"chat_history": _chat_history,
+		"music_state": MusicManager.snapshot(_music_event),
 		"minigame_state": minigame_state,
 		"pending_minigame": _pending_minigame,
 		"chapter_state": get_chapter_state(),
