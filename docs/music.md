@@ -7,7 +7,7 @@ Thư viện cấu hình: `data/audio/music.json`. Đổi `crossfade_seconds` đ�
 | BGM_DAILY | Before the Bell.mp3 | Có |
 | BGM_DREAM | Seventeen Twenty.mp3 | Có |
 | BGM_INVESTIGATION | Traces of Her.mp3 | Có |
-| BGM_GRIEF | **Chưa có file The Empty Chair; cần gán `path`** | Có |
+| BGM_GRIEF | The Empty Chair.mp3 | Có |
 | BGM_TRUST | Words Left Unsaid.mp3 | Có |
 | BGM_FINAL_ROAD | One Last Road Home.mp3 | Có |
 | BGM_ENDING_E1 | The Light Is Still On.mp3 | Không |
@@ -15,7 +15,7 @@ Thư viện cấu hình: `data/audio/music.json`. Đổi `crossfade_seconds` đ�
 | BGM_ENDING_E3 | Home Without You.mp3 | Không |
 | BGM_ENDING_E4 | Tomorrow Never Comes.mp3 | Không |
 
-Các file còn lại không được tự gán thay cho The Empty Chair. ID chưa gán, đường dẫn thiếu hoặc tài nguyên không phải âm thanh sẽ giảm nhạc cũ về im lặng, cảnh báo một lần cho mỗi ID trong phiên chơi và tiếp tục truyện. Sau khi bổ sung file, gán đường dẫn `res://...` rồi chạy lại game. Hai preset export đều bao gồm JSON truyện và thư viện nhạc.
+Cả 10 ID đã được gán file âm thanh có trong dự án. Nếu sau này ID chưa gán, đường dẫn thiếu hoặc tài nguyên không phải âm thanh, hệ thống sẽ giảm nhạc cũ về im lặng, cảnh báo một lần cho mỗi ID trong phiên chơi và tiếp tục truyện. Sau khi thay file hoặc cấu hình, chạy lại game để nạp thư viện nhạc mới. Hai preset export đều bao gồm JSON truyện và thư viện nhạc.
 
 ## Điểm chuyển chính
 
