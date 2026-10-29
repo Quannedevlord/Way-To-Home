@@ -43,6 +43,8 @@ Mỗi file hiện có một episode chứa các cảnh. `StoryChapter.go_to_scen
 | Trường | Tác dụng |
 | --- | --- |
 | `text` | Chữ trên nút và câu trả lời thêm vào lịch sử khi lựa chọn được chấp nhận. |
+| `avatar` | Biểu cảm của Kiên cho câu trả lời; giữ nguyên qua bước xác nhận, lưu và Continue. |
+| `time`, `events` | Đổi giờ/nền/nhạc cùng câu trả lời đã chấp nhận, trước khi chuyển tới `go`. Hủy xác nhận không chạy các sự kiện này. |
 | `description` | Mô tả bổ sung trên nút khả dụng. |
 | `when` | Quyết định có hiển thị lựa chọn hay không. |
 | `requires` | Quyết định có được bấm hay không; lựa chọn vẫn hiện khi khóa, kèm việc còn thiếu. |
@@ -52,6 +54,14 @@ Mỗi file hiện có một episode chứa các cảnh. `StoryChapter.go_to_scen
 | `checkpoint` | Tải mốc đã lưu thay cho xử lý lựa chọn thông thường. |
 
 `when` và `requires` so sánh bằng chính xác từng giá trị, không phải biểu thức GDScript. Bộ truyện dùng các cờ boolean như `memory_verified`, `farewell_ready`, `anchor_ready` để giải thích việc còn thiếu trên nút kết thúc E1.
+
+## Biểu cảm nhân vật
+
+`avatar` được gắn theo nội dung từng câu và lựa chọn, không suy đoán tự động từ từ khóa. Trong `assets/avatars`, mỗi nhân vật Kiên, Thư và Vy có bốn ảnh: tên gốc là nét dịu/cười, `_NoE` là bình tĩnh/suy nghĩ, `_Sad` là buồn/lo và `_Sudden` là giật mình/ngạc nhiên. Cả 12 ảnh được dùng trong năm chương, gồm 265 câu thoại và 43 lựa chọn. “Giọng nữ” trước khi Vy giới thiệu vẫn dùng avatar chưa rõ danh tính.
+
+Hai câu liên tiếp cùng người và cùng biểu cảm gộp avatar; khi đổi biểu cảm hoặc sau lời dẫn, avatar hiện lại. Continue và tải checkpoint giữ biểu cảm. Lịch sử save cũ được bổ sung phần trình bày từ đúng cảnh và câu đã đọc, không áp dụng lại cờ hay điều kiện truyện. Giữ `scene.location` duy nhất trong mỗi chapter để đối chiếu lịch sử cũ.
+
+Ở Chapter 4, lựa chọn tạm dừng tại `c4b2` và dòng cuối `c4reread` đưa nền về phòng Kiên lúc 14:00. Đầu `c4s2` dùng phòng chiều muộn lúc 16:30; đến dòng Kiên ngủ mới chuyển sang giấc mơ 17:20.
 
 ## Sự kiện và câu đố
 

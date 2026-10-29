@@ -26,19 +26,23 @@
               ]
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Thu_Sad.png",
               "speaker": "Thư",
               "text": "Cậu vừa đọc một dòng ba lần."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
               "speaker": "Kiên",
               "text": "Tớ đang nghĩ."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Thu.png",
               "speaker": "Thư",
               "text": "Tớ biết. Cậu có muốn tớ nghe cùng không?",
               "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
               "speaker": "Thư",
               "text": "Giấc mơ đã thay đổi thế nào?",
               "when": {
@@ -46,6 +50,7 @@
               }
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
               "speaker": "Thư",
               "text": "Tớ mới biết cậu đang tìm đồ của Vy. Cậu cần giải thích thêm để tớ giúp.",
               "when": {
@@ -57,6 +62,7 @@
               "text": "Kiên đã mệt vì giữ mọi chuyện một mình.",
               "choices": [
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
                   "text": "Kể đầy đủ và nhờ Thư giúp",
                   "go": "c4support",
                   "set": {
@@ -64,6 +70,7 @@
                   }
                 },
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
                   "text": "Thừa nhận mất ngủ và nhờ hỗ trợ",
                   "go": "c4support"
                 }
@@ -78,19 +85,23 @@
           "location": "Nghĩ cách về trước",
           "dialogues": [
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
               "speaker": "Kiên",
               "text": "Tớ nghĩ còn một lần đi được đến nhà Vy. Nhưng tớ sợ mình không tỉnh lại.",
               "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
               "speaker": "Thư",
               "text": "Vậy trước khi nghĩ cách đi, nghĩ cách về đã."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
               "speaker": "Kiên",
               "text": "Nếu cậu không tin thì sao?"
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Thu.png",
               "speaker": "Thư",
               "text": "Tớ có thể chưa tin cách cậu giải thích. Tớ vẫn tin cậu đang sợ."
             },
@@ -110,18 +121,22 @@
               "text": "Ba việc có thể làm theo thứ tự bạn muốn. Sổ tay ghi phần đã có và phần còn thiếu.",
               "choices": [
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "text": "Xác minh lời nhắn buổi chiều cuối",
                   "go": "c4a"
                 },
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "text": "Giúp Vy viết lời chào",
                   "go": "c4b"
                 },
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "text": "Chuẩn bị và thử đường về của Kiên",
                   "go": "c4c"
                 },
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "text": "Bắt đầu giấc mơ cuối",
                   "go": "c4summary"
                 }
@@ -163,6 +178,7 @@
               "text": "Cô nghe đi nghe lại. Không phải để tìm lỗi của ai. Cô chỉ muốn nghe con gọi mẹ."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
               "speaker": "Kiên",
               "text": "Nếu cô không muốn mở thì cháu có thể chờ ạ."
             },
@@ -171,6 +187,7 @@
               "text": "Hôm nay cô muốn có người nghe cùng."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Vy.png",
               "speaker": "Vy trong ghi âm",
               "text": "Mẹ ơi, con về hơi muộn chút. Con mang tranh về cho mẹ xem. Mẹ để phần canh cho con nhé."
             },
@@ -213,6 +230,7 @@
               }
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
               "speaker": "Kiên",
               "text": "Cháu đã nghĩ một câu nói lúc giận có thể là điều cuối cùng bạn muốn nói."
             },
@@ -256,10 +274,12 @@
               ]
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
               "speaker": "Vy",
               "text": "Tớ nhớ mình đã nói bố đừng quản tớ nữa. Tớ cứ nghĩ câu ấy làm mọi thứ thành ra thế này."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
               "speaker": "Kiên",
               "text": "Cậu cãi nhau với bố buổi sáng. Đến 17:12, cậu vẫn nhắn mẹ để phần canh. Cậu đã định về.",
               "when": {
@@ -267,6 +287,7 @@
               }
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
               "speaker": "Kiên",
               "text": "Tớ chưa kiểm tra được phần này. Tớ không muốn nói thay bố mẹ cậu.",
               "when": {
@@ -274,11 +295,13 @@
               }
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
               "speaker": "Kiên",
               "text": "Nếu có một lời gửi về, cậu muốn nói gì?",
               "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
               "speaker": "Vy",
               "text": "Tớ nên xin lỗi trước chứ?"
             },
@@ -287,10 +310,12 @@
               "text": "Trang giấy trước Vy vẫn trắng.",
               "choices": [
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien.png",
                   "text": "Cậu muốn nói gì cũng được. Tớ sẽ nghe.",
                   "go": "c4b1"
                 },
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "text": "Cứ viết rằng mọi chuyện đều ổn để mọi người đỡ buồn.",
                   "go": "c4b2",
                   "when": {
@@ -298,6 +323,7 @@
                   }
                 },
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "text": "Đọc lại lời Vy đã chọn",
                   "go": "c4reread",
                   "when": {
@@ -314,19 +340,23 @@
           "location": "Một lời nhắn không hoàn hảo",
           "dialogues": [
             {
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
               "speaker": "Vy",
               "text": "Nhưng mọi chuyện đâu có ổn.",
               "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
               "speaker": "Kiên",
               "text": "Vậy không cần viết là ổn."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
               "speaker": "Vy",
               "text": "Tớ giận bố. Rồi lại nhớ bố. Hai chuyện ấy có được ở cùng nhau không?"
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien.png",
               "speaker": "Kiên",
               "text": "Tớ nghĩ có."
             },
@@ -356,14 +386,17 @@
               }
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
               "speaker": "Vy",
               "text": "Mẹ ơi, hôm ấy con đã định về. Bố ơi, con vẫn muốn cho bố xem bức tranh. Con còn giận nhiều điều, nhưng con chưa bao giờ muốn không còn là con của bố mẹ. Nếu bố mẹ nhớ con, thỉnh thoảng cứ kể chuyện về con nhé. Cả những chuyện con làm bố mẹ bực nữa. Con chào bố mẹ."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
               "speaker": "Kiên",
               "text": "Cậu muốn sửa gì không?"
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Vy.png",
               "speaker": "Vy",
               "text": "Không. Lần này đúng là điều tớ muốn nói."
             },
@@ -404,11 +437,14 @@
           "location": "Lời Vy đã chọn",
           "dialogues": [
             {
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
               "speaker": "Vy",
               "text": "Mẹ ơi, hôm ấy con đã định về. Bố ơi, con vẫn muốn cho bố xem bức tranh. Con còn giận nhiều điều, nhưng con chưa bao giờ muốn không còn là con của bố mẹ. Nếu bố mẹ nhớ con, thỉnh thoảng cứ kể chuyện về con nhé. Cả những chuyện con làm bố mẹ bực nữa. Con chào bố mẹ.",
               "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
+              "time": "14:00",
+              "events": [{"type": "change_background", "path": "res://Giao_Dien/bg_phong_ngu_trua.png", "duration": 0.2}],
               "type": "narration",
               "text": "Kiên giữ nguyên lời Vy đã tự chọn. Không cần làm lại phần sắp ý."
             }
@@ -425,14 +461,17 @@
               "events": [{"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
               "speaker": "Vy",
               "text": "Nhưng tớ không thấy thế."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
               "speaker": "Kiên",
               "text": "Tớ chỉ muốn mọi người đỡ đau."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Vy_NoE.png",
               "speaker": "Vy",
               "text": "Tớ biết. Nhưng đây nghe giống lời cậu hơn."
             },
@@ -441,10 +480,14 @@
               "text": "Kiên nhìn lại trang giấy.",
               "choices": [
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
                   "text": "Xin lỗi, để Vy tự viết",
                   "go": "c4b1"
                 },
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
+                  "time": "14:00",
+                  "events": [{"type": "change_background", "path": "res://Giao_Dien/bg_phong_ngu_trua.png", "duration": 0.2}],
                   "text": "Tạm dừng, quay lại sau",
                   "go": "c4hub"
                 }
@@ -474,6 +517,7 @@
               ]
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
               "speaker": "Kiên",
               "text": "Một cái tên, một âm thanh, một đồ vật… Ông ấy đã nhắc vậy.",
               "when": {
@@ -481,6 +525,7 @@
               }
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
               "speaker": "Thư",
               "text": "Hai lần trước cậu đều tỉnh khi nghe mẹ gọi. Mình thử nhớ những thứ quen thuộc với cậu nhé.",
               "when": {
@@ -488,22 +533,27 @@
               }
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
               "speaker": "Thư",
               "text": "Chọn những thứ thuộc về cậu. Đừng dùng chiếc vòng của Vy làm dấu đường về cho mình."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
               "speaker": "Kiên",
               "text": "Tên tớ, tiếng mẹ gọi… còn đồ vật?"
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Thu.png",
               "speaker": "Thư",
               "text": "Cái móc khóa cậu cứ quên mang ấy."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien.png",
               "speaker": "Kiên",
               "text": "Nó chưa từng làm được việc gì lớn thế."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Thu.png",
               "speaker": "Thư",
               "text": "Hôm nay cho nó cơ hội."
             },
@@ -512,10 +562,12 @@
               "text": "Chuẩn bị cách trở lại trước khi đi xa hơn.",
               "choices": [
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "text": "Chuẩn bị và thử ba điểm neo",
                   "go": "c4anchor"
                 },
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "text": "Con tự lo được, chưa cần chuẩn bị",
                   "go": "c4hub"
                 }
@@ -646,10 +698,12 @@
               "text": "Bạn có thể chuẩn bị thêm hoặc tiếp tục với những gì đang có.",
               "choices": [
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "text": "Chuẩn bị thêm",
                   "go": "c4hub"
                 },
                 {
+                  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
                   "text": "Đi tiếp",
                   "go": "c4s2"
                 }
@@ -663,19 +717,24 @@
           "location": "Lời hẹn ngày mai",
           "dialogues": [
             {
+              "avatar": "res://assets/avatars/Avatar_Thu.png",
+              "time": "16:30",
               "speaker": "Thư",
               "text": "Cậu không cần chứng minh mọi thứ với tớ trong một đêm.",
-              "events": [{"type": "change_music", "id": "BGM_TRUST"}]
+              "events": [{"type": "change_background", "path": "res://Giao_Dien/bg_phong_ngu_chieu_muon.png", "duration": 0.2}, {"type": "change_music", "id": "BGM_TRUST"}]
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
               "speaker": "Kiên",
               "text": "Tớ biết."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Thu.png",
               "speaker": "Thư",
               "text": "Vậy mai nhớ đến trường đúng giờ."
             },
             {
+              "avatar": "res://assets/avatars/Avatar_Kien.png",
               "speaker": "Kiên",
               "text": "Câu này khó hơn phần chuẩn bị vừa rồi đấy."
             },

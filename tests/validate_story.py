@@ -13,6 +13,8 @@ def validate():
     total_scenes = total_lines = 0
     puzzle_ids = set()
     checkpoints = set()
+    portraits = set()
+    characters = {'Kiên': 'Kien', 'Thư': 'Thu', 'Vy': 'Vy', 'Vy trong ghi âm': 'Vy'}
     music = json.loads((ROOT / 'data/audio/music.json').read_text(encoding='utf-8'))
     tracks = music['tracks']
     assert music['crossfade_seconds'] >= 0
@@ -44,6 +46,7 @@ def validate():
         scenes = data['episodes'][0]['scenes']
         ids = {scene['id'] for scene in scenes}
         assert len(ids) == len(scenes), f'Duplicate scene ID: {path}'
+        assert len({scene['location'] for scene in scenes}) == len(scenes), 'History requires unique scene locations'
         graph = {}
         for scene in scenes:
             total_scenes += 1
@@ -57,7 +60,16 @@ def validate():
             edges = {target} if isinstance(target, str) else {b['go'] for b in target}
             edges.discard('')
             for line in lines:
+                if line.get('speaker') in characters:
+                    name = characters[line['speaker']]
+                    expected = {f'res://assets/avatars/Avatar_{name}{suffix}.png'
+                                for suffix in ['', '_NoE', '_Sad', '_Sudden']}
+                    assert line.get('avatar') in expected, (scene['id'], line)
+                    portraits.add(line['avatar'])
                 for choice in line.get('choices', []):
+                    assert choice.get('avatar') in {
+                        f'res://assets/avatars/Avatar_Kien{suffix}.png'
+                        for suffix in ['', '_NoE', '_Sad', '_Sudden']}, (scene['id'], choice)
                     if 'go' in choice:
                         edges.add(choice['go'])
                     if choice.get('set', {}).get('ending_id') in ['E1', 'E2', 'E3']:
@@ -88,6 +100,7 @@ def validate():
         # Cảnh không có cạnh đi tiếp phải đúng tập kết thúc dự kiến, tránh cụt nhánh ngoài ý muốn.
         assert {id for id, edges in graph.items() if not edges} == expected_ends[chapter]
     assert checkpoints == {'preparation', 'final_choice'}
+    assert len(portraits) == 12, 'Campaign must use all twelve authored expressions'
     print(f'STORY DATA: {total_scenes} reachable scenes, {total_lines} lines, '
           f'{len(puzzle_ids)} puzzles; all targets and assets valid')
     print('MUSIC: unassigned IDs: ' + ', '.join(key for key, value in tracks.items() if not value['path']))

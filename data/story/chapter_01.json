@@ -31,10 +31,12 @@
 			  "sfx": "schoolbell"
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
 			  "speaker": "Kiên",
 			  "text": "Thôi tiêu rồi! Sao hôm nào cái cổng cũng xa thế này!"
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
 			  "speaker": "Kiên",
 			  "text": "Em xin lỗi thầy, em đi muộn ạ!",
 			  "event": {
@@ -48,6 +50,7 @@
 			  "text": "Hôm nay lại đi muộn nữa à, Kiên?"
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
 			  "speaker": "Kiên",
 			  "text": "Dạ, tại…"
 			},
@@ -56,26 +59,32 @@
 			  "text": "Về chỗ đi. Lần sau đến đúng giờ."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Thu.png",
 			  "speaker": "Thư",
 			  "text": "Vẫn như mọi khi nhỉ."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
 			  "speaker": "Kiên",
 			  "text": "Đừng trêu tớ nữa. Hôm nay tớ đã chạy nhanh lắm rồi."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
 			  "speaker": "Thư",
 			  "text": "Chiều họp nhóm làm báo cáo. Bốn đứa mình, phòng học cuối dãy. Đừng quên."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
 			  "speaker": "Kiên",
 			  "text": "Lại ở lại nữa à?"
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
 			  "speaker": "Thư",
 			  "text": "Phần hình của cậu vẫn chưa xong."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien.png",
 			  "speaker": "Kiên",
 			  "text": "Rồi, rồi. Lần này tớ nhớ."
 			},
@@ -88,10 +97,12 @@
 			  "text": "Bảng thông báo bên cạnh bàn có một tờ giấy mới.",
 			  "choices": [
 				{
+				  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 				  "text": "Xem thông báo trưng bày tranh",
 				  "go": "c1notice"
 				},
 				{
+				  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 				  "text": "Ngồi vào bàn",
 				  "go": "c1s2"
 				}
@@ -133,18 +144,22 @@
 			  ]
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Thu_NoE.png",
 			  "speaker": "Thư",
 			  "text": "Tớ gửi phần sửa vào nhóm rồi. Cậu nhớ xem."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien.png",
 			  "speaker": "Kiên",
 			  "text": "Ừ. Cậu về trước đi, tớ đóng cửa."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Thu.png",
 			  "speaker": "Thư",
 			  "text": "Đừng ngủ luôn ở đây đấy."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien.png",
 			  "speaker": "Kiên",
 			  "text": "Cậu nghĩ tớ là ai chứ?"
 			},
@@ -175,6 +190,7 @@
 			  }
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Hửm… vòng tay của ai đây?"
 			},
@@ -185,6 +201,7 @@
 			  "use_as_background": false
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Chắc của Thư. Mai hỏi vậy."
 			},
@@ -229,6 +246,7 @@
 			  "text": "Chút nữa ăn cơm nhé con."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Dạ. Con nằm một lát thôi."
 			},
@@ -249,6 +267,7 @@
 			  ]
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
 			  "speaker": "Kiên",
 			  "text": "Mình vừa… đi đâu ấy nhỉ?"
 			},
@@ -257,6 +276,7 @@
 			  "text": "Cậu có nghe thấy mình không?"
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
 			  "speaker": "Kiên",
 			  "text": "Ai vậy?"
 			},
@@ -276,55 +296,68 @@
 		  "location": "Vy",
 		  "dialogues": [
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
 			  "speaker": "Kiên",
 			  "text": "Đây là đâu? Sao cậu lại ở đây?",
 				"events": [{"type": "change_music", "id": "BGM_DREAM"}]
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
 			  "speaker": "Kiên",
 			  "text": "Và… cậu thật sự là cái gì vậy?"
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
 			  "speaker": "Vy",
 			  "text": "Mình là Vy. Câu cuối nghe hơi buồn đấy."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
 			  "speaker": "Kiên",
 			  "text": "Xin lỗi. Tại chỗ này…"
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_NoE.png",
 			  "speaker": "Vy",
 			  "text": "Tớ cũng không biết rõ. Có lẽ là giấc mơ của cậu."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Vậy ra mình ngủ thật rồi."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
 			  "speaker": "Vy",
 			  "text": "Nhưng tớ đã ở đây từ trước. Lâu lắm. Hay mới một lúc thôi? Tớ không biết nữa."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Cậu bảo cần giúp đỡ?"
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
 			  "speaker": "Vy",
 			  "text": "Tớ muốn về nhà. Đi đến ngã rẽ kia là lại quay về cổng trường."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Thế trước khi đến đây, cậu ở đâu?"
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_NoE.png",
 			  "speaker": "Vy",
 			  "text": "Tan học. Tớ đang về… Mẹ có nói tối ấy nấu món tớ thích."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Rồi sao nữa?"
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
 			  "speaker": "Vy",
 			  "text": "Có tiếng mưa. Với…"
 			},
@@ -333,14 +366,17 @@
 			  "text": "Tiếng nước vọng lên. Vy ôm đầu; biển tên trường bị xóa trắng trong một nhịp."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
 			  "speaker": "Vy",
 			  "text": "Xin lỗi. Tớ không nhớ được."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Đồng phục của cậu giống trường tớ."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
 			  "speaker": "Vy",
 			  "text": "Vậy có khi chúng mình ở gần nhau thật. Nếu cậu tìm được đường… cho tớ đi cùng được không?"
 			},
@@ -349,6 +385,7 @@
 			  "text": "Vy chờ câu trả lời của Kiên.",
 			  "choices": [
 				{
+				  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 				  "text": "Tớ sẽ giúp. Nhưng mình phải tìm hiểu từng chút một.",
 				  "go": "c1a",
 				  "set": {
@@ -356,6 +393,7 @@
 				  }
 				},
 				{
+				  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 				  "text": "Cho tớ một điều có thể kiểm chứng trước.",
 				  "go": "c1b",
 				  "set": {
@@ -363,6 +401,7 @@
 				  }
 				},
 				{
+				  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
 				  "text": "Tớ sợ. Tớ muốn tỉnh lại trước.",
 				  "go": "c1c",
 				  "set": {
@@ -379,19 +418,23 @@
 		  "location": "Nhận lời giúp",
 		  "dialogues": [
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Tớ chưa biết chuyện gì đang xảy ra. Nhưng tớ sẽ quay lại nếu có thể.",
 				"events": [{"type": "change_music", "id": "BGM_DREAM"}]
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_Sudden.png",
 			  "speaker": "Vy",
 			  "text": "Thật à?"
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien.png",
 			  "speaker": "Kiên",
 			  "text": "Đừng bắt tớ hứa tìm được ngay. Đường đi học tớ còn suýt lạc vì buồn ngủ."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy.png",
 			  "speaker": "Vy",
 			  "text": "Vậy tớ sẽ đi chậm thôi."
 			},
@@ -407,27 +450,33 @@
 		  "location": "Giữ sự hoài nghi",
 		  "dialogues": [
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Nếu đây là mơ, tỉnh dậy tớ có thể quên hết.",
 				"events": [{"type": "change_music", "id": "BGM_DREAM"}]
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
 			  "speaker": "Vy",
 			  "text": "Tớ cũng sợ thế."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Cậu nhớ nhà mình có gì đặc biệt không?"
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy.png",
 			  "speaker": "Vy",
 			  "text": "Cửa sơn xanh. Trước hiên có một chậu hoa trắng. Tớ vẫn hay vẽ nó."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Tớ sẽ thử tìm. Cậu đừng nghĩ tớ đang gọi cậu là kẻ nói dối."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
 			  "speaker": "Vy",
 			  "text": "Tớ biết. Chỉ là tớ chẳng còn nhiều thứ để chứng minh mình có thật."
 			},
@@ -449,19 +498,23 @@
 		  "location": "Tìm cách rời đi",
 		  "dialogues": [
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_Sad.png",
 			  "speaker": "Kiên",
 			  "text": "Xin lỗi. Tớ không làm được đâu.",
 				"events": [{"type": "change_music", "id": "BGM_DREAM"}]
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
 			  "speaker": "Vy",
 			  "text": "Ừ… Tớ làm cậu sợ phải không?"
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
 			  "speaker": "Kiên",
 			  "text": "Không phải chỉ cậu. Tất cả chỗ này."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_Sad.png",
 			  "speaker": "Vy",
 			  "text": "Nếu cậu thấy nhà có cửa xanh… thôi, không sao. Cậu đi đi."
 			},
@@ -482,6 +535,7 @@
 				"events": [{"type": "change_music", "id": "BGM_DREAM"}]
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Vy_NoE.png",
 			  "speaker": "Vy",
 			  "text": "Có người đang gọi cậu kìa."
 			},
@@ -502,6 +556,7 @@
 			  ]
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_Sudden.png",
 			  "speaker": "Kiên",
 			  "text": "Ái da… Mới nằm một tí mà hết cả tiếng rồi à?"
 			},
@@ -510,10 +565,12 @@
 			  "text": "Mẹ gọi mấy lần rồi đấy."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Dạ, con xuống ngay."
 			},
 			{
+			  "avatar": "res://assets/avatars/Avatar_Kien_NoE.png",
 			  "speaker": "Kiên",
 			  "text": "Chắc tại mình mệt quá thôi."
 			},

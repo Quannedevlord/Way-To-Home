@@ -10,9 +10,9 @@ const SettingsScript = preload("res://scenes/settings/settings.gd")
 @export var setting_button: Button
 @export var exit_button: Button
 
-# Đổi đường dẫn tại đây nếu muốn thay icon chuột thường hoặc icon khi hover.
-var cursor_normal = preload("res://assets/backgrounds/ui/cursor.png")
-var cursor_hover = preload("res://assets/backgrounds/ui/cursor_hover.png")
+var new_game_dialog: ConfirmationDialog
+var _new_game_shade: ColorRect
+var _starting_new_game := false
 
 
 ## Thiết lập menu chính, cập nhật nút tiếp tục theo dữ liệu lưu và kết nối sự kiện.
@@ -28,28 +28,42 @@ func _ready() -> void:
 	continue_button.pressed.connect(_on_continue_pressed)
 	setting_button.pressed.connect(_on_setting_pressed)
 	exit_button.pressed.connect(_on_exit_pressed)
-	Input.set_custom_mouse_cursor(cursor_normal)
-	# Khi thêm Button mới vào menu, thêm biến đó vào danh sách này để có cursor hover.
-	for button in [start_button, continue_button, setting_button, exit_button]:
-		button.mouse_entered.connect(_on_button_mouse_entered)
-		button.mouse_exited.connect(_on_button_mouse_exited)
-
-
-## Đổi con trỏ sang trạng thái hover khi chuột đi vào một nút.
-func _on_button_mouse_entered() -> void:
-	Input.set_custom_mouse_cursor(cursor_hover)
-
-
-## Khôi phục con trỏ mặc định khi chuột rời khỏi nút.
-func _on_button_mouse_exited() -> void:
-	Input.set_custom_mouse_cursor(cursor_normal)
-	
 
 
 ## Bắt đầu trò chơi mới rồi mở màn đầu tiên của chương 1.
 func _on_start_pressed() -> void:
-	if GameManager.is_chapter_transition_active():
+	if _starting_new_game or GameManager.is_chapter_transition_active():
 		return
+	if GameManager.has_save() or not GameManager.story_checkpoints.is_empty() or not GameManager.campaign_state.is_empty():
+		if not is_instance_valid(new_game_dialog):
+			_new_game_shade = ColorRect.new()
+			_new_game_shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			_new_game_shade.color = Color(0.015, 0.025, 0.055, 0.72)
+			_new_game_shade.z_index = 100
+			_new_game_shade.hide()
+			add_child(_new_game_shade)
+			new_game_dialog = preload("res://scenes/ui/new_game_dialog.gd").new()
+			new_game_dialog.title = "Bắt đầu lượt chơi mới?"
+			new_game_dialog.dialog_text = "Tiến trình hiện tại và các mốc lưu sẽ được đặt lại.\nNhững kết thúc đã sưu tập vẫn được giữ."
+			new_game_dialog.ok_button_text = "Chơi mới"
+			new_game_dialog.cancel_button_text = "Hủy"
+			add_child(new_game_dialog)
+			new_game_dialog.confirmed.connect(_start_new_game)
+			new_game_dialog.canceled.connect(func() -> void: start_button.grab_focus())
+			# Đóng bằng nút, Esc hay đổi scene đều gỡ lớp làm tối menu.
+			new_game_dialog.visibility_changed.connect(func() -> void: _new_game_shade.visible = new_game_dialog.visible)
+		if not new_game_dialog.visible:
+			new_game_dialog.popup_centered(Vector2i(640, 370))
+			# Enter đầu tiên không vô tình xóa tiến trình đang có.
+			new_game_dialog.get_cancel_button().grab_focus()
+		return
+	_start_new_game()
+
+
+func _start_new_game() -> void:
+	if _starting_new_game or GameManager.is_chapter_transition_active():
+		return
+	_starting_new_game = true
 	GameManager.start_new_game()
 	GameManager.change_scene(GameManager.FIRST_CHAPTER_PATH, true)
 

@@ -5,6 +5,9 @@ extends Control
 const SETTINGS_SCENE := preload("res://scenes/settings/settings.tscn")
 const HOVER_SCALE := Vector2(1.12, 1.12)
 const HOVER_DURATION := 0.12
+# Hai ảnh con trỏ dùng chung cho menu, hội thoại và các nút tạo động.
+const CURSOR_NORMAL := preload("res://assets/backgrounds/ui/cursor.png")
+const CURSOR_HOVER := preload("res://assets/backgrounds/ui/cursor_hover.png")
 
 @onready var menu_button: TextureButton = $CanvasLayer/MenuButton
 @onready var auto_button: Button = $CanvasLayer/AutoButton
@@ -22,6 +25,11 @@ var auto_mode := 0
 ## Cấu hình menu chạy cả khi game tạm dừng, kết nối sự kiện và ẩn bảng tùy chọn ban đầu.
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	Input.set_custom_mouse_cursor(CURSOR_NORMAL, Input.CURSOR_ARROW)
+	Input.set_custom_mouse_cursor(CURSOR_HOVER, Input.CURSOR_POINTING_HAND)
+	get_tree().node_added.connect(_configure_mouse_cursor)
+	for control in get_tree().root.find_children("*", "Control", true, false):
+		_configure_mouse_cursor(control)
 	canvas_layer.process_mode = Node.PROCESS_MODE_ALWAYS
 	if menu_button == null:
 		push_error("[GlobalMenu] Không tìm thấy CanvasLayer/MenuButton.")
@@ -47,6 +55,12 @@ func _ready() -> void:
 		close_button.pressed.connect(_on_close_button_pressed)
 	if popup_panel != null:
 		popup_panel.hide()
+
+
+## Godot tự trả về mũi tên khi rời nút; không cần đổi ảnh mỗi frame.
+func _configure_mouse_cursor(node: Node) -> void:
+	if node is BaseButton or node is Slider:
+		node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
 ## Mở màn hình cài đặt khi người chơi nhấn nút menu.

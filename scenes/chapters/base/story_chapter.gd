@@ -55,28 +55,47 @@ func _can_restore_line(line: Dictionary) -> bool:
 	return not is_campaign() or matches(line.get("when", {}))
 
 
-## Save cũ lưu bản sao thoại trước khi có ID nhạc: lấy cue mới từ đúng dòng đã đọc.
-## Không xét lại when của lịch sử thật, vì cờ có thể đã đổi sau dòng đó.
-func _process_json_events(line: Dictionary, animate: bool) -> void:
-	if is_campaign() and not animate:
-		var restored := line.duplicate(true)
-		var events: Variant = restored.get("events", restored.get("event", []))
-		var kept: Array = []
-		for event in ([events] if events is Dictionary else events):
-			if event is Dictionary and str(event.get("type", "")) != "change_music":
-				kept.append(event)
-		for scene in story_data["episodes"][0]["scenes"]:
-			for authored in scene.get("dialogues", []):
-				if str(authored.get("text", "")) != str(line.get("text", line.get("message", ""))) or authored.get("speaker", "") != line.get("speaker", ""):
-					continue
-				var cues: Variant = authored.get("events", authored.get("event", []))
-				for cue in ([cues] if cues is Dictionary else cues):
-					if cue is Dictionary and str(cue.get("type", "")) == "change_music":
-						kept.append(cue)
-		restored["events"] = kept
-		super._process_json_events(restored, false)
-		return
-	super._process_json_events(line, animate)
+## Bổ sung biểu cảm, nền/giờ và cue mới cho save cũ, theo đúng cảnh đã đọc.
+## Không xét lại when hay áp dụng set: cờ hiện tại có thể khác lúc đọc dòng đó.
+func _rebuild_chat_history() -> void:
+	if is_campaign():
+		var sources: Array = []
+		for entry in _chat_history:
+			if entry.has("location_divider"):
+				sources.clear()
+				for scene in story_data["episodes"][0]["scenes"]:
+					if scene.get("location", "") != entry["location_divider"]:
+						continue
+					for line in scene.get("dialogues", []):
+						sources.append(line)
+						for choice in line.get("choices", []):
+							var reply: Dictionary = choice.duplicate(true)
+							reply["speaker"] = choice_speaker
+							sources.append(reply)
+							if choice.has("confirm"):
+								var confirmed := reply.duplicate(true)
+								confirmed["text"] = choice["confirm"]
+								sources.append(confirmed)
+				continue
+			for authored in sources:
+				if authored.get("speaker", "") == entry.get("speaker", "") and str(authored.get("text", "")) == str(entry.get("text", entry.get("message", ""))):
+					_refresh_saved_presentation(entry, authored)
+					break
+	super._rebuild_chat_history()
+
+
+func _refresh_saved_presentation(entry: Dictionary, authored: Dictionary) -> void:
+	for field in ["avatar", "time"]:
+		if authored.has(field):
+			entry[field] = authored[field]
+	var original: Variant = entry.get("events", entry.get("event", []))
+	var events: Array = [original] if original is Dictionary else original.duplicate(true)
+	var source: Variant = authored.get("events", authored.get("event", []))
+	var source_events: Array = [source] if source is Dictionary else source
+	var is_presentation := func(event: Dictionary) -> bool: return event.get("type", "") in ["change_music", "change_background"]
+	var cues := source_events.filter(is_presentation)
+	if events.filter(is_presentation) != cues:
+		entry["events"] = events.filter(func(event: Dictionary) -> bool: return not is_presentation.call(event)) + cues.duplicate(true)
 
 
 ## Trả true khi mọi cờ đều bằng giá trị yêu cầu; cờ chưa có được xem là false.
@@ -183,8 +202,10 @@ func _on_choice_selected(choice: Dictionary) -> void:
 	choice_overlay.hide()
 	_inline_choice_resolved = true
 	var reply := {"speaker": choice_speaker, "text": choice["text"]}
-	if choice.has("avatar"):
-		reply["avatar"] = choice["avatar"]
+	# Sự kiện của lựa chọn chỉ chạy sau khi xác nhận và qua đủ điều kiện.
+	for field in ["avatar", "time", "events"]:
+		if choice.has(field):
+			reply[field] = choice[field]
 	_append_line(reply)
 	if choice.has("go"):
 		go_to_scene(str(choice["go"]))

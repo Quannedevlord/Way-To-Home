@@ -787,8 +787,12 @@ func _input(event: InputEvent) -> void:
 		return
 		
 	if event.is_action_pressed("ui_accept") or (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
-		if event is InputEventMouseButton and _is_pointer_over_button():
+		if event is InputEventMouseButton and _is_pointer_over_interactive_control():
 			return
+		if not event is InputEventMouseButton and get_viewport().gui_get_focus_owner() is BaseButton:
+			return
+		# Không để cùng Enter/click chọn luôn nút vừa xuất hiện ở dòng mới.
+		get_viewport().set_input_as_handled()
 		advance_dialogue()
 
 
@@ -981,12 +985,11 @@ func _on_choice_selected(choice: Dictionary) -> void:
 	save_progress()
 
 
-## Trả true nếu con trỏ đang ở trên Button hoặc Control con của một Button.
-## Dùng để click chọn/menu không đồng thời làm hội thoại nhảy sang dòng tiếp theo.
-func _is_pointer_over_button() -> bool:
+## Click/kéo thanh cuộn hoặc nút không được đồng thời chuyển thoại.
+func _is_pointer_over_interactive_control() -> bool:
 	var hovered_control := get_viewport().gui_get_hovered_control()
 	while hovered_control != null:
-		if hovered_control is BaseButton:
+		if hovered_control is BaseButton or hovered_control is ScrollBar:
 			return true
 		hovered_control = hovered_control.get_parent() as Control
 	return false

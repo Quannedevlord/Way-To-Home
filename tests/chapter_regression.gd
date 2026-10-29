@@ -176,7 +176,17 @@ func _run() -> void:
 	check(bool(chapter.get_progress().get("continue_hint_dismissed", false)), "Save cũ không bắt người chơi xem lại hướng dẫn")
 	var before: Dictionary = manager.load_game()
 	manager.save_game()
-	check(manager.load_game() == before, "save_game lúc thoát giữ snapshot đầy đủ")
+	var after: Dictionary = manager.load_game()
+	var before_music: Dictionary = before.get("music_state", {}).duplicate(true)
+	var after_music: Dictionary = after.get("music_state", {}).duplicate(true)
+	# Audio vẫn tiến giữa hai lần lưu; chỉ vị trí phát được phép thay đổi.
+	check(float(after_music.get("position", 0.0)) >= float(before_music.get("position", 0.0)), "save_game cập nhật vị trí nhạc đang phát")
+	before_music.erase("position")
+	after_music.erase("position")
+	check(after_music == before_music, "save_game giữ bản nhạc và cấu hình phát")
+	before.erase("music_state")
+	after.erase("music_state")
+	check(after == before, "save_game lúc thoát giữ snapshot đầy đủ")
 	check(not manager.save_game({"dialogue_index": 0}, "res://old_chapter.tscn"), "Từ chối lưu từ chapter cũ")
 
 	# File truyện đã gỡ: bỏ vị trí/lịch sử nhánh cũ và mở lại đầu chương.
